@@ -119,7 +119,7 @@ body
 			
 			// 여기서 ajax 처리로 개수 체크하기
 			
-			/* $.ajax(
+			$.ajax(
 			{
 				type : "POST"
 				, url : "lecturecreatecnt.action"
@@ -144,7 +144,7 @@ body
 				{
 					alert(e.responseText + "에러");
 				}
-			}); */
+			});
 			
 		});
 		
@@ -258,7 +258,7 @@ body
 								<option value="name">강사명</option>
 							</select>
 							
-							<input type="text" name="searchValue" placeholder="관심 키워드 또는 스터디방 제목으로 검색하세요!" class="form-control boxTF" style="width: 70%;">
+							<input type="text" name="searchValue" placeholder="관심 키워드 또는 스터디방 제목으로 검색하세요!" class="form-control boxTF" style="width: 50%;">
 							<input type="button" value="검색" class="btn btn-primary searchBtn" id="searchBtn" style="width: 9%">
 						</form>
 							<!-- <input type="text" class="form-control tag" id="tag" placeholder="기술 태그">
