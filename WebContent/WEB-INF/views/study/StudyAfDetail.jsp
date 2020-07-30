@@ -399,10 +399,10 @@ $(document).ready(function ()
                   
 				<div class="leaderImg">
 				
-					<c:set var="imgCount" value="${imgCount=0 }"/>
+					<c:set var="imgCount" value="${imgCount==0 }"/>
                      <c:forEach var="memImg" items="${memImg }">
                         <c:if test="${memImg.join_mem_cd eq leaderName.leader_mem_cd}">
-                              <c:set var="imgCount" value="${imgCount=1 }"/>	
+                              <c:set var="imgCount" value="${imgCount==1 }"/>	
                               	<img src="${memImg.mem_img }" alt="" class="img-circle memImg" />
                         </c:if>
                      </c:forEach>
