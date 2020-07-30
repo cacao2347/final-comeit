@@ -53,7 +53,7 @@ footer {
 		<!-- 사이드바 -->
 		<nav class="col-sm-3 sidenav">
 			<h4>
-				<img class="img-fluid img-square myimg" src="assets/images/IU.jpg"
+				<img class="img-fluid img-square myimg" src="${profInfo.img_url }"
 					alt="myimg" style="width: 180px; height: 200px;">
 			</h4>
 			<ul class="nav nav-pills nav-stacked">
