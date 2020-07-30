@@ -362,11 +362,11 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                               <span class="joinStu" id="memJoinStu"></span>
                            </div><!-- end .userStu -->
                           
-                           <div class="out">
+                           <%-- <div class="out">
                             <c:if test="${sessionScope.mem_cd eq leaderName.leader_mem_cd }">
                               <input type="button" value="방출" class="btn btn-sm outBtn" />
                             </c:if>
-                           </div><!-- end .out -->
+                           </div><!-- end .out --> --%>
                      </div><!-- end .search-modal-content -->                     
                      </div><!-- end .searchModal -->   
             

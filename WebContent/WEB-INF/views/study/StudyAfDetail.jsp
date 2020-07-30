@@ -10,7 +10,7 @@
 <head>
 <meta charset="UTF-8">
 <title>StudyAfDetail.jsp</title>
-<link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/studyAfDetail.css" >
+<link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/study/studyAfDetail.css" >
 <link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/bootstrap/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 
@@ -384,8 +384,8 @@ $(document).ready(function ()
                           
                           <c:if test="${sessionScope.mem_cd eq  leaderName.leader_mem_cd}">
                            <div class="out">
-                              <input type="button" value="방출" class="btn btn-sm outBtn" />
-                              <input type="button" class="btn btn-sm btn-primary manBtn" id="histBtn" value="위임" />
+                             <!--  <input type="button" value="방출" class="btn btn-sm outBtn" />
+                              <input type="button" class="btn btn-sm btn-primary manBtn" id="histBtn" value="위임" /> -->
                            </div><!-- end .out -->
                           </c:if>
                            
