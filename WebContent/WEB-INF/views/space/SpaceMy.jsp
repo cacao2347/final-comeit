@@ -179,7 +179,7 @@
 	</div>
 </div>
 
-<div class="row" style="margin-top: 50pt;">
+<div class="row" style="margin-top: 190pt;">
 	<div class="col-md-12">
 	<c:import url="/WEB-INF/views/common/footer.jsp"></c:import>
 	</div>
