@@ -429,7 +429,7 @@ body
                         <!-- <img class="study-logo" alt="study-logo" src="assets/images/studylogo.PNG"> -->
                         <c:choose>
                         <c:when test="${empty studys.img_url }">
-                        <img class="study-logo" alt="study-logo" src="assets/images/studylogo.PNG">
+                        <img class="study-logo" alt="study-logo" src="assets/images/study_logo2.png">
                         </c:when>
                         <c:when test="${not empty studys.img_url }">
                         <img class="study-logo" alt="study-logo" src="${studys.img_url }">
