@@ -156,7 +156,7 @@ body
          
          //$(location).attr("href", "employeeupdateform.action?employeeId=" + $(this).val());
          
-         alert($(this).val());
+         //alert($(this).val());
          
          var params = "stu_cd=" + $(this).val();
          
