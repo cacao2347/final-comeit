@@ -248,8 +248,8 @@ public class LoginController
 	@RequestMapping(value = "/idsendsms.action", method = {RequestMethod.GET, RequestMethod.POST})
 	public String idSendSms(@RequestParam(value = "receiver") String receiver) throws CoolsmsException
     {
-		String api_key = "NCSSVMTOHVFAMAWF";
-		String api_secret = "LAFEEWGYZJ7GGRH4MKT9TUXNY4OSVWBL";
+    	String api_key = "NCSXHDF6ZGMKEB2C";
+		String api_secret = "VONNHWGHSKC86IDOCJIDV9W996SH3UR9";
 		String authNum = "";
 		Message coolsms = new Message(api_key, api_secret);
 		
@@ -258,8 +258,8 @@ public class LoginController
 		
 		// 4 params(to, from, type, text) are mandatory. must be filled
 		HashMap<String, String> params = new HashMap<String, String>();
-		params.put("to", "01028652034");
-		params.put("from", "01028652034"); 				// 인증할 전화번호
+		params.put("to", receiver);
+		params.put("from", "01099044626"); 				// 인증할 전화번호
 		params.put("type", "SMS");
 		params.put("text", "[COME-IT] 인증번호 : " + authNum);
 		params.put("app_version", "test app 1.2"); // application name and version
@@ -311,10 +311,17 @@ public class LoginController
    {
 	   HttpSession session = request.getSession();
 	   
-	   String searchPwd = request.getParameter("searchPwd"); 
+	   String searchPwd = request.getParameter("searchPwd");
+	   /*
+	   String id = request.getParameter("formUserId");
+	   String name = request.getParameter("formUserName");
+	   */
 	   String view = null;
 	   
-	   session.setAttribute("searchPwd", searchPwd);
+	  session.setAttribute("searchPwd", searchPwd);
+	  // session.setAttribute("name", name);
+	  // session.setAttribute("id", id);
+	  System.out.println(searchPwd);
 	   
 	   view = "/WEB-INF/views/member/SearchPw.jsp";
 	   
@@ -326,15 +333,27 @@ public class LoginController
    @RequestMapping(value = "/searchpwdcheck.action", method = {RequestMethod.GET, RequestMethod.POST})
    public ModelAndView loginSearchPwd(HttpServletRequest request)
    {
+	  HttpSession session = request.getSession();
       ModelAndView mav = new ModelAndView();  
       
       IMemberDAO memDao = sqlSession.getMapper(IMemberDAO.class);
       ISpaDAO spaDao = sqlSession.getMapper(ISpaDAO.class);
 
+      
       String name = request.getParameter("formUserName");
-      String id = request.getParameter("formUserId");
+	  String id = request.getParameter("formUserId");
       String tel = request.getParameter("formTel");
-      String searchPwd = request.getParameter("searchPwd");
+      String searchPwd = (String)session.getAttribute("searchPwd");
+      
+      session.setAttribute("id", id);
+      session.setAttribute("name",name);
+      session.setAttribute("tel", tel);
+      //session.setAttribute("", value);
+      
+      System.out.println(searchPwd);
+      System.out.println(name);
+      System.out.println(id);
+      System.out.println(tel);
     		  
       int result =0;
       
@@ -412,7 +431,7 @@ public class LoginController
    @RequestMapping(value = "/pwdsendsms.action", method = {RequestMethod.GET, RequestMethod.POST})
 	public String pwdSendSms(HttpServletRequest request) throws CoolsmsException
    {
-	   
+	   HttpSession session = request.getSession();
 	    String result = "";
 	    IMemberDAO memDao = sqlSession.getMapper(IMemberDAO.class);
 	    ISpaDAO spaDao = sqlSession.getMapper(ISpaDAO.class);
@@ -420,10 +439,14 @@ public class LoginController
 	   
 
 	    String authNum = updatePwd();							// 난수 발생 비밀번호
-	    String name = request.getParameter("formUserName");
-	    String id = request.getParameter("formUserId");
-	    String tel = request.getParameter("formTel");
-	    String searchPwd = request.getParameter("searchPwd");	// 회원 여부
+	    
+	    
+	    String name = (String)session.getAttribute("name");
+	    String id = (String)session.getAttribute("id");
+	    String tel = (String)session.getAttribute("tel");
+	    String searchPwd = (String)session.getAttribute("searchPwd");	// 회원 여부
+	    System.out.println(authNum + name + id + tel+ searchPwd);
+	    
 	    
 	    if (searchPwd.equals("memPwdSearch")) 					// 일반 회원 
 	      {
@@ -448,8 +471,8 @@ public class LoginController
 	    	  spaDao.spaPwd(dto);
 	      }
 	       
-		String api_key = "NCSSVMTOHVFAMAWF";
-		String api_secret = "LAFEEWGYZJ7GGRH4MKT9TUXNY4OSVWBL";
+		String api_key = "NCSXHDF6ZGMKEB2C";
+		String api_secret = "VONNHWGHSKC86IDOCJIDV9W996SH3UR9";
 
 		Message coolsms = new Message(api_key, api_secret);
 		
@@ -457,8 +480,8 @@ public class LoginController
 		
 		// 4 params(to, from, type, text) are mandatory. must be filled
 		HashMap<String, String> params = new HashMap<String, String>();
-		params.put("to", "01028652034");
-		params.put("from", "01028652034"); 				// 인증할 전화번호
+		params.put("to", tel);
+		params.put("from", "01099044626"); 				// 인증할 전화번호
 		params.put("type", "SMS");
 		params.put("text", "[COME-IT] 인증번호 : " + authNum);
 		params.put("app_version", "test app 1.2"); // application name and version
