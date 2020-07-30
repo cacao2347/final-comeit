@@ -11,7 +11,8 @@
 <head>
 <meta charset="UTF-8">
 <title>COME-IT</title>
-<link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/lecture/lecturelist.css" >
+<%-- <link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/lecture/lecturelist.css" > --%>
+<link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/study/studylist.css" >
 <%-- <link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/lecturelist.css" > --%>
 
 <link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/bootstrap/bootstrap.min.css">
@@ -22,7 +23,7 @@
 
 body
 {
-	font-family: 'Noto Sans KR', sans-serif !important;
+   font-family: 'Noto Sans KR', sans-serif !important;
 }
 
 </style>

@@ -49,14 +49,14 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 	                    <img src="<%=cp %>/assets/images/main_img_1.jpg" style="width:100%; height:324px;">
 	                    <div class="carousel-caption active align-items-center"> 
 	                    	<h1>COME-IT</h1>
-	                    	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</p> 
+	                    	<p>프로그래밍은 즐겨야 한다.</p> 
 	                   	</div>
 	              </div><!-- /Slide1 --> 
 	            <div class="item">
 	                    <img src="<%=cp %>/assets/images/main_img_2.jpg" style="width:100%; height:324px;">
 	                    <div class="carousel-caption active align-items-center"> 
 	                    	<h1>COME-IT</h1>
-	                    	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</p> 
+	                    	<p>프로그래밍은 상상이다.</p> 
 	                   	</div>
 	              </div><!-- /Slide2 --> 
 	        </div>
@@ -79,48 +79,48 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                         <li class="col-sm-3">
     						<div class="fff">
 								<div class="thumbnail">
-									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
+									<a href="#"><img src="<%=cp %>/assets/images/차오즈.jpg" style="width: 227.5px; height: 227.5px;"></a>
 								</div>
 								<div class="caption">
-									<h4>Praesent commodo</h4>
-									<p>Nullam Condimentum Nibh Etiam Sem</p>
-									<a class="btn btn-mini" href="#">» Read More</a>
+									<h4>차오즈와 함께 자바공부하실분</h4>
+									<p>자바는 사랑입니다.</p>
+									
 								</div>
                             </div>
                         </li>
                         <li class="col-sm-3">
 							<div class="fff">
 								<div class="thumbnail">
-									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
+									<a href="#"><img src="<%=cp %>/assets/images/신민아.jpg" style="width: 227.5px; height: 227.5px;"></a>
 								</div>
 								<div class="caption">
-									<h4>Praesent commodo</h4>
-									<p>Nullam Condimentum Nibh Etiam Sem</p>
-									<a class="btn btn-mini" href="#">» Read More</a>
+									<h4>아차산에서 정보산업기사 공부하실분</h4>
+									<p>매주 목요일날 모입니다.</p>
+									
 								</div>
                             </div>
                         </li>
                         <li class="col-sm-3">
 							<div class="fff">
 								<div class="thumbnail">
-									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
+									<a href="#"><img src="<%=cp %>/assets/images/아이유.jpg" style="width: 227.5px; height: 227.5px;"></a>
 								</div>
 								<div class="caption">
-									<h4>Praesent commodo</h4>
-									<p>Nullam Condimentum Nibh Etiam Sem</p>
-									<a class="btn btn-mini" href="#">» Read More</a>
+									<h4>홍대입구에서 제이쿼리 공부해요!</h4>
+									<p>제이쿼리 공부합시다!</p>
+									
 								</div>
                             </div>
                         </li>
                         <li class="col-sm-3">
 							<div class="fff">
 								<div class="thumbnail">
-									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
+									<a href="#"><img src="<%=cp %>/assets/images/차오즈.jpg" style="width: 227.5px; height: 227.5px;"></a>
 								</div>
 								<div class="caption">
-									<h4>Praesent commodo</h4>
-									<p>Nullam Condimentum Nibh Etiam Sem</p>
-									<a class="btn btn-mini" href="#">» Read More</a>
+									<h4>합정에서 데이터베이스 공부해요!</h4>
+									<p>매주 월, 목에 모입니다!</p>
+									
 								</div>
                             </div>
                         </li>
@@ -133,48 +133,48 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                         <li class="col-sm-3">	
 							<div class="fff">
 								<div class="thumbnail">
-									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
+									<a href="#"><img src="<%=cp %>/assets/images/차오즈.jpg" stylealt=""></a>
 								</div>
 								<div class="caption">
 									<h4>Praesent commodo</h4>
 									<p>Nullam Condimentum Nibh Etiam Sem</p>
-									<a class="btn btn-mini" href="#">» Read More</a>
+									
 								</div>
                             </div>
                         </li>
                         <li class="col-sm-3">
 							<div class="fff">
 								<div class="thumbnail">
-									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
+									<a href="#"><img src="<%=cp %>/assets/images/아이유.jpg" alt=""></a>
 								</div>
 								<div class="caption">
 									<h4>Praesent commodo</h4>
 									<p>Nullam Condimentum Nibh Etiam Sem</p>
-									<a class="btn btn-mini" href="#">» Read More</a>
+									
 								</div>
                             </div>
                         </li>
                         <li class="col-sm-3">
 							<div class="fff">
 								<div class="thumbnail">
-									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
+									<a href="#"><img src="<%=cp %>/assets/images/신민아.jpg" alt=""></a>
 								</div>
 								<div class="caption">
 									<h4>Praesent commodo</h4>
 									<p>Nullam Condimentum Nibh Etiam Sem</p>
-									<a class="btn btn-mini" href="#">» Read More</a>
+									
 								</div>
                             </div>
                         </li>
                         <li class="col-sm-3">
 							<div class="fff">
 								<div class="thumbnail">
-									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
+									<a href="#"><img src="<%=cp %>/assets/images/차오즈.jpg" alt=""></a>
 								</div>
 								<div class="caption">
 									<h4>Praesent commodo</h4>
 									<p>Nullam Condimentum Nibh Etiam Sem</p>
-									<a class="btn btn-mini" href="#">» Read More</a>
+									
 								</div>
                             </div>
                         </li>
