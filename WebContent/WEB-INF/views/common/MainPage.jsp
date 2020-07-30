@@ -161,7 +161,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 									<a href="#"><img src="<%=cp %>/assets/images/4.JPG" alt=""></a>
 								</div>
 								<div class="caption">
-									<h4>전진영 강사</h4>
+									<h4>김동휘 강사</h4>
 									<p>한 달 안에 Go 마스터하기</p>
 									
 								</div>

@@ -242,9 +242,6 @@
 			minMem = $("#minMem").val();
 			maxMem = $("#maxMem").val();
 			
-			alert("최소인원 : " + minMem);
-			alert("최대인원 : " + maxMem);
-			
 			if (minMem > maxMem) 
 			{
 				alert("최대인원이 최소인원보다 적습니다.1");
@@ -265,12 +262,9 @@
 			minMem = $("#minMem").val();
 			maxMem = $("#maxMem").val();
 			
-			alert("최소인원 : " + minMem);
-			alert("최대인원 : " + maxMem);
-			
 			if (minMem > maxMem) 
 			{
-				alert("최대인원이 최소인원보다 적습니다.2");
+				alert("최대인원이 최소인원보다 적습니다.");
 				
 				$("#minMem").val($("#minMem option:first").val());
 				$("#maxMem").val($("#maxMem option:first").val());

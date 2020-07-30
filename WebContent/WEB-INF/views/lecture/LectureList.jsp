@@ -83,7 +83,7 @@ body
 		// 강의 각각 리스트 클릭 시 (로그인 후)
 		$(".titleBtn").click(function()
 		{
-			alert($(this).val());
+            /* alert($(this).val()); */
 			
 			var params = "lec_cd=" + $(this).val();
 			location.href = "<%=cp%>/lecturedetail.action?" + params;
@@ -144,7 +144,7 @@ body
 				}
 				, error : function(e)
 				{
-					alert(e.responseText + "에러");
+					/* alert(e.responseText + "에러"); */
 				}
 			});
 			
