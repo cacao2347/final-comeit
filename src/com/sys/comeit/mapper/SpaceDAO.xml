@@ -173,4 +173,12 @@
 		AND SPA_ID=#{spa_id}
    </select>
    
+   <!-- 스터디 예약 요청 승인 -->
+   <update id="SpaReqAppr">
+		UPDATE TBL_STU_SPA_REQ
+		SET CHECK_TYPE_CD='CHET1001'
+		WHERE STU_SPA_REQ_CD=#{stu_spa_req_cd}
+   </update>
+
+   
 </mapper>

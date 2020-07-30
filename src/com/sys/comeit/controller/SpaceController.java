@@ -242,6 +242,7 @@ public class SpaceController
 			//view = "redirect:spacedetail.action";
 			//return view;
 		}
+		
 		// 공간 마이페이지로 이동
 		@RequestMapping(value = "/spacemy.action", method = RequestMethod.GET)
 		public String spaceMy(Model model,HttpServletRequest request)
@@ -262,4 +263,17 @@ public class SpaceController
 			return view;
 		}
 		
+		// 예약 승인
+		@ResponseBody
+		@RequestMapping(value = "/spareqappr.action", method = RequestMethod.POST)
+		public String SpaReqAppr(Model model,HttpServletRequest request)
+		{
+			ISpaceDAO ispaceDAO = sqlSession.getMapper(ISpaceDAO.class);
+			
+			String stu_spa_req_cd = request.getParameter("stu_spa_req_cd");
+			System.out.println(stu_spa_req_cd);
+			int reqInsertNum = ispaceDAO.SpaReqAppr(stu_spa_req_cd);
+			
+			return String.valueOf(reqInsertNum);
+		}
 }

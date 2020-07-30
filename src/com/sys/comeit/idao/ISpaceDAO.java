@@ -24,4 +24,6 @@ public interface ISpaceDAO
 	public ArrayList<SpaReqDTO> googleChart(String spa_id);		// 마이페이지 그래프
 	public ArrayList<SpaReqDTO> SpaReqCheck(String spa_id);		// 마이페이지 예약 내역 관리
 	public ArrayList<SpaReqDTO> SpaReq(String spa_id);		// 마이페이지 예약 요청 관리
+	public int SpaReqAppr(String stu_spa_req_cd);		// 예약 요청 승인
+	
 }

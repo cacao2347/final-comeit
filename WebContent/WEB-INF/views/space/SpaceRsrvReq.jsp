@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%
+   request.setCharacterEncoding("UTF-8");
+   String cp = request.getContextPath();
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,7 +27,34 @@
 	                submenu.slideDown();
 	            }
 	        });
+	    
+	    
+	    $("#reqSubmit").click(function()
+        {
+	    	var params = "stu_spa_req_cd="+$(this).val();
+	    	//alert(params);
+	    	$.ajax(
+  			{
+  				type : "POST"
+  				, data :params
+  				, url : "spareqappr.action"
+  				, success : function()
+  				{
+  					alert("승인되었습니다.");
+  				}
+  				, error : function(e)
+  				{
+  					alert("승인이 실패되었습니다.");
+  				}
+  			});
+	    	End();	
+        });
+	    
 	    });
+	
+	function End() {
+    	location.reload();
+	}
 	</script>
 </head>
 
@@ -54,7 +85,7 @@
 	               				<td>${reqList.mem_num}</td>
 	               				<td>${reqList.req_date}</td>
 	               				<td>
-	               					<button class="btn btn-primary">승인</button>
+	               					<button class="btn btn-primary" value="${reqList.stu_spa_req_cd }" id="reqSubmit">승인</button>
 	               					<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#staticBackdrop">거부</button>
 	               				</td>
 	               				
