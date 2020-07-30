@@ -32,7 +32,7 @@ body
 
 	$(function()
 	{
-		// AJAX 요청 및 응답 처리
+		// AJAX 요청 및 응답 처리입니다.
         ajaxSpcAreaRequest();
 		
      	// 지역명이 바뀌면 상세지역 ajax 호출
