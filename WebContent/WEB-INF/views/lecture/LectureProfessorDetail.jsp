@@ -13,7 +13,16 @@
 <link rel="stylesheet" type="text/css" href="<%=cp%>/assets/css/lecture/lectureprofessordetail.css">
 <link rel="stylesheet" type="text/css" href="<%=cp%>/assets/css/bootstrap/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
+
+<style type="text/css">
+
+body
+{
+   font-family: 'Noto Sans KR', sans-serif !important;
+}
+
+</style>
 
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="<%=cp%>/assets/js/bootstrap.min.js"></script>
@@ -96,7 +105,7 @@
 								</h3>
 							</div>
 							<!-- end stuTerm -->
-
+							<hr/>
 							<!-- 활동 지역 -->
 							<div class="stuArea">
 								<span class="glyphicon glyphicon-map-marker icon"></span>
@@ -104,7 +113,7 @@
 								<br /> <span class="area">${lecInfo.spc_area_name }</span>
 							</div>
 							<!-- end .stuArea -->
-
+							<hr/>
 							<!-- 키워드 -->
 							<div class="stuKey">
 								<span class="glyphicon glyphicon-tags icon"></span>
@@ -118,7 +127,7 @@
 								</span>
 							</div>
 							<!-- end .stuKey -->
-
+							<hr/>
 							<!-- 예상 레벨 -->
 							<div class="stuLevel">
 								<span class="glyphicon glyphicon-calendar icon"></span>
@@ -126,7 +135,7 @@
 								<br> <span class="level">${lecInfo.str_date }~${lecInfo.end_date }</span>
 								<br> <span class="level">화, 목</span>
 							</div>
-
+							<hr/>
 							<!-- 상세 설명 -->
 							<div class="stuCurr">
 								<span class="glyphicon glyphicon-user icon"></span>
@@ -137,7 +146,7 @@
 									강의 최대 인원 : ${lecInfo.max_mem }명
 								</span>
 							</div>
-							
+							<hr/>	
 							<div class="lecMoney">
 								<span class="glyphicon glyphicon-shopping-cart icon"></span>
 								<h3>수강료</h3>

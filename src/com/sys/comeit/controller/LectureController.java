@@ -308,7 +308,7 @@ public class LectureController
 					model.addAttribute("lecTag", lectureDao.lecIntTagSearch(lec_cd));
 					model.addAttribute("profInfo", proDao.profInfo(mem_cd));
 					
-					view = "WEB-INF/views/lecture/LectureLecStudent.jsp";
+					view = "WEB-INF/views/lecture/LectureStudentDetail.jsp";
 					
 					return view;
 				}

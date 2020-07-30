@@ -35,8 +35,6 @@
         
 </script>
 
-
-
 </head>
 <body>
 
@@ -46,7 +44,8 @@
         <li class="on"><a href="#tab1">공지사항</a></li>
         <li><a href="#tab2">모임 날짜</a></li>
          <li><a href="#tab3">모임 장소</a></li>
-         <li><a href="#tab4">피드백</a></li> 
+         <li><a href="#tab4">강의 관리</a></li> 
+         <li><a href="#tab5">피드백</a></li> 
     </ul>
 
     <!--탭 콘텐츠 영역 -->
@@ -68,6 +67,10 @@
         </div>
    
          <div id="tab4" class="tab_content">
+           <!--Content-->
+        </div>
+        
+        <div id="tab5" class="tab_content">
            <!--Content-->
         </div>
 

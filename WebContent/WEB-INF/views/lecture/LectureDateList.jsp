@@ -20,7 +20,7 @@
 	<div class="row">
 		<div class="col-md-2">
 		</div>
-		<div class="col-md-8" id="col-md-8">
+		<div class="col-md-8 col-md-8-center" id="col-md-8" style="text-align: center;">
 			<div class="date">
 				<select name="" id="" class="form-control dateSel">
 					<option value="date1">2020년 6월</option>
@@ -28,7 +28,7 @@
 					<option value="date3">2020년 8월</option>
 				</select>
 			</div><!-- end .date -->
-			<div class="meet">
+			<div class="meet" style="text-align: center;">
 				<select name="" id="" class="form-control meetSel">
 					<option value="meet1">1회차</option>
 					<option value="meet2">2회차</option>
@@ -44,7 +44,7 @@
 	<div class="row">
 		<div class="col-md-2">
 		</div>
-		<div class="col-md-8" id="col-md-8">
+		<div class="col-md-8 col-md-8-center" id="col-md-8" style="text-align: center;">
 			<h1>2020년 6월 7회차</h1>
 		</div><!-- end .col-md-8 -->
 		<div class="col-md-2">
@@ -158,7 +158,7 @@
 	<div class="row">
 		<div class="col-md-2">
 		</div>
-		<div class="col-md-8" id="col-md-8">
+		<div class="col-md-8" id="col-md-88">
 			<div class="button">
 				<div class="mod">
 					<input type="button" value="수정" class="btn btn-default"/>

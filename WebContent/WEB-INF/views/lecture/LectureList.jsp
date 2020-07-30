@@ -418,7 +418,7 @@ body
 </div>
 <div class="row">
 	<div class="col-md-12">
-	<c:import url="/WEB-INF/views/common/footer.jsp"></c:import>
+		<c:import url="/WEB-INF/views/common/footer.jsp"></c:import>
 	</div>
 </div>
 </body>

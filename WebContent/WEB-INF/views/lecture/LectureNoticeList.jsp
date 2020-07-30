@@ -19,7 +19,7 @@
 	<div class="row searchRow">
 	
 		
-			<div class="col-md-12" id="col-md-12">
+			<div class="col-md-12" id="col-md-12-board">
 				<select name="" id="" class="form-control searchSel">
 					<option value="title">제목</option>
 					<option value="author">작성자</option>
@@ -35,7 +35,7 @@
 	
 	<div class="row">
 		
-		<div class="col-md-12 container">
+		<div class="col-md-12 container" id="col-md-12-table">
 		
 			<table class="table">
 				<thead class="thead-dark">
@@ -126,7 +126,7 @@
 	</div><!-- end .row -->
 	<div class="row">
 		
-		<div class="col-md-12">
+		<div class="col-md-12" id="col-md-12-paging">
 			<div class="paging"> 
 				<ul class="pagination">
 				<li class="page-item"><a href="#" class="page-link">Previous</a></li>

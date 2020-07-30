@@ -39,7 +39,7 @@ String cp = request.getContextPath();
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-md-2"></div>
-				<div class="col-md-8 text-left">
+				<div class="col-md-8 text-center">
 					<h1>모임 장소 정하기</h1>
 				</div>
 				<div class="col-md-2"></div>
