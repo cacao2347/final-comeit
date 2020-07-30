@@ -182,7 +182,7 @@ public class LectureController
 		}
 		
 		model.addAttribute("area", areaDao.areaList());
-		//model.addAttribute("lec", lecDao.lecList()); // 실제 강의 리스트
+		// model.addAttribute("lec", lecDao.lecList()); // 실제 강의 리스트
 		model.addAttribute("count", lecDao.lecCount());
 		model.addAttribute("lecTags", lecDao.lecTagList()); // 하나의 강의의 모든 키워드
 		model.addAttribute("lecHrDays", lecDao.lecHrDaySearch());  // 하나의 강의의 요일, 시간
@@ -193,7 +193,7 @@ public class LectureController
 		MyUtil util = new MyUtil();
 
 		String pageNum = request.getParameter("pageNum"); // 페이지 번호? 왜 삭제 버튼에서..?
-
+		
 		int currentPage = 1;
 		if (pageNum != null && pageNum.length() != 0)
 		{
