@@ -105,6 +105,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 	{
 		phoneCheck = "";
 		alert("phoneCheck_bf : " + phoneCheck);
+
 		
 		$.ajax({
 			url : "<%=cp%>/idsendsms.action",
