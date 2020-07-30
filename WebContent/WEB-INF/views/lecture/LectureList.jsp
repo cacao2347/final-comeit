@@ -289,7 +289,7 @@ body
 								<img class="study-logo" alt="study-logo" src="assets/images/studylogo.PNG">
 								</c:when>
 								<c:when test="${not empty lecs.img_url }">
-								<img class="study-logo" alt="study-logo" src="${lecs.img_url }" style="width: 160px; heigth: 114.03px;">
+								<img class="study-logo" alt="study-logo" src="${lecs.img_url }" style="width: 160px; height: 150px;">
 								</c:when>
 								</c:choose>
 								</div>

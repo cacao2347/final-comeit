@@ -9,7 +9,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/study/studyTab.css">
+<link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/lecture/lectureTab.css">
 <script type="text/javascript">
         $(document).ready(function() {
 
