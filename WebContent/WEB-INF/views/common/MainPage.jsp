@@ -134,11 +134,11 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                         <li class="col-sm-3">	
 							<div class="fff">
 								<div class="thumbnail">
-									<a href="#"><img src="<%=cp %>/assets/images/2.jpg" stylealt=""></a>
+									<a href="#"><img src="<%=cp %>/assets/images/2.JPG" stylealt=""></a>
 								</div>
 								<div class="caption">
-									<h4>Praesent commodo</h4>
-									<p>Nullam Condimentum Nibh Etiam Sem</p>
+									<h4>전진영 강사</h4>
+									<p>한 달안에 C언어 마스터하기</p>
 									
 								</div>
                             </div>
@@ -146,11 +146,11 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                         <li class="col-sm-3">
 							<div class="fff">
 								<div class="thumbnail">
-									<a href="#"><img src="<%=cp %>/assets/images/3.jpg" alt=""></a>
+									<a href="#"><img src="<%=cp %>/assets/images/3.JPG" alt=""></a>
 								</div>
 								<div class="caption">
-									<h4>Praesent commodo</h4>
-									<p>Nullam Condimentum Nibh Etiam Sem</p>
+									<h4>임효림 강사</h4>
+									<p>한 달 안에 C++ 마스터하기</p>
 									
 								</div>
                             </div>
@@ -158,11 +158,11 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                         <li class="col-sm-3">
 							<div class="fff">
 								<div class="thumbnail">
-									<a href="#"><img src="<%=cp %>/assets/images/4.jpg" alt=""></a>
+									<a href="#"><img src="<%=cp %>/assets/images/4.JPG" alt=""></a>
 								</div>
 								<div class="caption">
-									<h4>Praesent commodo</h4>
-									<p>Nullam Condimentum Nibh Etiam Sem</p>
+									<h4>전진영 강사</h4>
+									<p>한 달 안에 Go 마스터하기</p>
 									
 								</div>
                             </div>
@@ -170,11 +170,11 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                         <li class="col-sm-3">
 							<div class="fff">
 								<div class="thumbnail">
-									<a href="#"><img src="<%=cp %>/assets/images/5.jpg" alt=""></a>
+									<a href="#"><img src="<%=cp %>/assets/images/5.JPG" alt=""></a>
 								</div>
 								<div class="caption">
-									<h4>Praesent commodo</h4>
-									<p>Nullam Condimentum Nibh Etiam Sem</p>
+									<h4>강건희 강사</h4>
+									<p>세 달 안에 Oracle 마스터하기</p>
 									
 								</div>
                             </div>
