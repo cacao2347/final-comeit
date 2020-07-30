@@ -115,7 +115,7 @@ body
          {
             alert("한 개 이상의 레벨을 선택해주세요.");
             return;
-         }
+         } 
          
          f = document.filterForm;
          f.action = "<%=cp %>/studylist.action";
