@@ -2,127 +2,128 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
-	request.setCharacterEncoding("UTF-8");
-	String cp = request.getContextPath();
+   request.setCharacterEncoding("UTF-8");
+   String cp = request.getContextPath();
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>StudyAfDetail.jsp</title>
-<link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/study/studyAfDetail.css" >
+<link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/studyAfDetail.css" >
 <link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/bootstrap/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<!-- 파비콘 -->
-<link rel="shortcut icon" href="<%=cp %>/assets/images/pen_1.ico" type="image/x-icon">
-<link rel="icon" href="<%=cp %>/assets/images/pen_1.ico" type="image/x-icon">
-<!-- 글씨체 -->
-<style type="text/css">
-	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet"><style type="text/css">
-	body{font-family: 'Noto Sans KR', sans-serif;}
-</style>
+
 
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="<%=cp %>/assets/js/bootstrap.min.js"></script>
 
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<!-- 파비콘 -->
+<link rel="shortcut icon" href="<%=cp %>/assets/images/pen_1.ico" type="image/x-icon">
+<link rel="icon" href="<%=cp %>/assets/images/pen_1.ico" type="image/x-icon">
+<!-- 글씨체 -->
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
+<style type="text/css">
+body{font-family: 'Noto Sans KR', sans-serif;}
+</style>
 
 
 <script type="text/javascript">
 
 $(document).ready(function () 
 {
-	   // 스터디장 모달 정보 요청
+      // 스터디장 모달 정보 요청
       $(".leaderBtn").click(function() 
       { 
-    	  var params = "leaderMemCd=" +$(this).val();
-    	  
-    	  $.ajax(
-    	  {
-    	      type : "POST"
-    	      , url : "leaderinfomodal.action"
-    	      , data : params
-    	      , dataType : "text"
-    	      , success : function(args)
- 	  	      { 
-    	    	  var infoData = args.split('-');
-    	    	 
-    	    	  // 정보 담기
-				  $("#modalName").text(infoData[0]);
-		    	  $("#modalIdntt").text(infoData[1]);
-		    	  $("#memContent").text(infoData[2]); 
-		    	  $("#modalTag").text(infoData[3]);
-		    	  $("#memJoinStu").text(infoData[4]);
-				  
-		    	  // 모달창 보여주기
-		    	  $("#modal").show();
-				  
-				  // 스크롤 제어
-		          $("html, body").css({"overflow":"hidden", "height":"100%"});
-		          $("#modal").bind("touchmove", function(e) {
-		            e.preventDefault();
-		          });
-		         
-		          $("#modal .searchModal").bind("touchmove", function(e) {
-		            e.stopPropagation();
-		          });
-		          
-	    	 
-			  }
-    	  	  , error : function(e) 
-    	  	  {
-					alert(e.responseText);
-			  }
-    	  	
-    	  
-    	  });	
+         var params = "leaderMemCd=" +$(this).val();
+         
+         $.ajax(
+         {
+             type : "POST"
+             , url : "leaderinfomodal.action"
+             , data : params
+             , dataType : "text"
+             , success : function(args)
+               { 
+                var infoData = args.split('-');
+               
+                // 정보 담기
+              $("#modalName").text(infoData[0]);
+               $("#modalIdntt").text(infoData[1]);
+               $("#memContent").text(infoData[2]); 
+               $("#modalTag").text(infoData[3]);
+               $("#memJoinStu").text(infoData[4]);
+              
+               // 모달창 보여주기
+               $("#modal").show();
+              
+              // 스크롤 제어
+                $("html, body").css({"overflow":"hidden", "height":"100%"});
+                $("#modal").bind("touchmove", function(e) {
+                  e.preventDefault();
+                });
+               
+                $("#modal .searchModal").bind("touchmove", function(e) {
+                  e.stopPropagation();
+                });
+                
+           
+           }
+              , error : function(e) 
+              {
+               alert(e.responseText);
+           }
+            
+         
+         });   
       });   // end 스터디장 모달 정보요청
       
       
       // 스터디원 모달 정보 요청 joinMemBtn
        $(".joinMemBtn").click(function() 
       {
-    	   
-    	  var params = "joinMemCd=" +$(this).val();
-    	  
-    	  $.ajax(
-    	  {
-    	      type : "POST"
-    	      , url : "meminfomodal.action"
-    	      , data : params
-    	      , dataType : "text"
-    	      , success : function(args)
- 	  	      { 
-    	    	  var infoData = args.split('-');
-    	    	 
-    	    	  // 정보 담기
-				  $("#modalName").text(infoData[0]);
-		    	  $("#modalIdntt").text(infoData[1]);
-		    	  $("#memContent").text(infoData[2]); 
-		    	  $("#modalTag").text(infoData[3]);
-		    	  $("#memJoinStu").text(infoData[4]);
-				  
-		    	  // 모달창 보여주기
-		    	  $("#modal").show();
-				  
-				  // 스크롤 제어
-		          $("html, body").css({"overflow":"hidden", "height":"100%"});
-		          $("#modal").bind("touchmove", function(e) {
-		            e.preventDefault();
-		          });
-		         
-		          $("#modal .searchModal").bind("touchmove", function(e) {
-		            e.stopPropagation();
-		          });
-	    	 
-			  }
-    	  	  , error : function(e) 
-    	  	  {
-					alert(e.responseText);
-			  }
-    	  	
-    	  
-    	  });	
+          
+         var params = "joinMemCd=" +$(this).val();
+         
+         $.ajax(
+         {
+             type : "POST"
+             , url : "meminfomodal.action"
+             , data : params
+             , dataType : "text"
+             , success : function(args)
+               { 
+                var infoData = args.split('-');
+               
+                // 정보 담기
+              $("#modalName").text(infoData[0]);
+               $("#modalIdntt").text(infoData[1]);
+               $("#memContent").text(infoData[2]); 
+               $("#modalTag").text(infoData[3]);
+               $("#memJoinStu").text(infoData[4]);
+              
+               // 모달창 보여주기
+               $("#modal").show();
+              
+              // 스크롤 제어
+                $("html, body").css({"overflow":"hidden", "height":"100%"});
+                $("#modal").bind("touchmove", function(e) {
+                  e.preventDefault();
+                });
+               
+                $("#modal .searchModal").bind("touchmove", function(e) {
+                  e.stopPropagation();
+                });
+           
+           }
+              , error : function(e) 
+              {
+               alert(e.responseText);
+           }
+            
+         
+         });   
       });// end 스터디원 모달 정보요청
       
       
@@ -136,100 +137,100 @@ $(document).ready(function ()
       {
          alert("스터디 방을 폐쇄하시겠습니까?");   
       });
-		      
+            
 });
-		  	
- 	// 모달창 닫기 버튼 클릭 시 
-	function closeModal() 
-	{	
-		$('.searchModal').hide();
-		
-		// 스크롤 제어 해제
-		$("html, body").css({"overflow":"auto", "height":"auto"});
-		$('#modal').unbind('touchmove');
-		
-	};
-	
+           
+    // 모달창 닫기 버튼 클릭 시 
+   function closeModal() 
+   {   
+      $('.searchModal').hide();
+      
+      // 스크롤 제어 해제
+      $("html, body").css({"overflow":"auto", "height":"auto"});
+      $('#modal').unbind('touchmove');
+      
+   };
+   
 
-	// 캘린더
-	document.addEventListener('DOMContentLoaded', function() {
+   // 캘린더
+   document.addEventListener('DOMContentLoaded', function() {
 
-		var calendarEl = document.getElementById('calendar');
+      var calendarEl = document.getElementById('calendar');
 
-		var calendar = new FullCalendar.Calendar(calendarEl, {
+      var calendar = new FullCalendar.Calendar(calendarEl, {
 
-			eventDidMount : function(info) {
-				var tooltip = new Tooltip(info.el, {
-					title : info.event.extendedProps.description,
-					placement : 'top',
-					trigger : 'hover',
-					container : 'body'
-				});
-			},
+         eventDidMount : function(info) {
+            var tooltip = new Tooltip(info.el, {
+               title : info.event.extendedProps.description,
+               placement : 'top',
+               trigger : 'hover',
+               container : 'body'
+            });
+         },
 
-			plugins : [ 'interaction', 'dayGrid', 'timeGrid' ],
-			defaultView : 'dayGridMonth',
-			defaultDate : new Date(),
-			dateClick : function() {
+         plugins : [ 'interaction', 'dayGrid', 'timeGrid' ],
+         defaultView : 'dayGridMonth',
+         defaultDate : new Date(),
+         dateClick : function() {
 
-			},
-			header : {
-				left : 'prev,next',
-				center : 'title',
-				right : 'today'
-			},
+         },
+         header : {
+            left : 'prev,next',
+            center : 'title',
+            right : 'today'
+         },
 
-			// 일정 등록
-			selectable : true,
-			selectMirror : true,
-			select : function(arg) {
-				var title = prompt('일정을 등록하세요 :');
-				if (title) {
-					calendar.addEvent({
-						title : title,
-						start : arg.start,
-						end : arg.end,
-						allDay : arg.allDay
-					})
-				}
+         // 일정 등록
+         selectable : true,
+         selectMirror : true,
+         select : function(arg) {
+            var title = prompt('일정을 등록하세요 :');
+            if (title) {
+               calendar.addEvent({
+                  title : title,
+                  start : arg.start,
+                  end : arg.end,
+                  allDay : arg.allDay
+               })
+            }
 
-				calendar.unselect()
-			},
-			eventClick : function(info) {
+            calendar.unselect()
+         },
+         eventClick : function(info) {
 
-				if (confirm("정말 삭제하시겠습니까?")) {
-					info.event.remove();
-				}
+            if (confirm("정말 삭제하시겠습니까?")) {
+               info.event.remove();
+            }
 
-			},
+         },
 
-			tizeZone : 'local',
-			locale : 'ko',
-			eventSources : [ {
+         tizeZone : 'local',
+         locale : 'ko',
+         eventSources : [ {
 
-				events : function(info, callback, failureCallback) // 이 이벤트 영역에 제이슨 형태로 뿌려주려고 ajax
-				{
-					$.ajax({
-						type : "POST",
-						url : "WEB-INF/views/study/CalendarReturn.jsp" // 데이터 가지고 올 곳. 요청 url
-						,
-						dataType : "json",
-						success : function(args) {
+            events : function(info, callback, failureCallback) // 이 이벤트 영역에 제이슨 형태로 뿌려주려고 ajax
+            {
+               $.ajax({
+                  type : "POST",
+                  url : "calimsi.jsp" // 데이터 가지고 올 곳. 요청 url
+                  ,
+                  dataType : "json",
+                  success : function(args) {
 
-							callback(args);
-							//alert(args);
+                     callback(args);
+                     //alert(args);
 
-						}
+                  }
 
-					});
+               });
 
-				}
+            }
 
-			} ]
+         } ]
 
-		});
-		calendar.render();
-	});
+      });
+      calendar.render();
+   });
 </script>
 
 
@@ -238,7 +239,7 @@ $(document).ready(function ()
 
 <!-- 헤더 -->
 <div class="row">
-	<div class="col-md-12">
+   <div class="col-md-12">
    <c:import url="/WEB-INF/views/common/header.jsp"></c:import>
    </div>
 
@@ -279,11 +280,11 @@ $(document).ready(function ()
                   <!-- 스터디장 : 커밋 , 회원 : 참가, 스터디원 : 퇴장 으로 노출 -->
                   <div class="jrBtn pull-right">
                      <c:if test="${sessionScope.mem_cd eq leaderName.leader_mem_cd }">
-                  	 <button type="button" class="btn btn-lg btn-primary commitBtn" value="${studyInfo.stu_cd }" disabled="disabled">COMMIT</button>
-                  	</c:if>
-                  	 <c:if test="${sessionScope.mem_cd ne leaderName.leader_mem_cd }">
-                  	<button type="button" class="btn btn-lg btn-primary joinStudyBtn" value="${studyInfo.stu_cd }">퇴장</button>
-                  	</c:if>
+                      <button type="button" class="btn btn-lg btn-primary commitBtn" value="${studyInfo.stu_cd }" disabled="disabled">COMMIT</button>
+                     </c:if>
+                      <c:if test="${sessionScope.mem_cd ne leaderName.leader_mem_cd }">
+                     <button type="button" class="btn btn-lg btn-primary joinStudyBtn" value="${studyInfo.stu_cd }">퇴장</button>
+                     </c:if>
                      <img src="<%=cp %>/assets/images/report.png" alt="" class="report" onclick=""/>
                   </div><!-- end .button -->
                </div><!-- end.stuTitle -->
@@ -361,7 +362,7 @@ $(document).ready(function ()
                            
                            <div class="userName">
                               <span class="glyphicon glyphicon-user user"></span><h4>이름 :</h4><span class="name" id="modalName"></span>              
-	                           
+                              
                            </div><!-- end .userName -->
                            <div class="userManner">
                               <span class="glyphicon glyphicon-pencil pencil"></span><h4>매너연필 :</h4><span class="manPencil">5cm</span>
@@ -397,18 +398,18 @@ $(document).ready(function ()
           <div class="memLeader" id="member1">
                   
                   
-				<div class="leaderImg">
-				
-					<c:set var="imgCount" value="${imgCount==0 }"/>
+            <div class="leaderImg">
+            
+               <c:set var="imgCount" value="${imgCount=0 }"/>
                      <c:forEach var="memImg" items="${memImg }">
                         <c:if test="${memImg.join_mem_cd eq leaderName.leader_mem_cd}">
-                              <c:set var="imgCount" value="${imgCount==1 }"/>	
-                              	<img src="${memImg.mem_img }" alt="" class="img-circle memImg" />
+                              <c:set var="imgCount" value="${imgCount=1 }"/>   
+                                 <img src="${memImg.mem_img }" alt="" class="img-circle memImg" />
                         </c:if>
                      </c:forEach>
                      
                      <c:if test="${imgCount==0 }" >
-                     	<img src="<%=cp %>/assets/images/basic.png" alt="" class="img-circle memImg" />
+                        <img src="<%=cp %>/assets/images/basic.png" alt="" class="img-circle memImg" />
                      </c:if>
                    </div><!-- end .leaderImg -->  
                      
@@ -432,28 +433,28 @@ $(document).ready(function ()
                         <div class="memLeader" id="">
                           <%--   
                         <div class="leaderImg">
-						                    
+                                      
                           <c:forEach var="memImg" items="${memImg }">
                           
                               <c:if test="${memImg.join_mem_cd eq joinName.join_mem_cd}">
-									<c:set var="countImg" value="${countImg=1 }"/>                                
-                              		<img src="${memImg.mem_img }" alt="" class="img-circle memImg" />
+                           <c:set var="countImg" value="${countImg=1 }"/>                                
+                                    <img src="${memImg.mem_img }" alt="" class="img-circle memImg" />
                               </c:if>
                               
                            </c:forEach>
                           
                            <c:if test="${countImg==0 }">
-                              		<img src="<%=cp %>/assets/images/basic.png" alt="" class="img-circle memImg" />
-                          	</c:if>
-                          	
-                          	<img src="<%=cp %>/assets/images/basic.png" alt="" class="img-circle memImg" />
+                                    <img src="<%=cp %>/assets/images/basic.png" alt="" class="img-circle memImg" />
+                             </c:if>
+                             
+                             <img src="<%=cp %>/assets/images/basic.png" alt="" class="img-circle memImg" />
                           </div><!-- end .leaderImg -->
                            --%>
                            
                            
                           <div class="leaderImg">
-								<img src="<%=cp %>/assets/images/basic.png" alt="" class="img-circle memImg" />
-							</div><!-- end .leaderImg -->
+                        <img src="<%=cp %>/assets/images/basic.png" alt="" class="img-circle memImg" />
+                     </div><!-- end .leaderImg -->
                           
                            <div class="leaderInfo">
                               <h4>Study Member</h4><br>
@@ -468,7 +469,7 @@ $(document).ready(function ()
                      
                   </c:forEach>
                </div><!-- end .stuMem -->
-      		
+            
                <!-- 
                관리자에게만 보일 폐쇄 버튼
                <div class="roomBtn">
@@ -494,29 +495,29 @@ $(document).ready(function ()
 <!-- 탭 -->
 
 <div class="container-fluid">
-	<div class="row">
-		<div class="col-md-2">
-		</div>
-		<div class="col-md-8">
-			<div class="row">
-				<div class="col-md-12">
-				
-				<c:import url="StudyTab.jsp">
-					<c:param name="stu_cd" value="${studyInfo.stu_cd }"></c:param>
-				</c:import>
-				
-				</div>
-			</div>
-		</div>
-		<div class="col-md-2">
-		</div>
-	</div>
+   <div class="row">
+      <div class="col-md-2">
+      </div>
+      <div class="col-md-8">
+         <div class="row">
+            <div class="col-md-12">
+            
+            <c:import url="StudyTab.jsp">
+               <c:param name="stu_cd" value="${studyInfo.stu_cd }"></c:param>
+            </c:import>
+            
+            </div>
+         </div>
+      </div>
+      <div class="col-md-2">
+      </div>
+   </div>
 </div>
 
 <!-- 푸터 -->
 <div class="row">
-	<div class="col-md-12">
-   		<c:import url="/WEB-INF/views/common/footer.jsp"></c:import>
+   <div class="col-md-12">
+         <c:import url="/WEB-INF/views/common/footer.jsp"></c:import>
     </div>
 </div>
 </body>
