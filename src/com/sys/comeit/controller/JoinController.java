@@ -294,6 +294,9 @@ public class JoinController
 			view = "redirect:memberlogin.action"; // 회원가입 성공 시 로그인 페이지
 		else
 			view = "redirect:spacejoin.action";
+		
+		
+		view = "redirect:memberlogin.action";
 
 		return view;
 
