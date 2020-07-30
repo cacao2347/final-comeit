@@ -3,6 +3,7 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
+	String imagePath = cp + "/pds/saveData/";
 %>
 <!DOCTYPE html>
 <html>
@@ -79,11 +80,11 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                         <li class="col-sm-3">
     						<div class="fff">
 								<div class="thumbnail">
-									<a href="#"><img src="<%=cp %>/assets/images/차오즈.jpg" style="width: 227.5px; height: 227.5px;"></a>
+									<a href="#"><img src="<%=cp %>/assets/images/1조.png" style="width: 227.5px; height: 227.5px;"></a>
 								</div>
 								<div class="caption">
-									<h4>차오즈와 함께 자바공부하실분</h4>
-									<p>자바는 사랑입니다.</p>
+									<h4>[언어] 강아지 산책 어플리케이션 만들어요</h4>
+									<p>서울 은평구쪽에서 활동할 예정입니다.</p>
 									
 								</div>
                             </div>
@@ -91,11 +92,11 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                         <li class="col-sm-3">
 							<div class="fff">
 								<div class="thumbnail">
-									<a href="#"><img src="<%=cp %>/assets/images/신민아.jpg" style="width: 227.5px; height: 227.5px;"></a>
+									<a href="#"><img src="<%=imagePath %>/3조.png" style="width: 227.5px; height: 227.5px;"></a>
 								</div>
 								<div class="caption">
-									<h4>아차산에서 정보산업기사 공부하실분</h4>
-									<p>매주 목요일날 모입니다.</p>
+									<h4>[언어]농구 사이트 만들고 싶어요.</h4>
+									<p>농구하는 사람들 매칭해주는 사이트 만들고 싶어요~</p>
 									
 								</div>
                             </div>
@@ -103,11 +104,11 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                         <li class="col-sm-3">
 							<div class="fff">
 								<div class="thumbnail">
-									<a href="#"><img src="<%=cp %>/assets/images/아이유.jpg" style="width: 227.5px; height: 227.5px;"></a>
+									<a href="#"><img src="<%=cp %>/assets/images/4조.png" style="width: 227.5px; height: 227.5px;"></a>
 								</div>
 								<div class="caption">
-									<h4>홍대입구에서 제이쿼리 공부해요!</h4>
-									<p>제이쿼리 공부합시다!</p>
+									<h4>[언어]공동구매 사이트 만듭시다</h4>
+									<p>자바, 오라클 사용해서 Spring 기반으로 웹사이트 만들려구 해요</p>
 									
 								</div>
                             </div>
@@ -115,7 +116,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                         <li class="col-sm-3">
 							<div class="fff">
 								<div class="thumbnail">
-									<a href="#"><img src="<%=cp %>/assets/images/차오즈.jpg" style="width: 227.5px; height: 227.5px;"></a>
+									<a href="#"><img src="<%=cp %>/assets/images/1.png" style="width: 227.5px; height: 227.5px;"></a>
 								</div>
 								<div class="caption">
 									<h4>합정에서 데이터베이스 공부해요!</h4>
@@ -133,7 +134,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                         <li class="col-sm-3">	
 							<div class="fff">
 								<div class="thumbnail">
-									<a href="#"><img src="<%=cp %>/assets/images/차오즈.jpg" stylealt=""></a>
+									<a href="#"><img src="<%=cp %>/assets/images/2.jpg" stylealt=""></a>
 								</div>
 								<div class="caption">
 									<h4>Praesent commodo</h4>
@@ -145,7 +146,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                         <li class="col-sm-3">
 							<div class="fff">
 								<div class="thumbnail">
-									<a href="#"><img src="<%=cp %>/assets/images/아이유.jpg" alt=""></a>
+									<a href="#"><img src="<%=cp %>/assets/images/3.jpg" alt=""></a>
 								</div>
 								<div class="caption">
 									<h4>Praesent commodo</h4>
@@ -157,7 +158,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                         <li class="col-sm-3">
 							<div class="fff">
 								<div class="thumbnail">
-									<a href="#"><img src="<%=cp %>/assets/images/신민아.jpg" alt=""></a>
+									<a href="#"><img src="<%=cp %>/assets/images/4.jpg" alt=""></a>
 								</div>
 								<div class="caption">
 									<h4>Praesent commodo</h4>
@@ -169,7 +170,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                         <li class="col-sm-3">
 							<div class="fff">
 								<div class="thumbnail">
-									<a href="#"><img src="<%=cp %>/assets/images/차오즈.jpg" alt=""></a>
+									<a href="#"><img src="<%=cp %>/assets/images/5.jpg" alt=""></a>
 								</div>
 								<div class="caption">
 									<h4>Praesent commodo</h4>
