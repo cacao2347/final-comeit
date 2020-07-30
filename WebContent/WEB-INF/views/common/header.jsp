@@ -59,12 +59,12 @@
 			<c:when test="${empty idCheck}">
 			    <li><a href="memberlogin.action">Login</a></li>
 			    <li><a href="memberjoin.action">개인 Singup</a></li>
-			    <li><a href="spajoin.action">업체 Singup</a></li>
+			    <li><a href="spacejoin.action">업체 Singup</a></li>
 			</c:when>
 			<c:when test="${not empty idCheck}">
 				<c:choose>
            		 <c:when  test="${loginType eq '0'}">
-					<li><a href="#">${name } MyPage</a></li>
+					<li><a href="membermy.action">${name } MyPage</a></li>
 				 </c:when>
 				 <c:when  test="${loginType eq '1'}">
 				    <li><a href="spacemy.action">${name } MyPage</a></li>

@@ -19,6 +19,7 @@
 <script type="text/javascript" src="<%=cp%>/assets//js/jquery-ui.js"></script>
 <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <style type="text/css">
 	body{font-family: 'Noto Sans KR', sans-serif;}
 	
@@ -94,6 +95,20 @@
 			
 		})
 
+		// 취소 버튼 클릭 시 되돌아가기
+		$("#cancelBtn").click(function() 
+		{
+			var result = confirm("스터디 개설을 취소하시겠습니까?");
+	         
+	         if(result)
+	         {
+	            location.href = "<%=cp%>/studylist.action";
+	         }
+	         else if(result==null)
+	         {
+	            return;
+	         }
+		});
 
 		//alert($('input[name=provisionyn]').val());
 		// 개설 버튼 클릭 시 유효성 체크
@@ -142,287 +157,297 @@
 	
 			});
 		
-			$("#authNumBtn").click(function() 
-			{			 
-				if($("#authNum").val() == "" || $("#authNum").val() == null)
-				 {
-					  alert("인증번호를 입력하세요.");
-					  return;
-				 }
-	
-				 if($("#authNum").val() == phoneCheck)
-			     {
-					 alert("인증에 성공하였습니다.");
-					 $("#authNumRslt").attr("value", "인증 성공");
-					 
-					 $("#joinBtn").removeAttr("disabled");
-			     }
-				 else if($("#authNum").val() != phoneCheck)
-				 {
-					 alert("인증에 실패하였습니다.");
-					 $("#authNumRslt").attr("value", "인증 실패"); 
-				 }
-				 else
-				 {
-					 alert("인증에 실패하였습니다.");
-					 $("#authNumRslt").attr("value", "인증 실패");
-				 }
-			});
-			
-			// 관심 키워드 추가 버튼
-			 $("#keyAddBtn").click(function() 
-		     {
-			      var tmpHtml = "";
-			      var selectedKey = "";
-			      var keyInput = "";
-
-			      tmpHtml = tmpHtml + "";
-			      
-			      selectedText = $("#keySelect option:checked").text();
-			      selectedValue = $("#keySelect option:checked").val();
-			      keyInput = $("#keyInput").val();
-			      elementCount = $(".tagStyle").length;
-			      
-			      if(selectedValue =='INT1057')
-			      {
-			    	  selectedText = keyInput;
-			      }
-			      
-			      for (var i = 0; i < array.length; i++) 
-			      {
-						if(selectedText == array[i])
-						{
-							alert(selectedText)
-							alert("중복된 키워드는 입력 할 수 없습니다.");
-							return;
-						}
-				  }
-			      
-			      if(selectedText.trim()=="")
-			     {
-			    	alert("공백은 입력할 수 없습니다.");
-			    	return;
-			     }
-			      
-			   	  // 키워드 개수 제한
-			      if(elementCount == 5)
-			      {
-			    	  alert("키워드는 최대 5개 까지 선택 할 수 있습니다.")
-			    	  return;
-			      }
-			      
-			      array.push(selectedText);
-			      
-			      if(selectedValue == 'INT1057')
-			      {
-			    	  
-			    	  $(".stuKeyBox").append("<div class='tagStyle'><span class='keyTag'>"+ selectedText 
-			    			  + "<input type='hidden' name='etcTagList' value='"+ selectedText + "'></span></div>");
-			      }
-			      // 관심키워드 일 때...
-			      else
-			      {
-			    	  $(".stuKeyBox").append("<div class='tagStyle'><span class='keyTag'>"+ selectedText 
-			    			  + "<input type='hidden' name='intTagList' value='"+ selectedValue + "'></span></div>");			    	  
-			      }
-			      
-			 });
-			
-			 $("#keySelect").change(function() 
+		// datePicker
+		$("#start").datepicker(
+		{
+			showOn: "both",
+			buttonImage: "<%=cp%>/assets/images/calendar.PNG",
+			buttonImageOnly: true,
+			buttonText: "Select date",
+			dateFormat: 'yy-mm-dd'
+		});
+		
+		$("#authNumBtn").click(function() 
+		{			 
+			if($("#authNum").val() == "" || $("#authNum").val() == null)
 			 {
-				    var selectedValue = "";
-				 	// alert("셀렉트값 변경");
-				 	
-				 	selectedValue = $("#keySelect option:checked").val();
-				 
-					if(selectedValue == "INT1057")
-					{
-						$("#keyInput").attr("readonly", false);
-					}
-					else
-					{
-						$("#keyInput").attr("readonly", true);
-					}
-			 });
-			 
-			 // 관심 키워드 삭제 버튼
-			 $("#keyResetBtn").click(function() 
-		     {
-				   $(".stuKeyBox").empty();
-				   array = [];
-			 });
-			 
-			 
-			// 요일 키워드 추가 버튼
-			 $("#dayAddBtn").click(function() 
-		     {
-			      var tmpHtml = "";
-			      var selectedKey = "";
-			      var dayInput = "";
+				  alert("인증번호를 입력하세요.");
+				  return;
+			 }
 
-			      tmpHtml = tmpHtml + "";
-			      
-			      selectedText = $("#daySelect option:checked").text();
-			      selectedValue = $("#daySelect option:checked").val();
-			      dayInput = $("#dayInput").val();
-			      elementCount = $(".tagStyle2").length;
-			      
-			      for (var i = 0; i < array2.length; i++) 
-			      {
-						if(selectedText == array2[i])
-						{
-							alert(selectedText)
-							alert("중복된 키워드는 입력 할 수 없습니다.");
-							return;
-						}
-				  }
-			      
-			   	  // 요일 개수 제한
-			      if(elementCount == 4)
-			      {
-			    	  alert("요일은 최대 4개 까지 선택 할 수 있습니다.")
-			    	  return;
-			      }
-			      
-			      array2.push(selectedText);
-			      
-		    	  $(".stuDayBox").append("<div class='tagStyle2'><span class='dayTag'>"+ selectedText 
-		    			  + "<input type='hidden' name='dayList' value='"+ selectedValue + "'></span></div>");			    	  
-			      
-			 });
+			 if($("#authNum").val() == phoneCheck)
+		     {
+				 alert("인증에 성공하였습니다.");
+				 $("#authNumRslt").attr("value", "인증 성공");
+				 
+				 $("#joinBtn").removeAttr("disabled");
+		     }
+			 else if($("#authNum").val() != phoneCheck)
+			 {
+				 alert("인증에 실패하였습니다.");
+				 $("#authNumRslt").attr("value", "인증 실패"); 
+			 }
+			 else
+			 {
+				 alert("인증에 실패하였습니다.");
+				 $("#authNumRslt").attr("value", "인증 실패");
+			 }
+		});
+			
+		// 관심 키워드 추가 버튼
+		 $("#keyAddBtn").click(function() 
+	     {
+		      var tmpHtml = "";
+		      var selectedKey = "";
+		      var keyInput = "";
+
+		      tmpHtml = tmpHtml + "";
+		      
+		      selectedText = $("#keySelect option:checked").text();
+		      selectedValue = $("#keySelect option:checked").val();
+		      keyInput = $("#keyInput").val();
+		      elementCount = $(".tagStyle").length;
+		      
+		      if(selectedValue =='INT1057')
+		      {
+		    	  selectedText = keyInput;
+		      }
+		      
+		      for (var i = 0; i < array.length; i++) 
+		      {
+					if(selectedText == array[i])
+					{
+						alert(selectedText)
+						alert("중복된 키워드는 입력 할 수 없습니다.");
+						return;
+					}
+			  }
+		      
+		      if(selectedText.trim()=="")
+		     {
+		    	alert("공백은 입력할 수 없습니다.");
+		    	return;
+		     }
+		      
+		   	  // 키워드 개수 제한
+		      if(elementCount == 5)
+		      {
+		    	  alert("키워드는 최대 5개 까지 선택 할 수 있습니다.")
+		    	  return;
+		      }
+		      
+		      array.push(selectedText);
+		      
+		      if(selectedValue == 'INT1057')
+		      {
+		    	  
+		    	  $(".stuKeyBox").append("<div class='tagStyle'><span class='keyTag'>"+ selectedText 
+		    			  + "<input type='hidden' name='etcTagList' value='"+ selectedText + "'></span></div>");
+		      }
+		      // 관심키워드 일 때...
+		      else
+		      {
+		    	  $(".stuKeyBox").append("<div class='tagStyle'><span class='keyTag'>"+ selectedText 
+		    			  + "<input type='hidden' name='intTagList' value='"+ selectedValue + "'></span></div>");			    	  
+		      }
+		      
+		 });
+			
+		 $("#keySelect").change(function() 
+		 {
+			    var selectedValue = "";
+			 	// alert("셀렉트값 변경");
+			 	
+			 	selectedValue = $("#keySelect option:checked").val();
+			 
+				if(selectedValue == "INT1057")
+				{
+					$("#keyInput").attr("readonly", false);
+				}
+				else
+				{
+					$("#keyInput").attr("readonly", true);
+				}
+		 });
+			 
+		 // 관심 키워드 삭제 버튼
+		 $("#keyResetBtn").click(function() 
+	     {
+			   $(".stuKeyBox").empty();
+			   array = [];
+		 });
+		 
+		 
+		// 요일 키워드 추가 버튼
+		 $("#dayAddBtn").click(function() 
+	     {
+		      var tmpHtml = "";
+		      var selectedKey = "";
+		      var dayInput = "";
+
+		      tmpHtml = tmpHtml + "";
+		      
+		      selectedText = $("#daySelect option:checked").text();
+		      selectedValue = $("#daySelect option:checked").val();
+		      dayInput = $("#dayInput").val();
+		      elementCount = $(".tagStyle2").length;
+		      
+		      for (var i = 0; i < array2.length; i++) 
+		      {
+					if(selectedText == array2[i])
+					{
+						alert(selectedText)
+						alert("중복된 키워드는 입력 할 수 없습니다.");
+						return;
+					}
+			  }
+		      
+		   	  // 요일 개수 제한
+		      if(elementCount == 4)
+		      {
+		    	  alert("요일은 최대 4개 까지 선택 할 수 있습니다.")
+		    	  return;
+		      }
+		      
+		      array2.push(selectedText);
+		      
+	    	  $(".stuDayBox").append("<div class='tagStyle2'><span class='dayTag'>"+ selectedText 
+	    			  + "<input type='hidden' name='dayList' value='"+ selectedValue + "'></span></div>");			    	  
+		      
+		 });
 			
 			 
-			 // 요일 삭제 버튼
-			 $("#dayResetBtn").click(function() 
-		     {
-				   $(".stuDayBox").empty();
-				   array2 = [];
-			 });
-			 
-			 $('INPUT[type="file"]').change(function () 
-		      {
-		    	 var ext = this.value.match(/\.(.+)$/)[1];
-		    	 switch (ext) 
-		    	 {
-			         case 'jpg':
-			         case 'JPG':
-			         case 'jpeg':
-			         case 'JPEG':
-			         case 'png':
-			         case 'PNG' :
-			         case 'gif':
-			         case 'GIF':
-			        	 
-			         $('#proImgBtn').attr('disabled', false);
-			            break;
-		        	 default:
-		             alert('형식에 어긋나는 파일입니다.');
-		             this.value = '';
-		    	 }
-			  });
-			 
-			 $("#proImgBtn").click(function()
-			         {
-			            var result = confirm('정말 등록하시겠습니까?'); 
-			            
-			            if(result) 
-			            { 
-			                    var myFormData = new FormData();
-			                    
-			                    var fileok = document.getElementById("uploadFile");
-			                    
-			                    var fileCheck = null;
-			                    
-			                    fileCheck = $("#uploadFile").val();
+		 // 요일 삭제 버튼
+		 $("#dayResetBtn").click(function() 
+	     {
+			   $(".stuDayBox").empty();
+			   array2 = [];
+		 });
+		 
+		 $('INPUT[type="file"]').change(function () 
+	      {
+	    	 var ext = this.value.match(/\.(.+)$/)[1];
+	    	 switch (ext) 
+	    	 {
+		         case 'jpg':
+		         case 'JPG':
+		         case 'jpeg':
+		         case 'JPEG':
+		         case 'png':
+		         case 'PNG' :
+		         case 'gif':
+		         case 'GIF':
+		        	 
+		         $('#proImgBtn').attr('disabled', false);
+		            break;
+	        	 default:
+	             alert('형식에 어긋나는 파일입니다.');
+	             this.value = '';
+	    	 }
+		  });
+		 
+		 $("#proImgBtn").click(function()
+         {
+            var result = confirm('정말 등록하시겠습니까?'); 
+            
+            if(result) 
+            { 
+                    var myFormData = new FormData();
+                    
+                    var fileok = document.getElementById("uploadFile");
+                    
+                    var fileCheck = null;
+                    
+                    fileCheck = $("#uploadFile").val();
 
-			                    
-			                    myFormData.append("fileok", fileok.files[0]);
-			                    
-			                    if(fileCheck == false)
-			                    {
-			                         alert("파일을 첨부해 주세요");
-			                         return;
-			                    }
-			                    else
-			                    {
-			                       $.ajax(
-			                       {
-			                            url: '<%=cp%>/ajaximg.action',
-			                            type: 'POST',
-			                            processData: false, 
-			                            contentType: false,
-			                            dataType : 'text',
-			                            data: myFormData,
-			                            
-			                            success : function(data)
-			                            {
-			                             var dataArray = data.split("\\");
-			                                
-			                             
-			                             var reverse = dataArray.reverse().join("\\");
-			                             
-			                             var newpics = reverse.substring( 0, reverse.indexOf("\\"));
-			                             
-			                             newpics = "/FinalComeit/pds/saveData/" + newpics;
-			                             
-			                             $('#okFile').val(newpics);
-			                               
-			                            }
-			                       })
-			                    }
-			             } 
-			            else 
-			             { 
-			             }
+                    
+                    myFormData.append("fileok", fileok.files[0]);
+                    
+                    if(fileCheck == false)
+                    {
+                         alert("파일을 첨부해 주세요");
+                         return;
+                    }
+                    else
+                    {
+                       $.ajax(
+                       {
+                            url: '<%=cp%>/ajaximg.action',
+                            type: 'POST',
+                            processData: false, 
+                            contentType: false,
+                            dataType : 'text',
+                            data: myFormData,
+                            
+                            success : function(data)
+                            {
+                             var dataArray = data.split("\\");
+                                
+                             
+                             var reverse = dataArray.reverse().join("\\");
+                             
+                             var newpics = reverse.substring( 0, reverse.indexOf("\\"));
+                             
+                             newpics = "/FinalComeit/pds/saveData/" + newpics;
+                             
+                             $('#okFile').val(newpics);
+                               
+                            }
+                       })
+                    }
+             } 
+            else 
+             { 
+             }
 
-			                    
-			                 
-			          })
-			                 
-			          
-			                 
-			           var xOffset = 0;
-			           var yOffset = 5;
-			             
-			           $(document).on("mouseover", "#thumbnail", function (e) 
-			           {
-			               
-			               var okFile = $("#okFile").val();
-			           
-			                if(okFile == false)
-			               {
-			                   return;
-			               }
-			                else
-			                {
-			                 var div = $("<div>", {id: "preview"});
-			                 
-			                 var img = "<img id='bye' src='" + okFile + "' style='width: 400px; height: 200px;'>";
-			                 
-			                 div.append(img);
-			                 
-			                 $("body").append(div);
-			                 
-			                 $("#preview")
-			                     .css("top", (e.pageY - xOffset) + "px")
-			                     .css("left", (e.pageX + yOffset) + "px")
-			                     .fadeIn("fast"); 
-			                }
-			               
-			               
-			           }); 
-			           
-			           $(document).on("mousemove", "#thumbnail", function (e) {
-			               $("#preview")
-			                   .css("top", (e.pageY - xOffset) + "px")
-			                   .css("left", (e.pageX + yOffset) + "px");
-			           });
+                    
+                 
+          })
+                 
+          
+                 
+           var xOffset = 0;
+           var yOffset = 5;
+             
+           $(document).on("mouseover", "#thumbnail", function (e) 
+           {
+               
+               var okFile = $("#okFile").val();
+           
+                if(okFile == false)
+               {
+                   return;
+               }
+                else
+                {
+                 var div = $("<div>", {id: "preview"});
+                 
+                 var img = "<img id='bye' src='" + okFile + "' style='width: 400px; height: 200px;'>";
+                 
+                 div.append(img);
+                 
+                 $("body").append(div);
+                 
+                 $("#preview")
+                     .css("top", (e.pageY - xOffset) + "px")
+                     .css("left", (e.pageX + yOffset) + "px")
+                     .fadeIn("fast"); 
+                }
+               
+               
+           }); 
+           
+           $(document).on("mousemove", "#thumbnail", function (e) {
+               $("#preview")
+                   .css("top", (e.pageY - xOffset) + "px")
+                   .css("left", (e.pageX + yOffset) + "px");
+           });
 
 
-			           $(document).on("mouseout", "#thumbnail", function () 
-			           { 
-			              $("#preview").remove()
-			           });
+           $(document).on("mouseout", "#thumbnail", function () 
+           { 
+              $("#preview").remove()
+           });
                      
 
 	});
@@ -623,7 +648,7 @@
 			</label>
 			<div class="col-lg-10 form-inline">
 				<input type="text" class="start form-control" id="start"  name="start"
-					placeholder="시작날짜를 선택하세요." style="width: 40%;"/>
+					placeholder="시작날짜를 선택하세요." readonly="readonly" style="width: 40%;"/>
 			</div>
 			
 		</div>

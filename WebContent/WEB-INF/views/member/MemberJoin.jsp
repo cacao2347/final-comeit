@@ -544,6 +544,7 @@
                }
                
                array.push(selectedText);
+               document.getElementById("keyInput").value = null;
                
                if(selectedValue == 'INT1057')
                {
@@ -1020,7 +1021,7 @@
                            <option value="${intTag.int_tag_cd }">${intTag.int_tag }</option>
                         </c:forEach>
                      </select> &nbsp; <input type="text" class="keyInput form-control"
-                        id="keyInput" placeholder="관심 키워드를 입력해 주세요." style="width: 30%" readonly="readonly"/>
+                        id="keyInput" placeholder="기타 관심 키워드를 입력해 주세요." style="width: 30%" readonly="readonly"/>
                         &nbsp;
                         <input type="button" id="keyAddBtn" value="추가"class="keyBtn btn btn-primary" />
                      	&nbsp;   

@@ -11,10 +11,13 @@
 <meta charset="UTF-8">
 <title>MemberMy.jsp</title>
 
-<link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/membermy.css" >
+<link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/member/membermy.css" >
 
 <link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/bootstrap/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
+<link rel="shortcut icon" href="<%=cp %>/assets/images/pen_1.ico" type="image/x-icon">
+<link rel="icon" href="<%=cp %>/assets/images/pen_1.ico" type="image/x-icon">
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
 <style type="text/css">
@@ -36,9 +39,25 @@
         text-align: left;
         vertical-align: middle;
 }
+
+body{font-family: 'Noto Sans KR', sans-serif;}
+	
+	#preview {
+	  z-index: 1; /* 필요시 설정 */
+	  position: absolute;
+	  background: #999999;
+	  padding: 2px;
+	}
  </style>
 </head>
-<body>
+<body class="padding">
+
+<!-- 헤더 -->
+<div class="row">
+	<div class="col-md-12">
+	<c:import url="/WEB-INF/views/common/header.jsp"></c:import>
+	</div>
+</div><!-- row -->
 
 <div class="container-fluid">
 
@@ -113,7 +132,7 @@
 	<div class="row">
 		<div class="col-md-2">
 		</div>
-		<div class="col-md-4">
+		<div class="col-md-8">
 		<div class="panel panel-default">
 			<div class="panel-heading head">
 				<h3 class="panel-title tit"><a href="">참여 스터디 ></a></h3>
@@ -146,31 +165,7 @@
 				</table>
 		</div>
 		</div>
-		<div class="col-md-4">
-		<div class="panel panel-default">
-			<div class="panel-heading head">
-				<h3 class="panel-title tit">참여 프로젝트 ></h3>
-			</div>
-				<table class="table table-bordered">
-				<tr class="myPro">
-					<th>프로젝트 명</th>
-					<th>진행 상태</th>
-				</tr>
-				<tr class="detail">
-					<td class="deTit">첫 번째 프로젝트방 제목</td>
-					<td>진행중</td>
-				</tr>
-				<tr class="detail">
-					<td class="deTit">두 번째 프로젝트방 제목</td>
-					<td>진행중</td>
-				</tr>
-				<tr class="detail">
-					<td class="deTit">세 번째 프로젝트방 제목</td>
-					<td>진행중</td>
-				</tr>
-				</table>
-		</div>
-		</div>
+		
 		<div class="col-md-2">
 		</div>
 	</div><!-- 참여 스터디/프로젝트 끝 -->
@@ -418,8 +413,13 @@
 		</div>
 	</div><!-- 공간 예약 내역 끝 -->
 	
-	
-	
+</div>
+
+<!-- 푸터 -->
+<div class="row">
+	<div class="col-md-12">
+	<c:import url="/WEB-INF/views/common/footer.jsp"></c:import>
+	</div>
 </div>
 
 </body>

@@ -10,6 +10,18 @@
 {
    width: 30px;
 }
+.level .iconLv
+{
+	color: #009500;
+}
+.location .iconArea
+{
+	color: #ce6868;
+}
+.numb .iconNum
+{
+	color: #0057ae;
+}
 .filterDiv
 {
    text-align: center;
@@ -121,9 +133,9 @@ dd
 
 .list-study .list-study-item .study-logo {
    margin: 2px;
-    width: auto;
+    width: 182px;
     max-width: 16rem;
-    height: auto;
+    height: 120px;
     max-height: 16rem;
     border-radius: 0.5rem;
     margin-right: 20px;

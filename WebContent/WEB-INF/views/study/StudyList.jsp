@@ -475,9 +475,9 @@ body
                         </div>
                         
                         <ul class="study-info">
-                           <li class="level"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span> ${studys.lv }</li>
-                           <li class="location"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> ${studys.area_name } ${studys.spc_area_name }</li>
-                           <li class="numb"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> ${studys.mem_num }명</li>
+                           <li class="level"><span class="glyphicon glyphicon-stats iconLv" aria-hidden="true"></span> ${studys.lv }</li>
+                           <li class="location"><span class="glyphicon glyphicon-map-marker iconArea" aria-hidden="true"></span> ${studys.area_name } ${studys.spc_area_name }</li>
+                           <li class="numb"><span class="glyphicon glyphicon-user iconNum" aria-hidden="true"></span> ${studys.mem_num }명</li>
                         </ul>
 
                         
