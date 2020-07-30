@@ -670,6 +670,8 @@ public class AdminController
 		request.setAttribute("pageIndexList", pageIndexList);
 		request.setAttribute("dataCount", dataCount);
 				
+		model.addAttribute("args", "/WEB-INF/views/admin/AdminBanList.jsp");
+
 		view = "/WEB-INF/views/admin/PageLayout.jsp";
 
 		return view;

@@ -74,50 +74,46 @@
               <h6 class="m-0 font-weight-bold text-primary">금지어 관리</h6>
             </div>
             
-				<form action="banadd.action" method="post" role="form" id="banForm">
-					<input type="hidden" id="admin_cd" name="admin_cd" value=${sessionScope.id }> 
-					<!-- 관리자 세션 넣기 -->
-					<table class="table table-bordered" style="width: 20%;" >
-					<!-- 검색 영역 -->
-					<div class="col-md-12">
+			<form action="banadd.action" method="post" role="form" id="banForm">
+				<input type="hidden" id="admin_cd" name="admin_cd" value=${sessionScope.id }> 
+				<!-- 관리자 세션 넣기 -->
+				<table class="table table-bordered" style="width: 20%;" >
+					<thead>
+            			<tr>
+            				<td>&nbsp;금지어등록</td>
+            			</tr>
+            		</thead>
+            		<tr>
+            			<td>
+						<input type="text" id="ban" name="ban" class="form-control">
+							<button type="submit" class="btn btn-default btn-sm">등록</button>
+							<button type="button" class="btn btn-default btn-sm btnCancel">취소</button>
+						</td>
+					</tr>
+				</table>
+			</form>
+			
+				
+				<div class="card-body">
+              <div class="table-responsive">
+				
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <!-- 검색 영역 -->
 					<div class="form-inline search">
 					
 					<form name="searchForm" method="post">
 						<select name="searchKey" class="form-control selectField" style="width: 20%;">
-							<option value="SPA_NAME">업체명</option>
-							<option value="SPA_ID">업체아이디</option>
-							<option value="SPA_ID">회원명</option>
-							<option value="TYPE">요청확인</option>
-							<option value="ADM_NAME">처리관리자</option>
+							<option value="BAN">금지어명</option>
+							<option value="NAME">처리관리자</option>
 						</select>
 						
-						<input type="text" name="searchValue" placeholder="업체명 또는 처리관리자명으로 검색하세요!" class="form-control boxTF" style="width: 70%;">
+						<input type="text" name="searchValue" class="form-control boxTF" style="width: 70%;">
 						<input type="button" value="검색" class="btn btn-primary searchBtn" id="searchBtn" style="width: 9%">
 					</form>
 						<!-- <input type="text" class="form-control tag" id="tag" placeholder="기술 태그">
 						<input type="text" class="form-control title" id="title" placeholder="스터디방 제목">
 						<button type="button" id="searchBtn" class="btn btn-primary searchBtn">검색</button> -->
 					</div>
-					
-						<thead>
-	            			<tr>
-	            				<td>&nbsp;금지어등록</td>
-	            			</tr>
-	            		</thead>
-	            		<tr>
-	            			<td>
-							<input type="text" id="ban" name="ban" class="form-control">
-								<button type="submit" class="btn btn-default btn-sm">등록</button>
-								<button type="button" class="btn btn-default btn-sm btnCancel">취소</button>
-							</td>
-						</tr>
-				</table>
-				</form>
-				
-				<div class="card-body">
-              <div class="table-responsive">
-				
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
                       <th>등록번호</th>
