@@ -74,7 +74,7 @@ $(document).ready(function () {
 </script>
 
 <style type="text/css">
-table.ui-datepicker-calendar { display:none; }
+table.ui-datepicker-calendar { display:none; } 
 </style>
 </head>
 <body>
@@ -102,7 +102,7 @@ table.ui-datepicker-calendar { display:none; }
 	        <li class="menu"style="margin-top: 20px;">
 	            <ul>
 	                <li style="margin-top: 30px;">
-	               		<table class="table table-hover table-bordered">
+	               		<table class="table table-hover table-bordered" >
 	               		<thead>
 	               			<tr>
 	               				<th>이름</th>
