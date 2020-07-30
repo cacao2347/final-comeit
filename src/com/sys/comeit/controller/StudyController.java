@@ -47,6 +47,7 @@ public class StudyController
 	      IStudyDAO studyDao = sqlSession.getMapper(IStudyDAO.class);
 
 	      String stuCd = request.getParameter("stu_cd");
+	      String insertResult = request.getParameter("insertResult");
 	      // 1. stu_cd로 스터디 시작일/ 확정일 조회
 	      // 2. stu_cd로 참가 회원 코드 조회
 
@@ -96,6 +97,10 @@ public class StudyController
 	         model.addAttribute("joinName", studyDao.studyJoinName(stuCd));
 	         // 스터디 참여자 이미지
 	         model.addAttribute("memImg", studyDao.memImgSearch(stuCd));
+	         
+	         if (insertResult != null) 
+	        	 model.addAttribute("insertResult", insertResult);
+			
 
 	      }
 
@@ -145,7 +150,16 @@ public class StudyController
 
 	         // 시작일 전 + 모집인원이 다 차지 않은 경우 + 방에 참가중이지 않은 경우
 	         if (strDateCompare <= 0 && joinMem < dto.getMem_num() && myJoin == 0)
-	            insertRslt = studyDao.joinStudy(mem);
+	         {
+	        	 insertRslt = studyDao.joinStudy(mem);
+	        	 view = "redirect:studydetail.action?stu_cd=" + stu_cd + "&insertResult='참가'";
+	         }
+	         else 
+	        {
+	        	 insertRslt = studyDao.joinStudy(mem);
+	        	 view = "redirect:studydetail.action?stu_cd=" + stu_cd + "&insertResult='불가'";
+			}
+	        	 
 
 	         // 테스트
 	         System.out.println(insertRslt + stu_cd);
@@ -154,7 +168,7 @@ public class StudyController
 
 	      }
 
-	      view = "redirect:studydetail.action?stu_cd=" + stu_cd;
+	      
 
 	      return view;
 

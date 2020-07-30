@@ -128,10 +128,10 @@ body{font-family: 'Noto Sans KR', sans-serif;}
     	  
     	  $(location).attr("href", "studyjoin.action?stuCode=" + $(this).val());	  
     	  
-    	  if ($("#insertResult").val().eq)
+    	  if ($("#insertResult").val() == "참가")
 			 alert("참가가 완료 되었습니다.")
 		  else
-			  alert("참가가 완료 되었습니다..")
+			  alert("참가가 완료 되었습니다.")
     	
 	  });
       
@@ -439,8 +439,10 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                
                <!-- 스터디장에게만 보일 수정 / 폐쇄 버튼 -->
                <div class="roomBtn">
+               <c:if test="${sessionScope.mem_cd eq leaderName.leader_mem_cd }">
                   <input type="button" value="방 정보 수정" class="btn modBtn" />
                   <input type="button" value="폐쇄" class="btn delBtn" />
+                 </c:if>
                </div><!-- end .roomBtn -->
             </div>
             
