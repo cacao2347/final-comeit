@@ -191,7 +191,7 @@ $(function(){
                  async:false,
                  success : function(data)
                  {
-                	 alert(data);
+                	 //alert(data);
                      
                      var dataArray = data.split("\\");
                      
@@ -257,7 +257,7 @@ $(function(){
                  async:false,
                  success : function(data)
                  {
-                	 alert(data);
+                	 //alert(data);
                 	 var dataArray = data.split("\\");
                      
                      var reverse = dataArray.reverse().join("\\");
@@ -794,7 +794,7 @@ $(function(){
                   class="form-control" accept=".gif, .jpg, .png, .jpeg" style="width: 65%;" />
                   <input type="text" class="form-control" id="thumbnail1" style="width: 20%;" readonly="readonly" value="미리보기">
                   <button class="btn btn-primary " type="button" id="spanumfile" disabled="disabled">등록</button></div>
-                		 <input type="text" id="okFile1" name="okFile1" class="btn btn-primary">
+                		 <input type="hidden" id="okFile1" name="okFile1" class="btn btn-primary">
                 	 </div>
                 	 <div class="errMsg">
                     	<span id="err"></span>
