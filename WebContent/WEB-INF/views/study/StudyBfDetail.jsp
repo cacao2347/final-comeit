@@ -128,10 +128,10 @@ body{font-family: 'Noto Sans KR', sans-serif;}
     	  
     	  $(location).attr("href", "studyjoin.action?stuCode=" + $(this).val());	  
     	  
-    	  if ($("#insertResult").val() != 1)
-			 alert("참가하실 수 없는 스터디 방입니다.")
+    	  if ($("#insertResult").val().eq)
+			 alert("참가가 완료 되었습니다.")
 		  else
-			  alert("참가가 완료 되었습니다.")
+			  alert("참가가 완료 되었습니다..")
     	
 	  });
       

@@ -42,8 +42,10 @@ public class StudyController
 		HttpSession session = request.getSession();
 
 		String mem_cd = (String) session.getAttribute("mem_cd");
+		String insertResult = request.getParameter("insertResult");
 
 		String view = null;
+		
 
 		IStudyDAO studyDao = sqlSession.getMapper(IStudyDAO.class);
 
@@ -97,8 +99,12 @@ public class StudyController
 			model.addAttribute("joinName", studyDao.studyJoinName(stuCd));
 			// 스터디 참여자 이미지
 			model.addAttribute("memImg", studyDao.memImgSearch(stuCd));
+			
+			if (insertResult != null) 
+				model.addAttribute("insertResult", insertResult);
 
 		}
+		System.out.println(insertResult);
 
 		return view;
 	}
@@ -109,6 +115,7 @@ public class StudyController
 	public String studyJoin(Model model, HttpServletRequest request)
 	{
 		String view = null;
+		String insertResult = null;
 
 		HttpSession session = request.getSession();
 		IStudyDAO studyDao = sqlSession.getMapper(IStudyDAO.class);
@@ -148,14 +155,21 @@ public class StudyController
 			if (strDateCompare <= 0 && joinMem < dto.getMem_num() && myJoin == 0)
 				insertRslt = studyDao.joinStudy(mem);
 
+			
+			
+			if (insertRslt == 1) 
+				insertResult = "1";
+			else
+				insertResult = "0";
+			
 			// 테스트
 			System.out.println(insertRslt + stu_cd);
 
-			model.addAttribute("insertResult", insertRslt);
+			//model.addAttribute("insertResult", insertRslt);
 
 		}
 
-		view = "redirect:studydetail.action?stu_cd=" + stu_cd;
+		view = "redirect:studydetail.action?stu_cd=" + stu_cd + "&insertResult=" + insertResult;
 
 		return view;
 
