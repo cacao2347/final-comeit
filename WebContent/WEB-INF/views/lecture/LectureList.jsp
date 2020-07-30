@@ -328,8 +328,8 @@ body
 								<ul class="study-info">
 								<c:forEach var="lecHrDayss" items="${lecHrDays }">
 									<c:if test="${lecs.lec_cd eq lecHrDayss.lec_cd }">
-									<li class="day"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>${lecHrDayss.day_name}</li>
-									<li class="lec_time"><span class="glyphicon glyphicon-time" aria-hidden="true"></span>${lecHrDayss.str_hrs}시 ~ ${lecHrDayss.end_hrs}시</li>
+										<li class="day"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>${lecHrDayss.day_name}</li>
+										<li class="lec_time"><span class="glyphicon glyphicon-time" aria-hidden="true"></span>${lecHrDayss.str_hrs}시 ~ ${lecHrDayss.end_hrs}시</li>
 									</c:if>
 									</c:forEach>
 								</ul>

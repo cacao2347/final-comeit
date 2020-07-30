@@ -108,7 +108,7 @@
 	</select>
 	
 	<select id="getListData" resultType="com.sys.comeit.dto.LectureDTO">
-		SELECT *
+		SELECT RNUM, LEC_CD, NAME, AREA_NAME, SPC_AREA_NAME, LEC_NAME, LEC_TERM, CRT_DATE, TO_CHAR(STR_DATE, 'YYYY-MM-DD') AS STR_DATE, LEC_FEE, LEC_INTRO, MIN_MEM, MAX_MEM, IMG_URL, END_DATE
 		FROM
 		(
 		    SELECT ROWNUM AS RNUM
