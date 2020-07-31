@@ -25,7 +25,7 @@
 <!-- 글씨체 -->
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
 <style type="text/css">
-body{font-family: 'Noto Sans KR', sans-serif;}
+body{font-family: 'Noto Sans KR', sans-serif !important;}
 </style>
 
 
