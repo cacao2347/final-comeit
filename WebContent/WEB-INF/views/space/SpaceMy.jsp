@@ -170,7 +170,7 @@
 					</div>
 				</div>
 				<button type="submit" class="btn btn-primary">정보수정</button>
-			
+				<!-- ㅎㅇ -->
 				</div>
 			</div>
 		</div>

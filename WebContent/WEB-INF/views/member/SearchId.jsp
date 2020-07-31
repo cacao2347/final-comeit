@@ -81,7 +81,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 	function idSendSms() 
 	{
 		phoneCheck = "";
-		alert("phoneCheck_bf : " + phoneCheck);
+		//alert("phoneCheck_bf : " + phoneCheck);
 		
 		$.ajax({
 			url : "<%=cp%>/idsendsms.action",
@@ -91,8 +91,8 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 			type: "post",
 			success: function(result) {
 				phoneCheck = result;
-				alert("result : " + result);
-				alert("phoneCheck_af : " + phoneCHeck);
+				//alert("result : " + result);
+				//alert("phoneCheck_af : " + phoneCHeck);
 			}
 		});	
 	}
