@@ -10,7 +10,6 @@ String cp = request.getContextPath();
 <meta charset="UTF-8">
 <title>StudySpaceList.jsp</title>
 
-<link rel="stylesheet" type="text/css" href="<%=cp%>/assets/css/bootstrap.min.css">
 
 <style type="text/css">
 #listTbl {
@@ -31,17 +30,12 @@ String cp = request.getContextPath();
 
 </head>
 <body>
-
-
-	<br>
-	<br>
-
 	<div align="center">
 
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-md-2"></div>
-				<div class="col-md-8 text-left">
+				<div class="col-md-8 text-center">
 					<h1>모임 장소 정하기</h1>
 				</div>
 				<div class="col-md-2"></div>

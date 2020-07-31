@@ -284,7 +284,7 @@ body
             <div class="col-md-2">
             </div>
             <div class="col-md-8">
-            <img class="img-fluid rounded study-img" src="assets/images/study2.jpg" alt="studyImg">
+            <img class="img-fluid rounded study-img" src="assets/images/스터디배너.png" alt="studyImg">
             </div>
             <div class="col-md-2">
             </div>
