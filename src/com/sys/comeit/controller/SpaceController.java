@@ -206,7 +206,7 @@ public class SpaceController
 			SpaReqDTO dto = new SpaReqDTO();
 			
 			String spa_req_cd = request.getParameter("spaReqCd");
-			String stu_hist_cd="SHIST1030";  //임의로 지정
+			String stu_hist_cd="SHIST1031";  //임의로 지정
 			String date = request.getParameter("date");
 			int use_hrs =Integer.parseInt(request.getParameter("time"));	//총 요청시간
 			String impo = request.getParameter("import"); //이용 시작시간
