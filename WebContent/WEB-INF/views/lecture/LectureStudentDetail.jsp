@@ -14,6 +14,8 @@
 <link rel="stylesheet" type="text/css" href="<%=cp%>/assets/css/bootstrap/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
+<link rel="shortcut icon" href="<%=cp %>/assets/images/pen_1.ico" type="image/x-icon">
+<link rel="icon" href="<%=cp %>/assets/images/pen_1.ico" type="image/x-icon">
 
 <style type="text/css">
 
@@ -66,6 +68,7 @@ body
 			    } else {
 			        var msg = '결제에 실패하였습니다.';
 			        msg += '에러내용 : ' + rsp.error_msg;
+			        location.href = "<%=cp %>/LecturePaySuccess.jsp";
 			    }
 			    alert(msg);
 			});

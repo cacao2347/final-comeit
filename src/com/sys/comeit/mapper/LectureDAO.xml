@@ -135,6 +135,24 @@
 		        </choose>
 	</select>
 	
+	<!-- 발표용으로 만든 메소드 발표끝나면 지우고 반드시 다시 만들것 -->
+	<select id="getListData2" resultType="com.sys.comeit.dto.LectureDTO">
+		SELECT RNUM, LEC_CD, NAME, AREA_NAME, SPC_AREA_NAME, LEC_NAME, LEC_TERM, CRT_DATE, TO_CHAR(STR_DATE, 'YYYY-MM-DD') AS STR_DATE, LEC_FEE, LEC_INTRO, MIN_MEM, MAX_MEM, IMG_URL, END_DATE
+		FROM
+		(
+		    SELECT ROWNUM AS RNUM
+		     , DATA.* 
+		    FROM 
+		    (
+		        SELECT LEC_CD, NAME, AREA_NAME, SPC_AREA_NAME, LEC_NAME, LEC_TERM, CRT_DATE
+           			 , STR_DATE , LEC_FEE , LEC_INTRO , MIN_MEM , MAX_MEM , IMG_URL, END_DATE
+      			FROM VIEW_LEC_INFO
+                ORDER BY LEC_CD DESC
+				    ) DATA
+				)
+				WHERE LEC_CD = #{lec_cd}
+	</select>
+	
 	<select id="lectureInfo" resultType="com.sys.comeit.dto.LectureDTO" parameterType="java.lang.String">
 		SELECT LEC_NAME, LEC_INTRO, STR_DATE, STR_DATE + 30 AS END_DATE, LEC_FEE, MIN_MEM, MAX_MEM, IMG_URL, SPC_AREA_NAME, LEC_CD
 		FROM VIEW_LEC_INFO

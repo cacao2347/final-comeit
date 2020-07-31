@@ -304,7 +304,7 @@ public class LectureController
 				
 				if(profCheck == 0)
 				{
-					model.addAttribute("lecInfo", lectureDao.lectureInfo(lec_cd));
+					model.addAttribute("lecInfo", lectureDao.getListData2(lec_cd));
 					model.addAttribute("lecTag", lectureDao.lecIntTagSearch(lec_cd));
 					model.addAttribute("profInfo", proDao.profInfo(mem_cd));
 					

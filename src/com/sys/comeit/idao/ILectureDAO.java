@@ -31,6 +31,7 @@ public interface ILectureDAO
 	public int lecSearchCount(LectureDTO dto);	// 검색완료된 스터디방 개수
 	
 	public List<LectureDTO> getListData(LectureDTO dto);	// 검색완료된 스터디방
+	public LectureDTO getListData2(String lec_cd);	// 모든 스터디방
 	
 	public ArrayList<LectureDTO> lecHrDaySearch();	// 모든 요일 빼오는 리스트
 	

@@ -20,7 +20,7 @@ p {
 </head>
 <body>
 
-	<c:import url="/WEB-INF/views/header.jsp"></c:import>
+	<c:import url="/WEB-INFviews/common/header.jsp"></c:import>
 	<br>
 	<div class="col-8" style="position: absolute; left: 15%; top: 25%;">
 		<div class="card">
