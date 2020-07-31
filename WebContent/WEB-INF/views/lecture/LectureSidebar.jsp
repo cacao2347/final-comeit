@@ -58,8 +58,9 @@ footer {
 			</h4>
 			<ul class="nav nav-pills nav-stacked">
 				<li class="active" style="text-align: center;">${profInfo.name } 님의 프로필</li>
-				<li style="text-align: center;">◎85cm</li>
-				<li><textarea name="" id="" cols="20" rows="5">강사이력
+				<li style="text-align: center;"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>85cm</li>
+				<li>강사이력</li>
+				<li><textarea name="" id="" cols="20" rows="5">
 						${profInfo.career }
 				</textarea></li>
 				<li>강사소개</li>

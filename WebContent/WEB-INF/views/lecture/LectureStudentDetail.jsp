@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>LectureLecStudent.jsp</title>
+<title>LectureLecStudentDetail.jsp</title>
 <link rel="stylesheet" type="text/css" href="<%=cp%>/assets/css/lecture/lectureprofessordetail.css">
 <link rel="stylesheet" type="text/css" href="<%=cp%>/assets/css/bootstrap/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -68,7 +68,7 @@ body
 			    } else {
 			        var msg = '결제에 실패하였습니다.';
 			        msg += '에러내용 : ' + rsp.error_msg;
-			        location.href = "<%=cp %>/LecturePaySuccess.jsp";
+			        <%-- location.href = "<%=cp %>/LecturePaySuccess.jsp"; --%>
 			    }
 			    alert(msg);
 			});
