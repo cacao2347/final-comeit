@@ -80,7 +80,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                         <li class="col-sm-3">
     						<div class="fff">
 								<div class="thumbnail">
-									<a href="#"><img src="<%=cp %>/assets/images/study_logo2.png" style="width: 227.5px; height: 227.5px;"></a>
+									<a href="#"><img src="<%=imagePath %>/1조.png" style="width: 227.5px; height: 227.5px;"></a>
 								</div>
 								<div class="caption">
 									<h4>[언어] 강아지 산책 어플리케이션 만들어요</h4>
@@ -92,7 +92,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                         <li class="col-sm-3">
 							<div class="fff">
 								<div class="thumbnail">
-									<a href="#"><img src="<%=cp %>/assets/images/study_logo2.png" style="width: 227.5px; height: 227.5px;"></a>
+									<a href="#"><img src="<%=imagePath %>/3조.png" style="width: 227.5px; height: 227.5px;"></a>
 								</div>
 								<div class="caption">
 									<h4>[언어]농구 사이트 만들고 싶어요.</h4>
@@ -104,7 +104,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                         <li class="col-sm-3">
 							<div class="fff">
 								<div class="thumbnail">
-									<a href="#"><img src="<%=cp %>/assets/images/study_logo2.png" style="width: 227.5px; height: 227.5px;"></a>
+									<a href="#"><img src="<%=imagePath %>/4조.png" style="width: 227.5px; height: 227.5px;"></a>
 								</div>
 								<div class="caption">
 									<h4>[언어]공동구매 사이트 만듭시다</h4>

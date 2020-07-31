@@ -143,7 +143,7 @@ public class LoginController
     	  if (loginType.equals("2")) 		// 관리자
     	  {
     		  session.setAttribute("name", name);
-    		  result = "/adminmemberlist.action";
+    		  result = "/adminlist.action";
 		  }
     	  else if (loginType.equals("1"))   // 업체
     	  {
