@@ -127,11 +127,11 @@ body{font-family: 'Noto Sans KR', sans-serif;}
       {
     	  
     	  $(location).attr("href", "studyjoin.action?stuCode=" + $(this).val());	  
-    	  
+    	  	  
     	  if ($("#insertResult").val() == "참가")
 			 alert("참가가 완료 되었습니다.")
 		  else
-			  alert("참가가 완료 되었습니다.")
+			  alert("참가가 불가합니다.")
     	
 	  });
       

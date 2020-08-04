@@ -36,7 +36,7 @@ public class StudyController
 	   // ★
 	   @RequestMapping(value = "/studydetail.action", method =
 	   { RequestMethod.GET, RequestMethod.POST })
-	   public String studyBfInfo(Model model, HttpServletRequest request)
+	   public String studyDetail(Model model, HttpServletRequest request)
 	   {
 	      HttpSession session = request.getSession();
 
@@ -150,29 +150,74 @@ public class StudyController
 
 	         // 시작일 전 + 모집인원이 다 차지 않은 경우 + 방에 참가중이지 않은 경우
 	         if (strDateCompare <= 0 && joinMem < dto.getMem_num() && myJoin == 0)
-	         {
 	        	 insertRslt = studyDao.joinStudy(mem);
-	        	 view = "redirect:studydetail.action?stu_cd=" + stu_cd + "&insertResult='참가'";
-	         }
 	         else 
-	        {
-	        	 insertRslt = studyDao.joinStudy(mem);
-	        	 view = "redirect:studydetail.action?stu_cd=" + stu_cd + "&insertResult='불가'";
-			}
-	        	 
+	        	 insertRslt = studyDao.joinStudy(mem); 
 
 	         // 테스트
 	         System.out.println(insertRslt + stu_cd);
 
+	         model.addAttribute("stu_cd", stu_cd);
 	         model.addAttribute("insertResult", insertRslt);
+	         view = "redirect:studyjoindetail.action";
+	         
+	         System.out.println("넘기는 데이터 확인 : " + insertRslt);
 
-	      }
-
-	      
+	      }	      
 
 	      return view;
 
 	   }
+	   
+	   // 스터디 참가 후 스터디방 요청
+	   @RequestMapping(value = "/studyjoindetail.action", method =
+	   { RequestMethod.GET, RequestMethod.POST })
+	   public String studyBfInfo(Model model, HttpServletRequest request)
+	   {
+
+	      String view = null;
+
+	      IStudyDAO studyDao = sqlSession.getMapper(IStudyDAO.class);
+
+	      String stuCd = request.getParameter("stu_cd");
+	      String insertResult = request.getParameter("insertResult");
+	      
+	      System.out.println("받은 데이터 확인 : " + insertResult);
+
+	      // 스터디방 정보 조회
+	      StudyDTO dto = studyDao.studyInfoSearch(stuCd);
+	      
+	      if (dto != null)
+	      {
+	        
+	        view = "/WEB-INF/views/study/StudyBfDetail.jsp";
+
+
+	         // 스터디방 정보
+	         model.addAttribute("studyInfo", dto);
+	         // 스터디방 관심태그
+	         model.addAttribute("intTag", studyDao.studyIntTagSearch(stuCd));
+	         // 스터디방 기타 관심 태그
+	         model.addAttribute("etcTag", studyDao.studyEtcTagSearch(stuCd));
+	         // 스터디방 진행 요일
+	         model.addAttribute("dayName", studyDao.studyDaySearch(stuCd));
+	         // 스터디장 이름
+	         model.addAttribute("leaderName", studyDao.studyLeaderSearch(stuCd));
+	         // 스터디원 이름
+	         model.addAttribute("joinName", studyDao.studyJoinName(stuCd));
+	         // 스터디 참여자 이미지
+	         model.addAttribute("memImg", studyDao.memImgSearch(stuCd));
+	         // 참가 여부 넘기기
+	         
+	         if (insertResult.equals("1")) 
+	        	 model.addAttribute("insertResult", "참가");	
+	         else
+	        	 model.addAttribute("insertResult", "불가");
+	      }
+
+	      return view;
+	   }
+	   
 
 	   // 스터디 커밋
 	   @ResponseBody
