@@ -9,6 +9,7 @@
 		SELECT SPC_AREA_CD, SPC_AREA_NAME
 		FROM TBL_SPC_AREA
 		WHERE AREA_CD=#{area_cd}
+		ORDER BY SPC_AREA_NAME
 	</select>
 	
 </mapper>

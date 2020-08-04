@@ -516,7 +516,7 @@
                keyInput = $("#keyInput").val();
                elementCount = $(".tagStyle").length;
                
-               if(selectedValue =='INT1057')
+               if(selectedValue =='INT9999')
                {
                   selectedText = keyInput;
                }
@@ -546,7 +546,7 @@
                array.push(selectedText);
                document.getElementById("keyInput").value = null;
                
-               if(selectedValue == 'INT1057')
+               if(selectedValue == 'INT9999')
                {
                   
                   $(".stuKeyBox").append("<div class='tagStyle'><span class='keyTag'>"+ selectedText 
@@ -568,7 +568,7 @@
                 
                 selectedValue = $("#keySelect option:checked").val();
              
-               if(selectedValue == "INT1057")
+               if(selectedValue == "INT9999")
                {
                   $("#keyInput").attr("readonly", false);
                }
@@ -623,15 +623,15 @@
       
             $.ajax(
             {
-               url : "<%=cp%>/sendsms.action",
+               url : "sendsms.action",
                data: {
-                  receiver: $("#divPhoneNumber").val()
+                  receiver: $("#phoneNumber").val()
                },
                type: "post",
                success: function(result){
                   phoneCheck = result;
                   alert("result : " + result);
-                  alert("phoneCheck_af : " + phoneCheck);
+                  alert("phoneCheck_af : " + phroneCheck);
                }
             });   
          }   
@@ -993,7 +993,7 @@
          <div class="form-group">
                     <label for="selfintro" class="col-lg-2 control-label">본인 소개</label>
                     <div class="col-lg-10 form-inline">
-                    <input type="text" id="intro" name="intro" class="form-control" placeholder="예) 자바개발자가 되고싶은 학생입니다." maxlength="11" style="width: 85%;"/>
+                    <input type="text" id="intro" name="intro" class="form-control" placeholder="예) 자바개발자가 되고싶은 학생입니다." maxlength="30" style="width: 85%;"/>
                     </div>
                 </div>
              <!-- 키워드 -->

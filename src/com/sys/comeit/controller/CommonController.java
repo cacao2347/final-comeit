@@ -53,11 +53,11 @@ public class CommonController
 	@RequestMapping(value = "/sendsms.action", method = RequestMethod.POST)
 	public String sendSms(@RequestParam(value = "receiver") String receiver) throws CoolsmsException
 	{
-		String api_key = "NCSKB3F0JFPNVSIF";
-		String api_secret = "K2T9Z6CWXWQST5QAL1KJND9LGEUARTXJ";
+		String api_key = "NCSXHDF6ZGMKEB2C";
+		String api_secret = "VONNHWGHSKC86IDOCJIDV9W996SH3UR9";
 		String authNum = "";
 
-		System.out.println(receiver);
+		System.out.println("번호 : " + receiver);
 
 		Message coolsms = new Message(api_key, api_secret);
 
@@ -67,7 +67,7 @@ public class CommonController
 		// 4 params(to, from, type, text) are mandatory. must be filled
 		HashMap<String, String> params = new HashMap<String, String>();
 		params.put("to", receiver);
-		params.put("from", "010668064811"); // 무조건 자기번호 (인증)
+		params.put("from", "01099044626"); // 무조건 자기번호 (인증)
 		params.put("type", "SMS");
 		params.put("text", "[COME-IT] 인증번호 : " + authNum);
 		params.put("app_version", "test app 1.2"); // application name and version
@@ -76,7 +76,7 @@ public class CommonController
 		{
 			// send() 는 메시지를 보내는 함수
 			JSONObject obj = (JSONObject) coolsms.send(params);
-			System.out.println(obj.get("error_count"));
+			System.out.println("에러코드" + obj.get("error_count"));
 
 		} catch (CoolsmsException e)
 		{
