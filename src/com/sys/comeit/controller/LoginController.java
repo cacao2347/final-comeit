@@ -129,6 +129,13 @@ public class LoginController
     	  dto.setPwd(pwd);
     	  
     	  name = admDao.adminLogin(dto);
+    	  
+    	  if (name == null)				// 로그인 정보 없을시
+          {
+        	  result = "redirect:memberlogin.action";
+              return result;
+          }
+    	  
       }
       
       
