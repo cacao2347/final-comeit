@@ -189,7 +189,7 @@ body
 				<div class="col-md-2">
 				</div>
 				<div class="col-md-8">
-				<img class="img-fluid rounded study-img" style="border: 1px solid gray; " src="assets/images/강의배너.png" alt="studyImg">
+				<img class="img-fluid rounded study-img" style="border: 1px solid #ccc; " src="assets/images/강의배너.png" alt="studyImg">
 				</div>
 				<div class="col-md-2">
 				</div>

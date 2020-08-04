@@ -98,7 +98,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 				<div class="col-md-2">
 				</div>
 				<div class="col-md-8">
-				<img class="img-fluid rounded space-img" src="assets/images/spaimg.png" alt="studyImg">
+				<img class="img-fluid rounded space-img" src="assets/images/공간배너.png" alt="studyImg">
 				</div>
 				<div class="col-md-2">
 				</div>
