@@ -463,7 +463,7 @@ $(function(){
 		      keyInput = $("#keyInput").val();
 		      elementCount = $(".tagStyle").length;
 		      
-		      if(selectedValue =='SPTGT1009')
+		      if(selectedValue =='SPTGT1000')
 		      {
 		    	  selectedText = keyInput;
 		      }
@@ -494,7 +494,7 @@ $(function(){
 		      array.push(selectedText);
 		      document.getElementById("keyInput").value = null;
 		      
-		      if(selectedValue == 'SPTGT1009')
+		      if(selectedValue == 'SPTGT1000')
 		      {
 		    	  
 		    	  $(".stuKeyBox").append("<div class='tagStyle'><span class='keyTag'>"+ selectedText 
@@ -519,7 +519,7 @@ $(function(){
 			 	
 			 	selectedValue = $("#keySelect option:checked").val();
 			 
-				if(selectedValue == "SPTGT1009")
+				if(selectedValue == "SPTGT1000")
 				{
 					$("#keyInput").attr("readonly", false);
 				}
