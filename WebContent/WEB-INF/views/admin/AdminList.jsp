@@ -53,7 +53,7 @@
               <h6 class="m-0 font-weight-bold text-primary">관리자명단</h6>
             </div>
             
-            <c:if test="${sessionScope.id == 'ADM1002'}">
+            <c:if test="${sessionScope.id == 'ADM1001'}">
             <div class="card-body">
             	<div class="table-responsive">
             	<form action="adminadd.action" method="post" role="form" id="adminForm">
@@ -97,7 +97,7 @@
                       <th>전화번호</th>
                       <th>이메일</th>
                       <th>관리자등급</th>
-                      <c:if test="${sessionScope.id == 'ADM1002'}">
+                      <c:if test="${sessionScope.id == 'ADM1001'}">
                       <th>삭제</th>
                       </c:if>
                     </tr>
@@ -115,7 +115,7 @@
 							<td>${admin.email }</td>
 							<td>${admin.grds_name }</td>
 							
-							<c:if test="${sessionScope.id == 'ADM1002'}">
+							<c:if test="${sessionScope.id == 'ADM1001'}">
 							<td id="btnTbl">	
 								<button type="button" class="btn btn-default btn-xs adminDelBtn" value=${admin.admin_cd }>삭제</button>
 							</td>
