@@ -126,16 +126,23 @@ public class StudyController
 	      // System.out.println(dto.getStu_cd());
 
 	      // 오늘 날짜 구하기
-	      Date sysdate = new Date();
+	      Date bfSysdate = new Date();
 	      SimpleDateFormat date = new SimpleDateFormat("YYYY-MM-DD");
+	      String sysdate = date.format(bfSysdate);
+	      System.out.println("bf날짜 : " + bfSysdate);
+	      
 	      int strDateCompare = 0;
-	      int insertRslt = 0;
+	      int insertRslt = 0;	      
+	     
 
 	      // 시작일 확정일 비교
 	      if (dto != null)
 	      {
 	         String strDate = dto.getStr_date();
-	         strDateCompare = date.format(sysdate).compareTo(strDate);
+	         strDateCompare = sysdate.compareTo(strDate);
+	         
+	         System.out.println("오늘날짜: " + sysdate);
+	         System.out.println("비교날짜: " + strDate);
 
 	         int joinMem = studyDao.joinMemNum(stu_cd);
 	         // System.out.println(joinMem);
@@ -146,13 +153,15 @@ public class StudyController
 	         mem.setStu_cd(stu_cd);
 	         int myJoin = studyDao.stuJoinMemSearch(mem);
 
-	         System.out.println(myJoin);
+	         System.out.println("참가여부: "+myJoin);
+	         System.out.println("날짜 : " + strDateCompare);
+	         System.out.println("모집인원 : " + joinMem + dto.getMem_num());
 
 	         // 시작일 전 + 모집인원이 다 차지 않은 경우 + 방에 참가중이지 않은 경우
 	         if (strDateCompare <= 0 && joinMem < dto.getMem_num() && myJoin == 0)
 	        	 insertRslt = studyDao.joinStudy(mem);
 	         else 
-	        	 insertRslt = studyDao.joinStudy(mem); 
+	        	 insertRslt = 0; 
 
 	         // 테스트
 	         System.out.println(insertRslt + stu_cd);
