@@ -17,8 +17,58 @@
 		FROM VIEW_STU_NTC
 		WHERE STU_CD = #{stu_cd}
 		  AND STU_NTC_PNT_CD = STU_NTC_CD
+		  AND DEL_DATE IS NULL
 		) DATA
    </select>
+   
+   <!--검색 완료된 공지사항 개수 조회 -->
+	<select id="searchNoticeCount" resultType="java.lang.Integer">
+		SELECT COUNT(*) AS COUNT
+		FROM VIEW_STU_NTC
+		WHERE STU_CD = #{stu_cd}
+		  AND STU_NTC_PNT_CD = STU_NTC_CD
+		  AND DEL_DATE IS NULL
+		 <if test="searchValue != null and !searchValue.equals('')">
+				AND ${searchKey} LIKE '%${searchValue}%'
+		 </if>
+	</select>
+	
+	<!-- 리스트 출력 데이터 조회 -->
+	<select id="getNoticeListData" resultType="com.sys.comeit.dto.StudyNoticeDTO">
+	SELECT ROWNUM AS ROW_NUM
+	     , STU_CD, STU_NTC_CD, STU_NTC_PNT_CD, STU_JOIN_NAME, MEM_CD, STU_JOIN_CD, TITLE
+	     , CRT_DATE, CONTENT, HITS, DEL_DATE
+	FROM
+	(
+	    SELECT ROWNUM AS ROW_NUM
+	         , STU_CD, STU_NTC_CD, STU_NTC_PNT_CD, STU_JOIN_NAME, MEM_CD, STU_JOIN_CD, TITLE
+	         , CRT_DATE, CONTENT, HITS, DEL_DATE
+	    FROM
+	    (
+	    SELECT STU_CD, STU_NTC_CD, STU_NTC_PNT_CD, STU_JOIN_NAME, MEM_CD, STU_JOIN_CD, TITLE
+	         , CRT_DATE, CONTENT, HITS, DEL_DATE
+	    FROM VIEW_STU_NTC
+	    WHERE STU_CD = #{stu_cd}
+	      AND STU_NTC_PNT_CD = STU_NTC_CD
+	      AND DEL_DATE IS NULL
+	      <choose>
+	      <when test="searchValue != null">
+	      		AND ${searchKey} LIKE '%${searchValue}%'
+	      		)DATA
+	      	)
+			WHERE ROW_NUM<![CDATA[>]]>= #{start} AND ROW_NUM <![CDATA[<]]>=#{end}
+	      </when>
+	      <otherwise>
+	      		)DATA
+	      	)
+			WHERE ROW_NUM<![CDATA[>]]>= #{start} AND ROW_NUM <![CDATA[<]]>=#{end}
+	      </otherwise>
+	      
+	      </choose>
+	
+	</select>
+	
+	
 
 	<!-- 공지사항 게시글 등록 -->
 	<select id="studyNoticeInsert" parameterType="com.sys.comeit.dto.StudyNoticeDTO" statementType="CALLABLE">

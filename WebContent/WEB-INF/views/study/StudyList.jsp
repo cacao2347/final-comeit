@@ -266,7 +266,7 @@ body
 
 </script>
 </head>
-<body class="padding">
+<body style="overflow-x:hidden; overflow-y:auto;" class="padding">
 <c:if test="">
 
 </c:if>

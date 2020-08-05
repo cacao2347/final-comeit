@@ -46,16 +46,58 @@
 			, success : function(data)
 			{
 				//alert("성공" + data);
-				// 여기부터 하기
 				$(".noticeList").html(data);
 				
-				
-				$(".listTitle").click(function()
+				// 게시글 상세 정보 보기 클릭 시
+				$(".noticeListTitle").click(function()
 				{
 					alert("클릭");
-					$("#tableForm").submit();
+					
+					var send = params + "&stu_ntc_pnt_cd=" + $(this).val();
+					
+					$.ajax(
+					{
+						type : "POST"
+						, url : "studynoticedetail.action"
+						, data : send
+						, dataType : "text"
+						, async : false
+						, success : function(args) 
+						{
+							$(".noticelist").html(args);
+							
+							$(".goListBtn").click(function() 
+							{
+								ajaxStudyNoticeList();
+							});
+						}
+					});
 				
 				});
+				
+				// 등록 버튼 클릭 시
+				$(".notice-add").click(function() 
+				{
+					$.ajax(
+					{
+						type : "POST"
+						, url : "studynoticeadd.action"
+						, data : params
+						, dataType : "text"
+						, async : false
+						, success : function(args) 
+						{
+							$(".noticelist").html(args);
+							
+							$(".notice-cancel").click(function() 
+							{
+								ajaxStudyNoticeList();	
+							});
+						}
+					});
+				});
+				
+				
 				
 			}
 			, error : function(e)
@@ -151,7 +193,7 @@
 	</div><!-- end .row --> --%>
 	
 	
-	<div class="row searchRow">
+	<!-- <div class="row searchRow">
 	<div class="col-md-12 form-inline">
 		<input type="text" style="width: 10%;" class="form-control" value="제목" readonly="readonly"/>
 		<input type="text" style="width: 80%;"class="searchBox form-control" placeholder="검색어를 입력하세요."/>
@@ -160,21 +202,22 @@
 	</div>
 		
 		
-	</div><!-- end .row .searchRow -->
+	</div>end .row .searchRow -->
 	
 	
 	<div class="row">
 		
-		<form id="tableForm" class="form-horizontal" role="form" method="post" action="studynoticedetail.action">
-		<input type="hidden" id="studyCode" name="stu_cd" value="<%=stu_cd%>">
+		<%-- <form id="tableForm" class="form-horizontal" role="form" method="post" action="studynoticedetail.action">
+		<input type="hidden" id="studyCode" name="stu_cd" value="<%=stu_cd%>"> --%>
 			<!-- 실제 테이블 -->
-			<div class="col-md-12 noticeList">
+			<input type="hidden" id="studyCode" name="stu_cd" value="<%=stu_cd%>">
+			<div class="col-md-12 container noticeList">
 			</div>
-		</form>
+		<!-- </form> -->
 		
 		
 	</div><!-- end .row -->
-	<div class="row">
+	<%-- <div class="row">
 		
 		<div class="col-md-12">
 			<div class="paging"> 
@@ -200,7 +243,7 @@
 			
 		</div>
 			
-</div><!-- end .row -->
+	</div><!-- end .row --> --%>
 </div><!-- end .container-fluid -->
 
 </body>

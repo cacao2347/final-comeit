@@ -66,10 +66,7 @@
 				<button type="button" class="btn btn-primary btn-lg btm">
 					등록
 				</button>
-				<button type="button" class="btn btn-lg btm">
-					리셋
-				</button>
-				<button type="button" class="btn btn-lg btm cancel">
+				<button type="button" class="btn btn-lg btm notice-cancel">
 					취소
 				</button>
 			

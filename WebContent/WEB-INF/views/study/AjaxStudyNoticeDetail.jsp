@@ -1,51 +1,33 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-	<!-- 상세내용 영역 -->
-	<div class="row">
-		<div class="col-md-2">
-		</div>
-		<div class="col-md-8">
-			<table class="table detail">
-				<tr>
-					<th>제목</th>
-					<td colspan="6">${noticeDetail.title }</td>
-				</tr>
-				<tr class="tit">
-					<th>작성자</th>
-					<td>${noticeDetail.stu_join_name }</td>
-					<th>작성일</th>
-					<td>${noticeDetail.crt_date }</td>
-					<th>조회수</th>
-					<td>${noticeDetail.hits }</td>
-				</tr>
-				<tr class="content">
-					<td colspan="6">${noticeDetail.content }</td>
-				</tr>
-				<tr>
-					<td colspan="6">이전글 : 공지사항의 아홉 번째 게시글 제목입니다.</td>
-				</tr>
-				<tr>
-					<td colspan="6">다음글 : 없음</td>
-				</tr>
-			</table>
-		</div>
-		<div class="col-md-2">
-		</div>
-	</div><!-- 상세내용 영역 끝 -->
+<!-- 상세내용 영역 -->
+<div class="row">
+	<div class="col-md-12">
+		<table class="table detail">
+			<tr>
+				<th style="text-align: center; background-color: #EEEEEE">제목</th>
+				<td colspan="6">${noticeDetail.title }</td>
+			</tr>
+			<tr class="tit">
+				<th>작성자</th>
+				<td>${noticeDetail.stu_join_name }</td>
+				<th>작성일</th>
+				<td>${noticeDetail.crt_date }</td>
+				<th>조회수</th>
+				<td>${noticeDetail.hits }</td>
+			</tr>
+			<tr class="content" style="vertical-align: top; height: 300px;">
+				<td colspan="6">${noticeDetail.content }</td>
+			</tr>
+		</table>
+	</div>
+</div><!-- 상세내용 영역 끝 -->
 	
-	<!-- 버튼 영역 -->
-	<div class="row">
-		<div class="col-md-2">
-		</div>
-		<div class="col-md-8">
-			<div class="repBtn">
-				<button type="button" class="btn btn-link">
-				신고
-				</button>
-			</div>
-			
-			<div class="btns">
-				<c:if test="${sessionScope.mem_cd == noticeDetail.mem_cd }">
+<!-- 버튼 영역 -->
+<div class="row">
+	<div class="col-md-12">
+		<div class="btns">
+			<c:if test="${sessionScope.mem_cd == noticeDetail.mem_cd }">
 				<div class="leftBtn">
 					<button type="button" class="btn">
 						수정
@@ -54,19 +36,17 @@
 						삭제
 					</button>
 				</div>
-				</c:if>
-				
-				<div class="rightBtn">
-					<button type="button" class="btn btn-primary goListBtn">
-						목록
-					</button>
-				</div>
-			</div>
+			</c:if>
 			
+			<div class="rightBtn">
+				<button type="button" class="btn btn-primary goListBtn">
+					목록
+				</button>
+			</div>
 		</div>
-		<div class="col-md-2">
-		</div>
-	</div><!-- 버튼 영역 끝-->
+		
+	</div>
+</div><!-- 버튼 영역 끝-->
 	
 	<!-- 댓글 목록 영역 -->
 	<div class="row">

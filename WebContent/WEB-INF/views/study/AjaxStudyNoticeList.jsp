@@ -1,5 +1,17 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<!-- 검색 영역 -->
+<div class="row searchRow">
+	<div class="col-md-12 form-inline">
+		<input type="text" style="width: 10%;" class="form-control" value="제목" readonly="readonly"/>
+		<input type="text" style="width: 80%;"class="searchBox form-control" placeholder="검색어를 입력하세요."/>
+		
+		<button type="button" class="search btn btn-primary">검색</button>
+	</div>
+</div>
+
+<!-- 리스트 영역 -->
 <table class="table">
 	<thead class="thead-dark">
 		<tr>
@@ -16,7 +28,7 @@
 		<tr>
 			<td>${studyNoticeLists.row_num }</td>
 			<td>
-			<button class="btn btn-link listTitle" name="stu_ntc_pnt_cd" value="${studyNoticeLists. stu_ntc_pnt_cd}">${studyNoticeLists.title }</button>
+			<button class="btn btn-link noticeListTitle" value="${studyNoticeLists.stu_ntc_pnt_cd}">${studyNoticeLists.title }</button>
 			</td>
 			<td>${studyNoticeLists.stu_join_name }</td>
 			<td>${studyNoticeLists.crt_date }</td>
@@ -25,3 +37,18 @@
 	</c:forEach>
 		</tbody>
 </table>
+
+<!-- 페이징 영역 -->
+<div class="col-md-12">
+			<div class="paging"> 
+				
+				<c:if test="${dataCount != 0 }">
+					<div align="center">
+						${pageIndexList }
+					</div>
+				</c:if>
+			</div>
+			
+			<button type="button" class="add btn btn-primary pull-right notice-add">등록</button>
+		
+</div><!-- end .col-md-12 -->

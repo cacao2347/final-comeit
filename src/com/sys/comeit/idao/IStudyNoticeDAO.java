@@ -27,4 +27,7 @@ public interface IStudyNoticeDAO
 	
 	public ArrayList<StudyNoticeDTO> studyNoticeReList(StudyNoticeDTO dto);	// 1번방의 2번게시물의 댓글리스트
 
+	public int searchNoticeCount(StudyNoticeDTO dto);			// 게시물 수
+	
+	public ArrayList<StudyNoticeDTO> getNoticeListData(StudyNoticeDTO dto);	// 페이징 처리 된 게시물 리스트
 }
