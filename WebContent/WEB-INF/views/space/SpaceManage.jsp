@@ -98,6 +98,9 @@
             <a href="#" class="btn btn-primary">Find Out More!</a>
           </div>
         </div> -->
+        <c:forEach var="radioList" items="${MyInfo }">
+			<label><input type="radio" name="search" value="${radioList.spa_req_cd }" />${radioList.spa_name }</label>
+		</c:forEach>
          <div  style="margin-top: 30px;">
 		 <div class="item">
                   <ul class="thumbnails" style="list-style:none;" >
@@ -106,7 +109,6 @@
                       	<p>등록된 공간이 없습니다. 지금바로 공간을 등록하세요!</p>
                       </c:if>
                       <c:forEach var="MyInfoList" items="${MyInfo }">
-
                        <li class="col-sm-4 col-md-5" >	
 						<div class="demo">
 					      <figure class="imghvr-scale-top-left">

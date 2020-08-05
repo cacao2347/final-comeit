@@ -18,8 +18,7 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
  --%>
- <style type="text/css">
- body{font-family: 'Noto Sans KR', sans-serif;}
+<style type="text/css">
 .modal {
         text-align: center;
 }
@@ -38,96 +37,41 @@
         text-align: left;
         vertical-align: middle;
 }
-[class*=' imghvr-'],[class^=imghvr-]
-{
-	font-family:Montserrat,sans-serif;
-	position:relative;
-	display:inline-block;
-	margin:0;
-	max-width:100%;
-	background-color:rgba(230,230,230,.7);
-	color:#666;overflow:hidden
-	;-moz-osx-font-smoothing:grayscale;
-	-webkit-backface-visibility:hidden;
-	backface-visibility:hidden;
-	-webkit-transform:translateZ(0);
-	transform:translateZ(0)
-}
-[class*=' imghvr-'] figcaption,[class^=imghvr-] figcaption
-{
-	background-color:rgba(255,255,255,.9);
-	padding:20px;
-	position:absolute;
-	top:15px;
-	bottom:15px;
-	left:15px;
-	right:15px;
-	border:1px solid rgba(0,0,0,.1)
-}
 
-[class*=' imghvr-'] a,[class^=imghvr-] a
-{ 
-	position:absolute;
-	top:0;
-	bottom:0;
-	left:0;
-	right:0;
-	z-index:1
-}
-[class*=' imghvr-'],[class*=' imghvr-'] *,[class*=' imghvr-'] :after,[class*=' imghvr-'] :before,[class*=' imghvr-']:after,[class*=' imghvr-']:before,[class^=imghvr-],[class^=imghvr-] *,[class^=imghvr-] :after,[class^=imghvr-] :before,[class^=imghvr-]:after,[class^=imghvr-]:before
-{
-	-webkit-box-sizing:border-box;
-	box-sizing:border-box;
-	-webkit-transition:all .35s ease;
-	transition:all .35s ease
-}
-
-[class*=' imghvr-push-']:hover figcaption,[class*=' imghvr-slide-']:hover figcaption,[class^=imghvr-push-]:hover figcaption,[class^=imghvr-slide-]:hover figcaption
-{
-	-webkit-transform:translate(0,0);transform:translate(0,0)
-}
-
-[class*=' imghvr-book-open-']:hover figcaption:after,[class*=' imghvr-book-open-']:hover figcaption:before,[class^=imghvr-book-open-]:hover figcaption:after,[class^=imghvr-book-open-]:hover figcaption:before
-{
-	opacity:1;
-	background-color:#fff;
-	-webkit-transform:rotateY(0);
-	transform:rotateY(0)
-}
-/* 2번째 처리 css */
-[class*=' imghvr-scale-']:before,[class^=imghvr-scale-]:before
-{
-	background-color:inherit;
-	top:15px;
-	bottom:15px;
-	left:15px;
-	right:15px;
-	position:
-	absolute;content:''
-}
-[class*=' imghvr-scale-'] figcaption,[class^=imghvr-scale-] figcaption
-{
-	opacity:0
-}
-
-[class*=' imghvr-scale-']:hover:before,[class^=imghvr-scale-]:hover:before
-{
-	top:15px;
-	bottom:15px;
-	left:15px;
-	right:15px;
-	opacity:.9
-}
-[class*=' imghvr-scale-']:hover figcaption,[class^=imghvr-scale-]:hover figcaption
-{
-	opacity:1;
-	-webkit-transition-delay:.25s;
-	transition-delay:.25s
-}
-
-.imghvr-slide-down figcaption{-webkit-transform:translateY(-120%);transform:translateY(-120%)}
-.imghvr-scale-top-left:before{bottom:100%;right:100%}
- </style>
+</style>
+<script type="text/javascript">
+/* $(function()
+		   {
+			alert("1");
+			$(".aa").click(function() {
+				alert("3");
+			});
+			$(".spaUpdate").click(function()
+	       	{
+				alert("2");
+	        	$.ajax(
+	  			{
+	  				type : "POST"
+	  				, url : "spaupdate.action"
+	  			    , data : {"spa_id":$(this).val(),
+	  			    	"name":$("#name").val(),
+	  					"tel":$("#tel").val(),
+	  					"email":$("#email").val(),
+	  					} 
+	  				, success : function()
+	  				{
+	  					alert("정보가 수정되었습니다.");
+	  				}
+	  				, error : function(e)
+	  				{
+	  					alert("정보 수정에 실패되었습니다.");
+	  				}
+	  			});
+	        	end();
+	       	});
+});
+ */
+</script>
 </head>
 <body>
 <div class="headerrow">
@@ -160,17 +104,16 @@
 				<div class="form-inline">
 					<div class="memName">
 					<h5>이름</h5>
-					<p class="content">김길동</p>
+					<p class="content">${Search.name }</p>
 					<h5>아이디</h5>
-					<p class="content">길동12</p>
+					<p class="content">${Search.spa_id }</p>
 					<h5>전화번호</h5>
-					<p class="content">010-1111-1111</p>
+					<p class="content">${Search.tel }</p>
 					<h5>이메일</h5>
-					<p class="content">hhh@test.com</p>
+					<p class="content">${Search.email }</p>
 					</div>
 				</div>
-				<button type="submit" class="btn btn-primary">정보수정</button>
-				<!-- ㅎㅇ -->
+				<button type="button" class="btn btn-primary aa" data-toggle="modal" data-target="#myModal">정보수정</button>
 				</div>
 			</div>
 		</div>
@@ -178,7 +121,27 @@
 		
 	</div>
 </div>
-
+<!-- 정보 수정 모달창 -->
+<div id="myModal" class="modal fade" role="dialog"> 
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">x</button>
+        <h4 class="modal-title">정보 수정</h4>
+      </div>
+      <div class="modal-body">
+      	<p>이름 : <input type="text" id="name" name="name" value=${Search.name }></p>
+      	<p>전화번호 : <input type="text" id="tel" name="tel" value=${Search.tel }></p>
+      	<p>이메일 : <input type="text" id="email" name="email" value=${Search.email }></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" value="${Search.spa_id }" class="btn btn-primary spaUpdate">Update</button>
+      </div>
+    </div>
+  </div>
+</div>
 <div class="row" style="margin-top: 250pt;">
 	<div class="col-md-12">
 	<c:import url="/WEB-INF/views/common/footer.jsp"></c:import>

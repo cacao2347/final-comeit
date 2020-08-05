@@ -2,6 +2,7 @@ package com.sys.comeit.idao;
 
 import java.util.ArrayList;
 
+import com.sys.comeit.dto.SpaDTO;
 import com.sys.comeit.dto.SpaReqDTO;
 
 public interface ISpaceDAO 
@@ -21,6 +22,8 @@ public interface ISpaceDAO
 	public int feedInsert(SpaReqDTO dto);	// 피드백 insert
 	public int reqInsert(SpaReqDTO dto);	// 예약하기 insert
 	
+	public SpaDTO Search(String spa_id);// 마이페이지 내정보
+	public int spaUpdate(SpaDTO dto);// 마이페이지 내정보 수정
 	public ArrayList<SpaReqDTO> googleChart(String spa_id);		// 마이페이지 그래프
 	public ArrayList<SpaReqDTO> SpaReqCheck(String spa_id);		// 마이페이지 예약 내역 관리
 	public ArrayList<SpaReqDTO> SpaReq(String spa_id);		// 마이페이지 예약 요청 관리

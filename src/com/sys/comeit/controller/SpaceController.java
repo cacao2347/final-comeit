@@ -254,6 +254,7 @@ public class SpaceController
 			
 			ISpaceDAO ispaceDAO = sqlSession.getMapper(ISpaceDAO.class); // 공간 정보
 			
+			model.addAttribute("Search",ispaceDAO.Search(spa_id));	// 내정보
 			model.addAttribute("MyInfo",ispaceDAO.MyInfoSearch(spa_id));	// 본인이 등록한 공간 중 승인된 공간 관리
 			model.addAttribute("TotData",ispaceDAO.googleChart(spa_id));
 			model.addAttribute("reqCheck",ispaceDAO.SpaReqCheck(spa_id));	//마이페이지 공간 예약 내역 관리
@@ -276,4 +277,27 @@ public class SpaceController
 			
 			return String.valueOf(reqInsertNum);
 		}
+		
+		// 내 정보 수정
+		@ResponseBody
+		@RequestMapping(value = "/spaupdate.action", method = RequestMethod.POST)
+		public String spaUpdate(Model model,HttpServletRequest request)
+		{
+			ISpaceDAO ispaceDAO = sqlSession.getMapper(ISpaceDAO.class);
+			
+			String spa_id = request.getParameter("spa_id");
+			String name = request.getParameter("name");
+			String tel = request.getParameter("tel");
+			String email = request.getParameter("email");
+			SpaDTO dto = new SpaDTO();
+			dto.setName(name);
+			dto.setEmail(email);
+			dto.setSpa_id(spa_id);
+			dto.setTel(tel);
+			
+			int spaUpdateNum = ispaceDAO.spaUpdate(dto);
+			
+			return String.valueOf(spaUpdateNum);
+		}
+		
 }

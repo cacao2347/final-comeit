@@ -146,7 +146,7 @@
 		WHERE SPA_REQ_CD=M.SPA_REQ_CD
 		) AS FEEDCOUNT
 		FROM VIEW_SPA_MY M
-    	WHERE CHECK_TYPE='YES'
+    	WHERE CHECK_TYPE='Y'
    		AND ID= #{spa_id}
    </select>
    
@@ -179,6 +179,20 @@
 		SET CHECK_TYPE_CD='CHET1001', PRCS_DATE=SYSDATE
 		WHERE STU_SPA_REQ_CD=#{stu_spa_req_cd}
    </update>
-
+   
+   <!-- 마이페이지 내정보 -->
+   <select id="Search" resultType="com.sys.comeit.dto.SpaDTO">
+   		SELECT SPA_ID, SPA_CD, EMAIL, NAME, TEL
+		FROM TBL_SPA_JOIN
+		WHERE SPA_ID=#{spa_id}
+   </select>
+   
+   <!-- 마이페이지 내정보 수정 -->
+   <update id="spaUpdate">
+		UPDATE TBL_SPA_JOIN
+		SET EMAIL=#{email}, NAME=#{name}, TEL=#{tel}
+		WHERE SPA_ID=#{spa_id}
+   </update>
+   
    
 </mapper>
