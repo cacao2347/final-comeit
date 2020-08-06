@@ -40,15 +40,18 @@
 
 <!-- 페이징 영역 -->
 <div class="col-md-12">
-			<div class="paging"> 
-				
-				<c:if test="${dataCount != 0 }">
-					<div align="center">
-						${pageIndexList }
-					</div>
-				</c:if>
+	<div class="paging"> 
+		
+		<c:if test="${dataCount != 0 }">
+			<div align="center">
+				${pageIndexList }
 			</div>
+		</c:if>
+	</div>
+	
+	<c:if test="${sessionScope.mem_cd eq leaderName.leader_mem_cd}">
+		<button type="button" class="add btn btn-primary pull-right notice-add">등록</button>
+	</c:if>
 			
-			<button type="button" class="add btn btn-primary pull-right notice-add">등록</button>
 		
 </div><!-- end .col-md-12 -->

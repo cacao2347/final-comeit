@@ -7,7 +7,7 @@ public interface IStudyNoticeDAO
 {
 	// 스터디 공지사항
 	
-	public int studyNoticeInsert(StudyNoticeDTO dto);	// 게시글 등록
+	public String studyNoticeInsert(StudyNoticeDTO dto);	// 게시글 등록
 	
 	public int studyNoticeReInsert(StudyNoticeDTO dto);	// 댓글 등록
 	
@@ -30,4 +30,8 @@ public interface IStudyNoticeDAO
 	public int searchNoticeCount(StudyNoticeDTO dto);			// 게시물 수
 	
 	public ArrayList<StudyNoticeDTO> getNoticeListData(StudyNoticeDTO dto);	// 페이징 처리 된 게시물 리스트
+	
+	public StudyNoticeDTO studyNoticeAddData(String stu_cd);	// 스터디 공지사항 등록화면 노출 데이터
+
+	public String studyLeaderJoin(String stu_cd);		// 작성자의 스터디 참가 코드 알아내기
 }

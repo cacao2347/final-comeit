@@ -9,11 +9,11 @@
 				<td colspan="6">${noticeDetail.title }</td>
 			</tr>
 			<tr class="tit">
-				<th>작성자</th>
+				<th style="text-align: center; background-color: #EEEEEE">작성자</th>
 				<td>${noticeDetail.stu_join_name }</td>
-				<th>작성일</th>
+				<th style="text-align: center; background-color: #EEEEEE">작성일</th>
 				<td>${noticeDetail.crt_date }</td>
-				<th>조회수</th>
+				<th style="text-align: center; background-color: #EEEEEE">조회수</th>
 				<td>${noticeDetail.hits }</td>
 			</tr>
 			<tr class="content" style="vertical-align: top; height: 300px;">

@@ -46,7 +46,7 @@
 	    FROM
 	    (
 	    SELECT STU_CD, STU_NTC_CD, STU_NTC_PNT_CD, STU_JOIN_NAME, MEM_CD, STU_JOIN_CD, TITLE
-	         , CRT_DATE, CONTENT, HITS, DEL_DATE
+	         , TO_CHAR(CRT_DATE,'YYYY-MM-DD HH24:MI') AS CRT_DATE, CONTENT, HITS, DEL_DATE
 	    FROM VIEW_STU_NTC
 	    WHERE STU_CD = #{stu_cd}
 	      AND STU_NTC_PNT_CD = STU_NTC_CD
@@ -54,11 +54,13 @@
 	      <choose>
 	      <when test="searchValue != null">
 	      		AND ${searchKey} LIKE '%${searchValue}%'
+	      		ORDER BY STU_NTC_CD DESC
 	      		)DATA
 	      	)
 			WHERE ROW_NUM<![CDATA[>]]>= #{start} AND ROW_NUM <![CDATA[<]]>=#{end}
 	      </when>
 	      <otherwise>
+	      		ORDER BY STU_NTC_CD DESC
 	      		)DATA
 	      	)
 			WHERE ROW_NUM<![CDATA[>]]>= #{start} AND ROW_NUM <![CDATA[<]]>=#{end}
@@ -68,7 +70,19 @@
 	
 	</select>
 	
-	
+	<!-- 공지사항 게시글 등록 화면 노출 -->
+	<select id="studyNoticeAddData" resultType="com.sys.comeit.dto.StudyNoticeDTO">
+		SELECT DISTINCT(STU_JOIN_NAME), TO_CHAR(SYSDATE,'YYYY-MM-DD HH24:MI') AS CRT_DATE
+		FROM VIEW_STU_NTC
+		WHERE STU_CD = #{stu_cd}
+	</select>
+
+	<!-- 작성자의 스터디 참가 코드 알아내기 -->
+	<select id="studyLeaderJoin" resultType="java.lang.String">
+		SELECT STU_JOIN_CD
+		FROM VIEW_STU_INFO
+		WHERE STU_CD = #{stu_cd}
+	</select>
 
 	<!-- 공지사항 게시글 등록 -->
 	<select id="studyNoticeInsert" parameterType="com.sys.comeit.dto.StudyNoticeDTO" statementType="CALLABLE">

@@ -51,7 +51,7 @@
 				// 게시글 상세 정보 보기 클릭 시
 				$(".noticeListTitle").click(function()
 				{
-					alert("클릭");
+					//alert("상세");
 					
 					var send = params + "&stu_ntc_pnt_cd=" + $(this).val();
 					
@@ -64,7 +64,8 @@
 						, async : false
 						, success : function(args) 
 						{
-							$(".noticelist").html(args);
+							//alert("상세성공");
+							$(".noticeList").html(args);
 							
 							$(".goListBtn").click(function() 
 							{
@@ -78,16 +79,26 @@
 				// 등록 버튼 클릭 시
 				$(".notice-add").click(function() 
 				{
+					//alert("등록");
 					$.ajax(
 					{
 						type : "POST"
-						, url : "studynoticeadd.action"
+						, url : "studynoticeaddjsp.action"
 						, data : params
 						, dataType : "text"
 						, async : false
 						, success : function(args) 
 						{
-							$(".noticelist").html(args);
+							//alert("등록성공" + args);
+							
+							$(".noticeList").html(args);
+							
+							$("#noticeCreateBtn").click(function() 
+							{
+								alert("실제 등록");
+								
+								
+							});
 							
 							$(".notice-cancel").click(function() 
 							{

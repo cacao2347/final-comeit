@@ -108,10 +108,16 @@ public class StudyNoticeController
 		
 		String pageIndexList = util.pageIndexList(currentPage, totalPage, listUrl);
 		
+		
+		IStudyDAO studyDao = sqlSession.getMapper(IStudyDAO.class);
+		
 		// 포워딩 할 데이터 넘겨주기
 		request.setAttribute("studyNoticeList", studyNoticeList);
 		request.setAttribute("pageIndexList", pageIndexList);
 		request.setAttribute("dataCount", dataCount);
+		
+		model.addAttribute("leaderName", studyDao.studyLeaderSearch(stu_cd));
+		model.addAttribute("stu_cd", stu_cd);
 		
 		// 테스트
 		//System.out.println(stu_cd);
@@ -151,19 +157,62 @@ public class StudyNoticeController
 		return view;
 	}
 	
-	// 스터디 공지사항 등록
-	@RequestMapping(value = "/studynoticeadd.action", method = { RequestMethod.GET, RequestMethod.POST })
+	// 스터디 공지사항 등록화면 노출
+	@RequestMapping(value = "/studynoticeaddjsp.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String studyNoticeAdd(Model model, HttpServletRequest request)
 	{
 		String view = null;
 		
+		IStudyNoticeDAO studyNoticeDao = sqlSession.getMapper(IStudyNoticeDAO.class);
+		
+		String stu_cd = request.getParameter("stu_cd");
+		
+		System.out.println("등록화면에서 받은 스터디코드" + stu_cd);
+		
+		StudyNoticeDTO noticeAddData = studyNoticeDao.studyNoticeAddData(stu_cd);
+		
+		model.addAttribute("noticeAddData", noticeAddData);
 		
 		view = "WEB-INF/views/study/StudyNoticeAdd.jsp";
 		
 		return view;
 	}
 	
-	
+	// 실제 스터디 공지사항 등록하기 → 프로시저 호출
+	@RequestMapping(value = "/studynoticeinsert.action", method = { RequestMethod.GET, RequestMethod.POST })
+	public String studyNoticeInsert(Model model, HttpServletRequest request) 
+	{
+		String view = null;
+		
+		IStudyNoticeDAO studyNoticeDao = sqlSession.getMapper(IStudyNoticeDAO.class);
+		
+		String stu_cd = request.getParameter("stu_cd");
+		System.out.println("등록화면에서 받은 스터디코드22" + stu_cd);
+		String stu_join_cd = studyNoticeDao.studyLeaderJoin(stu_cd);	// 작성자의 스터디 참가 코드
+		
+		String title = request.getParameter("title");		// 제목
+		String content = request.getParameter("content");	// 내용		
+		
+		//System.out.println(stu_join_cd);
+		//System.out.println(title);
+		//System.out.println(content);
+		
+		StudyNoticeDTO dto = new StudyNoticeDTO();
+		
+		dto.setStu_join_cd(stu_join_cd);
+		dto.setTitle(title);
+		dto.setContent(content);
+		
+		studyNoticeDao.studyNoticeInsert(dto);	// 실제 등록 프로시저 호출
+		
+		model.addAttribute("stu_cd", stu_cd);
+		
+		//view = "WEB-INF/views/study/StudyAfDetail.jsp";		
+		view = "redirect:studydetail.action";				// 스터디 상세 재호출
+		
+		return view;
+
+	}
 	
 	
 	
