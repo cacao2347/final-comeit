@@ -60,16 +60,27 @@ public class LectureController
 
 		// String lec_cd = request.getParameter("id");
 		String prof_cd = proDao.lecCreateCheck2(mem_cd); //
+		System.out.println("prof_cd : " + prof_cd);
 		String spc_area_cd = request.getParameter("spcArea");
+		System.out.println("spcArea_cd : " + spc_area_cd);
 		String lec_term_cd = request.getParameter("lecTerm");
+		System.out.println("lecTerm_cd : " + lec_term_cd);
 		String lec_name = request.getParameter("lecName"); //
+		System.out.println("lecName : " + lec_name);
 		String str_date = request.getParameter("start"); //
+		System.out.println("str_date : " + str_date);
 		int lec_fee = Integer.parseInt(request.getParameter("lecFee"));
+		System.out.println("lecFee : " + lec_fee);
 		String lec_intro = request.getParameter("lecIntro"); //
+		System.out.println("lecIntro : " + lec_intro);
 		String min_mem = request.getParameter("minMem");
+		System.out.println("minMem : " + min_mem);
 		String max_mem = request.getParameter("maxMem");
+		System.out.println("maxMem : " + max_mem);
 		String startTime = request.getParameter("startTime");
+		System.out.println("startTime : " + startTime);
 		String endTime = request.getParameter("endTime");
+		System.out.println("endTime : " + endTime);
 
 		LectureDTO dto = new LectureDTO();
 

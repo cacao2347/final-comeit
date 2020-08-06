@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.sys.comeit.idao.ILectureNoticeDAO">
+	
+	<select id="lectureNoticeList" resultType="com.sys.comeit.dto.LectureNoticeDTO">
+		SELECT ROWNUM AS ROW_NUM, LNTC.LEC_NTC_CD AS LEC_NTC_CD, LNTC.TITLE AS TITLE, MJ.NAME AS NAME
+		, TO_CHAR(LNTC.CRT_DATE, 'YYYY-MM-DD') AS CRT_DATE
+		, LNTC.HITS AS HITS
+		, LNTC.LEC_NTC_CD AS LEC_NTC_CD
+		FROM TBL_LEC_NTC LNTC, TBL_LEC L, TBL_PROF P, TBL_MEM_JOIN MJ
+		WHERE LNTC.LEC_CD = L.LEC_CD
+		AND L.PROF_CD = P.PROF_CD
+		AND P.MEM_CD = MJ.MEM_CD
+		AND LNTC.LEC_CD = #{lec_cd}
+	</select>
+	
+</mapper>
