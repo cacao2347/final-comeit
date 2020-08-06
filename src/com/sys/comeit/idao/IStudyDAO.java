@@ -46,4 +46,6 @@ public interface IStudyDAO
 	public List<StudyDTO> getListData(StudyDTO dto);	// 검색완료된 스터디방
 	
 	public int studyCommit(String stu_cd);		// 스터디 커밋
+	
+	public int studyDelete(String stu_cd);	// 스터디방 폐쇄
 }

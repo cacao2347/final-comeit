@@ -104,6 +104,15 @@
    </update>
    
    
+   <!-- 스터디방 삭제 -->
+   <delete id="studyDelete">
+   		DELETE
+		FROM TBL_STU
+		WHERE STU_CD = #{stu_cd}
+   </delete>
+   
+   
+   
    <!-- 수진 추가 -->
    <!-- 전체 스터디방 조회 -->
    <!-- 전체 스터디방 조회 -->

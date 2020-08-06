@@ -33,7 +33,6 @@ public class StudyController
 
 	// 기혜
 	   // ---------------------------------------------------------------------------------
-	   // ★
 	   @RequestMapping(value = "/studydetail.action", method =
 	   { RequestMethod.GET, RequestMethod.POST })
 	   public String studyDetail(Model model, HttpServletRequest request)
@@ -47,7 +46,6 @@ public class StudyController
 	      IStudyDAO studyDao = sqlSession.getMapper(IStudyDAO.class);
 
 	      String stuCd = request.getParameter("stu_cd");
-	      String insertResult = request.getParameter("insertResult");
 	      // 1. stu_cd로 스터디 시작일/ 확정일 조회
 	      // 2. stu_cd로 참가 회원 코드 조회
 
@@ -97,17 +95,13 @@ public class StudyController
 	         model.addAttribute("joinName", studyDao.studyJoinName(stuCd));
 	         // 스터디 참여자 이미지
 	         model.addAttribute("memImg", studyDao.memImgSearch(stuCd));
-	         
-	         if (insertResult != null) 
-	        	 model.addAttribute("insertResult", insertResult);
-			
 
 	      }
 
 	      return view;
 	   }
 
-	   // 스터디 참가
+	   // 스터디 참가버튼 클릭 시
 	   @RequestMapping(value = "/studyjoin.action", method =
 	   { RequestMethod.GET, RequestMethod.POST })
 	   public String studyJoin(Model model, HttpServletRequest request)
@@ -228,7 +222,7 @@ public class StudyController
 	   }
 	   
 
-	   // 스터디 커밋
+	   // 스터디방 확정(커밋)
 	   @ResponseBody
 	   @RequestMapping(value = "/leadercommit.action", method =
 	   { RequestMethod.GET, RequestMethod.POST })
@@ -236,12 +230,34 @@ public class StudyController
 	   {
 
 	      IStudyDAO studyDao = sqlSession.getMapper(IStudyDAO.class);
-
+	      
+	      // 확정할 스터디방의 코드
 	      String stu_cd = request.getParameter("stuCode");
-
+	      
+	      // 스터디방 확정 update실행
 	      int result = studyDao.studyCommit(stu_cd);
 
 	      return result;
+	   }
+	   
+	   // 스터디 시작전 스터디방 폐쇄
+	   @RequestMapping(value = "/studydelete.action", method =
+	   { RequestMethod.GET, RequestMethod.POST })
+	   public String studyDelete(Model model, HttpServletRequest request)
+	   {
+		  String view = null; 
+		  
+	      IStudyDAO studyDao = sqlSession.getMapper(IStudyDAO.class);
+	      // 폐쇄할 스터디방 코드
+	      String stu_cd = request.getParameter("stuCode");
+	      
+	      // 스터디방 폐쇄
+	      int delResult = studyDao.studyDelete(stu_cd);
+    	  view = "redirect:studylist.action";
+	      
+	      model.addAttribute("delResult", delResult);
+
+	      return view;
 	   }
 
 	   // 스터디장 모달창 정보

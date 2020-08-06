@@ -135,6 +135,15 @@ body{font-family: 'Noto Sans KR', sans-serif;}
     	
 	  });
       
+     // 스터디방 폐쇄 버튼 클릭
+     $("#deleteBtn").click(function() 
+     {
+    	alert("스터디방을 폐쇄하시겠습니까?");
+    	
+		$(location).attr("href", "studydelete.action?stuCode=" + $(this).val());
+		
+	 });
+      
       // 스터디장 커밋 버튼 클릭
       $(".commitBtn").click(function() 
       {
@@ -441,8 +450,8 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                <div class="roomBtn">
                <c:if test="${sessionScope.mem_cd eq leaderName.leader_mem_cd }">
                   <input type="button" value="방 정보 수정" class="btn modBtn" />
-                  <input type="button" value="폐쇄" class="btn delBtn" />
-                 </c:if>
+				  <button type="button" class="btn delBtn" id="deleteBtn" value="${studyInfo.stu_cd }">폐쇄</button>               
+               </c:if>
                </div><!-- end .roomBtn -->
             </div>
             
