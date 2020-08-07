@@ -21,6 +21,8 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="<%=cp %>/assets/js/bootstrap.min.js"></script>
 
+<link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/study/studynoticedetail.css" >
+
 <script type="text/javascript">
 
 	$(function()
@@ -67,10 +69,20 @@
 							//alert("상세성공");
 							$(".noticeList").html(args);
 							
+							// 목록 버튼 클릭 시 리스트로 이동
 							$(".goListBtn").click(function() 
 							{
 								ajaxStudyNoticeList();
 							});
+							
+							// 수정 버튼 클릭 시
+							
+							// 게시글 삭제 버튼 클릭 시
+							
+							// 댓글 삭제 버튼 클릭 시
+							
+							// 댓글 등록 버튼 클릭 시
+							
 						}
 					});
 				

@@ -152,6 +152,19 @@ public class StudyNoticeController
 		
 		model.addAttribute("noticeDetail", noticeDetail);
 		
+		// 댓글 정보 -------------------------------------
+		
+		// 댓글 수
+		int re_count = studyNoticeDao.studyReCount(dto);
+		
+		model.addAttribute("re_count", re_count);
+		
+		// 댓글 리스트
+		
+		ArrayList<StudyNoticeDTO> noticeReList = studyNoticeDao.studyNoticeReList(dto);
+		
+		model.addAttribute("noticeReList", noticeReList);
+		
 		view = "WEB-INF/views/study/AjaxStudyNoticeDetail.jsp";
 
 		return view;
@@ -213,6 +226,21 @@ public class StudyNoticeController
 		return view;
 
 	}
+	
+	// 공지사항 댓글 등록하기
+	@RequestMapping(value = "/studynoticereinsert.action", method = { RequestMethod.GET, RequestMethod.POST })
+	public String studyNoticeReInsert(Model model, HttpServletRequest request) 
+	{
+		String view = null;
+		
+		IStudyNoticeDAO studyNoticeDao = sqlSession.getMapper(IStudyNoticeDAO.class);
+		
+		
+		
+		return view;
+
+	}
+	
 	
 	
 	

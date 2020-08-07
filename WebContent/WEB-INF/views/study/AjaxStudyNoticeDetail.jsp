@@ -26,9 +26,9 @@
 <!-- 버튼 영역 -->
 <div class="row">
 	<div class="col-md-12">
-		<div class="btns">
+		<div class="btns form-inline">
 			<c:if test="${sessionScope.mem_cd == noticeDetail.mem_cd }">
-				<div class="leftBtn">
+				<div class="leftBtn" style="float: left;">
 					<button type="button" class="btn">
 						수정
 					</button>
@@ -50,14 +50,12 @@
 	
 	<!-- 댓글 목록 영역 -->
 	<div class="row">
-		<div class="col-md-2">
-		</div>
-		<div class="col-md-8 reList">
+		<div class="col-md-12 reList" style="float: left; text-align: left;">
 			<div class="count">
-			댓글 2
+			댓글 ${re_count }
 			</div>
 			<table class="table">
-				<tr>
+				<!-- <tr>
 					<td class="reTop">
 						<h4>홍길동</h4>
 						<h5>2020-06-19 01:05:53</h5>
@@ -77,18 +75,27 @@
 							등록된 댓글 노출 영역입니다.
 						</p>
 					</td>
+				</tr> -->
+				<c:forEach var="noticeReLists" items="${noticeReList }">
+				<tr>
+					<td class="reTop">
+						<h4>${noticeReLists.stu_join_name }</h4>
+						<h5>${noticeReLists.crt_date }</h5>
+						<button type="button" class="btn btn-link delBtn">삭제</button>
+						<p>
+							${noticeReLists.content }
+						</p>
+					</td>
 				</tr>
+				
+				</c:forEach>
 			</table>
-		</div>
-		<div class="col-md-2">
 		</div>
 	</div>
 	
 	<!-- 댓글 등록 영역 -->
 	<div class="row">
-		<div class="col-md-2">
-		</div>
-		<div class="col-md-8">
+		<div class="col-md-12" style="float: left; text-align: left;">
 		
 			<table class="table re">
 				<tr class="reAdd">
@@ -101,7 +108,5 @@
 					</td>
 				</tr>
 			</table>
-		</div>
-		<div class="col-md-2">
 		</div>
 	</div>

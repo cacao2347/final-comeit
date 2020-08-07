@@ -208,7 +208,7 @@
 		      keyInput = $("#keyInput").val();
 		      elementCount = $(".tagStyle").length;
 		      
-		      if(selectedValue =='INT1057')
+		      if(selectedValue =='INT9999')
 		      {
 		    	  selectedText = keyInput;
 		      }
@@ -238,7 +238,7 @@
 		      
 		      array.push(selectedText);
 		      
-		      if(selectedValue == 'INT1057')
+		      if(selectedValue == 'INT9999')
 		      {
 		    	  
 		    	  $(".stuKeyBox").append("<div class='tagStyle'><span class='keyTag'>"+ selectedText 
@@ -260,7 +260,7 @@
 			 	
 			 	selectedValue = $("#keySelect option:checked").val();
 			 
-				if(selectedValue == "INT1057")
+				if(selectedValue == "INT9999")
 				{
 					$("#keyInput").attr("readonly", false);
 				}
