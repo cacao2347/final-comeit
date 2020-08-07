@@ -74,9 +74,7 @@
 	<update id="memPwd">
 		UPDATE TBL_MEM_JOIN
 		SET PWD=CRYPTPACK.ENCRYPT(#{pwd},#{pwd})
-		WHERE NAME=#{name}
-		AND MEM_ID=#{id}
-		AND TEL=#{tel} 
+		WHERE TEL=#{tel} 
 	</update>
 	
 	<!-- 일반 회원 pwd 찾기 정보 조회 -->

@@ -179,16 +179,18 @@ public class LoginController
    
    
    
-   // 아이디 찾기 뷰
+   // 아이디 찾기 뷰페이지 요청
    @RequestMapping(value = "/searchid.action", method = {RequestMethod.GET, RequestMethod.POST})
    public String searchIdView(HttpServletRequest request)
    {
 	   HttpSession session = request.getSession();
 	   
+	   // 일반 회원, 업체회원 여부 
 	   String searchId = request.getParameter("searchId"); 
 	   String view = null;
 	   
-	   System.out.println(searchId);
+	   // 테스트
+	   //System.out.println(searchId);
 	   
 	   session.setAttribute("searchId", searchId);
 	   view = "/WEB-INF/views/member/SearchId.jsp";
@@ -197,7 +199,7 @@ public class LoginController
 	   return view;
    }
    
-   // 찾은 아이디 값
+   // 회원 정보 조회하여 아이디 찾기 
    @RequestMapping(value = "/searchidcheck.action", method = {RequestMethod.GET, RequestMethod.POST})
    public ModelAndView loginSearchId(HttpServletRequest request)
    {
@@ -259,13 +261,14 @@ public class LoginController
 		String authNum = "";
 		Message coolsms = new Message(api_key, api_secret);
 		
-		System.out.println("Hello");
-		authNum = sendString();
+		// 테스트 
+		//System.out.println("Hello");
+		authNum = sendString();							// 인증번호 난수 발생 시키는 함수 호출
 		
 		// 4 params(to, from, type, text) are mandatory. must be filled
 		HashMap<String, String> params = new HashMap<String, String>();
-		params.put("to", receiver);
-		params.put("from", "01099044626"); 				// 인증할 전화번호
+		params.put("to", receiver);						// 회원 전화번호
+		params.put("from", "01099044626"); 				
 		params.put("type", "SMS");
 		params.put("text", "[COME-IT] 인증번호 : " + authNum);
 		params.put("app_version", "test app 1.2"); // application name and version
@@ -299,7 +302,7 @@ public class LoginController
 			switch (rIndex)
 			{
 			case 0:
-				// A-Z
+				// A-Z 
 				temp.append((char) ((int) (rnd.nextInt(26)) + 65)); // +97이면 소문자 +65면 대문자
 				break;
 			case 1:
@@ -311,31 +314,27 @@ public class LoginController
 		return temp.toString();
 	}
    
-   // 패스워드 찾기 뷰
+   // 패스워드 찾기 뷰 요청
    @RequestMapping(value = "/searchpwd.action", method = {RequestMethod.GET, RequestMethod.POST})
    public String searchPwdView(HttpServletRequest request)
    {
 	   HttpSession session = request.getSession();
-	   
-	   String searchPwd = request.getParameter("searchPwd");
-	   /*
-	   String id = request.getParameter("formUserId");
-	   String name = request.getParameter("formUserName");
-	   */
 	   String view = null;
 	   
-	  session.setAttribute("searchPwd", searchPwd);
-	  // session.setAttribute("name", name);
-	  // session.setAttribute("id", id);
-	  System.out.println(searchPwd);
+	   // 일반 회원인지, 업체 회원인지 여부
+	   String searchPwd = request.getParameter("searchPwd");
 	   
-	   view = "/WEB-INF/views/member/SearchPw.jsp";
+	   // 테스트
+	   // System.out.println(searchPwd);	   
+	   
+	  session.setAttribute("searchPwd", searchPwd);
+	  view = "/WEB-INF/views/member/SearchPw.jsp";
 	   
 	   return view;
    }
    
    
-   // 패스워드 찾기
+   // 패스워드를 찾을 때 입력한 정보로 회원 여부 조회하기
    @RequestMapping(value = "/searchpwdcheck.action", method = {RequestMethod.GET, RequestMethod.POST})
    public ModelAndView loginSearchPwd(HttpServletRequest request)
    {
@@ -346,26 +345,24 @@ public class LoginController
       ISpaDAO spaDao = sqlSession.getMapper(ISpaDAO.class);
 
       
-      String name = request.getParameter("formUserName");
-	  String id = request.getParameter("formUserId");
-      String tel = request.getParameter("formTel");
-      String searchPwd = (String)session.getAttribute("searchPwd");
+      String name = request.getParameter("formUserName");					// 사용자가 입력한 이름	
+	  String id = request.getParameter("formUserId");						// 사용자가 입력한 ID
+      String tel = request.getParameter("formTel");							// 사용자가 입력한 전화번호
+      String searchPwd = (String)session.getAttribute("searchPwd");			// 일반 회원, 업체 회원 여부
       
       session.setAttribute("id", id);
       session.setAttribute("name",name);
       session.setAttribute("tel", tel);
-      //session.setAttribute("", value);
       
+      // 테스트
       System.out.println(searchPwd);
       System.out.println(name);
       System.out.println(id);
       System.out.println(tel);
     		  
-      int result =0;
+      int result =0; 
       
-   
-      
-      if (searchPwd.equals("memPwdSearch")) 			// 일반 회원 비밀번호 찾기일 때
+      if (searchPwd.equals("memPwdSearch")) 			// 일반 회원 패스워드 찾기일 때
       {
 		 MemberDTO dto = new MemberDTO();
 
@@ -377,7 +374,7 @@ public class LoginController
 		 
 		 mav.addObject("infoDto", dto);
 	  }
-      else if (searchPwd.equals("spaPwdSearch")) 		// 업체 회원 비밀번호 찾기일때
+      else if (searchPwd.equals("spaPwdSearch")) 		// 업체 회원 패스워드 찾기일때
       {
     	  SpaDTO dto = new SpaDTO();
     	  
@@ -433,50 +430,42 @@ public class LoginController
    }
    
    
-   // 변경된 난수 비밀번호 전송
+   // 임시 비밀번호 발급 및 전송
    @RequestMapping(value = "/pwdsendsms.action", method = {RequestMethod.GET, RequestMethod.POST})
-	public String pwdSendSms(HttpServletRequest request) throws CoolsmsException
+   public String pwdSendSms(HttpServletRequest request) throws CoolsmsException
    {
-	   HttpSession session = request.getSession();
-	    String result = "";
+	    HttpSession session = request.getSession();
+	    String view = "";
 	    IMemberDAO memDao = sqlSession.getMapper(IMemberDAO.class);
 	    ISpaDAO spaDao = sqlSession.getMapper(ISpaDAO.class);
 	    
-	   
-
-	    String authNum = updatePwd();							// 난수 발생 비밀번호
+	    String tel = request.getParameter("tel");				// 회원의 전화번호
+	    String searchPwd = (String)session.getAttribute("searchPwd");	// 회원 여부
+	    // 테스트
+	    System.out.println("회원 전화번호: "+tel);
 	    
+	    String authNum = updatePwd();							// 임시 비밀번호 난수 발생시킬 함수 호출
+	    int result = 0;
 	    
+	    // 확인
+	    System.out.println("임시 비밀번호: "+authNum);
+	    
+	    /*
 	    String name = (String)session.getAttribute("name");
 	    String id = (String)session.getAttribute("id");
 	    String tel = (String)session.getAttribute("tel");
-	    String searchPwd = (String)session.getAttribute("searchPwd");	// 회원 여부
+	    
 	    System.out.println(authNum + name + id + tel+ searchPwd);
+	     */
 	    
+	    if (searchPwd.equals("memPwdSearch")) 					// 일반 회원
+			 result = memDao.memPwd(tel);
+        else if (searchPwd.equals("spaPwdSearch")) 				// 업체 회원
+        	 result = spaDao.spaPwd(tel);
+	   
+	    // 확인
+	    System.out.println("비밀번호 변경 결과 :"+result);
 	    
-	    if (searchPwd.equals("memPwdSearch")) 					// 일반 회원 
-	      {
-			 MemberDTO dto = new MemberDTO();
-
-			 dto.setPwd(authNum); 
-		     dto.setName(name); 
-		     dto.setId(id);
-		     dto.setTel(tel);
-		     
-		     memDao.memPwd(dto);
-		  }
-	      else if (searchPwd.equals("spaPwdSearch")) 			// 업체 회원
-	      {
-	    	  SpaDTO dto = new SpaDTO();
-	    	  
-	    	  dto.setPwd(authNum);
-	    	  dto.setName(name);
-	    	  dto.setSpa_id(id);
-	    	  dto.setTel(tel);
-	    	  
-	    	  spaDao.spaPwd(dto);
-	      }
-	       
 		String api_key = "NCSXHDF6ZGMKEB2C";
 		String api_secret = "VONNHWGHSKC86IDOCJIDV9W996SH3UR9";
 
@@ -491,7 +480,10 @@ public class LoginController
 		params.put("type", "SMS");
 		params.put("text", "[COME-IT] 인증번호 : " + authNum);
 		params.put("app_version", "test app 1.2"); // application name and version
-
+		
+		// 테스트
+		System.out.println("비밀번호 변경 성공");
+		
 		try
 		{
 			// send() 는 메시지를 보내는 함수
@@ -504,9 +496,9 @@ public class LoginController
 			System.out.println(e.getCode());
 		}
 		
-		result="redirect:memberlogin.action";
+		view ="/WEB-INF/views/member/MemberLogin.jsp";
 
-		return result;
+		return view;
 		
 	}
      

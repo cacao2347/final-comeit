@@ -54,9 +54,7 @@
 	<update id="spaPwd">
 		UPDATE TBL_SPA_JOIN
 		SET PWD=CRYPTPACK.ENCRYPT(#{pwd},#{pwd})
-		WHERE NAME=#{name}
-  		  AND SPA_ID=#{spa_id}
-  		  AND TEL=#{tel} 
+		WHERE TEL=#{tel} 
 	</update>
 	
 	<!-- 업체 회원 pwd 찾기 정보 조회 -->
