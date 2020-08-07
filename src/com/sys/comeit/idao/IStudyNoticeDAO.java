@@ -31,7 +31,7 @@ public interface IStudyNoticeDAO
 	
 	public ArrayList<StudyNoticeDTO> getNoticeListData(StudyNoticeDTO dto);	// 페이징 처리 된 게시물 리스트
 	
-	public StudyNoticeDTO studyNoticeAddData(String stu_cd);	// 스터디 공지사항 등록화면 노출 데이터
+	public StudyNoticeDTO studyNoticeAddData(StudyNoticeDTO dto);	// 스터디 공지사항 등록화면 노출 데이터
 
 	public String studyLeaderJoin(String stu_cd);		// 작성자의 스터디 참가 코드 알아내기
 

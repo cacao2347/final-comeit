@@ -180,11 +180,21 @@ public class StudyNoticeController
 		
 		IStudyNoticeDAO studyNoticeDao = sqlSession.getMapper(IStudyNoticeDAO.class);
 		
+		// 세션에서 로그인한 회원 코드 받아오기
+		HttpSession session = request.getSession();
+
+	    String mem_cd = (String) session.getAttribute("mem_cd");
+		
 		String stu_cd = request.getParameter("stu_cd");
 		
 		System.out.println("등록화면에서 받은 스터디코드" + stu_cd);
 		
-		StudyNoticeDTO noticeAddData = studyNoticeDao.studyNoticeAddData(stu_cd);
+		StudyNoticeDTO dto = new StudyNoticeDTO();
+		
+		dto.setStu_cd(stu_cd);
+	    dto.setMem_cd(mem_cd);
+		
+		StudyNoticeDTO noticeAddData = studyNoticeDao.studyNoticeAddData(dto);
 		
 		model.addAttribute("noticeAddData", noticeAddData);
 		

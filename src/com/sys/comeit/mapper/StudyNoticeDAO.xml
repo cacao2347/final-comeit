@@ -75,6 +75,7 @@
 		SELECT DISTINCT(STU_JOIN_NAME), TO_CHAR(SYSDATE,'YYYY-MM-DD HH24:MI') AS CRT_DATE
 		FROM VIEW_STU_NTC
 		WHERE STU_CD = #{stu_cd}
+		  AND MEM_CD = #{mem_cd}
 	</select>
 
 	<!-- 작성자의 스터디 참가 코드 알아내기 -->
@@ -144,6 +145,7 @@
 		WHERE STU_CD = #{stu_cd}
 		  AND STU_NTC_PNT_CD = #{stu_ntc_pnt_cd}
 		  AND STU_NTC_PNT_CD != STU_NTC_CD
+		ORDER BY CRT_DATE DESC
 	</select>
 	
 	<!-- 1번방의 2번 공지사항의 댓글 개수 확인 -->
