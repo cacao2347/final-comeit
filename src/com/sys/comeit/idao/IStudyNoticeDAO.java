@@ -34,4 +34,6 @@ public interface IStudyNoticeDAO
 	public StudyNoticeDTO studyNoticeAddData(String stu_cd);	// 스터디 공지사항 등록화면 노출 데이터
 
 	public String studyLeaderJoin(String stu_cd);		// 작성자의 스터디 참가 코드 알아내기
+
+	public String noticeReCreateJoin(String mem_cd);	// 댓글 작성자의 스터디 참가 코드 알아내기
 }

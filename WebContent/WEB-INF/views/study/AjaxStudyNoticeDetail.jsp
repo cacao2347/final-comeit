@@ -55,27 +55,7 @@
 			댓글 ${re_count }
 			</div>
 			<table class="table">
-				<!-- <tr>
-					<td class="reTop">
-						<h4>홍길동</h4>
-						<h5>2020-06-19 01:05:53</h5>
-						<button type="button" class="btn btn-link repBtn">신고</button>
-						<p>
-							등록된 댓글 노출 영역입니다.
-						</p>
-					</td>
-				</tr>
-				<tr>
-					<td class="reTop">
-						<h4>홍길동</h4>
-						<h5>2020-06-19 01:05:53</h5>
-						<button type="button" class="btn btn-link repBtn">신고</button>
-						<button type="button" class="btn btn-link delBtn">삭제</button>
-						<p>
-							등록된 댓글 노출 영역입니다.
-						</p>
-					</td>
-				</tr> -->
+				
 				<c:forEach var="noticeReLists" items="${noticeReList }">
 				<tr>
 					<td class="reTop">

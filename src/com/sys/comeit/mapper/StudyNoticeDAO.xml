@@ -95,6 +95,13 @@
 		}
 	</select>
 	
+	<!-- 공지사항 댓글 등록자의 참가코드 알아내기 -->
+	<select id="noticeReCreateJoin" resultType="java.lang.String">
+		SELECT DISTINCT(STU_JOIN_CD)
+		FROM VIEW_STU_NTC
+		WHERE MEM_CD = #{mem_cd}
+	</select>
+	
 	<!-- 공지사항 댓글 등록 -->
 	<insert id="studyNoticeReInsert">
 		INSERT INTO TBL_STU_NTC(STU_NTC_CD, STU_NTC_CD2, STU_JOIN_CD, TITLE, CRT_DATE, CONTENT)

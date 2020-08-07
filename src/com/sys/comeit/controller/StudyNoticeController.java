@@ -7,6 +7,7 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -165,7 +166,8 @@ public class StudyNoticeController
 		
 		model.addAttribute("noticeReList", noticeReList);
 		
-		view = "WEB-INF/views/study/AjaxStudyNoticeDetail.jsp";
+		//view = "WEB-INF/views/study/AjaxStudyNoticeDetail.jsp";
+		view = "WEB-INF/views/study/StudyNoticeDetail.jsp";
 
 		return view;
 	}
@@ -235,7 +237,40 @@ public class StudyNoticeController
 		
 		IStudyNoticeDAO studyNoticeDao = sqlSession.getMapper(IStudyNoticeDAO.class);
 		
+		// 그 게시글 코드
+		String stu_ntc_pnt_cd = request.getParameter("stu_ntc_pnt_cd");
+		System.out.println("게시글 코드 : " + stu_ntc_pnt_cd);
 		
+		// 그 게시글의 제목
+		String title = request.getParameter("title");
+		System.out.println("게시글제목 : " + title);
+		
+		// 작성자의 스터디참가코드
+		HttpSession session = request.getSession();
+
+	    String mem_cd = (String) session.getAttribute("mem_cd");	// 로그인한 사람의 회원코드
+		
+	    String stu_join_cd = studyNoticeDao.noticeReCreateJoin(mem_cd);
+	    System.out.println("댓글 작성자의 스터디 참가 코드 : " + stu_join_cd);
+	    
+		// 댓글 내용
+	    String content = request.getParameter("reContent");
+	    System.out.println("댓글 내용 : " + content);
+	    
+	    StudyNoticeDTO dto = new StudyNoticeDTO();
+	    
+	    dto.setStu_ntc_pnt_cd(stu_ntc_pnt_cd);
+	    dto.setTitle(title);
+	    dto.setStu_join_cd(stu_join_cd);
+	    dto.setContent(content);
+	    
+	    studyNoticeDao.studyNoticeReInsert(dto);	// 실제 댓글 등록
+	    
+	    String stu_cd = request.getParameter("stu_cd");
+	    System.out.println("스터디코드3" + stu_cd);
+	    model.addAttribute("stu_cd", stu_cd);
+	    
+	    view = "redirect:studydetail.action";				// 스터디 상세 재호출
 		
 		return view;
 

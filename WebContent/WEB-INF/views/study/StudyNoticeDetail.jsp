@@ -6,6 +6,7 @@
 	String cp = request.getContextPath();
 %>
 <%
+	String stu_ntc_pnt_cd = request.getParameter("stu_ntc_pnt_cd");
 	String stu_cd = request.getParameter("stu_cd");
 %>
 <!DOCTYPE html>
@@ -24,40 +25,23 @@
 
 	$(function()
 	{
-		
-		// ajax처리
-		ajaxStudyNoticeDetail();
+		$("#reCreateBtn").click(function() 
+		{
+			//alert("댓글등록!");
+			if ($("#reContent").val() == "")
+			{
+				alert("댓글 내용을 입력해주세요.");
+				return;
+			}
+			else if ($("#reContent").val() != "")
+			{
+				$("#reForm").submit();	// 댓글 등록하기
+			}
+			
+						
+		});
 		
 	});
-	
-	function ajaxStudyNoticeDetail()
-	{
-		var params = "stu_cd=" + $("#studyCode").val() + "&stu_ntc_pnt_cd=" $("#stu_ntc_pnt_cd").val();
-		
-		$.ajax(
-		{
-			type : "POST"
-			, url : "studynoticedetailshow.action"
-			, data : params
-			, dataType : "text"
-			, success : function(data)
-			{
-				//alert("성공" + data);
-				$(".container").html(data);
-				
-				$(".goListBtn").click(function()
-				{
-					alert("클릭");
-					//$("#tableForm").submit();
-					
-				});
-			}
-			, error : function(e)
-			{
-				alert(e.responseText + "에러");
-			}
-		});
-	}
 	
 </script>
 
@@ -66,57 +50,35 @@
 
 <div class="container-fluid">
 
-<!-- 실제 데이터 -->
-<div class="container">
-
-</div>
-
-<!-- 	<!-- 상세내용 영역
-	<div class="row">
-		<div class="col-md-2">
-		</div>
-		<div class="col-md-8">
-			<table class="table detail">
-				<tr>
-					<th>제목</th>
-					<td colspan="6">공지사항 제목</td>
-				</tr>
-				<tr class="tit">
-					<th>작성자</th>
-					<td>홍길동</td>
-					<th>작성일</th>
-					<td>2020-06-18</td>
-					<th>조회수</th>
-					<td>22</td>
-				</tr>
-				<tr class="content">
-					<td colspan="6">상세내용 영역</td>
-				</tr>
-				<tr>
-					<td colspan="6">이전글 : 공지사항의 아홉 번째 게시글 제목입니다.</td>
-				</tr>
-				<tr>
-					<td colspan="6">다음글 : 없음</td>
-				</tr>
-			</table>
-		</div>
-		<div class="col-md-2">
-		</div>
-	</div>상세내용 영역 끝
+<!-- 상세내용 영역 -->
+<div class="row">
+	<div class="col-md-12">
+		<table class="table detail">
+			<tr>
+				<th style="text-align: center; background-color: #EEEEEE">제목</th>
+				<td colspan="6">${noticeDetail.title }</td>
+			</tr>
+			<tr class="tit">
+				<th style="text-align: center; background-color: #EEEEEE">작성자</th>
+				<td>${noticeDetail.stu_join_name }</td>
+				<th style="text-align: center; background-color: #EEEEEE">작성일</th>
+				<td>${noticeDetail.crt_date }</td>
+				<th style="text-align: center; background-color: #EEEEEE">조회수</th>
+				<td>${noticeDetail.hits }</td>
+			</tr>
+			<tr class="content" style="vertical-align: top; height: 300px;">
+				<td colspan="6">${noticeDetail.content }</td>
+			</tr>
+		</table>
+	</div>
+</div><!-- 상세내용 영역 끝 -->
 	
-	버튼 영역
-	<div class="row">
-		<div class="col-md-2">
-		</div>
-		<div class="col-md-8">
-			<div class="repBtn">
-				<button type="button" class="btn btn-link">
-				신고
-				</button>
-			</div>
-			
-			<div class="btns">
-				<div class="leftBtn">
+<!-- 버튼 영역 -->
+<div class="row">
+	<div class="col-md-12">
+		<div class="btns form-inline">
+			<c:if test="${sessionScope.mem_cd == noticeDetail.mem_cd }">
+				<div class="leftBtn" style="float: left;">
 					<button type="button" class="btn">
 						수정
 					</button>
@@ -124,78 +86,66 @@
 						삭제
 					</button>
 				</div>
-				
-				<div class="rightBtn">
-					<button type="button" class="btn btn-primary">
-						목록
-					</button>
-				</div>
-			</div>
+			</c:if>
 			
+			<div class="rightBtn">
+				<button type="button" class="btn btn-primary goListBtn">
+					목록
+				</button>
+			</div>
 		</div>
-		<div class="col-md-2">
-		</div>
-	</div>버튼 영역 끝
+		
+	</div>
+</div><!-- 버튼 영역 끝-->
 	
-	댓글 목록 영역
+	<!-- 댓글 목록 영역 -->
 	<div class="row">
-		<div class="col-md-2">
-		</div>
-		<div class="col-md-8 reList">
+		<div class="col-md-12 reList" style="float: left; text-align: left;">
 			<div class="count">
-			댓글 2
+			댓글 ${re_count }
 			</div>
 			<table class="table">
+				
+				<c:forEach var="noticeReLists" items="${noticeReList }">
 				<tr>
 					<td class="reTop">
-						<h4>홍길동</h4>
-						<h5>2020-06-19 01:05:53</h5>
-						<button type="button" class="btn btn-link repBtn">신고</button>
-						<p>
-							등록된 댓글 노출 영역입니다.
-						</p>
-					</td>
-				</tr>
-				<tr>
-					<td class="reTop">
-						<h4>홍길동</h4>
-						<h5>2020-06-19 01:05:53</h5>
-						<button type="button" class="btn btn-link repBtn">신고</button>
+						<h4>${noticeReLists.stu_join_name }</h4>
+						<h5>${noticeReLists.crt_date }</h5>
 						<button type="button" class="btn btn-link delBtn">삭제</button>
 						<p>
-							등록된 댓글 노출 영역입니다.
+							${noticeReLists.content }
 						</p>
 					</td>
 				</tr>
+				
+				</c:forEach>
 			</table>
-		</div>
-		<div class="col-md-2">
 		</div>
 	</div>
 	
-	댓글 등록 영역
+	<!-- 댓글 등록 영역 -->
 	<div class="row">
-		<div class="col-md-2">
-		</div>
-		<div class="col-md-8">
-		
+		<div class="col-md-12" style="float: left; text-align: left;">
+		<form id="reForm" class="form-horizontal" role="form" method="post" action="studynoticereinsert.action">
 			<table class="table re">
 				<tr class="reAdd">
 					<th class="reTh">댓글내용 * </th>
 					<td class="textArea">
-					<textarea rows="3" class="form-control text"></textarea>
+					<textarea rows="3" class="form-control text" id="reContent" name="reContent"></textarea>
 					</td>
 					<td class="addBtn">
-					<button type="submit" class="btn btn-primary btn-lg">등록</button>
+					<button type="submit" class="btn btn-primary btn-lg" id="reCreateBtn">등록</button>
 					</td>
 				</tr>
 			</table>
+			<input type="hidden" id="stu_ntc_pnt_cd" name="stu_ntc_pnt_cd" value="<%=stu_ntc_pnt_cd%>">
+			<input type="hidden" id="title" name="title" value="${noticeDetail.title }">
+			<input type="hidden" id="studyCode" name="stu_cd" value="<%=stu_cd%>">
+		</form>
 		</div>
-		<div class="col-md-2">
-		</div>
-	</div> -->
-	<input type="hidden" id="studyCode" value="<%=stu_cd%>">
-	<input type="hidden" id="stu_ntc_pnt_cd" value="${noticeDetail.stu_ntc_pnt_cd }">
+	</div>
+
+
 </div>
 
 </body>
