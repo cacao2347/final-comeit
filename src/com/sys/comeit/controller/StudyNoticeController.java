@@ -236,7 +236,7 @@ public class StudyNoticeController
 		String view = null;
 		
 		IStudyNoticeDAO studyNoticeDao = sqlSession.getMapper(IStudyNoticeDAO.class);
-		
+		String stu_cd = request.getParameter("stu_cd");
 		// 그 게시글 코드
 		String stu_ntc_pnt_cd = request.getParameter("stu_ntc_pnt_cd");
 		System.out.println("게시글 코드 : " + stu_ntc_pnt_cd);
@@ -250,7 +250,12 @@ public class StudyNoticeController
 
 	    String mem_cd = (String) session.getAttribute("mem_cd");	// 로그인한 사람의 회원코드
 		
-	    String stu_join_cd = studyNoticeDao.noticeReCreateJoin(mem_cd);
+	    StudyNoticeDTO dtoRe = new StudyNoticeDTO();
+	    
+	    dtoRe.setStu_cd(stu_cd);
+	    dtoRe.setMem_cd(mem_cd);
+	    
+	    String stu_join_cd = studyNoticeDao.noticeReCreateJoin(dtoRe);
 	    System.out.println("댓글 작성자의 스터디 참가 코드 : " + stu_join_cd);
 	    
 		// 댓글 내용
@@ -266,7 +271,7 @@ public class StudyNoticeController
 	    
 	    studyNoticeDao.studyNoticeReInsert(dto);	// 실제 댓글 등록
 	    
-	    String stu_cd = request.getParameter("stu_cd");
+	    
 	    System.out.println("스터디코드3" + stu_cd);
 	    model.addAttribute("stu_cd", stu_cd);
 	    

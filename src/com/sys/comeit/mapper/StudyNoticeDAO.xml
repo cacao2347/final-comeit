@@ -97,9 +97,12 @@
 	
 	<!-- 공지사항 댓글 등록자의 참가코드 알아내기 -->
 	<select id="noticeReCreateJoin" resultType="java.lang.String">
-		SELECT DISTINCT(STU_JOIN_CD)
-		FROM VIEW_STU_NTC
-		WHERE MEM_CD = #{mem_cd}
+		SELECT STU_JOIN_CD
+		FROM TBL_STU_JOIN SJ, TBL_MEM_CD MC, TBL_MEM_JOIN MJ
+		WHERE SJ.MEM_CD = MC.MEM_CD
+		  AND MC.MEM_CD = MJ.MEM_CD
+		  AND MC.MEM_CD = #{mem_cd}
+		  AND SJ.STU_CD = #{stu_cd}
 	</select>
 	
 	<!-- 공지사항 댓글 등록 -->
