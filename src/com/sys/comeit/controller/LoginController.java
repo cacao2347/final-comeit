@@ -31,11 +31,24 @@ public class LoginController
    @Autowired
    private SqlSession sqlSession;
    
+   // 로그인 페이지 요청
    @RequestMapping(value = "/memberlogin.action", method = {RequestMethod.GET, RequestMethod.POST})
    public String memberLogin(Model model)
    {
       String view = null;
       
+      view = "/WEB-INF/views/member/MemberLogin.jsp";
+      
+      return view;
+   }
+   
+   // 아이디, 비밀번호 오류 로그인 페이지 재요청
+   @RequestMapping(value = "/memberloginagain.action", method = {RequestMethod.GET, RequestMethod.POST})
+   public String memberReLogin(Model model)
+   {
+      String view = null;
+      
+      model.addAttribute("loginMsg", "아이디, 패스워드를 확인해주세요.");
       view = "/WEB-INF/views/member/MemberLogin.jsp";
       
       return view;
@@ -79,7 +92,7 @@ public class LoginController
           // 멤버 이름,코드 받기
           if (member == null)			// 로그인 정보 없을시
           {
-        	  result = "redirect:memberlogin.action";
+        	  result = "redirect:memberloginagain.action";
               return result;
           }
           else
@@ -108,7 +121,7 @@ public class LoginController
     	  // 업체 코드 받기
     	  if (spa == null)				// 로그인 정보 없을시
           {
-        	  result = "redirect:memberlogin.action";
+        	  result = "redirect:memberloginagain.action";
               return result;
           }
           else
@@ -121,7 +134,7 @@ public class LoginController
           }
     		  
       }
-      else if(loginType.equals("2"))
+      else if(loginType.equals("2"))		// 관리자 로그
       {
     	  AdminDTO dto = new AdminDTO();
     	  
@@ -132,7 +145,7 @@ public class LoginController
     	  
     	  if (name == null)				// 로그인 정보 없을시
           {
-        	  result = "redirect:memberlogin.action";
+        	  result = "redirect:memberloginagain.action";
               return result;
           }
     	  
@@ -459,9 +472,19 @@ public class LoginController
 	     */
 	    
 	    if (searchPwd.equals("memPwdSearch")) 					// 일반 회원
-			 result = memDao.memPwd(tel);
+	    {
+	    	MemberDTO dto = new MemberDTO();
+	    	dto.setTel(tel);
+	    	dto.setPwd(authNum);
+	    	result = memDao.memPwd(dto);
+	    }			
         else if (searchPwd.equals("spaPwdSearch")) 				// 업체 회원
-        	 result = spaDao.spaPwd(tel);
+        {
+        	SpaDTO dto = new SpaDTO();
+        	dto.setTel(tel);
+        	dto.setPwd(authNum);
+        	result = spaDao.spaPwd(dto);
+        }
 	   
 	    // 확인
 	    System.out.println("비밀번호 변경 결과 :"+result);
@@ -478,7 +501,7 @@ public class LoginController
 		params.put("to", tel);
 		params.put("from", "01099044626"); 				// 인증할 전화번호
 		params.put("type", "SMS");
-		params.put("text", "[COME-IT] 인증번호 : " + authNum);
+		params.put("text", "[COME-IT] 임시 비밀번호 : " + authNum);
 		params.put("app_version", "test app 1.2"); // application name and version
 		
 		// 테스트

@@ -125,7 +125,7 @@ body {
 				$("#LoginSpaForm").attr("action", "spacejoin.action");
 		});
         
-        
+      
         
         
     });
@@ -184,7 +184,8 @@ body {
 											type="password" name="formPassword" placeholder="Password..."
 											class="form-password form-control" id="formPassword">
 									</div>
-									<button type="submit" class="btn">Sign in!</button>
+									<input type="hidden" name="" id="loginMsg" value="${loginMsg }"/>
+									<button type="submit" class="btn signInBtn">Sign in!</button>
 								</form>
 								<form name="LoginMemForm" id="LoginMemForm">
 									<div class="row2 login-form">

@@ -90,8 +90,9 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 		
 		
 		// PW 버튼 클릭 시 
-		$("#rcvIdBtn").click(function() {
-			$(location).attr("href", "pwdsendsms.action?tel=" + $(this).val());	
+		$("#rcvIdBtn").click(function() 
+		{
+			$(location).attr("href", "pwdsendsms.action?tel=" + $(this).val());			
 		});
 		
 			
@@ -154,7 +155,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                   <div class="form-top-right"></div>
                </div>
                <div class="form-bottom">
-                  <form role="form" method="post" class="login-form" id="snedForm">
+                  <form method="post" class="login-form" id="snedForm">
                      <table class="inputForm">
                    
                         <tr>
@@ -221,7 +222,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                         </div>
                         <input type="hidden" name="ldPwd" value="${pwd }"/>
                         <input type="hidden" name="searchPwd" value="${searchPwd }"/>
-                        <button type="submit" class="btn btn-primary searchBtn" id="rcvIdBtn" disabled="disabled"
+                        <button type="button" class="btn btn-primary searchBtn" id="rcvIdBtn" disabled="disabled"
                         value="${infoDto.tel }">PW 받기</button>
                      </div>
                   </form>

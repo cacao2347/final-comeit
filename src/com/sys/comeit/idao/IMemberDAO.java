@@ -19,7 +19,7 @@ public interface IMemberDAO
 	public String memStop(String id);		// 정지 여부 확인
 	public int memBlock(String id);			// 블락 여부 확인
 	public String memId(MemberDTO dto);	// 아이디 찾기
-	public int memPwd(String tel);	// 임시 패스워드로 변경
+	public int memPwd(MemberDTO dto);	// 임시 패스워드로 변경
 	public int pwdInfo(MemberDTO dto); // 패스워드 찾기 정보 조회
 	
 	
