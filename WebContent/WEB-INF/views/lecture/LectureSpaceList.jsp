@@ -10,14 +10,9 @@ String cp = request.getContextPath();
 <meta charset="UTF-8">
 <title>StudySpaceList.jsp</title>
 
-<style type="text/css">
-#listTbl {
-	border-spacing: 20px;
-	border-collapse: separate;
-}
-</style>
+<link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/lecture/lectureSpaceList.css" >
 
-<script type="text/javascript">
+<%-- <script type="text/javascript">
 
 	function searchList() 
 	{
@@ -25,6 +20,51 @@ String cp = request.getContextPath();
 		f.action = "<%=cp%>/image/list.action";
 		f.submit();
 	}
+</script> --%>
+
+<script type="text/javascript">
+
+	$(function()
+	{
+		// ajax처리
+		ajaxLectureSpaceList();	
+	});
+	
+	// 이 스터디방에 대한 공지사항 리스트 뿌려주는 ajax
+	function ajaxLectureSpaceList()
+	{
+		var params = "lec_cd=" + $("#lectureCode").val();
+		
+		$.ajax(
+		{
+			type : "POST"
+			, url : "lecturespacelist.action"
+			, data : params
+			, dataType : "text"
+			, async: false
+			, success : function(data)
+			{
+				//alert("성공" + data);
+				// 여기부터 하기
+				$(".spaceList").html(data);
+				
+				
+				$(".listTitle").click(function()
+				{
+					alert("클릭");
+					$("#tableForm").submit();
+				
+				});
+				
+			}
+			, error : function(e)
+			{
+				alert(e.responseText + "에러");
+			}
+		});
+	}
+	
+
 </script>
 
 </head>
@@ -46,165 +86,8 @@ String cp = request.getContextPath();
 			</div>
 	</div>
 		
-		<div class="row">
-			<hr>
-
-			<div class="col-md-12">
-
-				
-				<div class="row">
-					<div class="col-md-12">
-					
-						<select name="searchKey" class="selectField form-control"
-						style="width: 15%; display: inline;">
-						<option value="subject">제목</option>
-						<option value="userName">작성자</option>
-						</select> <input type="text" name="searchValue" class="boxTF form-control"
-						style="width: 25%; display: inline;">
-						<button type="button" class="btn btn-primary">검색</button>
-					
-					
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-12">
-					
-						<table
-					style="width: 600px; margin: 1px; padding: 3px; background-color: #FFFFFF; align-self: center;"
-					id="listTbl">
-
-					<tr>
-
-						<td style="width: 200px;" align="left"><img
-							src="<%=cp%>/assets/images/studycafe.jpg"
-							style="width: 300px; height: 200px;"> <span
-							style="color: #2E64FE; font-weight: bold;">우리 스터디 카페</span>
-							&nbsp;&nbsp;&nbsp;&nbsp; <span
-							style="color: gray; font-size: 8pt;">스터디 카페</span> <br> <img
-							src="<%=cp%>/assets/images/pin.PNG"
-							style="width: 15px; height: 15px;">&nbsp;<span
-							style="font-size: 12pt;">경기 화성시</span> &nbsp;&nbsp;&nbsp;&nbsp; <img
-							src="<%=cp%>/assets/images/clock.PNG"
-							style="width: 15px; height: 15px;">&nbsp;<span
-							style="font-size: 12pt;">09:00 ~ 23:00</span> <br> <img
-							src="<%=cp%>/assets/images/calendar.PNG"
-							style="width: 15px; height: 15px;">&nbsp;<span
-							style="font-size: 12pt;">월~토</span> <br> <span
-							style="color: gray; font-size: 10pt;">#와이파이</span> &nbsp; <span
-							style="color: gray; font-size: 10pt;">#소음없음</span> &nbsp; <span
-							style="color: gray; font-size: 10pt;">#역가까움</span></td>
-
-						<td style="width: 200px;" align="left"><img
-							src="<%=cp%>/assets/images/studycafe.jpg"
-							style="width: 300px; height: 200px;"> <span
-							style="color: #2E64FE; font-weight: bold;">우리 스터디 카페</span>
-							&nbsp;&nbsp;&nbsp;&nbsp; <span
-							style="color: gray; font-size: 8pt;">스터디 카페</span> <br> <img
-							src="<%=cp%>/assets/images/pin.PNG"
-							style="width: 15px; height: 15px;">&nbsp;<span
-							style="font-size: 12pt;">경기 화성시</span> &nbsp;&nbsp;&nbsp;&nbsp; <img
-							src="<%=cp%>/assets/images/clock.PNG"
-							style="width: 15px; height: 15px;">&nbsp;<span
-							style="font-size: 12pt;">09:00 ~ 23:00</span> <br> <img
-							src="<%=cp%>/assets/images/calendar.PNG"
-							style="width: 15px; height: 15px;">&nbsp;<span
-							style="font-size: 12pt;">월~토</span> <br> <span
-							style="color: gray; font-size: 10pt;">#와이파이</span> &nbsp; <span
-							style="color: gray; font-size: 10pt;">#소음없음</span> &nbsp; <span
-							style="color: gray; font-size: 10pt;">#역가까움</span></td>
-
-						<td style="width: 200px;" align="left"><img
-							src="<%=cp%>/assets/images/studycafe.jpg"
-							style="width: 300px; height: 200px;"> <span
-							style="color: #2E64FE; font-weight: bold;">우리 스터디 카페</span>
-							&nbsp;&nbsp;&nbsp;&nbsp; <span
-							style="color: gray; font-size: 8pt;">스터디 카페</span> <br> <img
-							src="<%=cp%>/assets/images/pin.PNG"
-							style="width: 15px; height: 15px;">&nbsp;<span
-							style="font-size: 12pt;">경기 화성시</span> &nbsp;&nbsp;&nbsp;&nbsp; <img
-							src="<%=cp%>/assets/images/clock.PNG"
-							style="width: 15px; height: 15px;">&nbsp;<span
-							style="font-size: 12pt;">09:00 ~ 23:00</span> <br> <img
-							src="<%=cp%>/assets/images/calendar.PNG"
-							style="width: 15px; height: 15px;">&nbsp;<span
-							style="font-size: 12pt;">월~토</span> <br> <span
-							style="color: gray; font-size: 10pt;">#와이파이</span> &nbsp; <span
-							style="color: gray; font-size: 10pt;">#소음없음</span> &nbsp; <span
-							style="color: gray; font-size: 10pt;">#역가까움</span></td>
-
-					</tr>
-					<tr>
-
-						<td style="width: 200px;" align="left"><img
-							src="<%=cp%>/assets/images/studycafe.jpg"
-							style="width: 300px; height: 200px;"> <span
-							style="color: #2E64FE; font-weight: bold;">우리 스터디 카페</span>
-							&nbsp;&nbsp;&nbsp;&nbsp; <span
-							style="color: gray; font-size: 8pt;">스터디 카페</span> <br> <img
-							src="<%=cp%>/assets/images/pin.PNG"
-							style="width: 15px; height: 15px;">&nbsp;<span
-							style="font-size: 12pt;">경기 화성시</span> &nbsp;&nbsp;&nbsp;&nbsp; <img
-							src="<%=cp%>/assets/images/clock.PNG"
-							style="width: 15px; height: 15px;">&nbsp;<span
-							style="font-size: 12pt;">09:00 ~ 23:00</span> <br> <img
-							src="<%=cp%>/assets/images/calendar.PNG"
-							style="width: 15px; height: 15px;">&nbsp;<span
-							style="font-size: 12pt;">월~토</span> <br> <span
-							style="color: gray; font-size: 10pt;">#와이파이</span> &nbsp; <span
-							style="color: gray; font-size: 10pt;">#소음없음</span> &nbsp; <span
-							style="color: gray; font-size: 10pt;">#역가까움</span></td>
-
-						<td style="width: 200px;" align="left"><img
-							src="<%=cp%>/assets/images/studycafe.jpg"
-							style="width: 300px; height: 200px;"> <span
-							style="color: #2E64FE; font-weight: bold;">우리 스터디 카페</span>
-							&nbsp;&nbsp;&nbsp;&nbsp; <span
-							style="color: gray; font-size: 8pt;">스터디 카페</span> <br> <img
-							src="<%=cp%>/assets/images/pin.PNG"
-							style="width: 15px; height: 15px;">&nbsp;<span
-							style="font-size: 12pt;">경기 화성시</span> &nbsp;&nbsp;&nbsp;&nbsp; <img
-							src="<%=cp%>/assets/images/clock.PNG"
-							style="width: 15px; height: 15px;">&nbsp;<span
-							style="font-size: 12pt;">09:00 ~ 23:00</span> <br> <img
-							src="<%=cp%>/assets/images/calendar.PNG"
-							style="width: 15px; height: 15px;">&nbsp;<span
-							style="font-size: 12pt;">월~토</span> <br> <span
-							style="color: gray; font-size: 10pt;">#와이파이</span> &nbsp; <span
-							style="color: gray; font-size: 10pt;">#소음없음</span> &nbsp; <span
-							style="color: gray; font-size: 10pt;">#역가까움</span></td>
-
-						<td style="width: 200px;" align="left"><img
-							src="<%=cp%>/assets/images/studycafe.jpg"
-							style="width: 300px; height: 200px;"> <span
-							style="color: #2E64FE; font-weight: bold;">우리 스터디 카페</span>
-							&nbsp;&nbsp;&nbsp;&nbsp; <span
-							style="color: gray; font-size: 8pt;">스터디 카페</span> <br> <img
-							src="<%=cp%>/assets/images/pin.PNG"
-							style="width: 15px; height: 15px;">&nbsp;<span
-							style="font-size: 12pt;">경기 화성시</span> &nbsp;&nbsp;&nbsp;&nbsp; <img
-							src="<%=cp%>/assets/images/clock.PNG"
-							style="width: 15px; height: 15px;">&nbsp;<span
-							style="font-size: 12pt;">09:00 ~ 23:00</span> <br> <img
-							src="<%=cp%>/assets/images/calendar.PNG"
-							style="width: 15px; height: 15px;">&nbsp;<span
-							style="font-size: 12pt;">월~토</span> <br> <span
-							style="color: gray; font-size: 10pt;">#와이파이</span> &nbsp; <span
-							style="color: gray; font-size: 10pt;">#소음없음</span> &nbsp; <span
-							style="color: gray; font-size: 10pt;">#역가까움</span></td>
-
-					</tr>
-
-				</table>
-					
-					</div>
-				</div>
-
-			</div>
-			<!-- col-md-12 -->
-
+		<div class="row spaceList">
 		</div>
-		<!-- row -->
-		
 		
 		<hr>
 		<div class="row">
