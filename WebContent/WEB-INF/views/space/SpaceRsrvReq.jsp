@@ -50,7 +50,29 @@
 	    	End();	
         });
 	    
-	    });
+		$("#reqSubmitN").click(function()
+	        {
+		    	//alert(params);
+		    	$.ajax(
+	  			{
+	  				type : "POST"
+	  				, data :{"stu_spa_req_cd":$(this).val(),
+	   					"prcs_rsn":$("#prcsRsn").val(),
+	   					} 
+	  				, url : "spareqapprn.action"
+	  				, success : function()
+	  				{
+	  					alert("예약거부되었습니다.");
+	  				}
+	  				, error : function(e)
+	  				{
+	  					alert("예약거부가 실패되었습니다.");
+	  				}
+	  			});
+		    	End();	
+	        });
+		    
+		    });
 	
 	function End() {
     	location.reload();
@@ -116,14 +138,14 @@
 					      		<tr>
 					      			<td style="border-top:none"><div class="rsnTit">사유</div></td>
 					      			<td style="border-top:none">
-					      				<input type="text" class="form-control" style="width: 300px;" placeholder="예) 자리가 부족합니다.">
+					      				<input type="text" class="form-control" id="prcsRsn" style="width: 300px;" placeholder="예) 자리가 부족합니다.">
 					      			</td>
 					      		</tr>
 					      	</table>
 					      	
 					      </div>
 					      <div class="modal-footer">
-					        <button type="button" class="btn btn-primary">확인</button>
+					        <button type="button" id="reqSubmitN" class="btn btn-primary">확인</button>
 					      </div>
 					    </div>
 					  </div>

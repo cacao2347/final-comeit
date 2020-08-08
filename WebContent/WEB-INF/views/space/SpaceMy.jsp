@@ -13,11 +13,46 @@
 <link rel="shortcut icon" href="<%=cp %>/assets/images/pen_1.ico" type="image/x-icon">
 <link rel="icon" href="<%=cp %>/assets/images/pen_1.ico" type="image/x-icon">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <%-- <link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/bootstrap/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
  --%>
+<script type="text/javascript">
+$(function()
+		   {
+			$(".spaUpdate").click(function()
+	       	{
+	        	$.ajax(
+	  			{
+	  				type : "POST"
+	  				, url : "spaupdate.action"
+	  			    , data : {"spa_id":$(this).val(),
+	  			    	"name":$("#name").val(),
+	  					"tel":$("#tel").val(),
+	  					"email":$("#email").val(),
+	  					} 
+	  				, success : function()
+	  				{
+	  					alert("정보가 수정되었습니다.");
+	  				}
+	  				, error : function(e)
+	  				{
+	  					alert("정보 수정에 실패되었습니다.");
+	  				}
+	  			});
+	        	end();
+	       	});
+			
+});
+
+function end() {
+	location.reload();
+}
+
+
+</script>
 <style type="text/css">
 .modal {
         text-align: center;
@@ -39,39 +74,7 @@
 }
 
 </style>
-<script type="text/javascript">
-/* $(function()
-		   {
-			alert("1");
-			$(".aa").click(function() {
-				alert("3");
-			});
-			$(".spaUpdate").click(function()
-	       	{
-				alert("2");
-	        	$.ajax(
-	  			{
-	  				type : "POST"
-	  				, url : "spaupdate.action"
-	  			    , data : {"spa_id":$(this).val(),
-	  			    	"name":$("#name").val(),
-	  					"tel":$("#tel").val(),
-	  					"email":$("#email").val(),
-	  					} 
-	  				, success : function()
-	  				{
-	  					alert("정보가 수정되었습니다.");
-	  				}
-	  				, error : function(e)
-	  				{
-	  					alert("정보 수정에 실패되었습니다.");
-	  				}
-	  			});
-	        	end();
-	       	});
-});
- */
-</script>
+
 </head>
 <body>
 <div class="headerrow">

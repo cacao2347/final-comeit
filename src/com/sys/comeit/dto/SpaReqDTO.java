@@ -2,12 +2,12 @@ package com.sys.comeit.dto;
 
 public class SpaReqDTO
 {
-	private String spa_req_cd, spa_cd, spa_type,type_name,spa_id;//등록요청 코드, 업체코드, 업체타입, 업체 아이디
+	private String spa_req_cd, spa_cd, spa_type,type_name,rep_rsn_type_cd,rep_rsn,spa_id;//등록요청 코드, 업체코드, 업체타입&신고타입,신고사유 유형,신고이유, 업체 아이디
     private String one_intro,dtl_intro, rsv_notes, req_date; //한줄 소개, 상세소개, 주의사항, 등록요청일
     private int use_hrs, str_time, end_time,mem_num;//최대 이용시간, 시작시간, 종료시간
     private String busi_name, spa_name, dtl_addr, tel; // 상호명, 공간명, 상세주소, 전화번호
     private String rprsn_name, spa_addr; //대표자명, 사업장 주소
-    private String web_url, file_url,check_type,stu_spa_req_cd;//웹사이트, 사업자번호파일,승인여부, 예약 요청 코드
+    private String web_url, file_url,check_type,stu_spa_req_cd,prcs_rsn;//웹사이트, 사업자번호파일,승인여부, 예약 요청 코드, 요청 처리 이유
     private String area_name, spc_area_name;						// 지역명, 세부지역명
     private String rprsn_num,img_url ; //사업자번호, 대표이미지
     private String spc_area_cd; //세부지역코드
@@ -15,6 +15,24 @@ public class SpaReqDTO
     public String getPrcs_date()
 	{
 		return prcs_date;
+	}
+	public String getPrcs_rsn() {
+		return prcs_rsn;
+	}
+	public void setPrcs_rsn(String prcs_rsn) {
+		this.prcs_rsn = prcs_rsn;
+	}
+	public String getRep_rsn() {
+		return rep_rsn;
+	}
+	public void setRep_rsn(String rep_rsn) {
+		this.rep_rsn = rep_rsn;
+	}
+	public String getRep_rsn_type_cd() {
+		return rep_rsn_type_cd;
+	}
+	public void setRep_rsn_type_cd(String rep_rsn_type_cd) {
+		this.rep_rsn_type_cd = rep_rsn_type_cd;
 	}
 	public String getStu_spa_req_cd() {
 		return stu_spa_req_cd;
@@ -27,9 +45,15 @@ public class SpaReqDTO
 		this.prcs_date = prcs_date;
 	}
 	private String spa_tag_type_cd,tag_name; // 키워드 코드, 명
-    private String feedCount; // 피드백수
+    public String getMem_cd() {
+		return mem_cd;
+	}
+	public void setMem_cd(String mem_cd) {
+		this.mem_cd = mem_cd;
+	}
+	private String feedCount; // 피드백수
     private int facility, kindness, price, location, noise, count;// 시설, 친절, 가격, 위치, 소음, 피드백 평균 구할 개수
-	private String mem_id,req_cd,name,type; //피드백을 입력한 사람 아이디,요청 코드, 요청한사람 실명, 승인거부 여부
+	private String mem_id,mem_cd,req_cd,name,type; //피드백을 입력한 사람 아이디,사람코드, 요청 코드, 요청한사람 실명, 승인거부 여부
 	private String prcs_date;	// 예약 승인/거부 처리 날짜
 	public String getType() {
 		return type;
@@ -38,7 +62,6 @@ public class SpaReqDTO
 		this.type = type;
 	}
 	private String stu_hist_cd,use_time;// 스터디장코드, 실제사용시간, 인원수
-	
 	
 	public String getName() {
 		return name;

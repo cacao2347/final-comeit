@@ -181,23 +181,6 @@ body{font-family: 'Noto Sans KR', sans-serif;}
             }
         });
         
-        /* $(".spaReq").click(function()
-        {
-        	alert($("#spaReqCd").val());
-        	alert($("#date").val());
-        	alert($("#time").val());
-        	alert($("#import").val());
-        	alert($("#reqNum").val());
-        	
-        	if ($("#date").val() == "" || $("#time").val() == 0
-	           || $("#import").val() == 0|| $("#reqNum").val() == 0 )
-	          {
-	             alert("필수항목 누락");
-	             return;
-	          }
-	          $("#reqForm").submit();
-        }); */
-        
         // 모달창 값 보내기(예약하기)
         $(".spaReq").click(function()
        	{
@@ -222,6 +205,29 @@ body{font-family: 'Noto Sans KR', sans-serif;}
   			});
         	feedEnd();
        	});
+        
+        $(".btnImages").click(function() 
+        {
+        	$.ajax(
+   			{
+   				
+   				type : "POST"
+   				, url : "sparepinsert.action"
+   			    , data : {"spa_req_cd":$(this).val(),
+   					"rep_rsn_type_cd":$(".rsnType").val(),
+   					"rep_rsn":$("#repRsn").val(),
+   					} 
+   				, success : function()
+   				{
+   					alert("신고 접수되었습니다.");
+   				}
+   				, error : function(e)
+   				{
+   					alert("신고 접수에 실패하였습니다.");
+   				}
+   			});
+         	feedEnd();
+		});
         
     });
     
@@ -374,27 +380,6 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 				</tr>
 				</c:if>
 				</c:forEach>
-				<!-- <tr>
-					<td class="reTop">
-						<h4>홍길동</h4>
-						<h5>2020-06-19 01:05:53</h5>
-						<button type="button" class="btn btn-link repBtn">신고</button>
-						<p>
-							등록된 댓글 노출 영역입니다.
-						</p>
-					</td>
-				</tr>
-				<tr>
-					<td class="reTop">
-						<h4>홍길동</h4>
-						<h5>2020-06-19 01:05:53</h5>
-						<button type="button" class="btn btn-link repBtn">신고</button>
-						<button type="button" class="btn btn-link delBtn">삭제</button>
-						<p>
-							등록된 댓글 노출 영역입니다.
-						</p>
-					</td>
-				</tr> -->
 			</table>
 		</div>
 	</div>
@@ -564,12 +549,49 @@ body{font-family: 'Noto Sans KR', sans-serif;}
           </div>
         </div>
 
-	<button type="button" id="report" class="btn btnEvent" style="background-color:transparent;float: right;  border:0px transparent solid;outline:none;">
-		<img src="<%=cp %>/assets/images/report.png" alt="btnImages" class="btnImages" style="width: 35px;">
+	<button type="button" id="report" class="btn btnEvent " style="background-color:transparent;float: right;  border:0px transparent solid;outline:none;" data-toggle="modal" data-target="#staticBackdrop3">
+		<img src="<%=cp %>/assets/images/report.png" style="width: 35px;">
 	</button>
     </div>
     <!-- /.row -->
-    
+    <!-- 신고 모달 -->
+					<div class="modal fade" id="staticBackdrop3" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+					  <div class="modal-dialog modal-dialog-centered">
+					    <div class="modal-content">
+					      <div class="modal-header head">
+					        <h5 class="modal-title mTit" id="staticBackdropLabel">신고 접수</h5>
+					        <button type="button" class="close xBtn" data-dismiss="modal" aria-label="Close">
+					        X
+					        </button>
+					      </div>
+					      <div class="modal-body mbody">
+					      	
+					      	
+					      	<form action="sparepinsert.action" method="post" >
+					      	<%-- <input type="hidden" name="spaReqCd" id="spaReqCd" value="${spaceInfo.spa_req_cd}"> --%>
+					      	<table class="table" style="margin-top: 30px;">
+					      		
+					      		<tr>
+					      			<td style="border-top:none"><div class="rsnTit">신고 유형</div></td>
+					      			<td style="width: 180px;border-top:none">
+								        <c:forEach var="typeList" items="${repType }">
+											<input type="radio" class="rsnType" name="repType" value="${typeList.rep_rsn_type_cd }">${typeList.type_name }<br>
+								        </c:forEach>
+					      			</td>
+					      			<td style="border-top:none">
+					      				<label class="control-label" for="repRsn">신고 사유</label>
+					      				<input type="text" id="repRsn" name="repRsn" class="form-control" style="width: 150px;">
+					      			</td>
+					      		</tr>
+					      	</table>
+					      	</form>
+					      </div>
+					      <div class="modal-footer">
+					        <button type="button" value="${spaceInfo.spa_req_cd }" class="btn btn-primary btnImages">신고</button>
+					      </div>
+					    </div>
+					  </div>
+					</div><!-- 모달 끝  -->
 
 </div>
   </div>

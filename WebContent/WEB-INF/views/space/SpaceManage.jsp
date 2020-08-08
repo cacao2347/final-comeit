@@ -75,8 +75,48 @@
 			//var params = "spa_req_cd=" + $(this).val();
 			location.href = "<%=cp%>/spalist.action?"//+params;
 		});
+		
+	 	// 상세 페이지로 이동
+	   	$(".imageBtn").click(function()
+	   	{
+			var params = "spa_req_cd=" + $(this).val();
+			location.href = "<%=cp%>/spacedetail.action?"+params;
+		});
+	 	
+	 	// 공간 삭제
+	   	$(".delBtn").click(function()
+	   	{
+			var params = "spa_req_cd=" + $(this).val();
+			alert(params);
+			alert("1");
+			$.ajax(
+  			{
+  				type : "POST"
+  				, data :params
+  				, url : "spacedel.action"
+  				, success : function(data)
+  				{
+  					if(data==0)
+  					{
+  						alert("예약 사항이 존재해 공간을 삭제할 수 없습니다.");
+  					}
+  					else
+  					{
+  						alert("공간이 삭제되었습니다.");
+  					}
+  				}
+  				, error : function(e)
+  				{
+  					alert("삭제에 실패하였습니다.");
+  				}
+  			});
+			end();
+		});
 	});
 	
+	function end() {
+		location.reload();
+	}
 </script>
 </head>
 <body>
@@ -109,12 +149,10 @@
                       	<p>등록된 공간이 없습니다. 지금바로 공간을 등록하세요!</p>
                       </c:if>
                       <c:forEach var="MyInfoList" items="${MyInfo }">
-                       <li class="col-sm-4 col-md-5" >	
+                      <c:if test="${not empty MyInfoList}">
+                       <li class="col-sm-4 col-md-6" >	
 						<div class="demo">
 					      <figure class="imghvr-scale-top-left">
-					     <%--  <input type="image" class="imageBtn" value="${spaceList.area_name }" src="<%=cp %>/assets/images/199.jpg" alt="53" style="width: 300px; height: 250px;"> --%>
-					      <%-- <button type="button" class="imageBtn"  value="${spaceList.area_name }"><img src="<%=cp %>/assets/images/199.jpg" alt="53" style="width: 300px; height: 250px;"></button> --%>
-					       <%-- <input type="image" src="<%=cp %>/assets/images/199.jpg" alt="53" class="imageBtn" style="width: 300px; height: 250px;" value="${spaceList.spa_req_cd }"onclick="imageBtn(this)"> --%>
 					       <img src="<%=cp %>/assets/images/199.jpg" alt="53" style="width: 300px; height: 250px;">
 					        <figcaption>
 					        <button type="button" class="imageBtn" value="${MyInfoList.spa_req_cd }" style="background-color:transparent;  border:0px transparent solid; text-align: left;outline:none;" >
@@ -139,16 +177,18 @@
 							<p>&quot;${MyInfoList.one_intro}&quot;</p>
 						  </div>
 						  </div>
-                       </li>
-                       <c:if test="${not empty MyInfoList}">
-                       <div class="col-md-6" id="chart_div" style="width: 100%; height: 350px; margin-top: -35px; margin-bottom: 45px;">
-      					</div>
-      					<div class="upandde col-md-4"  style="margin-left: 30px;">
-							<button type="submit" class="btn btn-primary">수정</button>
-							<button type="submit" class="btn btn-secondary">삭제</button>
+						  <div class="upandde col-md-4 form-inline"  style="margin-left: 30px; display: contents;">
+							<button type="button" class="btn btn-primary">수정</button>
+							<button type="button" value="${MyInfoList.spa_req_cd }" class="btn btn-secondary delBtn">삭제</button>
 						</div>
-      					</c:if>
+                       </li>
+                       
+                     <!--   <div class="col-md-6" id="chart_div" style="width: 100%; height: 350px; margin-top: -35px; margin-bottom: 45px;">
+      					</div> -->
+      					
+						</c:if>
 				</c:forEach>
+				
                   </ul>
                   
              </div>

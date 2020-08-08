@@ -28,5 +28,12 @@ public interface ISpaceDAO
 	public ArrayList<SpaReqDTO> SpaReqCheck(String spa_id);		// 마이페이지 예약 내역 관리
 	public ArrayList<SpaReqDTO> SpaReq(String spa_id);		// 마이페이지 예약 요청 관리
 	public int SpaReqAppr(String stu_spa_req_cd);		// 예약 요청 승인
+	public int SpaReqApprN(SpaReqDTO dto);		// 예약 요청 거부
+	
+	
+	public int spaRepInsert(SpaReqDTO dto);	//공간 신고
+	public ArrayList<SpaReqDTO> spaRepType();//신고 타입
+	public int spaceDel(String spa_req_cd); //공간삭제
+	public int spaceDelCheck(String spa_req_cd);	//공간 삭제 여부 확인
 	
 }

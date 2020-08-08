@@ -74,21 +74,30 @@
       WHERE CHECK_TYPE_CD LIKE #{check_type} -->
    <!-- 전체 공간 조회 & 피드백수 -->
    <select id="spaceList" resultType="com.sys.comeit.dto.SpaReqDTO">
-    SELECT *
+     SELECT *
 		FROM
 		(
     SELECT ROWNUM AS RNUM
     , DATA.* 
     FROM
     (
-    SELECT ID, SPA_CD, SPA_REQ_CD, SPA_NAME, TYPE_NAME, BUSI_NAME, RPRSN_NAME, STR_TIME, END_TIME, USE_HRS, ONE_INTRO, AREA_NAME, SPC_AREA_NAME,     
-		(     
-		SELECT COUNT(*)
-		FROM VIEW_SPA_FEEDCOUNT 
-		WHERE SPA_REQ_CD=M.SPA_REQ_CD
-		) AS FEEDCOUNT
-		FROM VIEW_SPA_MY M
-		WHERE CHECK_TYPE_CD LIKE #{check_type}
+    SELECT *
+    FROM
+    (
+    SELECT ID, SPA_CD, SPA_REQ_CD, SPA_NAME, TYPE_NAME, BUSI_NAME, RPRSN_NAME, STR_TIME, END_TIME, USE_HRS, ONE_INTRO, AREA_NAME, SPC_AREA_NAME,RSV_NOTES,DTL_INTRO, 
+    (     
+    SELECT COUNT(*)
+    FROM VIEW_SPA_FEEDCOUNT 
+    WHERE SPA_REQ_CD=M.SPA_REQ_CD
+    ) AS FEEDCOUNT
+    FROM VIEW_SPA_MY M
+    WHERE CHECK_TYPE_CD LIKE #{check_type}
+    ) T
+     WHERE T.SPA_REQ_CD NOT IN
+    (
+      SELECT SPA_REQ_CD
+       FROM TBL_SPA_DEL
+    )
     <choose>
       <when test="searchValue != null">
       AND ${searchKey} LIKE '%${searchValue}%'
@@ -139,6 +148,9 @@
 	
 	<!-- 마이페이지 리스트뽑기 -->
 	<select id="MyInfoSearch" resultType="com.sys.comeit.dto.SpaReqDTO">
+		SELECT *
+		FROM 
+		(
 		SELECT ID, SPA_CD, SPA_REQ_CD, SPA_NAME, TYPE_NAME, BUSI_NAME, RPRSN_NAME, STR_TIME, END_TIME, USE_HRS, ONE_INTRO, AREA_NAME, SPC_AREA_NAME,RSV_NOTES,DTL_INTRO, 
 		(     
 		SELECT COUNT(*)
@@ -146,8 +158,14 @@
 		WHERE SPA_REQ_CD=M.SPA_REQ_CD
 		) AS FEEDCOUNT
 		FROM VIEW_SPA_MY M
-    	WHERE CHECK_TYPE='Y'
-   		AND ID= #{spa_id}
+		WHERE CHECK_TYPE='Y'
+		AND ID= #{spa_id}
+		) T
+		 WHERE T.SPA_REQ_CD NOT IN
+		(
+		  SELECT SPA_REQ_CD
+		   FROM TBL_SPA_DEL
+		)
    </select>
    
    <!-- 마이페이지 그래프 -->
@@ -176,7 +194,14 @@
    <!-- 스터디 예약 요청 승인 -->
    <update id="SpaReqAppr">
 		UPDATE TBL_STU_SPA_REQ
-		SET CHECK_TYPE_CD='CHET1001', PRCS_DATE=SYSDATE
+		SET CHECK_TYPE_CD='CHET1001', PRCS_DATE=SYSDATE,PRCS_RSN='승인되었습니다.'
+		WHERE STU_SPA_REQ_CD=#{stu_spa_req_cd}
+   </update>
+   
+   <!-- 스터디 예약 요청 거부 -->
+   <update id="SpaReqApprN">
+		UPDATE TBL_STU_SPA_REQ
+		SET CHECK_TYPE_CD='CHET1002', PRCS_DATE=SYSDATE,PRCS_RSN=#{prcs_rsn}
 		WHERE STU_SPA_REQ_CD=#{stu_spa_req_cd}
    </update>
    
@@ -194,5 +219,32 @@
 		WHERE SPA_ID=#{spa_id}
    </update>
    
-   
+    <!-- 신고 -->
+    <insert id="spaRepInsert" >
+		INSERT INTO TBL_SPA_REP(SPA_REP_CD,MEM_CD,SPA_REQ_CD,REP_RSN_TYPE_CD,REP_RSN)
+		VALUES('SPREP'||SEQ_SPA_REP.NEXTVAL,#{mem_cd},#{spa_req_cd},#{rep_rsn_type_cd},#{rep_rsn})
+	</insert>
+	
+	<!-- 신고사유유형 -->
+	<select id="spaRepType" resultType="com.sys.comeit.dto.SpaReqDTO">
+		SELECT REP_RSN_TYPE_CD,TYPE_NAME
+		FROM TBL_REP_RSN_TYPE
+   </select>
+
+
+	<!-- 공간 삭제 -->
+	<insert id="spaceDel">
+		INSERT INTO TBL_SPA_DEL(SPA_DEL_CD,SPA_REQ_CD)
+        VALUES ('SPDEL'||SEQ_SPA_DEL.NEXTVAL, #{spa_req_cd})
+	 </insert>
+	 
+	 <!-- 공간 삭제 여부 확인 -->
+	<select id="spaceDelCheck" resultType="java.lang.Integer">
+		SELECT COUNT(*)
+	    FROM VIEW_SPA_REQ_STU
+	    WHERE USE_TIME>SYSDATE
+	    AND SPA_REQ_CD=#{spa_req_cd}
+   </select>
+	 
+	 
 </mapper>

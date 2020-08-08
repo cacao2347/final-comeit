@@ -159,6 +159,8 @@ public class SpaceController
 			model.addAttribute("feedCheck",ispaceDAO.reqCount(dto));
 			// 피드백 입력 코드 받기
 			model.addAttribute("feeCdd",ispaceDAO.reqCd(dto));
+			//신고타입
+			model.addAttribute("repType",ispaceDAO.spaRepType());	
 			
 			view = "WEB-INF/views/space/SpaceDetail.jsp";
 			return view;
@@ -278,6 +280,26 @@ public class SpaceController
 			return String.valueOf(reqInsertNum);
 		}
 		
+		// 예약 거부
+		@ResponseBody
+		@RequestMapping(value = "/spareqapprn.action", method = RequestMethod.POST)
+		public String SpaReqApprN(Model model,HttpServletRequest request)
+		{
+			ISpaceDAO ispaceDAO = sqlSession.getMapper(ISpaceDAO.class);
+			
+			String stu_spa_req_cd = request.getParameter("stu_spa_req_cd");
+			String prcs_rsn = request.getParameter("prcs_rsn");
+			
+			SpaReqDTO dto = new SpaReqDTO();
+			
+			dto.setStu_spa_req_cd(stu_spa_req_cd);
+			dto.setPrcs_rsn(prcs_rsn);
+			
+			int reqNum = ispaceDAO.SpaReqApprN(dto);
+			
+			return String.valueOf(reqNum);
+		}
+		
 		// 내 정보 수정
 		@ResponseBody
 		@RequestMapping(value = "/spaupdate.action", method = RequestMethod.POST)
@@ -298,6 +320,53 @@ public class SpaceController
 			int spaUpdateNum = ispaceDAO.spaUpdate(dto);
 			
 			return String.valueOf(spaUpdateNum);
+		}
+		
+		// 신고 접수
+		@ResponseBody
+		@RequestMapping(value = "/sparepinsert.action", method = RequestMethod.POST)
+		public String spaRepInsert(Model model,HttpServletRequest request)
+		{
+			ISpaceDAO ispaceDAO = sqlSession.getMapper(ISpaceDAO.class);
+			
+			HttpSession session = request.getSession(); 
+			String mem_cd = (String) session.getAttribute("mem_cd");
+			String spa_req_cd = request.getParameter("spa_req_cd");
+			String rep_rsn_type_cd = request.getParameter("rep_rsn_type_cd");
+			String rep_rsn = request.getParameter("rep_rsn");
+			
+			
+			SpaReqDTO dto = new SpaReqDTO();
+			dto.setMem_cd(mem_cd);
+			dto.setSpa_req_cd(spa_req_cd);
+			dto.setRep_rsn_type_cd(rep_rsn_type_cd);
+			dto.setRep_rsn(rep_rsn);
+			System.out.println(dto.getMem_cd());
+			System.out.println(dto.getSpa_req_cd());
+			System.out.println(dto.getRep_rsn_type_cd());
+			System.out.println(dto.getRep_rsn());
+			
+			
+			int spaNum = ispaceDAO.spaRepInsert(dto);
+			
+			return String.valueOf(spaNum);
+		}
+		
+		// 공간 삭제
+		@ResponseBody
+		@RequestMapping(value = "/spacedel.action", method = RequestMethod.POST)
+		public String spaceDel(Model model,HttpServletRequest request)
+		{
+			ISpaceDAO ispaceDAO = sqlSession.getMapper(ISpaceDAO.class);
+			
+			String spa_req_cd = request.getParameter("spa_req_cd");
+			
+			int spaNum=0;
+			if(ispaceDAO.spaceDelCheck(spa_req_cd)==0)
+			{
+				spaNum = ispaceDAO.spaceDel(spa_req_cd);
+			}
+			return String.valueOf(spaNum);
 		}
 		
 }
