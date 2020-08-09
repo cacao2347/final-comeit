@@ -21,4 +21,8 @@ public interface ISpaReqDAO
 	
 	public int spaAddImg(SpaReqDTO dto);	// 공간 이미지 INSERT
 	public int spaAddContent(SpaReqDTO dto);	// 시설안내 INSERT
+	
+	public int spaIntTagDel(String spa_req_cd);	// 키워드 DELETE
+	public int spaEtcTagDel(String spa_req_cd);	// 기타 키워드 DELETE
+	public int spaDelContent(String spa_req_cd);	// 시설안내 DELETE
 }

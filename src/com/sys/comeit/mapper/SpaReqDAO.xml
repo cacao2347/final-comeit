@@ -58,6 +58,20 @@
 		VALUES('SPECT'||SEQ_SPA_ETC_TAG.NEXTVAL, #{spa_req_cd} , #{etc_tag})
 	</insert>
 	
+	<!-- 키워드 DELETE -->
+	<delete id="spaIntTagDel">
+		DELETE
+		FROM TBL_SPA_TAG
+		WHERE SPA_REQ_CD=#{spa_req_cd}
+	</delete>
+	
+	<!-- 기타 키워드 DELETE -->
+	<delete id="spaEtcTagDel">
+		DELETE
+		FROM TBL_SPA_ETC_TAG
+		WHERE SPA_REQ_CD=#{spa_req_cd}
+	</delete>
+	
 	<!-- 공간 가입 기타 키워드 테이블 호출해서 10개인지 체크 -->
 	<select id="spaEtcTagCount" resultType="java.lang.Integer">
 		SELECT COUNT(*) AS COUNT
@@ -76,6 +90,18 @@
 		INSERT INTO TBL_FCLTY_INFO(FCLTY_INFO_CD, SPA_REQ_CD,CONTENT)
 		VALUES('FCINF'||SEQ_FCLTY_INFO.NEXTVAL, #{spa_req_cd},#{content})
 	</insert>
-
+	
+	<!-- 시설안내 DELETE -->
+	<delete id="spaDelContent">
+		DELETE
+		FROM TBL_FCLTY_INFO
+		WHERE SPA_REQ_CD=#{spa_req_cd}
+	</delete>
+	<!-- 공간 수정 -->
+	<update id="spaReqModify">
+	     UPDATE TBL_SPA_REQ
+   		 SET ONE_INTRO=#{one_intro} ,USE_HRS=#{use_hrs} ,RSV_NOTES=#{rsv_notes} ,STR_TIME=#{str_time} ,END_TIME=#{end_time} ,DTL_INTRO=#{dtl_intro}, BUSI_NAME=#{busi_name} ,SPA_NAME=#{spa_name} ,TEL=#{tel} ,RPRSN_NAME=#{rprsn_name}
+    	WHERE SPA_REQ_CD=#{spa_req_cd}
+	</update>
    
 </mapper>

@@ -209,4 +209,136 @@ public class SpaReqController
 
 			return view;
 		}
+		
+		// 공간 수정 뷰
+		  @RequestMapping(value = "/spamodview.action", method = RequestMethod.GET)
+		  public String spaModView(Model model,HttpServletRequest request) 
+		  { 
+			  String view = null;
+			  String spa_req_cd = request.getParameter("spa_req_cd");
+			  ISpaReqDAO iSpaReqDao = sqlSession.getMapper(ISpaReqDAO.class);
+			  ISpaceDAO ispaceDAO = sqlSession.getMapper(ISpaceDAO.class); // 공간 정보
+				
+				
+			  model.addAttribute("spaceInfo",ispaceDAO.spaceInfoSearch(spa_req_cd));
+			  model.addAttribute("spaTag",iSpaReqDao.spaTagList());		// 키워드 종류
+			  model.addAttribute("spaceTag",ispaceDAO.spaceTagSearch(spa_req_cd)); // 공간 키워드
+			  model.addAttribute("fclty",ispaceDAO.spaceFcltySearch(spa_req_cd));// 시설 안내
+			  
+			  view = "WEB-INF/views/space/SpaceMod.jsp";
+			  
+			  return view; 
+		  }
+		  
+		  // 공간 수정
+		  @RequestMapping(value = "/spamod.action", method = RequestMethod.GET)
+		  public String spaMod(Model model,HttpServletRequest request) 
+		  { 
+			  String view = null;
+			  String spa_req_cd = request.getParameter("spa_req_cd");
+			  ISpaReqDAO iSpaReqDao = sqlSession.getMapper(ISpaReqDAO.class);
+			  SpaReqDTO dto = new SpaReqDTO();
+			  
+			  String onein = request.getParameter("onein"); // 한줄소개
+			  String dtlin = request.getParameter("dtlin"); // 상세소개
+			  String sparsv = request.getParameter("sparsv"); // 주의사항
+			  String spa = request.getParameter("spa"); // 상호명
+			  String spapeo = request.getParameter("spapeo"); // 대표자명
+			  String spaname = request.getParameter("spaname"); // 공간명
+			  String spatel = request.getParameter("spatel"); // 업체 전화번호
+			  System.out.println(onein);
+			  System.out.println(dtlin);
+			  System.out.println(sparsv);
+			  System.out.println(spa);
+			  System.out.println(spapeo);
+			  System.out.println(spaname);
+			  System.out.println(spatel);
+			  int start = Integer.parseInt(request.getParameter("start"));  // 영업시작시간
+			  int end = Integer.parseInt(request.getParameter("end")); // 영업최대 이용시간
+			  int max = Integer.parseInt(request.getParameter("max")); // 영업최대 이용시간
+			  
+			  
+			  System.out.println(start);
+			  System.out.println(end);
+			  System.out.println(max);
+			  System.out.println(spa_req_cd);
+			  dto.setOne_intro(onein);
+			  dto.setUse_hrs(max);
+			  dto.setRsv_notes(sparsv);
+			  dto.setStr_time(start); 
+			  dto.setEnd_time(end);
+			  dto.setDtl_intro(dtlin);
+			  dto.setBusi_name(spa);
+			  dto.setSpa_name(spaname);
+			  dto.setTel(spatel);
+			  dto.setRprsn_name(spapeo);
+			  dto.setSpa_req_cd(spa_req_cd);
+			
+			  iSpaReqDao.spaReqModify(dto);
+			  
+			  String[] intTagList = {};
+			  String[] etcTagList = {};
+			
+			  if(request.getParameterValues("intTagList")!=null)
+			  {
+				  intTagList = request.getParameterValues("intTagList"); // 선택한 모든 관심 키워드 배열에 넣기
+			  }
+			
+			  if(request.getParameterValues("etcTagList")!=null)
+			  {
+				  etcTagList = request.getParameterValues("etcTagList"); // 선택한 모든 관심 기타 키워드 배열에 넣기
+			  }
+			
+			
+			  if (spa_req_cd != null) 
+			  {
+				  if (intTagList.length > 0)
+				  {
+					  for (int i = 0; i < intTagList.length; i++) // 선택한 모든 관심 키워드 중에
+					  {
+						  dto.setInt_tag(intTagList[i]); // 자바를 키워드에 세팅하고
+						  
+						  System.out.println("각 관심 : " + intTagList[i]);
+		
+						  iSpaReqDao.spaIntTagDel(spa_req_cd);	// 기존 키워드 delete
+						  iSpaReqDao.spaIntTagInsert(dto); // 키워드 insert 실행시키기
+					  }
+				  }
+				if (etcTagList.length > 0)
+				{
+					for (int i = 0; i < etcTagList.length; i++) // 선택한 모든 기타 키워드 중에
+					{
+						dto.setEtc_tag(etcTagList[i]); // 기타태그를 키워드에 세팅하고
+						
+						System.out.println("각 기타 : " + etcTagList[i]);
+						
+						iSpaReqDao.spaEtcTagDel(spa_req_cd);	//기존 기타 키워드 delete
+						iSpaReqDao.spaEtcTagInsert(dto); // 기타 키워드 insert 실행시키기
+			
+						int etcTagCount = iSpaReqDao.spaEtcTagCount(etcTagList[i]);
+			
+						if (etcTagCount == 10) // 기타 키워드 테이블 호출해서 10개일 경우
+							iSpaReqDao.spaAddTagName(etcTagList[i]); // 그냥 관심키워드 테이블에 insert 시키기
+					}
+				}
+				
+				
+				// 시설안내 등록
+				String[] contentList = request.getParameterValues("contentList"); // 모든 시설안내를 배열에 넣기
+				if (contentList.length > 0)
+				{
+					for (int i = 0; i < contentList.length; i++) // 모든 시설안내를
+					{
+						dto.setContent(contentList[i]); // 시설안내 set
+						System.out.println("시설안내 : " + contentList[i]);
+			
+						iSpaReqDao.spaDelContent(spa_req_cd); // 기존 시설안내 delete
+						iSpaReqDao.spaAddContent(dto); // 시설안내 insert 실행시키기
+					}
+				}
+			} 
+			  view = "redirect:spacedetail.action?spa_req_cd="+spa_req_cd;
+			  
+			  return view; 
+		  }
 }

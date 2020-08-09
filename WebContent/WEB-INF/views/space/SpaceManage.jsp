@@ -62,11 +62,21 @@
   			});
 			end();
 		});
+	 	
+		 // 공간 수정페이지로 이동
+	   	$(".modBtn").click(function()
+	   	{
+			var params = "spa_req_cd=" + $(this).val();
+			location.href = "<%=cp%>/spamodview.action?"+params;
+		});
 	});
 	
 	function end() {
 		location.reload();
 	}
+	
+	
+	
 </script>
 </head>
 <body>
@@ -88,9 +98,6 @@
             <a href="#" class="btn btn-primary">Find Out More!</a>
           </div>
         </div> -->
-        <c:forEach var="radioList" items="${MyInfo }">
-			<label><input type="radio" name="search" value="${radioList.spa_req_cd }" />${radioList.spa_name }</label>
-		</c:forEach>
          <div  style="margin-top: 30px;">
 		 <div class="item">
                   <ul class="thumbnails" style="list-style:none;" >
@@ -128,7 +135,7 @@
 						  </div>
 						  </div>
 						  <div class="upandde col-md-4 form-inline"  style="margin-left: 30px; display: contents;">
-							<button type="button" class="btn btn-primary">수정</button>
+							<button type="button" value="${MyInfoList.spa_req_cd }" class="btn btn-primary modBtn">수정</button>
 							<button type="button" value="${MyInfoList.spa_req_cd }" class="btn btn-secondary delBtn">삭제</button>
 						</div>
                        </li>

@@ -532,7 +532,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
           		<dt>대표자명</dt>
           		<dd>${spaceInfo.rprsn_name }</dd>
           		<dt>전화번호</dt>
-          		<dd>${spaceInfo.tel }</dd>
+          		<dd>${spaceInfo.spa_tel }</dd>
           		<dt>영업 정보</dt>
           		<dd>영업시간 : ${spaceInfo.str_time }시 ~ ${spaceInfo.end_time }시<br> 최대 이용시간: ${spaceInfo.use_hrs }시</dd>
           	</dl>

@@ -5,7 +5,7 @@ public class SpaReqDTO
 	private String spa_req_cd, spa_cd, spa_type,type_name,rep_rsn_type_cd,rep_rsn,spa_id;//등록요청 코드, 업체코드, 업체타입&신고타입,신고사유 유형,신고이유, 업체 아이디
     private String one_intro,dtl_intro, rsv_notes, req_date; //한줄 소개, 상세소개, 주의사항, 등록요청일
     private int use_hrs, str_time, end_time,mem_num;//최대 이용시간, 시작시간, 종료시간
-    private String busi_name, spa_name, dtl_addr, tel; // 상호명, 공간명, 상세주소, 전화번호
+    private String busi_name, spa_name, dtl_addr, tel,spa_tel; // 상호명, 공간명, 상세주소, 전화번호, 업체 전화번호
     private String rprsn_name, spa_addr; //대표자명, 사업장 주소
     private String web_url, file_url,check_type,stu_spa_req_cd,prcs_rsn;//웹사이트, 사업자번호파일,승인여부, 예약 요청 코드, 요청 처리 이유
     private String area_name, spc_area_name;						// 지역명, 세부지역명
@@ -15,6 +15,12 @@ public class SpaReqDTO
     public String getPrcs_date()
 	{
 		return prcs_date;
+	}
+	public String getSpa_tel() {
+		return spa_tel;
+	}
+	public void setSpa_tel(String spa_tel) {
+		this.spa_tel = spa_tel;
 	}
 	public String getPrcs_rsn() {
 		return prcs_rsn;
