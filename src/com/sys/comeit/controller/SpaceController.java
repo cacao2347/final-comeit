@@ -134,9 +134,9 @@ public class SpaceController
 			String view = null;
 			HttpSession session = request.getSession(); 
 			
-			
 			String mem_id = (String) session.getAttribute("id");
 			String spa_req_cd = request.getParameter("spa_req_cd");
+			
 			
 			if(mem_id==null)
 			{
@@ -161,6 +161,8 @@ public class SpaceController
 			model.addAttribute("feeCdd",ispaceDAO.reqCd(dto));
 			//신고타입
 			model.addAttribute("repType",ispaceDAO.spaRepType());	
+			//그래프
+			model.addAttribute("TotData",ispaceDAO.googleChart(spa_req_cd));
 			
 			view = "WEB-INF/views/space/SpaceDetail.jsp";
 			return view;
@@ -258,7 +260,6 @@ public class SpaceController
 			
 			model.addAttribute("Search",ispaceDAO.Search(spa_id));	// 내정보
 			model.addAttribute("MyInfo",ispaceDAO.MyInfoSearch(spa_id));	// 본인이 등록한 공간 중 승인된 공간 관리
-			model.addAttribute("TotData",ispaceDAO.googleChart(spa_id));
 			model.addAttribute("reqCheck",ispaceDAO.SpaReqCheck(spa_id));	//마이페이지 공간 예약 내역 관리
 			model.addAttribute("req",ispaceDAO.SpaReq(spa_id));	//마이페이지 공간 예약 요청 관리
 			

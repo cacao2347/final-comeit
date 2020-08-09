@@ -13,58 +13,8 @@
 <title>SpaceManage.jsp</title>
 <!-- <link href="css/space-manage.css" rel="stylesheet">
 <link href="css/business-frontpage.css" rel="stylesheet"> -->
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
-	google.charts.load('current', {'packages':['corechart']});
-	google.charts.setOnLoadCallback(drawVisualization);
 	
-	var list = new Array();
-	<c:forEach items="${TotData}" var="TotData">
-	list.push("${TotData.facility}");
-	list.push("${TotData.kindness}");
-	list.push("${TotData.price}");
-	list.push("${TotData.location}");
-	list.push("${TotData.noise}");
-	list.push("${TotData.count}");
-	</c:forEach>
-
-	function drawVisualization() { 
-		
-		for ( var i = 0; i < list.length; i++) {
-		    var facility= list[0];
-		    var kindness= list[1];
-		    var price= list[2];
-		    var location= list[3];
-		    var noise= list[4];
-		    var count=list[5];
-		}
-		//alert(facility);
-		//alert(kindness);
-		//alert(price);
-		//alert(location);
-		//alert(noise);
-		
-		var data = google.visualization.arrayToDataTable([
-				['년도', {label: '시설', type: 'number'},{label: '친절', type: 'number'}, {label: '가격', type: 'number'},
-					{label: '위치', type: 'number'} , {label: '소음', type: 'number'}],
-				['2020',  facility/count, kindness/count, price/count, location/count, noise/count],
-			]);
-		var options = {
-				title : '업체명',
-				vAxis: {title: '점수'},
-				hAxis: {title: '년도'}, 
-				seriesType: 'bars',
-				series: {
-		            0: { color: '#68aae3' },
-		            1: { color: '#5683aa' },
-		            2: { color: '#4b92cf' },
-		            3: { color: '#2d6ca4' },
-		            4: { color: '#336699' }}
-			};
-		
-		var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
-		chart.draw(data, options);
-	}
 	
 	
 	$(function()
@@ -183,8 +133,6 @@
 						</div>
                        </li>
                        
-                     <!--   <div class="col-md-6" id="chart_div" style="width: 100%; height: 350px; margin-top: -35px; margin-bottom: 45px;">
-      					</div> -->
       					
 						</c:if>
 				</c:forEach>

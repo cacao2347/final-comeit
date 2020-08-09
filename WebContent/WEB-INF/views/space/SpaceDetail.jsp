@@ -24,8 +24,61 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet"><style type="text/css">
 body{font-family: 'Noto Sans KR', sans-serif;}
 </style>
-
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
+
+	/* 그래프 */
+	google.charts.load('current', {'packages':['corechart']});
+	google.charts.setOnLoadCallback(drawVisualization);
+	
+	var list = new Array();
+	<c:forEach items="${TotData}" var="TotData">
+	list.push("${TotData.facility}");
+	list.push("${TotData.kindness}");
+	list.push("${TotData.price}");
+	list.push("${TotData.location}");
+	list.push("${TotData.noise}");
+	list.push("${TotData.count}");
+	</c:forEach>
+
+	function drawVisualization() { 
+		
+		for ( var i = 0; i < list.length; i++) {
+		    var facility= list[0];
+		    var kindness= list[1];
+		    var price= list[2];
+		    var location= list[3];
+		    var noise= list[4];
+		    var count=list[5];
+		}
+		//alert(facility);
+		//alert(kindness);
+		//alert(price);
+		//alert(location);
+		//alert(noise);
+		
+		var data = google.visualization.arrayToDataTable([
+				['년도', {label: '시설', type: 'number'},{label: '친절', type: 'number'}, {label: '가격', type: 'number'},
+					{label: '위치', type: 'number'} , {label: '소음', type: 'number'}],
+				['2020',  facility/count, kindness/count, price/count, location/count, noise/count],
+			]);
+		var options = {
+				title : '업체명',
+				vAxis: {title: '점수'},
+				hAxis: {title: '년도'}, 
+				seriesType: 'bars',
+				series: {
+		            0: { color: '#68aae3' },
+		            1: { color: '#5683aa' },
+		            2: { color: '#4b92cf' },
+		            3: { color: '#2d6ca4' },
+		            4: { color: '#336699' }}
+			};
+		
+		var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
+		chart.draw(data, options);
+	}
+	
 	/* 달력 */
 	$(document).ready(function(){
 	    var date_input=$('input[name="date"]');
@@ -322,6 +375,12 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 					</div>
 				</div>
 				</dd>
+				<dt class="dtbr">
+					평균 점수
+				</dt>
+				<dd>
+				<div id="chart_div" style="width: 350px; height: 350px;"></div>
+				</dd> 
 			</dl>
 		</div>
 	</div><!-- end row -->
@@ -535,7 +594,6 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 					      				<input type="text" id="reqNum" name="reqNum" class="form-control content onlyNumber" id="peo" style="width: 150px;"  placeholder="예) 2(숫자만 입력)"></div>
 					      			</td>
 					      		</tr>
-					      			
 					      	</table>
 					      	</form>
 					      </div>
@@ -548,7 +606,6 @@ body{font-family: 'Noto Sans KR', sans-serif;}
           
           </div>
         </div>
-
 	<button type="button" id="report" class="btn btnEvent " style="background-color:transparent;float: right;  border:0px transparent solid;outline:none;" data-toggle="modal" data-target="#staticBackdrop3">
 		<img src="<%=cp %>/assets/images/report.png" style="width: 35px;">
 	</button>
