@@ -210,21 +210,26 @@ $(document).ready(function ()
 
             events : function(info, callback, failureCallback) // 이 이벤트 영역에 제이슨 형태로 뿌려주려고 ajax
             {
-               $.ajax({
-                  type : "POST"
-                  , url : "studycalendarresponse.action"  // 데이터 가지고 올 곳. 요청 url
-                  , dataType : "json"
-                  , success : function(args) 
-                  {
-                     callback(args);
-                     //alert(args);
-                  }
-	              , error:function(request,status,error)
-	              {
-	                 alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-	              }   
-
-               });
+            	var params = "stu_cd=" + $("#studyCode").val();
+            	
+				$.ajax(
+				{
+					type : "POST"
+					, url : "studycalendarresponse.action"  // 데이터 가지고 올 곳. 요청 url
+					, data : params
+					, dataType : "json"
+					, async : false
+					, success : function(args) 
+					{
+					   callback(args);
+					   //alert(args);
+					}
+					, error:function(request,status,error)
+					{
+					   alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+					}   
+				
+				});
 
             }
 
@@ -294,6 +299,7 @@ $(document).ready(function ()
                
                <!-- 스터디방 정보 -->
                <div class="stuInfo">
+               <input type="hidden" id="studyCode" name="stu_cd" value="${studyInfo.stu_cd }">
                   <!-- 활동 기간 -->
                   <div class="stuTerm">
                      <span class="glyphicon glyphicon-calendar icon icTerm"></span>
