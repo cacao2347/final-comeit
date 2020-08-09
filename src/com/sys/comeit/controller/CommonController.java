@@ -111,21 +111,4 @@ public class CommonController
 		return temp.toString();
 	}
 	
-	// 회원 마이페이지 (추후 회원으로 옮기기)
-	//----------------------------
-	@RequestMapping(value = "/membermy.action", method = {RequestMethod.GET, RequestMethod.POST})
-	public String memberMy(HttpServletRequest request, Model model)
-	{
-
-		String view = null;
-
-		
-
-		view = "WEB-INF/views/member/MemberMy.jsp";
-
-		return view;
-
-	}
-	
-	
 }

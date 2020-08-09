@@ -49,6 +49,23 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 	  padding: 2px;
 	}
  </style>
+<script type="text/javascript">
+
+	$(function() 
+	{
+		// 프로필 정보 수정 버튼 클릭 시
+		$(".myModiBtn").click(function()
+		{
+		   f = document.memberInfo;
+		   f.action = "<%=cp%>/memberinfomod.action";
+		   f.submit();		
+		});
+		
+	});
+	
+	
+	
+</script>
 </head>
 <body class="padding">
 
@@ -63,24 +80,33 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 
 	<!-- 내 정보 -->
 	<div class="row row">
+	<form name="memberInfo" method="post">
 		<div class="col-md-2">
 		</div>
 		<div class="col-md-3 img">
-		<img class="img-fluid img-circle myimg" src="assets/images/myImg.PNG" alt="myimg">
+		<c:choose>
+		<c:when test="${memberInfo.img_url eq null}">
+			<img class="img-fluid img-circle myimg" src="<%=cp %>/assets/images/basic.png" alt="myimg">
+		</c:when>
+		<c:otherwise>
+			<img class="img-fluid img-circle myimg" src="${memberInfo.img_url }" alt="myimg">
+		</c:otherwise>
+		
+		</c:choose>
 		</div>
 		<div class="col-md-5">
 			<table class="table myInfo">
 				<tr>
 					<th>이름</th>
-					<td>홍길동</td>
+					<td>${sessionScope.name }</td>
 				</tr>
 				<tr>
 					<th>아이디</th>
-					<td>h_gildong777</td>
+					<td>${sessionScope.id }</td>
 				</tr>
 				<tr>
 					<th>한 줄 소개</th>
-					<td>등록된 한 줄 소개가 노출되는 영역입니다.</td>
+					<td>${memberInfo.mem_content }</td>
 				</tr>
 				<tr>
 					<th>매너 연필</th>
@@ -88,34 +114,33 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 				</tr>
 				<tr>
 					<th>신분</th>
-					<td>취업준비생</td>
+					<td>${memberInfo.idntt }</td>
 				</tr>
 				<tr>
 					<th>관심과목</th>
 					<td>
-					<ul class="list-my-tags">
-						<li class="stack-item">Java</li>
-						<li class="stack-item">Oracle</li>
-						<li class="stack-item">JavaScript</li>
-						<li class="stack-item">HTML</li>
-					</ul>
+						<ul class="list-my-tags">
+						<c:forEach var="intTag" items="${memIntTag }">
+                              <li class="stack-item">${intTag.int_tag }</li>
+                     	</c:forEach>	
+                     	</ul>				
 					</td>
 				</tr>
 				<tr>
 					<th>이메일</th>
-					<td>hgd@naver.com</td>
+					<td>${memberInfo.email }</td>
 				</tr>
 				<tr>
 					<th>전화번호</th>
-					<td>010-2222-3333</td>
+					<td>${memberInfo.tel }</td>
 				</tr>
 				<tr>
 					<th>지역</th>
-					<td>서울시 마포구</td>
+					<td>${memberInfo.area_name } ${memberInfo.spc_area_name }</td>
 				</tr>
 				<tr>
 					<th>페널티</th>
-					<td>정지 1회, 옐로카드 1개</td>
+					<td>${pnlt }</td>
 				</tr>
 			</table>
 			
@@ -126,6 +151,8 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 		</div>
 		<div class="col-md-2">
 		</div>
+		
+	</form>
 	</div><!-- 내 정보 끝 -->
 	
 	<!-- 참여 스터디/프로젝트 -->

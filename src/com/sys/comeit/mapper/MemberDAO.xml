@@ -143,18 +143,18 @@
 	
 	
 	<!-- 패널티 개수 -->
-	<select id="pnltCount" resultType="com.sys.comeit.dto.MemberDTO">
+	<select id="pnltCount" resultType="java.lang.Integer">
 		<![CDATA[
       	SELECT COUNT(*) AS PNLT_CNT
 		FROM TBL_MEM_PNLT
 		WHERE MEM_CD = #{mem_cd}
-      ]]>
+       ]]>
 	</select>
 	
 	
-	<!-- 멤버별 정보 조회 list() -->
+	<!-- 멤버별 정보 조회 list() 마이페이지, 모달 사용 -->
 	<select id="memModalList" resultType="com.sys.comeit.dto.MemberDTO">
-	   SELECT NAME, IDNTT, MEM_CONTENT
+	   SELECT NAME, IDNTT, MEM_CONTENT, EMAIL, TEL, AREA_NAME, SPC_AREA_NAME, IMG_URL, PWD
 	   FROM VIEW_MEM_MY
 	   WHERE MEM_CD = #{mem_cd}
 	</select>
@@ -184,5 +184,4 @@
        ]]>
    </select>
 	
-   
 </mapper>
