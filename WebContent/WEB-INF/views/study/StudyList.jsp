@@ -105,6 +105,7 @@ body
       // 필터 적용 버튼 클릭 시 
       $("#filterBtn").click(function()
       {
+    	 
          if($("input[name=catChk]:checked").length < 1)
          {
             alert("한 개 이상의 카테고리를 선택해주세요.");
@@ -116,6 +117,7 @@ body
             alert("한 개 이상의 레벨을 선택해주세요.");
             return;
          } 
+         
          
          f = document.filterForm;
          f.action = "<%=cp %>/studylist.action";
@@ -296,6 +298,7 @@ body
             <form name="filterForm" method="post">
             
             <div class="side">
+            
                <dl class="cat" id="cate">
                   <dt>카테고리</dt>
                   <dd class="checkboxcat">

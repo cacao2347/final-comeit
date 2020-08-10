@@ -220,14 +220,14 @@
       FROM VIEW_STU_LIST
       WHERE END_DATE <![CDATA[>]]> SYSDATE
       <choose>
-         <when test='searchValue != null and !searchValue.equals("") and spc_area_cd != null'>
-            AND ${searchKey} LIKE UPPER('%{searchValue}%')
+         <when test='searchValue != null and spc_area_cd != null'>
+            AND ${searchKey} LIKE UPPER('%${searchValue}%')
               AND SPC_AREA_CD = #{spc_area_cd}
          </when>
-         <when test='searchValue != null and !searchValue.equals("") and spc_area_cd == null'>
+         <when test='searchValue != null and spc_area_cd == null'>
             AND ${searchKey} LIKE UPPER('%${searchValue}%')
          </when>
-         <when test='searchValue == null and searchValue.equals("") and spc_area_cd != null'>
+         <when test='searchValue == null and spc_area_cd != null'>
             AND SPC_AREA_CD LIKE #{spc_area_cd}
          </when>
          
@@ -235,8 +235,8 @@
       
    </select>
    
-   <select id="getListData" resultType="com.sys.comeit.dto.StudyDTO">
-      SELECT *
+   <select id="getListData" parameterType="com.sys.comeit.dto.StudyDTO" resultType="com.sys.comeit.dto.StudyDTO">
+      SELECT STU_CD, CRT_DATE, TITLE, STR_DATE, MEM_NUM, CMT_DATE, AREA_NAME, SPC_AREA_NAME, MEET_TERM, IDNTT_TYPE, LV, CAT_NAME, SCRT_NUM, END_DATE, IMG_URL
       FROM
       (
           SELECT ROWNUM AS RNUM
@@ -253,27 +253,27 @@
                     ORDER BY STU_CD DESC
                 ) DATA
             )
-            WHERE RNUM <![CDATA[>]]>= #{start} AND RNUM <![CDATA[<]]>=#{end}
+            WHERE RNUM <![CDATA[>]]>= #{start} AND RNUM <![CDATA[<]]>= #{end}
                  </when>
                  <when test='searchValue != null and spc_area_cd == null'>
                     WHERE ${searchKey} LIKE UPPER('%${searchValue}%')
                     ORDER BY STU_CD DESC
                 ) DATA
             )
-            WHERE RNUM <![CDATA[>]]>= #{start} AND RNUM <![CDATA[<]]>=#{end}
+            WHERE RNUM <![CDATA[>]]>= #{start} AND RNUM <![CDATA[<]]>= #{end}
                  </when>
                  <when test='searchValue == null and spc_area_cd != null'>
                     AND SPC_AREA_CD = #{spc_area_cd}
                     ORDER BY STU_CD DESC
                 ) DATA
             )
-            WHERE RNUM <![CDATA[>]]>= #{start} AND RNUM <![CDATA[<]]>=#{end}
+            WHERE RNUM <![CDATA[>]]>= #{start} AND RNUM <![CDATA[<]]>= #{end}
                  </when>
                  <otherwise>
                     ORDER BY STU_CD DESC
                 ) DATA
             )
-            WHERE RNUM <![CDATA[>]]>= #{start} AND RNUM <![CDATA[<]]>=#{end}
+            WHERE RNUM <![CDATA[>]]>= #{start} AND RNUM <![CDATA[<]]>= #{end}
                  </otherwise>
               </choose>
    </select>
