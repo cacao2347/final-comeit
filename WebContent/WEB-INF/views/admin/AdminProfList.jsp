@@ -44,23 +44,31 @@
 								<th>강사코드</th>
 								<th>이름</th>
 								<th>아이디</th>
+								<th>이메일</th>
+								<th>전화번호</th>
+								<th>매너연필</th>
 								<th>은행명</th>
 								<th>계좌번호</th>
 								<th>강사등록일</th>
+								<th>강사박탈일</th>
 							</tr>
 						</thead>
 						<tbody>
 						
 						<!-- mem_id, name, email. tel, joindate -->
                     
-	                   <c:forEach var="pro" items="${proList }">
+	                   <c:forEach var="pro" items="${admproList }">
 						<tr>
 							<td>${pro.prof_cd }</td>
-							<td>${pro.mem_cd }
-							<td>${pro.bank_cd }</td>
-							<td>${pro.career }</td>
-							<td>${pro.crt_date }</td>
+							<td>${pro.name}</td>
+							<td>${pro.id}</td>
+							<td>${pro.email}</td>
+							<td>${pro.tel}</td>
+							<td>없음</td>
+							<td>${pro.bank_name }</td>
 							<td>${pro.acnt_num }</td>
+							<td>${pro.crt_date }</td>
+							<td>없음</td>
 						</tr>
 					</c:forEach>
 					

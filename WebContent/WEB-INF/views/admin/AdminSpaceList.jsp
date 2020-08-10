@@ -43,13 +43,13 @@
                   <c:forEach var="spa" items="${adminspaList}">
                     <tr>
                     	<td>${spa.spa_cd }</td>
+                    	<td>${spa.spa_name }</td>
                     	<td>${spa.name }</td>
                     	<td>${spa.spa_id }</td>
                     	<td>${spa.email }</td>
                     	<td>${spa.tel }</td>
-                    	<td>없음</td>
+                    	<td>${spa.dtl_addr }</td>
                     	<td>${spa.join_date }</td>
-                    	<td>없음</td>
                     	<td>없음</td>
                     </tr>
                   </c:forEach>

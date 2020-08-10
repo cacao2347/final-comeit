@@ -62,16 +62,45 @@
 		VALUES('LNGBN'||SEQ_LNGG_BAN.NEXTVAL, #{admin_cd}, #{ban}, SYSDATE)
 	</insert>
 	
+	<!-- 멤버 정보 조회 list() -->
+	<select id="admmemList" resultType="com.sys.comeit.dto.AdmMemDTO">
+	   SELECT MM.MEM_CD AS MEM_CD, MM.NAME AS NAME , MM.ID AS ID, MM.EMAIL AS EMAIL
+	        , MM.TEL AS TEL, P.PROF_CD AS PROF_CD, MM.AREA_NAME AS AREA_NAME
+	        , MM.SPC_AREA_NAME AS SPC_AREA_NAME , MM.JOIN_DATE AS JOIN_DATE
+	   FROM VIEW_MEM_MY MM, TBL_PROF P
+	   WHERE MM.MEM_CD = P.MEM_CD(+)
+	</select>
+	
+	<!-- 강사 정보 조회 list() -->
+	<select id="admproList" resultType="com.sys.comeit.dto.AdmMemDTO">
+	SELECT P.PROF_CD AS PROF_CD, MM.NAME AS NAME, MM.ID AS ID
+	     , MM.EMAIL AS EMAIL, MM.TEL AS TEL , B.BANK_NAME AS BANK_NAME
+	     , P.ACNT_NUM AS ACNT_NUM, P.CRT_DATE AS CRT_DATE
+	FROM VIEW_MEM_MY MM, TBL_PROF P, TBL_BANK B
+	WHERE MM.MEM_CD(+) = P.MEM_CD
+	AND P.BANK_CD = B.BANK_CD
+	</select>
+	
+	
 	<delete id="banDelete">
 		DELETE
 		FROM TBL_LNGG_BAN
 		WHERE LNGG_BAN_CD=#{lngg_ban_cd}
 	</delete>
 	
-	<!-- 업체 로그인 정보 조회 list() -->
-	<select id="admspaList" resultType="com.sys.comeit.dto.SpaDTO">
-		SELECT SPA_ID, SPA_CD, EMAIL, NAME, TEL, JOIN_DATE
-		FROM TBL_SPA_JOIN
+	<!-- 업체 명단 정보 조회 list() -->
+	<select id="admspaList" resultType="com.sys.comeit.dto.AdmSpaReqDTO">
+		SELECT spa_cd, spa_name, name, spa_id, email, tel, dtl_addr, join_date
+		FROM VIEW_SPAREQLIST
+		WHERE TYPE ='Y'
+		AND PRCS_DATE IS NOT NULL
+	</select>
+	
+	<!-- 업체 거부 명단 정보 조회 list() -->
+	<select id="admspanoList" resultType="com.sys.comeit.dto.AdmSpaReqDTO">
+		SELECT SPA_REQ_CD ,SPA_ID, SPA_NAME, SPA_ID, PRCS_DATE, PRCS_RSN, ADM_NAME
+		FROM VIEW_SPAREQLIST
+		WHERE TYPE ='N'
 	</select>
 	
 	<!-- 업체 요청 관리 list() -->
@@ -79,7 +108,6 @@
 		SELECT SPA_REQ_CD, SPA_NAME, SPA_ID, COM_NAME, REQ_DATE, TYPE, PRCS_DATE, ADM_NAME
 		FROM VIEW_SPAREQLIST
 	</select>
-	
 	
 	<update id="spaCheckMod">
 		UPDATE TBL_SPA_REQ

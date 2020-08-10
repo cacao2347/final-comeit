@@ -100,15 +100,15 @@
             <a class="collapse-item" href="admin_report_reject_list.action">신고거부 사유목록</a>
             <a class="collapse-item" href="admin_penalty.action">패널티 관리</a>
             <a class="collapse-item" href="admin_stop.action">정지회원 관리</a>
-            <a class="collapse-item" href="admin_appeal.action">항소회원 관리</a>
-            <a class="collapse-item" href="admin_appeal_reject_list.action">항소거부 사유목록</a>
-            <a class="collapse-item" href="admin_block.action">블락회원 관리</a>
+            <!-- <a class="collapse-item" href="admin_appeal.action">항소회원 관리</a> -->
+            <!-- <a class="collapse-item" href="admin_appeal_reject_list.action">항소거부 사유목록</a> -->
+            <!-- <a class="collapse-item" href="admin_block.action">블락회원 관리</a> -->
           </div>
         </div>
       </li>
       
       <!-- Nav Item - Pages Collapse Menu -->
-      <li class="nav-item">
+      <!-- <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages3" aria-expanded="true" aria-controls="collapsePages">
           <i class="fas fa-fw fa-folder"></i>
           <span>문의 관리</span>
@@ -120,7 +120,7 @@
             <a class="collapse-item" href="admin_ask_refund_list.action">환불 문의 관리</a>
           </div>
         </div>
-      </li>
+      </li> -->
       
 	    <!-- Divider -->
 		<hr class="sidebar-divider d-none d-md-block">

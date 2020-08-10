@@ -5,12 +5,85 @@ public class AdmSpaReqDTO
 	private String spa_req_cd, spa_name, spa_id, com_name, check_type_cd
 	, req_date, type, prcs_date, adm_name, admin_cd;
 	
+	private String spa_cd, email, tel, dtl_addr, join_date, name, prcs_rsn;
+	
+
 	private String searchKey, searchValue;	// 검색 키, 검색 단어
 	private int start, end;			// 페이지 시작 / 끝
+	
+	public String getPrcs_rsn()
+	{
+		return prcs_rsn;
+	}
+
+	public void setPrcs_rsn(String prcs_rsn)
+	{
+		this.prcs_rsn = prcs_rsn;
+	}
+	
+	public String getName()
+	{
+		return name;
+	}
+
+	public void setName(String name)
+	{
+		this.name = name;
+	}
 	
 	public String getSearchKey()
 	{
 		return searchKey;
+	}
+
+	public String getSpa_cd()
+	{
+		return spa_cd;
+	}
+
+	public void setSpa_cd(String spa_cd)
+	{
+		this.spa_cd = spa_cd;
+	}
+
+	public String getEmail()
+	{
+		return email;
+	}
+
+	public void setEmail(String email)
+	{
+		this.email = email;
+	}
+
+	public String getTel()
+	{
+		return tel;
+	}
+
+	public void setTel(String tel)
+	{
+		this.tel = tel;
+	}
+
+	public String getDtl_addr()
+	{
+		return dtl_addr;
+	}
+
+	public void setDtl_addr(String dtl_addr)
+	{
+		this.dtl_addr = dtl_addr;
+	}
+
+	public String getJoin_date()
+	{
+		return join_date;
+	}
+
+	public void setJoin_date(String join_date)
+	{
+		this.join_date = join_date;
 	}
 
 	public void setSearchKey(String searchKey)

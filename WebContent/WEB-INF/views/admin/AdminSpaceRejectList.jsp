@@ -48,57 +48,17 @@
 								<th>처리 관리자</th>
 							</tr>
 						</thead>
-						<tfoot>
-							<tr>
-								<th>요청코드</th>
-								<th>업체명</th>
-								<th>업체아이디</th>
-								<th>거부사유</th>
-								<th>거부일자</th>
-								<th>처리 관리자</th>
-							</tr>
-						</tfoot>
 						<tbody>
+						<c:forEach var="spano" items="${admspanoList }">
 							<tr>
-								<td>ASR0001</td>
-								<td>우리스터디 카페</td>
-								<td>ABC123</td>
-								<td>업체 정보가 옳바르지 않음.</td>
-								<td>2020-07-11</td>
-								<td>[관리자] 신재민</td>
+								<td>${spano.spa_req_cd }</td>
+								<td>${spano.spa_name }</td>
+								<td>${spano.spa_id }</td>
+								<td>${spano.prcs_rsn }</td>
+								<td>${spano.prcs_date }</td>
+								<td>[관리자]${spano.adm_name }</td>
 							</tr>
-							<tr>
-								<td>ASR0001</td>
-								<td>우리스터디 카페</td>
-								<td>ABC123</td>
-								<td>업체 정보가 옳바르지 않음.</td>
-								<td>2020-07-11</td>
-								<td>[관리자] 신재민</td>
-							</tr>
-							<tr>
-								<td>ASR0001</td>
-								<td>우리스터디 카페</td>
-								<td>ABC123</td>
-								<td>업체 정보가 옳바르지 않음.</td>
-								<td>2020-07-11</td>
-								<td>[관리자] 신재민</td>
-							</tr>
-							<tr>
-								<td>ASR0001</td>
-								<td>우리스터디 카페</td>
-								<td>ABC123</td>
-								<td>업체 정보가 옳바르지 않음.</td>
-								<td>2020-07-11</td>
-								<td>[관리자] 신재민</td>
-							</tr>
-							<tr>
-								<td>ASR0001</td>
-								<td>우리스터디 카페</td>
-								<td>ABC123</td>
-								<td>업체 정보가 옳바르지 않음.</td>
-								<td>2020-07-11</td>
-								<td>[관리자] 신재민</td>
-							</tr>
+						</c:forEach>
 						</tbody>
 					</table>
 				</div>

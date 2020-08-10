@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>AdminMemList.jsp</title>
 </head>
 <body>
 
@@ -30,6 +30,7 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
+                      <th>회원코드</th>
                       <th>이름</th>
                       <th>아이디</th>
                       <th>이메일</th>
@@ -45,15 +46,23 @@
        
                     <!-- mem_id, name, email. tel, joindate -->
                     
-                    <c:forEach var="mem" items="${memberList }">
+                    <c:forEach var="mem" items="${admmemList }">
 						<tr>
+							<td>${mem.mem_cd }</td>
 							<td>${mem.id }</td>
 							<td>${mem.name }
 							<td>${mem.email }</td>
 							<td>${mem.tel }</td>
 							<td>없음</td>
+							<td>
+							<c:if test="${mem.prof_cd == null}">
+							무
+							</c:if>
+							<c:if test="${mem.prof_cd != null}">
+							유							
+							</c:if>
+							</td>
 							<td>${mem.area_name} ${mem.spc_area_name}</td>
-							<td>없음</td>
 							<td>${mem.join_date}</td>
 							<td>없음</td>
 						</tr>

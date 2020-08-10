@@ -91,9 +91,9 @@ public class AdminController
 	{
 		String view = null;
 		
-		IMemberDAO dao = sqlSession.getMapper(IMemberDAO.class);
+		IAdminDAO dao = sqlSession.getMapper(IAdminDAO.class);
 		
-		model.addAttribute("memberList", dao.memberList());
+		model.addAttribute("admmemList", dao.admmemList());
 		model.addAttribute("args", "/WEB-INF/views/admin/AdminMemList.jsp");
 		
 		view = "/WEB-INF/views/admin/PageLayout.jsp";
@@ -463,9 +463,9 @@ public class AdminController
 	{
 		String view = null;
 		
-		IProDAO proDao = sqlSession.getMapper(IProDAO.class);
+		IAdminDAO dao = sqlSession.getMapper(IAdminDAO.class);
 		
-		model.addAttribute("proList", proDao.proList());
+		model.addAttribute("admproList", dao.admproList());
 		model.addAttribute("args", "/WEB-INF/views/admin/AdminProfList.jsp");
 		
 		view = "/WEB-INF/views/admin/PageLayout.jsp";
@@ -481,8 +481,7 @@ public class AdminController
 		
 		IAdminDAO dao = sqlSession.getMapper(IAdminDAO.class);
 		
-		
-		
+		model.addAttribute("admspanoList", dao.admspanoList());
 		model.addAttribute("args", "/WEB-INF/views/admin/AdminSpaceRejectList.jsp");
 		
 		view = "/WEB-INF/views/admin/PageLayout.jsp";

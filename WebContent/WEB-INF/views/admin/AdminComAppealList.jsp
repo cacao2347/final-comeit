@@ -185,16 +185,16 @@
 						<button type="button" class="adminBtn" 
 						value=${ComApList.spa_req_cd }>확인</button>
 						</c:if>
-						<c:if test="${ComApList.type == 'CHECK'}">
+						<c:if test="${ComApList.type == 'C'}">
 						<button type="button" id="okBtn" class="okBtn" 
 						value=${ComApList.spa_req_cd }>승인</button>
 						<button type="button" id="noBtn" class="noBtn" 
 						value=${ComApList.spa_req_cd }>거부</button>
 						</c:if>
-						<c:if test="${ComApList.type == 'YES'}">
+						<c:if test="${ComApList.type == 'Y'}">
 							승인완료
 						</c:if>
-						<c:if test="${ComApList.type == 'NO'}">
+						<c:if test="${ComApList.type == 'N'}">
 							거부완료
 						</c:if>
 						</td>

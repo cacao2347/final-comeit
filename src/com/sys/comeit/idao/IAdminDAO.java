@@ -24,7 +24,7 @@ public interface IAdminDAO
 	public AdminDTO adminSearchList(String admin_cd);	// 관리자 리스트	 
 	
 	// 관리자 업체 회원 리스트 조회
-	public ArrayList<SpaDTO> admspaList();	// 회원 리스트
+	public ArrayList<SpaDTO> admspaList();	// 업체 회원 리스트
 	
 	// 관리자 업체 요청 관리
 	public ArrayList<SpaReqDTO> adminComAppealList();	// 회원 리스트
@@ -42,5 +42,10 @@ public interface IAdminDAO
 	public int banapplSearchCount(BanDTO dto);	// 검색완료된 금지어 요청 개수
 	
 	public List<BanDTO> banapplListData(BanDTO dto);	// 검색완료된 금지어 요청
+	
+	public ArrayList<AdmMemDTO> admmemList();	// 개인 회원 리스트
+	public ArrayList<AdmMemDTO> admproList();	// 강사 회원 리스트
+	
+	public ArrayList<AdmSpaReqDTO> admspanoList(); //업체 거부 명단 리스트
 	
 }
