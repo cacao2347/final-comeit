@@ -152,8 +152,7 @@ $(document).ready(function ()
    };
    
 
-// 캘린더
-   
+   // 캘린더
    document.addEventListener('DOMContentLoaded', function() {
 
       var calendarEl = document.getElementById('calendar');
@@ -181,28 +180,19 @@ $(document).ready(function ()
             right : 'today'
          },
 
-			// 일정 등록
-			selectable : true,
-			selectMirror : true,
-			select : function(arg) {
-			var title = prompt('일정을 등록하세요 :');
-         
-			if (title) 
-			{
-				
-				
-				
-				
-				/*
-				calendar.addEvent(
-				{
-					title : title
-					, start : arg.start
-					, end : arg.end
-					, allDay : arg.allDay
-				})
-				*/
-		 	}
+         // 일정 등록
+         selectable : true,
+         selectMirror : true,
+         select : function(arg) {
+            var title = prompt('일정을 등록하세요 :');
+            if (title) {
+               calendar.addEvent({
+                  title : title,
+                  start : arg.start,
+                  end : arg.end,
+                  allDay : arg.allDay
+               })
+            }
 
             calendar.unselect()
          },
@@ -220,26 +210,26 @@ $(document).ready(function ()
 
             events : function(info, callback, failureCallback) // 이 이벤트 영역에 제이슨 형태로 뿌려주려고 ajax
             {
-            	var params = "stu_cd=" + $("#studyCode").val();
-            	
-				$.ajax(
-				{
-					type : "POST"
-					, url : "studycalendarresponse.action"  // 데이터 가지고 올 곳. 요청 url
-					, data : params
-					, dataType : "json"
-					, async : false
-					, success : function(args) 
-					{
-					   callback(args);
-					   //alert(args);
-					}
-					, error:function(request,status,error)
-					{
-					   alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-					}   
-				
-				});
+               var params = "stu_cd=" + $("#studyCode").val();
+               
+            $.ajax(
+            {
+               type : "POST"
+               , url : "studycalendarresponse.action"  // 데이터 가지고 올 곳. 요청 url
+               , data : params
+               , dataType : "json"
+               , async : false
+               , success : function(args) 
+               {
+                  callback(args);
+                  //alert(args);
+               }
+               , error:function(request,status,error)
+               {
+                  alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+               }   
+            
+            });
 
             }
 
@@ -488,6 +478,13 @@ $(document).ready(function ()
                   </c:forEach>
                </div><!-- end .stuMem -->
             
+               <!-- 스터디장에게만 보일 수정 / 폐쇄 버튼 -->
+               <div class="roomBtn">
+               <c:if test="${sessionScope.mem_cd eq leaderName.leader_mem_cd }">
+                  <input type="button" value="방 정보 수정" class="btn modBtn" />
+               </c:if>
+               </div><!-- end .roomBtn -->
+            
                <!-- 
                관리자에게만 보일 폐쇄 버튼
                <div class="roomBtn">
@@ -539,4 +536,4 @@ $(document).ready(function ()
     </div>
 </div>
 </body>
-</html>
+</html>\
