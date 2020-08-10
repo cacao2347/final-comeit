@@ -153,9 +153,9 @@ public class StudyFileController
 		//System.out.println(detail.getFile_title());
 		
 		// 첨부파일 조회
-		ArrayList<StudyFileDTO> file = fileDao.fileUrlSearch(dto);
+		StudyFileDTO file = fileDao.fileUrlSearch(dto);
 		
-		if (!file.isEmpty())
+		if (file != null)
 			model.addAttribute("file", file);
 		else
 			model.addAttribute("file", "없음");

@@ -26,6 +26,7 @@
 	int maxSize = 5*1024*1024;
 	
 	MultipartRequest multi = null;
+	String urlFile = "";
 	
 	try
 	{
@@ -49,6 +50,9 @@
 					out.println(file);
 			}
 		}
+		
+		//urlFile = "Download.jsp?saveFileName=" + multi.getFilesystemName("uploadFile");
+		//urlFile += "&originalFileName=" + multi.getOriginalFileName("uploadFile");
 	}
 	catch(IOException e1)
 	{

@@ -21,26 +21,25 @@
 		<%-- 	<c:choose>
 			<c:when test="${file ne '없음' }"> --%>
 			
-			<c:if test="${file ne '없음'}">
-				
-				<c:forEach var="file" items="${file }">	
+			
 					<tr>
 					<th>첨부파일</th>	
 						
-						<td colspan="6">회의록</td> 
+						<td colspan="6">
+						<a href="">${file.file_url }</a>
+						</td> 
 						
 					</tr>	
-				</c:forEach>
-			</c:if>
+		
 		<%-- 	</c:when>
 			<c:otherwise>
 			 --%>
-			<c:if test="${file eq '없음'}">
+		<%-- 	<c:if test="${file eq '없음'}">
 			<tr>
 			<th>첨부파일</th>
 					<td colspan="6">없음</td>		
 			</tr>		
-			</c:if>
+			</c:if> --%>
 			
 	<%-- 		</c:otherwise>
 			</c:choose>  --%>
