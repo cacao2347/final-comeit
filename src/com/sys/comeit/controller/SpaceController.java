@@ -136,8 +136,11 @@ public class SpaceController
 			
 			String mem_id = (String) session.getAttribute("id");
 			String spa_req_cd = request.getParameter("spa_req_cd");
-			
-			
+			String peoCd = "";
+			if(request.getParameter("peoCd")!=null)
+			{
+				peoCd = request.getParameter("peoCd");
+			}
 			if(mem_id==null)
 			{
 				mem_id="";
@@ -157,12 +160,12 @@ public class SpaceController
 			model.addAttribute("feedback",ispaceDAO.spaceFeed(spa_req_cd));
 			// 피드백 입력 체크
 			model.addAttribute("feedCheck",ispaceDAO.reqCount(dto));
-			// 피드백 입력 코드 받기
-			model.addAttribute("feeCdd",ispaceDAO.reqCd(dto));
 			//신고타입
 			model.addAttribute("repType",ispaceDAO.spaRepType());	
 			//그래프
 			model.addAttribute("TotData",ispaceDAO.googleChart(spa_req_cd));
+			//스터디장, 강의코드
+			model.addAttribute("peoCd",peoCd);
 			
 			view = "WEB-INF/views/space/SpaceDetail.jsp";
 			return view;
@@ -185,18 +188,15 @@ public class SpaceController
 			dto.setLocation(Integer.parseInt(request.getParameter("spa4")));//위치
 			dto.setNoise(Integer.parseInt(request.getParameter("spa5")));//소음
 			
-			int feedcount = ispaceDAO.feedInsert(dto);
-			
-			/*
-			System.out.println("insert 이후");
-			System.out.println(dto.getReq_cd());
-			System.out.println(dto.getFacility());
-			System.out.println(dto.getKindness());
-			System.out.println(dto.getPrice());
-			System.out.println(dto.getLocation());
-			System.out.println(dto.getNoise());
-			System.out.println("어디갔어" + feedcount);
-			 */
+			int feedcount = 0;
+			if(ispaceDAO.feedbacPeokCheck(dto.getReq_cd())>0)
+			{
+				feedcount = ispaceDAO.feedStuInsert(dto);
+			}
+			else
+			{
+				feedcount = ispaceDAO.feedLecInsert(dto);
+			}
 			
 			return String.valueOf(feedcount);
 		}
@@ -210,7 +210,9 @@ public class SpaceController
 			SpaReqDTO dto = new SpaReqDTO();
 			
 			String spa_req_cd = request.getParameter("spaReqCd");
-			String stu_hist_cd="SHIST1031";  //임의로 지정
+			//String stu_hist_cd = request.getParameter("stu_hist_cd");	// 스터디장 코드
+			//String lec_cd=request.getParameter("lec_cd"); 	// 강의 코드
+			String peoCd=request.getParameter("peoCd"); //스터디장, 강의 코드
 			String date = request.getParameter("date");
 			int use_hrs =Integer.parseInt(request.getParameter("time"));	//총 요청시간
 			String impo = request.getParameter("import"); //이용 시작시간
@@ -227,7 +229,15 @@ public class SpaceController
 			}
 			
 			dto.setSpa_req_cd(spa_req_cd);
-			dto.setStu_hist_cd(stu_hist_cd);
+			
+			if(ispaceDAO.peoCdCheck(peoCd)>0)
+			{
+				dto.setStu_hist_cd(peoCd);
+			}
+			else
+			{
+				dto.setLec_cd(peoCd);
+			}
 			dto.setUse_hrs(use_hrs);
 			dto.setUse_time(use_time);
 			dto.setMem_num(mem_num);
@@ -239,12 +249,17 @@ public class SpaceController
 			System.out.println(dto.getUse_time());
 			System.out.println(dto.getMem_num());
 			
-		
-			int reqInsertNum = ispaceDAO.reqInsert(dto);
+			int reqInsertNum =0;
 			
+			if(ispaceDAO.peoCdCheck(peoCd)>0)
+			{
+				reqInsertNum = ispaceDAO.reqStuInsert(dto);
+			}
+			else
+			{
+				reqInsertNum = ispaceDAO.reqLecInsert(dto);
+			}
 			return String.valueOf(reqInsertNum);
-			//view = "redirect:spacedetail.action";
-			//return view;
 		}
 		
 		// 공간 마이페이지로 이동
@@ -261,30 +276,44 @@ public class SpaceController
 			model.addAttribute("Search",ispaceDAO.Search(spa_id));	// 내정보
 			model.addAttribute("MyInfo",ispaceDAO.MyInfoSearch(spa_id));	// 본인이 등록한 공간 중 승인된 공간 관리
 			model.addAttribute("reqCheck",ispaceDAO.SpaReqCheck(spa_id));	//마이페이지 공간 예약 내역 관리
-			model.addAttribute("req",ispaceDAO.SpaReq(spa_id));	//마이페이지 공간 예약 요청 관리
-			
+			model.addAttribute("reqStu",ispaceDAO.SpaReqStu(spa_id));	//마이페이지 공간 스터디 예약 요청 관리
+			model.addAttribute("reqLec",ispaceDAO.SpaReqLec(spa_id));	//마이페이지 공간 강의 예약 요청 관리
 			view = "WEB-INF/views/space/SpaceMy.jsp";
 			return view;
 		}
 		
-		// 예약 승인
+		// 스터디 예약 승인
 		@ResponseBody
-		@RequestMapping(value = "/spareqappr.action", method = RequestMethod.POST)
-		public String SpaReqAppr(Model model,HttpServletRequest request)
+		@RequestMapping(value = "/stuspareqappr.action", method = RequestMethod.POST)
+		public String SpaStuReqAppr(Model model,HttpServletRequest request)
 		{
 			ISpaceDAO ispaceDAO = sqlSession.getMapper(ISpaceDAO.class);
 			
 			String stu_spa_req_cd = request.getParameter("stu_spa_req_cd");
 			System.out.println(stu_spa_req_cd);
-			int reqInsertNum = ispaceDAO.SpaReqAppr(stu_spa_req_cd);
+			int reqInsertNum = ispaceDAO.SpaStuReqAppr(stu_spa_req_cd);
 			
 			return String.valueOf(reqInsertNum);
 		}
 		
-		// 예약 거부
+		// 강의 예약 승인
 		@ResponseBody
-		@RequestMapping(value = "/spareqapprn.action", method = RequestMethod.POST)
-		public String SpaReqApprN(Model model,HttpServletRequest request)
+		@RequestMapping(value = "/lecspareqappr.action", method = RequestMethod.POST)
+		public String SpaLecReqAppr(Model model,HttpServletRequest request)
+		{
+			ISpaceDAO ispaceDAO = sqlSession.getMapper(ISpaceDAO.class);
+			
+			String lec_spa_cd = request.getParameter("lec_spa_cd");
+			int reqInsertNum = ispaceDAO.SpaLecReqAppr(lec_spa_cd);
+			
+			return String.valueOf(reqInsertNum);
+		}
+				
+				
+		// 스터디 예약 거부
+		@ResponseBody
+		@RequestMapping(value = "/stuspareqapprn.action", method = RequestMethod.POST)
+		public String StuSpaReqApprN(Model model,HttpServletRequest request)
 		{
 			ISpaceDAO ispaceDAO = sqlSession.getMapper(ISpaceDAO.class);
 			
@@ -296,7 +325,26 @@ public class SpaceController
 			dto.setStu_spa_req_cd(stu_spa_req_cd);
 			dto.setPrcs_rsn(prcs_rsn);
 			
-			int reqNum = ispaceDAO.SpaReqApprN(dto);
+			int reqNum = ispaceDAO.StuSpaReqApprN(dto);
+			
+			return String.valueOf(reqNum);
+		}
+		
+		// 강의 예약 거부
+		@ResponseBody
+		@RequestMapping(value = "/lecspareqapprn.action", method = RequestMethod.POST)
+		public String LecSpaReqApprN(Model model,HttpServletRequest request)
+		{
+			ISpaceDAO ispaceDAO = sqlSession.getMapper(ISpaceDAO.class);
+			
+			String lec_spa_cd = request.getParameter("lec_spa_cd");
+			String prcs_rsn = request.getParameter("prcs_rsn");
+			SpaReqDTO dto = new SpaReqDTO();
+			
+			dto.setLec_spa_cd(lec_spa_cd);
+			dto.setPrcs_rsn(prcs_rsn);
+			
+			int reqNum = ispaceDAO.LecSpaReqApprN(dto);
 			
 			return String.valueOf(reqNum);
 		}

@@ -125,42 +125,6 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 						</dd>
 					</dl><!-- end region -->
 					
-					<dl class="region">
-						<dt>유형</dt>
-						<dd>
-							<select name="region" class="form-control">
-								<option value="전체">전체</option>
-								<option value="카페">카페</option>
-								<option value="스터디">스터디카페</option>
-							</select>
-						</dd>
-					</dl>
-					
-					<dl class="inwon">
-						<dt>시간</dt>
-						<dd class="radio">
-							<label for="all">
-							<input type="radio" id="all" name="inwon" value="전체" checked="checked">전체
-							</label>
-						</dd>
-						<dd class="radio">
-							<label id="fiveDown">
-							<input type="radio" id="fiveDown" name="inwon" value="5명 미만">3시간 미만
-							</label>
-						</dd>
-						<dd class="radio">
-							<label id="fiveUp">
-							<input type="radio" id="fiveUp" name="inwon" value="5명 이상">3시간 이상 ~ 5시간 미만
-							</label>
-							
-						</dd>
-						<dd class="radio">
-							<label id="tenUp">
-							<input type="radio" id="tenUp" name="inwon" value="10명 이상">5시간 이상
-							</label>
-							
-						</dd>
-					</dl><!-- end inwon -->
 				</div><!-- end side -->
 				</div><!-- 필터 끝 -->
 				

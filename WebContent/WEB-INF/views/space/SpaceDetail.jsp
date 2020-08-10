@@ -32,14 +32,12 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 	google.charts.setOnLoadCallback(drawVisualization);
 	
 	var list = new Array();
-	<c:forEach items="${TotData}" var="TotData">
 	list.push("${TotData.facility}");
 	list.push("${TotData.kindness}");
 	list.push("${TotData.price}");
 	list.push("${TotData.location}");
 	list.push("${TotData.noise}");
 	list.push("${TotData.count}");
-	</c:forEach>
 
 	function drawVisualization() { 
 		
@@ -242,6 +240,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
   				type : "POST"
   				, url : "reqinsert.action"
   			    , data : {"spaReqCd":$(this).val(),
+  			    	"peoCd":$("#peoCd").val(),
   			    	"date":$("#date").val(),
   					"time":$("#time").val(),
   					"import":$("#import").val(),
@@ -398,13 +397,10 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 				<tr>
 					<!-- <th>Feedback<button type="button" class="btn btn-primary btnfeed">등록</button></th> -->
 					<th colspan="6">Feedback
-					<c:set var="countFeed" value="${countFeed = 1 }" />
-					<c:forEach var="feedChecks" items="${feedCheck }">
-					<c:if test="${feedChecks.mem_id eq  sessionScope.id && countFeed eq 1}">
-					<c:set var="countFeed" value="${countFeed + 1}" />
+					<c:if test="${not empty feedCheck.mem_id}">
 					<button type="button"  class="btn btn-primary btnfeed" data-toggle="modal" data-target="#staticBackdrop2">등록하기</button>
 					</c:if>
-					</c:forEach></th> 
+					</th> 
 				</tr>
 				<tr>
 					<td class="countNum">번호</td>
@@ -497,17 +493,10 @@ body{font-family: 'Noto Sans KR', sans-serif;}
             		 <input type="hidden" id="spa5" class="form-control">
             		</div>
           			</div>
-          			<!-- <div class="price-slider" style="margin-top: 15px;">
-           			 <h4 class="great1"  style="color: #336699; font-weight: bold;">상세후기</h4>
-           			 <span>공간에 대한 상세 피드백 후기를 남겨주세요! (선택사항)</span>
-					<div class="deev">
-            			<textarea rows="5" cols="60"></textarea>
-            		</div>
-          			</div> -->
 
           <div class="form-group">
             <div class="col-sm-12">
-              <button type="button" value="${feeCdd}" id="feedBtn" class="btn btn-primary btn-lg btn-block">피드백등록 <span class="glyphicon glyphicon-chevron-right pull-right" style="padding-right: 10px;"></span></button>
+              <button type="button" value="${feedCheck.req_cd}" id="feedBtn" class="btn btn-primary btn-lg btn-block">피드백등록 <span class="glyphicon glyphicon-chevron-right pull-right" style="padding-right: 10px;"></span></button>
             </div>
           </div>
 </div>
@@ -547,9 +536,10 @@ body{font-family: 'Noto Sans KR', sans-serif;}
           <address>
 				 <strong>업체 주소</strong><br /> ${spaceInfo.area_name } ${spaceInfo.spc_area_name }<br />${spaceInfo.dtl_addr }<br />
 			</address>
+			<c:if test="${peoCd!=''}">
 			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
 						예약하기
-					</button>
+					</button></c:if>
 					
 					<!-- 모달 -->
 					<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -592,6 +582,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 					      			<td >
 					      				<div class="form-group"><label class="control-label" for="reqNum">인원수</label>
 					      				<input type="text" id="reqNum" name="reqNum" class="form-control content onlyNumber" id="peo" style="width: 150px;"  placeholder="예) 2(숫자만 입력)"></div>
+					      				<input type="hidden" value="${peoCd }" name="peoCd" id="peoCd"><!-- 스터디장이력, 강의코드 -->
 					      			</td>
 					      		</tr>
 					      	</table>

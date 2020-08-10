@@ -44,28 +44,16 @@
    
    <!-- 회원별 피드백 등록 여부 체크 -->
    <select id="reqCount" resultType="com.sys.comeit.dto.SpaReqDTO">
-	SELECT SPA_REQ_CD,SPA_CD,REQ_CD,REQ_DATE,USE_HRS,USE_TIME,MEM_NUM,MEM_ID,NAME,MEM_TEL
+	SELECT SPA_REQ_CD,SPA_ID,SPA_JOIN_NAME,CHECK_CD,SPA_CD,REQ_CD,REQ_DATE,USE_HRS,USE_TIME,MEM_NUM,MEM_CD,MEM_ID,NAME,MEM_TEL,PRCS_DATE,EVAL_DATE  
 	FROM VIEW_FEEDCHECK
-	WHERE SPA_REQ_CD =  #{spa_req_cd}
+	WHERE SPA_REQ_CD = #{spa_req_cd}
 	AND USE_TIME =
-	( SELECT MAX(USE_TIME)
+	( SELECT MIN(USE_TIME)
 	FROM VIEW_FEEDCHECK
-	WHERE  MEM_ID= #{mem_id}
+ 	WHERE MEM_ID=#{mem_id}
+ 	AND EVAL_DATE IS NULL
 	)
-	AND MEM_ID= #{mem_id}
-   </select>
-   
-      <!-- 회원별 피드백 등록 여부 체크_코드 -->
-   <select id="reqCd" resultType="java.lang.String">
-	SELECT REQ_CD
-	FROM VIEW_FEEDCHECK
-	WHERE SPA_REQ_CD =  #{spa_req_cd}
-	AND USE_TIME =
-	( SELECT MAX(USE_TIME)
-	FROM VIEW_FEEDCHECK
-	WHERE  MEM_ID= #{mem_id}
-	)
-	AND MEM_ID= #{mem_id}
+	AND MEM_ID=#{mem_id}
    </select>
 
 <!-- 공간 리스트 -->
@@ -134,17 +122,43 @@
 	 FROM VIEW_SPA_ETC_TAG
    </select>
    
-   <!-- 피드백입력 -->
-   <insert id="feedInsert">
+   <!-- 스터디장 피드백입력 -->
+   <insert id="feedStuInsert">
 		INSERT INTO TBL_STU_SPA_EVAL(STU_SPA_EVAL_CD,STU_SPA_REQ_CD,FACILITY,KINDNESS,PRICE,LOCATION,NOISE)
 		VALUES('SSPE'||SEQ_STU_SPA_EVAL.NEXTVAL,#{req_cd},#{facility},#{kindness},#{price},#{location},#{noise})
 	</insert>
 	
-	<!-- 예약하기 -->
-   <insert id="reqInsert" >
+	<!-- 강사 피드백입력 -->
+   <insert id="feedLecInsert">
+		INSERT INTO TBL_LEC_SPA_EVAL(LEC_SPA_EVAL_CD,LEC_SPA_CD,FACILITY,KINDNESS,PRICE,LOCATION,NOISE)
+		VALUES('SSPE'||SEQ_STU_SPA_EVAL.NEXTVAL,#{req_cd},#{facility},#{kindness},#{price},#{location},#{noise})
+	</insert>
+	
+	<!-- 강사인지 스터디장인지 구별 -->
+	<select id="feedbacPeokCheck" resultType="java.lang.Integer">
+      	SELECT COUNT(*)
+		FROM TBL_STU_SPA_REQ
+		WHERE STU_SPA_REQ_CD=#{req_cd}
+   </select>
+	
+	<!-- 스터디 공간 예약하기 -->
+   <insert id="reqStuInsert" >
 		INSERT INTO TBL_STU_SPA_REQ(STU_SPA_REQ_CD,SPA_REQ_CD,STU_HIST_CD,USE_HRS,USE_TIME,MEM_NUM)
 		VALUES('SSPR'||SEQ_STU_SPA_REQ.NEXTVAL, #{spa_req_cd},#{stu_hist_cd},#{use_hrs},TO_DATE(TO_CHAR(#{use_time}),'YYYY-MM-DD HH24:MI:SS'),#{mem_num})
 	</insert>
+	
+	<!-- 강의 공간 예약하기 -->
+   <insert id="reqLecInsert" >
+		INSERT INTO TBL_LEC_SPA(LEC_SPA_CD,SPA_REQ_CD,LEC_CD,USE_HRS,USE_TIME,MEM_NUM)
+		VALUES('LECSP'||SEQ_LEC_SPA.NEXTVAL, #{spa_req_cd},#{lec_cd},#{use_hrs},TO_DATE(TO_CHAR(#{use_time}),'YYYY-MM-DD HH24:MI:SS'),#{mem_num})
+	</insert>
+	
+	<!-- 스터디장코드인지 강의코드인지 구별 -->
+	<select id="peoCdCheck" resultType="java.lang.Integer">
+      	SELECT COUNT(*)
+		FROM TBL_STU_HIST
+		WHERE STU_HIST_CD=#{stu_hist_cd}
+   </select>
 	
 	<!-- 마이페이지 리스트뽑기 -->
 	<select id="MyInfoSearch" resultType="com.sys.comeit.dto.SpaReqDTO">
@@ -172,37 +186,60 @@
    <select id="googleChart" resultType="com.sys.comeit.dto.SpaReqDTO">
 		SELECT SPA_REQ_CD, SUM(FACILITY) AS FACILITY,SUM(KINDNESS) AS KINDNESS, SUM(PRICE) AS PRICE, SUM(LOCATION) AS LOCATION, SUM(NOISE) AS NOISE,COUNT(*) AS COUNT
 		FROM VIEW_SPA_FEEDCOUNT
-		WHERE SPA_REQ_CD= #{SPA_REQ_CD}
+		WHERE SPA_REQ_CD=  #{SPA_REQ_CD}
 		GROUP BY SPA_REQ_CD
    </select>
    
-   <!-- 예약 내역 관리 -->
+   <!-- 예약 내역 관리 승인-->
    <select id="SpaReqCheck" resultType="com.sys.comeit.dto.SpaReqDTO">
-		SELECT SPA_REQ_CD,SPA_ID,SPA_CD,REQ_CD,REQ_DATE,USE_HRS,USE_TIME,MEM_NUM,MEM_ID,NAME,MEM_TEL,TYPE, PRCS_DATE
+		SELECT SPA_REQ_CD,SPA_ID,SPA_CD,REQ_CD,REQ_DATE,USE_HRS,USE_TIME,MEM_NUM,MEM_ID,NAME,MEM_TEL, PRCS_DATE
 		FROM VIEW_FEEDCHECK
 		WHERE SPA_ID=#{spa_id}
+		AND CHECK_CD='CHET1001'
    </select>
    
-    <!-- 예약 요청 관리 -->
-   <select id="SpaReq" resultType="com.sys.comeit.dto.SpaReqDTO">
+    <!-- 스터디 예약 요청 관리 -->
+   <select id="SpaReqStu" resultType="com.sys.comeit.dto.SpaReqDTO">
 		SELECT STU_SPA_REQ_CD,SPA_REQ_CD,CHECK_TYPE_CD,REQ_DATE,USE_HRS,USE_TIME,MEM_NUM,PRCS_DATE,NAME,MEM_ID,SPA_ID
 		FROM VIEW_STU_SPA_REQ
 		WHERE CHECK_TYPE_CD IS NULL 
 		AND SPA_ID=#{spa_id}
    </select>
    
+   <!-- 강의 예약 요청 관리 -->
+   <select id="SpaReqLec" resultType="com.sys.comeit.dto.SpaReqDTO">
+		SELECT LEC_SPA_CD,SPA_REQ_CD,CHECK_TYPE_CD,REQ_DATE,USE_HRS,USE_TIME,MEM_NUM,PRCS_DATE,NAME,MEM_ID,SPA_ID
+		FROM VIEW_LEC_SPA_REQ
+		WHERE CHECK_TYPE_CD IS NULL 
+		AND SPA_ID=#{spa_id}
+   </select>
+   
    <!-- 스터디 예약 요청 승인 -->
-   <update id="SpaReqAppr">
+   <update id="SpaStuReqAppr">
 		UPDATE TBL_STU_SPA_REQ
 		SET CHECK_TYPE_CD='CHET1001', PRCS_DATE=SYSDATE,PRCS_RSN='승인되었습니다.'
 		WHERE STU_SPA_REQ_CD=#{stu_spa_req_cd}
    </update>
    
+    <!-- 강의 예약 요청 승인 -->
+   <update id="SpaLecReqAppr">
+		UPDATE TBL_LEC_SPA
+		SET CHECK_TYPE_CD='CHET1001', PRCS_DATE=SYSDATE,PRCS_RSN='승인되었습니다.'
+		WHERE LEC_SPA_CD=#{lec_spa_cd}
+   </update>
+   
    <!-- 스터디 예약 요청 거부 -->
-   <update id="SpaReqApprN">
+   <update id="StuSpaReqApprN">
 		UPDATE TBL_STU_SPA_REQ
 		SET CHECK_TYPE_CD='CHET1002', PRCS_DATE=SYSDATE,PRCS_RSN=#{prcs_rsn}
 		WHERE STU_SPA_REQ_CD=#{stu_spa_req_cd}
+   </update>
+   
+   <!-- 강의 예약 요청 거부 -->
+   <update id="LecSpaReqApprN">
+		UPDATE TBL_LEC_SPA
+		SET CHECK_TYPE_CD='CHET1002', PRCS_DATE=SYSDATE,PRCS_RSN=#{prcs_rsn}
+		WHERE LEC_SPA_CD=#{lec_spa_cd}
    </update>
    
    <!-- 마이페이지 내정보 -->

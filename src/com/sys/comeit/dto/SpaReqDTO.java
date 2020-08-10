@@ -59,7 +59,19 @@ public class SpaReqDTO
 	}
 	private String feedCount; // 피드백수
     private int facility, kindness, price, location, noise, count;// 시설, 친절, 가격, 위치, 소음, 피드백 평균 구할 개수
-	private String mem_id,mem_cd,req_cd,name,type; //피드백을 입력한 사람 아이디,사람코드, 요청 코드, 요청한사람 실명, 승인거부 여부
+	private String mem_id,mem_cd,req_cd,name,type,lec_cd,lec_spa_cd; //피드백을 입력한 사람 아이디,사람코드, 요청 코드, 요청한사람 실명, 승인거부 여부, 강의 코드, 강의 예약 코드
+	public String getLec_cd() {
+		return lec_cd;
+	}
+	public String getLec_spa_cd() {
+		return lec_spa_cd;
+	}
+	public void setLec_spa_cd(String lec_spa_cd) {
+		this.lec_spa_cd = lec_spa_cd;
+	}
+	public void setLec_cd(String lec_cd) {
+		this.lec_cd = lec_cd;
+	}
 	private String prcs_date;	// 예약 승인/거부 처리 날짜
 	public String getType() {
 		return type;

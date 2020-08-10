@@ -78,9 +78,9 @@ table.ui-datepicker-calendar { display:none; }
 </style>
 </head>
 <body>
-<form name="frmEX">
+<!-- <form name="frmEX">
 날짜 선택 <input type="text" name="sdate" id="sdate" size="7" maxlength="7" value="2020-07" />
-</form>
+</form> -->
 <br>
 <div class="radio">
 <!--     <label for="foo1">
