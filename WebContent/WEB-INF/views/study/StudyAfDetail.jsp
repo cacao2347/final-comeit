@@ -126,6 +126,21 @@ $(document).ready(function ()
          });   
       });// end 스터디원 모달 정보요청
       
+   		// 스터디방 수정 버튼 클릭
+    	$("#modBtn").click(function()
+		{
+    		var result = confirm("스터디방 정보를 수정하시겠습니까?");
+    		
+    		if(result)
+    		{
+    			$(location).attr("href", "studydetailmod.action?stu_cd=" + $(this).val());	  
+    		}
+    		else if(result==null)
+    		{
+    			return;
+    		}
+			
+		});
       
       $(".outBtn").click(function() 
       {
@@ -481,7 +496,7 @@ $(document).ready(function ()
                <!-- 스터디장에게만 보일 수정 / 폐쇄 버튼 -->
                <div class="roomBtn">
                <c:if test="${sessionScope.mem_cd eq leaderName.leader_mem_cd }">
-                  <input type="button" value="방 정보 수정" class="btn modBtn" />
+                  <button type="button" class="btn modBtn" value="${studyInfo.stu_cd }" id="modBtn">방 정보 수정</button>
                </c:if>
                </div><!-- end .roomBtn -->
             

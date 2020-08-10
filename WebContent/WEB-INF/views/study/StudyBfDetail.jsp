@@ -138,7 +138,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
       	// 스터디방 수정 버튼 클릭
       	$("#modBtn").click(function()
 		{
-      		var result = confirm("스터디장 정보를 수정하시겠습니까?");
+      		var result = confirm("스터디방 정보를 수정하시겠습니까?");
       		
       		if(result)
       		{
