@@ -48,4 +48,11 @@ public interface IStudyDAO
 	public int studyCommit(String stu_cd);		// 스터디 커밋
 	
 	public int studyDelete(String stu_cd);	// 스터디방 폐쇄
+	
+	public StudyDTO studyDetailMod(String stu_cd);	// 스터디방 수정 화면 노출
+	
+	public ArrayList<StudyDTO> studyDetailTags(String stu_cd);		// 특정 스터디방의 관심 키워드 노출
+	
+	public ArrayList<StudyDTO> studyDetailDays(String stu_cd);		// 특정 스터디방의 요일들 노출
+	
 }
