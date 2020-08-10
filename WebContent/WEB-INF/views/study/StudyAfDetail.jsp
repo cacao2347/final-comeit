@@ -478,6 +478,13 @@ $(document).ready(function ()
                   </c:forEach>
                </div><!-- end .stuMem -->
             
+            	<!-- 스터디장에게만 보일 수정 / 폐쇄 버튼 -->
+               <div class="roomBtn">
+               <c:if test="${sessionScope.mem_cd eq leaderName.leader_mem_cd }">
+                  <input type="button" value="방 정보 수정" class="btn modBtn" />
+               </c:if>
+               </div><!-- end .roomBtn -->
+            
                <!-- 
                관리자에게만 보일 폐쇄 버튼
                <div class="roomBtn">

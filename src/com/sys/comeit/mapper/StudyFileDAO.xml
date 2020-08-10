@@ -81,4 +81,26 @@ WHERE ROWNUM<![CDATA[>]]>= #{start} AND ROWNUM <![CDATA[<]]>=#{end}
 		  </choose>	
 </select>
 
+
+<!-- 스터디방 산출물 등록 -->
+<select id="fileAdd" parameterType="com.sys.comeit.dto.StudyFileDTO" statementType="CALLABLE">
+	   { CALL PRC_STU_FILE
+	      (
+	         #{file_stu_join_cd}
+	         , #{file_title}
+	         , #{file_content}
+	         , #{file_name}
+	         , #{file_url}
+	      )
+	   }
+</select>
+
+<!-- 참가중인 스터디방 참가코드 조회 -->
+<select id="fileStuJoinCd" resultType="java.lang.String">
+	SELECT STU_JOIN_CD AS FILE_STU_JOIN_CD
+	FROM TBL_STU_JOIN
+	WHERE STU_CD = #{file_stu_cd}
+	  AND MEM_CD = #{file_mem_cd}
+</select>
+
 </mapper>

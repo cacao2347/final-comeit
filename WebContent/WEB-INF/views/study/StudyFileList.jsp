@@ -88,6 +88,18 @@
 						{
 							$(".filelist").html(args);
 							
+							$('INPUT[type="file"]').change(function()
+							{
+								
+							});
+							
+							// 게시글 실제 등록
+							$("#fileAddBtn").click(function() 
+							{
+								alert("등록확인");
+							});
+							
+							// 등록 취소
 							$(".file-cancel").click(function()
 							{
 								ajaxStudyFileList();

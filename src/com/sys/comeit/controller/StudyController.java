@@ -51,7 +51,7 @@ public class StudyController
 
 	      // 오늘 날짜 구하기
 	      Date sysdate = new Date();
-	      SimpleDateFormat date = new SimpleDateFormat("YYYY-MM-DD");
+	      SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
 	      int strDateCompare = 0;
 
 	      // 스터디방 정보 조회
@@ -62,6 +62,9 @@ public class StudyController
 	      {
 	         String strDate = dto.getStr_date();
 	         strDateCompare = date.format(sysdate).compareTo(strDate);
+	         
+	         // 테스트
+	         System.out.println("시작일 비교 :" + strDateCompare+", 날짜 조회: "+ date.format(sysdate));
 
 	         if (strDateCompare < 0) // 시작일 전
 	         {
@@ -121,7 +124,7 @@ public class StudyController
 
 	      // 오늘 날짜 구하기
 	      Date bfSysdate = new Date();
-	      SimpleDateFormat date = new SimpleDateFormat("YYYY-MM-DD");
+	      SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
 	      String sysdate = date.format(bfSysdate);
 	      System.out.println("bf날짜 : " + bfSysdate);
 	      

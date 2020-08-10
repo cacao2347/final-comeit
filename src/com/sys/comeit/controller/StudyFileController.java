@@ -4,9 +4,12 @@ import java.io.UnsupportedEncodingException;
 
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -157,24 +160,101 @@ public class StudyFileController
 		else
 			model.addAttribute("file", "없음");
 		
-		
 		view = "WEB-INF/views/study/AjaxStudyFileDetail.jsp";
 		
 		return view;
 	}
 	
 	
-	// 스터디방 산출물 등록
+	// 스터디방 산출물 등록페이지 요청
 	@RequestMapping(value = "/studyfileadd.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String studyFileAdd(Model model, HttpServletRequest request)
 	{
 		String view = null;
-		
-		
+		String stu_cd = request.getParameter("stu_cd");
+
+		// 오늘 날짜 구하기
+		Date sysdate = new Date();
+		SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
+		String today = date.format(sysdate);
+
+		model.addAttribute("today", today);
+		model.addAttribute("stu_cd", stu_cd);
+
 		view = "WEB-INF/views/study/StudyFileAdd.jsp";
+
+		return view;
+	}
+	
+	// 스터디방 산출물 등록
+	@RequestMapping(value = "/studyfileinsert.action", method = { RequestMethod.GET, RequestMethod.POST })
+	public String studyFileInsert(HttpServletRequest request, Model model)
+	{
+		String view = null;
+		HttpSession session = request.getSession();
+		IStudyFileDAO fileDao = sqlSession.getMapper(IStudyFileDAO.class);
+		
+		
+		String stu_cd = request.getParameter("stu_cd");						// 스터디방 코드
+		String mem_cd = (String)session.getAttribute("mem_cd");				// 회원코드
+		String file_title = request.getParameter("file_title");				// 게시물 제목
+		String file_content = request.getParameter("file_content");			// 게시물 내용
+		String file_name = "파일";
+		String file_url = request.getParameter("file_check"); 
+		
+		System.out.println("파일 :" + stu_cd);
+		System.out.println(mem_cd);
+		System.out.println(file_title);
+		System.out.println(file_content);
+		System.out.println(file_name);
+		System.out.println(file_url + "파일끝");
+		
+		// 제목이 없다면 '제목 없음' 처리
+		if (file_title == "") 
+			file_title = "제목 없음";
+		
+		//  내용이 없다면 null 처리
+		if (file_content == "") 
+			file_content = "내용 없음";
+		
+		// 첨부파일이 없다면 null 처리
+		if (file_url == "") 
+			file_url = null;
+		
+		// 스터디방 참가코드 조회
+		StudyFileDTO dto = new StudyFileDTO();
+		dto.setFile_mem_cd(mem_cd);
+		dto.setFile_stu_cd(stu_cd);
+		
+		String file_stu_join_cd = fileDao.fileStuJoinCd(dto);
+		//System.out.println("파일 스터디 참가 코드 : "+ file_stu_join_cd);
+		
+		// 파일 등록하기
+		StudyFileDTO fileDto = new StudyFileDTO();
+		fileDto.setFile_stu_join_cd(file_stu_join_cd);
+		fileDto.setFile_title(file_title);
+		fileDto.setFile_content(file_content);
+		fileDto.setFile_name(file_name);
+		fileDto.setFile_url(file_url);
+		
+		// 등록 프로시저 실행
+		fileDao.fileAdd(fileDto); 
+		
+		model.addAttribute("stu_cd", stu_cd);
+		view = "redirect:studydetail.action";
 		
 		return view;
 	}
 	
+	// 첨부파일 등록
+	@RequestMapping(value = "/ajaxfileadd.action", method = RequestMethod.POST)
+	public String ajaxFileAdd()
+	{
+		String view = null;
+
+		view = "WEB-INF/views/member/AjaxStuFile.jsp";
+
+		return view;
+	}
 
 }
