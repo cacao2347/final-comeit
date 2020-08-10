@@ -48,4 +48,18 @@ public interface IAdminDAO
 	
 	public ArrayList<AdmSpaReqDTO> admspanoList(); //업체 거부 명단 리스트
 	
+	public ArrayList<AdmStuReqDTO> admstureqList();// 스터디방 신고 리스트
+	
+	// 관리자 스터디방 신고 요청 확인 업데이트 메소드
+	public int stuReqCheckMod(String stu_rep_cd);
+	
+	// 관리자 스터디방 신고 요청 승인/거부 업데이트 메소드
+	public int stuReqConfirmMod(AdmStuReqDTO dto);
+	
+	public ArrayList<AdmSpaReqDTO> admSpaIntro(String spa_req_cd); //업체 거부 명단 리스트
+	
+	public ArrayList<AdminCalDTO> admCalList();	// 정산 관리 리스트
+	
+	public int lecCalAdd(AdminCalDTO dto); // 정산 관리 추가
+	
 }

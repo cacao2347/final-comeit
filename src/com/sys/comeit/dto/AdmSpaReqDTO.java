@@ -7,6 +7,47 @@ public class AdmSpaReqDTO
 	
 	private String spa_cd, email, tel, dtl_addr, join_date, name, prcs_rsn;
 	
+	private String one_intro, use_hrs, rsv_notes, dtl_intro;
+
+	public String getOne_intro()
+	{
+		return one_intro;
+	}
+
+	public void setOne_intro(String one_intro)
+	{
+		this.one_intro = one_intro;
+	}
+
+	public String getUse_hrs()
+	{
+		return use_hrs;
+	}
+
+	public void setUse_hrs(String use_hrs)
+	{
+		this.use_hrs = use_hrs;
+	}
+
+	public String getRsv_notes()
+	{
+		return rsv_notes;
+	}
+
+	public void setRsv_notes(String rsv_notes)
+	{
+		this.rsv_notes = rsv_notes;
+	}
+
+	public String getDtl_intro()
+	{
+		return dtl_intro;
+	}
+
+	public void setDtl_intro(String dtl_intro)
+	{
+		this.dtl_intro = dtl_intro;
+	}
 
 	private String searchKey, searchValue;	// 검색 키, 검색 단어
 	private int start, end;			// 페이지 시작 / 끝

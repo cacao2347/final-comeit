@@ -24,6 +24,22 @@
 
 	$(document).ready(function()
 	{
+		$(".spareqBtn").click(function() 
+		{
+			var spa_req_cd = $(this).val();
+			//alert(spa_req_cd);
+			
+			$.post("ajaxspaintro.action",
+	        {
+				spa_req_cd : $(this).val()
+	        }
+			, function(data)
+	        {
+	           alert($.trim(data));
+	        });
+		});
+		
+		
 		$(".adminBtn").on("click", function()
 		{
 			// 확인
@@ -60,6 +76,7 @@
 					admin_cd : '${sessionScope.id}'
 					,spa_req_cd : $(this).val()
 					,check_type_cd : 'CHET1001'
+					, prcs_rsn : '승인되었습니다'
 		        }
 				, function(data)
 		        {
@@ -80,29 +97,38 @@
 		{
 			var result = confirm("정말 거부하시겠습니까?");
 			
+			var admin_cd = '${sessionScope.id}';
+			var spa_req_cd = $(this).val();
+			
 			if(result)
 			{
-				alert("거부 되었습니다.");
-				
-				$.post("ajaxcpconfirm.action",
-		        {
-					admin_cd : '${sessionScope.id}'
-					,spa_req_cd : $(this).val()
-					,check_type_cd : 'CHET1002'
-		        }
-				, function(data)
-		        {
-		           alert(data);
-		        });
+				$(".btn-primary").click(function()
+				{
+					
+					$.post("ajaxcpconfirm.action",
+			        {
+						admin_cd : admin_cd
+						,spa_req_cd : spa_req_cd
+						,check_type_cd : 'CHET1002'
+						, prcs_rsn : $("#prcsRsn").val()
+						
+			        }
+					, function(data)
+			        {
+			           alert(data);
+			           //alert("거부 되었습니다.");
+			        });
+					//새로고침
+					setTimeout('location.reload()',0);
+					
+					
+				});
 			}
 			else if(result==null)
 			{
 				return;
 			}
 			
-			
-			//새로고침
-			setTimeout('location.reload()',0);
 			
 		});
 		
@@ -144,17 +170,12 @@
 						<select name="searchKey" class="form-control selectField" style="width: 20%;">
 							<option value="SPA_NAME">업체명</option>
 							<option value="SPA_ID">업체아이디</option>
-							<option value="SPA_ID">회원명</option>
-							<option value="TYPE">요청확인</option>
 							<option value="ADM_NAME">처리관리자</option>
 						</select>
 						
 						<input type="text" name="searchValue" placeholder="업체명 또는 처리관리자명으로 검색하세요!" class="form-control boxTF" style="width: 70%;">
 						<input type="button" value="검색" class="btn btn-primary searchBtn" id="searchBtn" style="width: 9%">
 					</form>
-						<!-- <input type="text" class="form-control tag" id="tag" placeholder="기술 태그">
-						<input type="text" class="form-control title" id="title" placeholder="스터디방 제목">
-						<button type="button" id="searchBtn" class="btn btn-primary searchBtn">검색</button> -->
 					</div>
 					</div>
 					<br>
@@ -174,7 +195,16 @@
                   <tbody>
                   <c:forEach var="ComApList" items="${ComApList }">
 					<tr>
-						<td>${ComApList.spa_req_cd }</td>
+						<td>
+						<c:if test="${ComApList.adm_name == null}">
+						<button type="button" class="spareqBtn" 
+						value=${ComApList.spa_req_cd }>${ComApList.spa_req_cd }</button>
+						</c:if>
+						<c:if test="${ComApList.adm_name != null}">
+						${ComApList.spa_req_cd }
+						</c:if>
+						</td>
+						
 						<td>${ComApList.spa_name }</td>
 						<td>${ComApList.spa_id }</td>
 						<td>${ComApList.com_name }</td>
@@ -188,7 +218,9 @@
 						<c:if test="${ComApList.type == 'C'}">
 						<button type="button" id="okBtn" class="okBtn" 
 						value=${ComApList.spa_req_cd }>승인</button>
-						<button type="button" id="noBtn" class="noBtn" 
+						<%-- <button type="button" id="noBtn" class="noBtn" 
+						value=${ComApList.spa_req_cd }>거부</button> --%>
+						<button type="button" id="noBtn" class="noBtn" data-toggle="modal" data-target="#staticBackdrop"
 						value=${ComApList.spa_req_cd }>거부</button>
 						</c:if>
 						<c:if test="${ComApList.type == 'Y'}">
@@ -243,7 +275,37 @@
 
         </div>
         <!-- /.container-fluid -->
-
+		
+		<!-- 모달 -->
+		<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		  <div class="modal-dialog modal-dialog-centered">
+		    <div class="modal-content">
+		      <div class="modal-header head">
+		        <h5 class="modal-title mTit" id="staticBackdropLabel">거부 사유</h5>
+		        <button type="button" class="close xBtn" data-dismiss="modal" aria-label="Close">
+		        X
+		        </button>
+		      </div>
+		      <div class="modal-body mbody">
+		      	
+		      	
+		      	<table class="table" style="margin-top: 30px;">
+		      		
+		      		<tr>
+		      			<td style="border-top:none"><div class="rsnTit">사유</div></td>
+		      			<td style="border-top:none">
+		      				<input type="text" class="form-control" id="prcsRsn" style="width: 300px;" placeholder="예)카페랑 다릅니다.">
+		      			</td>
+		      		</tr>
+		      	</table>
+		      	
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" id="reqSubmitN" class="btn btn-primary">확인</button>
+		      </div>
+		    </div>
+		  </div>
+		</div><!-- 모달 끝  -->
       
 </body>
 </html>
