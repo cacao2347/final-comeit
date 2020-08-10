@@ -8,7 +8,7 @@ String cp = request.getContextPath();
 <html>
 <head>
 <meta charset="UTF-8">
-<title>StudySpaceList.jsp</title>
+<title>LectureSpaceList.jsp</title>
 
 <link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/lecture/lectureSpaceList.css" >
 
@@ -27,10 +27,44 @@ String cp = request.getContextPath();
 	$(function()
 	{
 		// ajax처리
-		ajaxLectureSpaceList();	
+		ajaxLectureSpaceList();
+		
+		// 상세 페이지로 이동
+	   	$(document).on('click', '.imageBtn', function()
+	   	{
+			var params = "spa_req_cd=" + $(this).val();
+			location.href = "<%=cp%>/spacedetail.action?"+params;
+		});
+		
+		// 페이징 번호가 클릭 됐을때
+		$(document).on('click', '.page-link', function()
+		{
+			
+			$.ajax(
+			{
+				type : "POST"
+				, url : "lecturespacelist.action"
+				, data : {"lec_cd" : $("#lectureCode").val(), "pageNum" : $(this).text()}
+				, dataType : "text"
+				, async: false
+				, success : function(data)
+				{
+					//alert("성공" + data);
+					// 여기부터 하기
+					$(".spaceList").html(data);
+					
+				}
+				, error : function(e)
+				{
+					alert(e.responseText + "에러");
+				}
+			});
+			
+		});
+		
 	});
 	
-	// 이 스터디방에 대한 공지사항 리스트 뿌려주는 ajax
+	// 이 스터디방에 대한 모임장소 리스트 뿌려주는 ajax
 	function ajaxLectureSpaceList()
 	{
 		var params = "lec_cd=" + $("#lectureCode").val();
@@ -48,20 +82,13 @@ String cp = request.getContextPath();
 				// 여기부터 하기
 				$(".spaceList").html(data);
 				
-				
-				$(".listTitle").click(function()
-				{
-					alert("클릭");
-					$("#tableForm").submit();
-				
-				});
-				
 			}
 			, error : function(e)
 			{
 				alert(e.responseText + "에러");
 			}
 		});
+		
 	}
 	
 
@@ -90,33 +117,6 @@ String cp = request.getContextPath();
 		</div>
 		
 		<hr>
-		<div class="row">
-			<div class="col-md-2"></div>
-			<div class="col-md-8">
-				<div class="row paging">
-					<div class="col-md-12">
-						<nav>
-							<ul class="pagination">
-								<li class="page-item"><a href="#" class="page-link">Previous</a></li>
-								<li class="page-item"><a href="#" class="page-link">1</a></li>
-								<li class="page-item"><a href="#" class="page-link">2</a></li>
-								<li class="page-item"><a href="#" class="page-link">3</a></li>
-								<li class="page-item"><a href="#" class="page-link">4</a></li>
-								<li class="page-item"><a href="#" class="page-link">5</a></li>
-								<li class="page-item"><a href="#" class="page-link">6</a></li>
-								<li class="page-item"><a href="#" class="page-link">7</a></li>
-								<li class="page-item"><a href="#" class="page-link">8</a></li>
-								<li class="page-item"><a href="#" class="page-link">9</a></li>
-								<li class="page-item"><a href="#" class="page-link">10</a></li>
-								<li class="page-item"><a href="#" class="page-link">Next</a></li>
-							</ul>
-						</nav>
-					</div>
-				</div>
-				<!-- 페이징 영역 끝 -->
-			</div>
-			<div class="col-md-2"></div>
-		</div>
 	</div>
 
 </body>

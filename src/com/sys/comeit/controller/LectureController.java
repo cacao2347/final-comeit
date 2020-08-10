@@ -168,6 +168,149 @@ public class LectureController
 		return view;
 	}
 	
+	// 강의 수정 FORM 호출
+	@RequestMapping(value = "/lecturemod.action", method =
+	{ RequestMethod.GET, RequestMethod.POST })
+	public String lectureMod(Model model, HttpServletRequest request)
+	{
+		String view = null;
+	
+		IAreaDAO areaDao = sqlSession.getMapper(IAreaDAO.class);
+		IIntTagDAO intTagDao = sqlSession.getMapper(IIntTagDAO.class);
+		ILectureDAO lectureDao = sqlSession.getMapper(ILectureDAO.class);
+		String lec_cd = request.getParameter("lec_cd");
+	
+		model.addAttribute("area", areaDao.areaList());
+		model.addAttribute("intTag", intTagDao.intTagList());
+		model.addAttribute("lecInfo", lectureDao.lectureInfo(lec_cd));
+	
+		view = "WEB-INF/views/lecture/LectureMod.jsp";
+	
+		return view;
+	}
+	
+	@RequestMapping(value = "/lectureupdate.action", method =
+	{ RequestMethod.GET, RequestMethod.POST })
+	public String lectureUpdate(Model model, HttpServletRequest request)
+	{
+		ILectureDAO lectureDao = sqlSession.getMapper(ILectureDAO.class);
+		IProDAO proDao = sqlSession.getMapper(IProDAO.class);
+		
+		HttpSession session = request.getSession();
+		
+		String view = "";
+		String mem_cd = "";
+		mem_cd = (String) session.getAttribute("mem_cd");
+
+		// String lec_cd = request.getParameter("id");
+		String prof_cd = proDao.lecCreateCheck2(mem_cd); //
+		System.out.println("prof_cd : " + prof_cd);
+		String spc_area_cd = request.getParameter("spcArea");
+		System.out.println("spcArea_cd : " + spc_area_cd);
+		String lec_term_cd = request.getParameter("lecTerm");
+		System.out.println("lecTerm_cd : " + lec_term_cd);
+		String lec_name = request.getParameter("lecName"); //
+		System.out.println("lecName : " + lec_name);
+		String str_date = request.getParameter("start"); //
+		System.out.println("str_date : " + str_date);
+		int lec_fee = Integer.parseInt(request.getParameter("lecFee"));
+		System.out.println("lecFee : " + lec_fee);
+		String lec_intro = request.getParameter("lecIntro"); //
+		System.out.println("lecIntro : " + lec_intro);
+		String min_mem = request.getParameter("minMem");
+		System.out.println("minMem : " + min_mem);
+		String max_mem = request.getParameter("maxMem");
+		System.out.println("maxMem : " + max_mem);
+		String startTime = request.getParameter("startTime");
+		System.out.println("startTime : " + startTime);
+		String endTime = request.getParameter("endTime");
+		System.out.println("endTime : " + endTime);
+
+		LectureDTO dto = new LectureDTO();
+
+		dto.setLec_name(lec_name);
+		dto.setProf_cd(prof_cd);
+		dto.setSpc_area_cd(spc_area_cd);
+		dto.setLec_term_cd(lec_term_cd);
+		dto.setLec_name(lec_name);
+		dto.setStr_date(str_date);
+		dto.setLec_fee(lec_fee);
+		dto.setLec_intro(lec_intro);
+		dto.setMin_mem(min_mem);
+		dto.setMax_mem(max_mem);
+		dto.setStr_hrs(startTime);
+		dto.setEnd_hrs(endTime);
+
+		lectureDao.lectureInsert(dto);
+
+		String lec_cd = dto.getLec_cd();
+		System.out.println(lec_cd);
+
+		String[] dayTagList = request.getParameterValues("dayTagList");		
+		String[] intTagList = {};
+		String[] etcTagList = {};
+		
+		if(request.getParameterValues("intTagList")!=null)
+		{
+			intTagList = request.getParameterValues("intTagList"); // 선택한 모든 관심 키워드 배열에 넣기
+		}
+		
+		if(request.getParameterValues("etcTagList")!=null)
+		{
+			etcTagList = request.getParameterValues("etcTagList"); // 선택한 모든 관심 기타 키워드 배열에 넣기
+		}
+		System.out.println("그냥 관심 : " + intTagList.length);
+		System.out.println("기타 관심 : " + etcTagList.length);
+		
+		// 관심키워드 DB INSERT
+		if (lec_cd != null)
+		{
+			// 관심키워드가 존재할 때 INSERT
+			if (intTagList.length > 0)
+			{
+				for (int i = 0; i < intTagList.length; i++)
+				{
+					dto.setInt_tag_cd(intTagList[i]);
+
+					System.out.println("각 관심 : " + intTagList[i]);
+
+					lectureDao.insertIntTag(dto);
+				}
+			}
+			// 기타 키워드가 존재할 때 INSERT
+			if (etcTagList.length > 0)
+			{
+				for (int i = 0; i < etcTagList.length; i++)
+				{
+					dto.setEtc_tag(etcTagList[i]);
+					System.out.println("각 기타 키워드 : " + etcTagList[i]);
+
+					lectureDao.insertEtcTag(dto); // 기타 키워드 INSERT
+
+					int etcTagCount = lectureDao.etcTagCount(etcTagList[i]);
+
+					if (etcTagCount == 10)
+						lectureDao.addTagName(etcTagList[i]);
+
+				}
+			}
+
+			// 강의 진행 일시 INSERT
+			if (dayTagList.length > 0)
+			{
+				for (int i = 0; i < dayTagList.length; i++)
+				{
+					dto.setDay_cd(dayTagList[i]);
+					lectureDao.addLecturePrgTime(dto);	
+				}
+			}
+
+		}
+		
+		view = "redirect:lecturelist.action";
+
+		return view;
+	}
 	
 	// 강의 리스트 화면 노출하기
 	@RequestMapping(value = "/lecturelist.action", method = {RequestMethod.GET, RequestMethod.POST})
@@ -328,6 +471,7 @@ public class LectureController
 					model.addAttribute("lecInfo", lectureDao.lectureInfo(lec_cd));
 					model.addAttribute("lecTag", lectureDao.lecIntTagSearch(lec_cd));
 					model.addAttribute("profInfo", proDao.profInfo(mem_cd));
+					model.addAttribute("lec_cd", lec_cd);
 					
 					view = "WEB-INF/views/lecture/LectureProfessorDetail.jsp";
 					

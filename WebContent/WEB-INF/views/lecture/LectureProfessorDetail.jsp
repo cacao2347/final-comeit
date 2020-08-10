@@ -24,7 +24,6 @@
 <link rel="icon" href="<%=cp%>/assets/images/pen_1.ico"
 	type="image/x-icon">
 
-
 <style type="text/css">
 body {
 	font-family: 'Noto Sans KR', sans-serif !important;
@@ -57,6 +56,20 @@ body {
 			$("#stuMemInfo2").css('display', 'none');
 		});
 		 */
+		 
+		// 수정 버튼이 눌러졌을 때
+		$("#modify").click(function()
+		{
+			$("#buttonForm").attr("action", "lecturemod.action");
+			$("#buttonForm").submit();
+		});
+		 
+		// 삭제 버튼이 눌러졌을 때
+		$("#delete").click(function()
+		{
+			$("#buttonForm").attr("action", "lecturedelete.action");
+			$("#buttonForm").submit();
+		});
 
 	});
 </script>
@@ -167,9 +180,12 @@ body {
 
 							<!-- 버튼 영역 -->
 							<div class="text-right">
-								<input type="button" value="강의 수정"
-									class="btn btn-lg btn-primary join" /> <input type="button"
-									value="강의 삭제" class="btn btn-lg btn-secondary join" />
+								<input type="button" value="강의 수정" class="btn btn-lg btn-primary join" id="modify" />
+								<input type="button" value="강의 삭제" class="btn btn-lg btn-secondary join" id="delete"/>
+								<!-- 수정/삭제시 강의코드를 넘겨주는 Form -->
+								<form id="buttonForm" action="">
+									<input type="hidden" name="lec_cd" value="${lec_cd }">
+								</form>
 							</div>
 
 						</div>
