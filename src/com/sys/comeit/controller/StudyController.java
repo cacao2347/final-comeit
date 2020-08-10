@@ -753,5 +753,63 @@ public class StudyController
 		return String.valueOf(stu_count);
 
 	}
+	
+	// 스터디방 수정화면 노출하기
+	@RequestMapping(value = "/studydetailmod.action", method = { RequestMethod.GET, RequestMethod.POST })
+	public String studyDetailMod(Model model, HttpServletRequest request) throws UnsupportedEncodingException
+	{
+		String view = null;
+		
+		IStudyDAO studyDao = sqlSession.getMapper(IStudyDAO.class); // 스터디 정보
+		
+		IDayDAO dayDao = sqlSession.getMapper(IDayDAO.class); // 요일
+		IIntTagDAO intTagDao = sqlSession.getMapper(IIntTagDAO.class); // 관심키워드
+		
+		String stu_cd = request.getParameter("stu_cd");
+		System.out.println("상세에서 받은 스터디 코드 : " + stu_cd);
+		
+		StudyDTO studydetailinfo = studyDao.studyDetailMod(stu_cd);				// 스터디방의 정보 가져오기
+		ArrayList<StudyDTO> studyDetailTags = studyDao.studyDetailTags(stu_cd);	// 스터디방의 키워드 정보 가져오기
+		ArrayList<StudyDTO> studyDetailDays = studyDao.studyDetailDays(stu_cd);	// 스터디방의 요일 정보 가져오기
+		
+		
+		model.addAttribute("studydetailinfo", studydetailinfo);
+		model.addAttribute("day", dayDao.dayList()); // 요일
+		model.addAttribute("intTag", intTagDao.intTagList()); // 관심키워드
+		model.addAttribute("studyDetailTags", studyDetailTags);	
+		model.addAttribute("studyDetailDays", studyDetailDays);
+		
+		view = "/WEB-INF/views/study/StudyDetailMod.jsp";
+		
+		return view;
+		
+	}
+	
+	// 스터디방 수정하기
+	@RequestMapping(value = "/studymodify.action", method = { RequestMethod.GET, RequestMethod.POST })
+	public String studyModify(Model model, HttpServletRequest request) throws UnsupportedEncodingException
+	{
+		String view = null;
+		
+		IStudyDAO studyDao = sqlSession.getMapper(IStudyDAO.class); // 스터디 정보
+		
+		String stu_cd = request.getParameter("stu_cd");
+		
+		String content = request.getParameter("content");
+		
+		StudyDTO dto = new StudyDTO();
+		
+		dto.setStu_cd(stu_cd);
+		dto.setContent(content);
+		
+		studyDao.studyModify(dto);
+		
+		model.addAttribute("stu_cd", stu_cd);
+	    
+	    view = "redirect:studydetail.action";
+		
+		return view;
+		
+	}
 
 }

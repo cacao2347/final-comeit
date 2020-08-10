@@ -235,6 +235,7 @@
       
    </select>
    
+   <!-- 실제 출력 스터디 리스트 -->
    <select id="getListData" parameterType="com.sys.comeit.dto.StudyDTO" resultType="com.sys.comeit.dto.StudyDTO">
       SELECT STU_CD, CRT_DATE, TITLE, STR_DATE, MEM_NUM, CMT_DATE, AREA_NAME, SPC_AREA_NAME, MEET_TERM, IDNTT_TYPE, LV, CAT_NAME, SCRT_NUM, END_DATE, IMG_URL
       FROM
@@ -278,5 +279,32 @@
               </choose>
    </select>
 
+   <!-- 스터디 수정 페이지 노출 -->
+   <select id="studyDetailMod" resultType="com.sys.comeit.dto.StudyDTO">
+	   	SELECT STU_CD, TITLE, CONTENT, STR_DATE, MEM_NUM, CMT_DATE, AREA_NAME, SPC_AREA_NAME, CAT_NAME, MEET_TERM, IDNTT_TYPE, LV
+		FROM VIEW_STU_LIST
+		WHERE STU_CD = #{stu_cd}
+   </select>
+   
+   <!-- 특정 스터디방의 관심 키워드들 노출 -->
+   <select id="studyDetailTags" resultType="com.sys.comeit.dto.StudyDTO">
+   		SELECT INT_TAG_NAME
+		FROM VIEW_STU_TAGS
+		WHERE STU_CD = #{stu_cd}
+   </select>
+   
+   <!-- 특정 스터디방의 요일들 노출 -->
+   <select id="studyDetailDays" resultType="com.sys.comeit.dto.StudyDTO">
+   		SELECT DAY_NAME AS STU_DAY_NAME
+		FROM VIEW_STU_DAYS
+		WHERE STU_CD = #{stu_cd}
+   </select>
+   
+   <!-- 스터디 수정 액션 -->
+   <update id="studyModify">
+   		UPDATE TBL_STU
+		SET CONTENT = #{content}
+		WHERE STU_CD = #{stu_cd}
+   </update>
    
 </mapper>
