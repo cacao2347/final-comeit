@@ -32,7 +32,7 @@ String cp = request.getContextPath();
 		// 상세 페이지로 이동
 	   	$(document).on('click', '.imageBtn', function()
 	   	{
-			var params = "spa_req_cd=" + $(this).val();
+			var params = "spa_req_cd=" + $(this).val() + "&peoCd=" + $("#lectureCode").val();
 			location.href = "<%=cp%>/spacedetail.action?"+params;
 		});
 		
@@ -64,7 +64,7 @@ String cp = request.getContextPath();
 		
 	});
 	
-	// 이 스터디방에 대한 모임장소 리스트 뿌려주는 ajax
+	// 이 강의에 대한 모임장소 리스트 뿌려주는 ajax
 	function ajaxLectureSpaceList()
 	{
 		var params = "lec_cd=" + $("#lectureCode").val();

@@ -140,6 +140,7 @@ public class SpaceController
 			if(request.getParameter("peoCd")!=null)
 			{
 				peoCd = request.getParameter("peoCd");
+				System.out.println("peoCd : " + peoCd);
 			}
 			if(mem_id==null)
 			{
