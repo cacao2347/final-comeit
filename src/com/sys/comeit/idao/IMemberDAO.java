@@ -41,4 +41,6 @@ public interface IMemberDAO
 	
 	public ArrayList<MemberDTO> modalStudyList(String mem_cd);
 	
+	public MemberDTO memPayInfo(String mem_cd); // 재민 추가, 결제 정보
+	
 }

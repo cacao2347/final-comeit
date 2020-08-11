@@ -183,5 +183,13 @@
        AND MEM_CD = #{mem_cd}
        ]]>
    </select>
+   
+   <!-- 재민 추가 -->
+	<!-- 강의 결제를 위한 특정 멤버 전화번호, 이메일 가져오기 -->
+   	<select id="memPayInfo" parameterType="java.lang.String" resultType="com.sys.comeit.dto.MemberDTO">
+   		SELECT NAME, EMAIL, TEL
+   		FROM TBL_MEM_JOIN
+   		WHERE MEM_CD = #{mem_cd}
+   	</select>
 	
 </mapper>

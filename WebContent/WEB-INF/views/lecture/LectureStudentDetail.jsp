@@ -48,22 +48,23 @@ body
 			IMP.init('imp37333857');
 
 			IMP.request_pay({
-			    pg : 'inicis', // version 1.1.0부터 지원.
+				pg : 'inicis', // version 1.1.0부터 지원.
 			    pay_method : 'card',
 			    merchant_uid : 'merchant_' + new Date().getTime(),
-			    name : '주문명:결제테스트',
-			    amount : 14000, //판매 가격
-			    buyer_email : 'iamport@siot.do',
-			    buyer_name : '임효림',
-			    buyer_tel : '010-3325-1244',
-			    buyer_addr : '서울특별시 강남구 삼성동',
-			    buyer_postcode : '123-456'
+			    name : '${lecInfo.lec_name}',	// 상품명(강의명)
+			    amount : '${lecInfo.lec_fee}', //판매 가격
+			    buyer_email : '${memInfo.email}', // 구매자 이메일
+			    buyer_name : '${memInfo.name}', // 구매자명
+			    buyer_tel : '${memInfo.tel}', // 구매자 번호
+			    buyer_addr : '주소',
+			    buyer_postcode : '우편번호'
 			}, function(rsp) {
 			    if ( rsp.success ) {
 			        var msg = '결제가 완료되었습니다.';
+			        $("#myForm").attr("action", "lecturepaysuccess.action");
+			        $("#myForm").submit();
 			    } else {
 			        var msg = '결제에 실패하였습니다.';
-			        msg += '에러내용 : ' + rsp.error_msg;
 			        <%-- location.href = "<%=cp %>/LecturePaySuccess.jsp"; --%>
 			    }
 			    alert(msg);
@@ -88,6 +89,16 @@ body
 
 </head>
 <body>
+
+	<!-- 강의 결제 성공시 데이터를 넘기기 위한 form 구성 -->
+	<form id="myForm" action="">
+		<input type="hidden" name="lecName" value="${lecInfo.lec_name }">
+		<input type="hidden" name="lecFee" value="${lecInfo.lec_fee }">
+		<input type="hidden" name="memEmail" value="${memInfo.email }">
+		<input type="hidden" name="memTel" value="${memInfo.tel }">
+		<input type="hidden" name="memName" value="${memInfo.name }">
+		<input type="hidden" name="lecCd" value="${lec_cd }">
+	</form>
 
 	<div class="row">
 		<div class="col-md-12">

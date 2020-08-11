@@ -537,14 +537,13 @@
 				<div class="weekDay">
 					<select name="week" id="week" class="weekSel form-control">
 						<option value="0">요일</option>
-						<option value="DAY1002">월요일</option>
-						<option value="DAY1003">화요일</option>
-						<option value="DAY1004">수요일</option>
-						<option value="DAY1005">목요일</option>
-						<option value="DAY1006">금요일</option>
-						<option value="DAY1007">토요일</option>
-						<option value="DAY1008">일요일</option>
-						<option value="DAY1010">매일</option>
+						<option value="DAY1001">월요일</option>
+						<option value="DAY1002">화요일</option>
+						<option value="DAY1003">수요일</option>
+						<option value="DAY1004">목요일</option>
+						<option value="DAY1005">금요일</option>
+						<option value="DAY1006">토요일</option>
+						<option value="DAY1007">일요일</option>
 						<option value="DAY1008">주말</option>
 						<option value="DAY1009">주중</option>
 					</select> <input type="button" value="추가" class="weekBtn btn btn-primary"
@@ -565,7 +564,8 @@
 					</div>
 					<!-- end .cancel -->
 					<div class="upload">
-						<input type="button" name="insertBtn" id="updateBtn" value="수정" class="btn btn-primary" />
+						<input type="button" name="updateBtn" id="updateBtn" value="수정" class="btn btn-primary" />
+						<input type="hidden" name="lecCd" id="lecCd" value=${lecCd }>
 					</div>
 					
 					<div class="errMsg">

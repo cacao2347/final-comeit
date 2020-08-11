@@ -35,4 +35,12 @@ public interface ILectureDAO
 	
 	public ArrayList<LectureDTO> lecHrDaySearch();	// 모든 요일 빼오는 리스트
 	
+	// 강의 결제시 수강테이블에 인서트
+	public void lecMemInsert(@Param("lec_cd") String lec_cd, @Param("mem_cd") String mem_cd);
+	
+	// 강의 수정 관련 쿼리문
+	public void lectureUpdate(LectureDTO dto);
+	public void intTagDelete(String lec_cd);
+	public void etcTagDelete(String lec_cd);
+	public void lecPrgTimeDelete(String lec_cd);
 }

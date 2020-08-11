@@ -175,4 +175,31 @@
 		WHERE LEC_CD = #{lec_cd}
 	</select>
 	
+	<!-- 결제 완료시 수강 테이블에 인서트 -->
+	<insert id="lecMemInsert">
+		INSERT INTO TBL_LEC_JOIN(LEC_JOIN_CD, LEC_CD, MEM_CD, BANK_CD, JOIN_DATE, ACNT_NUM)
+		VALUES('LECJO' || SEQ_LEC_JOIN.NEXTVAL, #{lec_cd} , #{mem_cd} , 'BNK1002', SYSDATE,  '1234567')
+	</insert>
+	
+	<!-- 강의 수정 관련 쿼리문 -->
+	<!-- TBL_LEC 테이블 업데이트 -->
+	<update id="lectureUpdate" parameterType="com.sys.comeit.dto.LectureDTO">
+		UPDATE TBL_LEC SET SPC_AREA_CD = #{spc_area_cd}, LEC_TERM_CD = #{lec_term_cd}
+		, LEC_NAME = #{lec_name}, STR_DATE = #{str_date}, LEC_INTRO = #{lec_intro}
+		, MIN_MEM = #{min_mem}, MAX_MEM = #{max_mem}
+		WHERE LEC_CD = #{lec_cd}
+	</update>
+	
+	<delete id="intTagDelete">
+		DELETE FROM TBL_LEC_INT_TAG WHERE LEC_CD = #{lec_cd}
+	</delete>
+	
+	<delete id="etcTagDelete">
+		DELETE FROM TBL_LEC_INT_ETC_TAG WHERE LEC_CD = #{lec_cd}
+	</delete>
+	
+	<delete id="lecPrgTimeDelete">
+		DELETE FROM TBL_LEC_PRG_TIME WHERE LEC_CD = #{lec_cd}
+	</delete>
+	
 </mapper>

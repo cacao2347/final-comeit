@@ -183,6 +183,7 @@ public class LectureController
 		model.addAttribute("area", areaDao.areaList());
 		model.addAttribute("intTag", intTagDao.intTagList());
 		model.addAttribute("lecInfo", lectureDao.lectureInfo(lec_cd));
+		model.addAttribute("lecCd", lec_cd);
 	
 		view = "WEB-INF/views/lecture/LectureMod.jsp";
 	
@@ -202,7 +203,7 @@ public class LectureController
 		String mem_cd = "";
 		mem_cd = (String) session.getAttribute("mem_cd");
 
-		// String lec_cd = request.getParameter("id");
+		String lec_cd = request.getParameter("lecCd");
 		String prof_cd = proDao.lecCreateCheck2(mem_cd); //
 		System.out.println("prof_cd : " + prof_cd);
 		String spc_area_cd = request.getParameter("spcArea");
@@ -228,8 +229,8 @@ public class LectureController
 
 		LectureDTO dto = new LectureDTO();
 
+		dto.setLec_cd(lec_cd);
 		dto.setLec_name(lec_name);
-		dto.setProf_cd(prof_cd);
 		dto.setSpc_area_cd(spc_area_cd);
 		dto.setLec_term_cd(lec_term_cd);
 		dto.setLec_name(lec_name);
@@ -241,10 +242,7 @@ public class LectureController
 		dto.setStr_hrs(startTime);
 		dto.setEnd_hrs(endTime);
 
-		lectureDao.lectureInsert(dto);
-
-		String lec_cd = dto.getLec_cd();
-		System.out.println(lec_cd);
+		lectureDao.lectureUpdate(dto);
 
 		String[] dayTagList = request.getParameterValues("dayTagList");		
 		String[] intTagList = {};
@@ -268,6 +266,8 @@ public class LectureController
 			// 관심키워드가 존재할 때 INSERT
 			if (intTagList.length > 0)
 			{
+				lectureDao.intTagDelete(lec_cd);
+				
 				for (int i = 0; i < intTagList.length; i++)
 				{
 					dto.setInt_tag_cd(intTagList[i]);
@@ -280,6 +280,8 @@ public class LectureController
 			// 기타 키워드가 존재할 때 INSERT
 			if (etcTagList.length > 0)
 			{
+				lectureDao.etcTagDelete(lec_cd);
+				
 				for (int i = 0; i < etcTagList.length; i++)
 				{
 					dto.setEtc_tag(etcTagList[i]);
@@ -298,6 +300,8 @@ public class LectureController
 			// 강의 진행 일시 INSERT
 			if (dayTagList.length > 0)
 			{
+				lectureDao.lecPrgTimeDelete(lec_cd);
+				
 				for (int i = 0; i < dayTagList.length; i++)
 				{
 					dto.setDay_cd(dayTagList[i]);
@@ -437,47 +441,74 @@ public class LectureController
 
 	
 	// 강의 상세 페이지 호출
-		@RequestMapping(value = "/lecturedetail.action", method =
-			{ RequestMethod.GET, RequestMethod.POST })
-			public String lectureDetail(Model model, HttpServletRequest request)
-			{
-				String view = "";
-				int profCheck = 0; // 강의 상세 페이지를 호출하는 회원이 강사인지 아닌지 판단하는 변수
-				
-				HttpSession session = request.getSession();
-				
-				ILectureDAO lectureDao = sqlSession.getMapper(ILectureDAO.class);
-				IProDAO proDao = sqlSession.getMapper(IProDAO.class);
-				
-				// 강의코드 받기
-				String lec_cd = request.getParameter("lec_cd");
-				String mem_cd = lectureDao.findMemcd(lec_cd); // 해당 강의의 강사 mem_cd 
-				String mem_cd_session = (String) session.getAttribute("mem_cd"); // 해당 페이지에 접속하는 mem_cd
-				
-				profCheck = lectureDao.checkProfcd(lec_cd, mem_cd_session);
-				
-				if(profCheck == 0)
-				{
-					model.addAttribute("lecInfo", lectureDao.getListData2(lec_cd));
-					model.addAttribute("lecTag", lectureDao.lecIntTagSearch(lec_cd));
-					model.addAttribute("profInfo", proDao.profInfo(mem_cd));
-					
-					view = "WEB-INF/views/lecture/LectureStudentDetail.jsp";
-					
-					return view;
-				}
-				else
-				{
-					model.addAttribute("lecInfo", lectureDao.lectureInfo(lec_cd));
-					model.addAttribute("lecTag", lectureDao.lecIntTagSearch(lec_cd));
-					model.addAttribute("profInfo", proDao.profInfo(mem_cd));
-					model.addAttribute("lec_cd", lec_cd);
-					
-					view = "WEB-INF/views/lecture/LectureProfessorDetail.jsp";
-					
-					return view;
-				}
-				
-			}
+	@RequestMapping(value = "/lecturedetail.action", method =
+	{ RequestMethod.GET, RequestMethod.POST })
+	public String lectureDetail(Model model, HttpServletRequest request)
+	{
+		String view = "";
+		int profCheck = 0; // 강의 상세 페이지를 호출하는 회원이 강사인지 아닌지 판단하는 변수
+		
+		HttpSession session = request.getSession();
+		
+		ILectureDAO lectureDao = sqlSession.getMapper(ILectureDAO.class);
+		IProDAO proDao = sqlSession.getMapper(IProDAO.class);
+		IMemberDAO memDao = sqlSession.getMapper(IMemberDAO.class);
+		
+		// 강의코드 받기
+		String lec_cd = request.getParameter("lec_cd");
+		String mem_cd = lectureDao.findMemcd(lec_cd); // 해당 강의의 강사 mem_cd 
+		String mem_cd_session = (String) session.getAttribute("mem_cd"); // 해당 페이지에 접속하는 mem_cd
+		
+		profCheck = lectureDao.checkProfcd(lec_cd, mem_cd_session);
+		
+		if(profCheck == 0)
+		{
+			model.addAttribute("lecInfo", lectureDao.getListData2(lec_cd));
+			model.addAttribute("lecTag", lectureDao.lecIntTagSearch(lec_cd));
+			model.addAttribute("profInfo", proDao.profInfo(mem_cd));
+			model.addAttribute("memInfo", memDao.memPayInfo(mem_cd_session)); // 결제정보 넘기기
+			model.addAttribute("lec_cd", lec_cd);
+			
+			view = "WEB-INF/views/lecture/LectureStudentDetail.jsp";
+			
+			return view;
+		}
+		else
+		{
+			model.addAttribute("lecInfo", lectureDao.lectureInfo(lec_cd));
+			model.addAttribute("lecTag", lectureDao.lecIntTagSearch(lec_cd));
+			model.addAttribute("profInfo", proDao.profInfo(mem_cd));
+			model.addAttribute("lec_cd", lec_cd);
+			
+			view = "WEB-INF/views/lecture/LectureProfessorDetail.jsp";
+			
+			return view;
+		}
+		
+	}
+	
+	// 결제 완료 페이지 호출
+	@RequestMapping(value = "/lecturepaysuccess.action", method =
+	{ RequestMethod.GET, RequestMethod.POST })
+	public String lecturePaySuccess(Model model, HttpServletRequest request)
+	{
+		String view = "";
+		
+		HttpSession session = request.getSession();
+		String mem_cd = (String) session.getAttribute("mem_cd");
+		
+		String lec_cd = request.getParameter("lecCd");
+		
+		System.out.println("테스트1" + mem_cd);
+		System.out.println("테스트2" + lec_cd);
+		
+		ILectureDAO lectureDao = sqlSession.getMapper(ILectureDAO.class);
+		
+		lectureDao.lecMemInsert(lec_cd, mem_cd);
+		
+		view = "WEB-INF/views/lecture/LecturePaySuccess.jsp";
+			
+			return view;
+	}
 
 }
