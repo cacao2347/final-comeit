@@ -63,21 +63,21 @@ FROM
 		FROM VIEW_STU_OPUT
 		WHERE STU_CD = #{file_stu_cd}
 		<choose>
-		       <when test="searchValue != null">
+		<when test="searchValue != null">
         AND BOARD_DEL IS NULL
         AND ${searchKey} LIKE '%${searchValue}%'
-        ORDER BY FILE_CRT_DATE 
-    )DATA
+        ORDER BY FILE_CRT_DATE DESC
+    	)DATA
 )
-WHERE ROWNUM<![CDATA[>]]>= #{start} AND ROWNUM <![CDATA[<]]>=#{end}
-				</when>
-				<otherwise>
+	WHERE ROWNUM<![CDATA[>]]>= #{start} AND ROWNUM <![CDATA[<]]>=#{end}
+		</when>
+		<otherwise>
 		  AND BOARD_DEL IS NULL
-        ORDER BY FILE_CRT_DATE 
-    )DATA
+        ORDER BY FILE_CRT_DATE DESC
+    	)DATA
 )
-WHERE ROWNUM<![CDATA[>]]>= #{start} AND ROWNUM <![CDATA[<]]>=#{end}
-				</otherwise>
+	WHERE ROWNUM<![CDATA[>]]>= #{start} AND ROWNUM <![CDATA[<]]>=#{end}
+		</otherwise>
 		  </choose>	
 </select>
 
