@@ -320,8 +320,7 @@ public class AdminController
 		
 		IAdminDAO dao = sqlSession.getMapper(IAdminDAO.class);
 		
-		
-		
+		model.addAttribute("admstureqList", dao.admstureqList());
 		model.addAttribute("args", "/WEB-INF/views/admin/AdminReport.jsp");
 		
 		view = "/WEB-INF/views/admin/PageLayout.jsp";
@@ -336,8 +335,7 @@ public class AdminController
 		
 		IAdminDAO dao = sqlSession.getMapper(IAdminDAO.class);
 		
-		
-		
+		model.addAttribute("admstureqList", dao.admstureqList());
 		model.addAttribute("args", "/WEB-INF/views/admin/AdminReportRejectList.jsp");
 		
 		view = "/WEB-INF/views/admin/PageLayout.jsp";
@@ -497,7 +495,7 @@ public class AdminController
 		IAdminDAO dao = sqlSession.getMapper(IAdminDAO.class);
 		
 		
-		
+		model.addAttribute("calList", dao.admCalList());
 		model.addAttribute("args", "/WEB-INF/views/admin/AdminCal.jsp");
 		
 		view = "/WEB-INF/views/admin/PageLayout.jsp";
@@ -752,15 +750,19 @@ public class AdminController
 		String admin_cd = request.getParameter("admin_cd");
 		String spa_req_cd = request.getParameter("spa_req_cd");
 		String check_type_cd = request.getParameter("check_type_cd");
+		String prcs_rsn = request.getParameter("prcs_rsn");
 		
+		System.out.println(admin_cd);
 		System.out.println(spa_req_cd);
 		System.out.println(check_type_cd);
+		System.out.println(prcs_rsn);
 		
 		AdmSpaReqDTO dto = new AdmSpaReqDTO();
 		
 		dto.setAdmin_cd(admin_cd);
 		dto.setSpa_req_cd(spa_req_cd);
 		dto.setCheck_type_cd(check_type_cd);
+		dto.setPrcs_rsn(prcs_rsn);
 		
 		dao.spaConfirmMod(dto);
 		
@@ -770,6 +772,104 @@ public class AdminController
 
 	}
 	
+	// 관리자 스터디신고 요청 확인
+	@RequestMapping(value = "/ajaxsrcheck.action", method = {RequestMethod.GET, RequestMethod.POST})
+	public String ajaxSrCheck(HttpServletRequest request)
+	{
+
+		String view = null;
+		
+		IAdminDAO dao = sqlSession.getMapper(IAdminDAO.class); 
+		
+		String stu_rep_cd = request.getParameter("stu_rep_cd");
+		System.out.println(stu_rep_cd);
+		
+		dao.stuReqCheckMod(stu_rep_cd);
+		view = "WEB-INF/views/admin/admin_report.action";
+
+		return view;
+
+	}
+	
+	// 관리자 스터디신고 요청 승인/거부
+	@RequestMapping(value = "/ajaxsrconfirm.action", method = {RequestMethod.GET, RequestMethod.POST})
+	public String selectSrAjax(HttpServletRequest request)
+	{
+
+		String view = null;
+		
+		IAdminDAO dao = sqlSession.getMapper(IAdminDAO.class); 
+		
+		String admin_cd = request.getParameter("admin_cd");
+		String stu_rep_cd = request.getParameter("stu_rep_cd");
+		String check_type_cd = request.getParameter("check_type_cd");
+		String prcs_rsn = request.getParameter("prcs_rsn");
+		
+		System.out.println("여기는 컨트롤러:" + admin_cd);
+		System.out.println(stu_rep_cd);
+		System.out.println(check_type_cd);
+		System.out.println(prcs_rsn);
+		
+		AdmStuReqDTO dto = new AdmStuReqDTO();
+		
+		dto.setAdmin_cd(admin_cd);
+		dto.setStu_rep_cd(stu_rep_cd);
+		dto.setCheck_type_cd(check_type_cd);
+		dto.setPrcs_rsn(prcs_rsn);
+		
+		System.out.println("디티오!:" + dto.getRep_rsn());
+		
+		dao.stuReqConfirmMod(dto);
+		
+		view = "WEB-INF/views/admin/admin_report.action";
+
+		return view;
+
+	}
 	
 	
+	// 관리자 스터디신고 요청 확인
+	@RequestMapping(value = "/ajaxspaintro.action", method = {RequestMethod.GET, RequestMethod.POST})
+	public String ajaxCheck(HttpServletRequest request, Model model)
+	{
+		String view = null;
+		
+		IAdminDAO dao = sqlSession.getMapper(IAdminDAO.class); 
+		
+		String spa_req_cd = request.getParameter("spa_req_cd");
+		
+		ArrayList<AdmSpaReqDTO> intro = dao.admSpaIntro(spa_req_cd);
+
+		model.addAttribute("intro", intro);
+		
+		view = "WEB-INF/views/admin/AjaxSpaIntro.jsp";
+
+		return view;
+
+	}
+	
+	
+	@RequestMapping(value = "/leccaladd.action", method = {RequestMethod.GET, RequestMethod.POST})
+	public String adminAdd(AdminCalDTO dto, HttpServletRequest request)
+	{
+		String view = "redirect:admin_cal.action";
+
+		String admin_cd = request.getParameter("admin_cd");
+		String lec_cd = request.getParameter("lec_cd");
+		String cal_fee = request.getParameter("cal_fee");
+		
+		IAdminDAO dao = sqlSession.getMapper(IAdminDAO.class);
+		
+		System.out.println(admin_cd);
+		System.out.println(lec_cd);
+		System.out.println(cal_fee);
+		
+		dto.setAdmin_cd(admin_cd);
+		dto.setLec_cd(lec_cd);
+		dto.setCal_fee(Integer.parseInt(cal_fee));
+		
+		dao.lecCalAdd(dto);
+		
+		return view;
+	}
 }

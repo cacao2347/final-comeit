@@ -38,11 +38,11 @@
 		// 취소 버튼 클릭 시 되돌아가기
 		$("#cancelBtn").click(function() 
 		{
-			var result = confirm("스터디 개설을 취소하시겠습니까?");
+			var result = confirm("수정을 취소하시겠습니까?");
 	         
 	         if(result)
 	         {
-	            location.href = "<%=cp%>/studylist.action";
+	        	 $(location).attr("href", "studydetail.action?stu_cd=" + $(this).val());	
 	         }
 	         else if(result==null)
 	         {
@@ -359,7 +359,7 @@
 					<span id="err"></span>
 				</div>
 				<div class="joinDiv">
-					<button type=button id="cancelBtn"
+					<button type=button id="cancelBtn" value="${studydetailinfo.stu_cd }" 
 						class="btn btn-lg cancelBtn">취소</button>
 					<button type="button" id="updateBtn"
 						class="btn btn-lg btn-success updateBtn">수정</button>

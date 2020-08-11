@@ -31,7 +31,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 <script src="<%=cp %>/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 <!-- Core plugin JavaScript-->
-<script src="<%=cp %>/assets/vendor/jquery-easing/jquery.easing.min.js"></script>
+<script src="<%=cp %>/assets/vendor/jquery-easing/jquery.easing.js"></script>
 
 <!-- Custom scripts for all pages-->
 <script src="<%=cp %>/assets/js/admin/sb-admin-2.min.js"></script>

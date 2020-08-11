@@ -35,7 +35,6 @@
 	<insert id="adminAdd" >
 		INSERT INTO TBL_ADMIN(ADMIN_CD, ADM_GRDS_CD, NAME, PWD, EMAIL, TEL)
 		VALUES('ADM'||SEQ_ADMIN.NEXTVAL , 'ADMG1002' , #{name}, '1234' ,#{email}, #{tel})
-		
 	</insert>
 	
 	<update id="adminModify">
@@ -109,6 +108,13 @@
 		FROM VIEW_SPAREQLIST
 	</select>
 	
+	<!-- 하나의 업체 소개내용 list() -->
+	<select id="admSpaIntro" resultType="com.sys.comeit.dto.AdmSpaReqDTO">
+		SELECT ONE_INTRO, USE_HRS, RSV_NOTES, DTL_INTRO ,DTL_ADDR
+		FROM TBL_SPA_REQ
+		WHERE SPA_REQ_CD = #{spa_req_cd}
+	</select>
+	
 	<update id="spaCheckMod">
 		UPDATE TBL_SPA_REQ
 		SET CHECK_TYPE_CD = 'CHET1003'
@@ -118,7 +124,7 @@
 	<update id="spaConfirmMod">
 		UPDATE TBL_SPA_REQ
 		SET ADMIN_CD = #{admin_cd} , CHECK_TYPE_CD = #{check_type_cd}
-		  , PRCS_DATE = SYSDATE
+		  , PRCS_DATE = SYSDATE , PRCS_RSN = #{prcs_rsn}
 		WHERE SPA_REQ_CD = #{spa_req_cd}
 	</update>
 	
@@ -200,7 +206,41 @@
 		        </choose>
 	</select>
 	
+	<!-- 스터디방 신고 조회 -->
+	<select id="admstureqList" resultType="com.sys.comeit.dto.AdmStuReqDTO">
+		SELECT STU_REP_CD, MEM_ID, TYPE_NAME, STU_CD, TITLE, ADMIN_CD, NAME, CHECK_TYPE_CD, REP_DATE, PRCS_DATE, REP_RSN, PRCS_RSN
+		FROM VIEW_STU_REP_LIST
+	</select>
 	
+	<!-- 스터디방 신고 요청 확인 -->
+	<update id="stuReqCheckMod">
+		UPDATE TBL_STU_REP
+		SET CHECK_TYPE_CD = 'CHET1003'
+		WHERE STU_REP_CD = #{stu_rep_cd}
+	</update>
+	
+	<!-- 스터디방 신고 요청 승인/거부 -->
+	<update id="stuReqConfirmMod">
+		UPDATE TBL_STU_REP
+		SET ADMIN_CD = #{admin_cd} , CHECK_TYPE_CD = #{check_type_cd}
+		, PRCS_DATE = SYSDATE , PRCS_RSN = #{prcs_rsn}
+		WHERE STU_REP_CD = #{stu_rep_cd}
+	</update>
+	
+	<!-- 정산 조회 -->
+	<select id="admCalList" resultType="com.sys.comeit.dto.AdminCalDTO">
+		SELECT LC.LEC_CD AS LEC_CD, LC.MEM_ID AS MEM_ID, LC.PROFIT AS PROFIT
+    		 , LC.RFND_FEE AS RFND_FEE, L.CAL_FEE AS CAL_FEE, L.CAL_DATE AS CAL_DATE , L.ADMIN_CD AS ADMIN_CD
+		FROM VIEW_LEC_CAL_LIST LC, TBL_LEC_CAL L
+		WHERE LC.LEC_CD = L.LEC_CD(+)
+	</select>
+	
+	<insert id="lecCalAdd" >
+		INSERT INTO TBL_LEC_CAL(LEC_CAL_CD, LEC_CD, ADMIN_CD, CAL_FEE, CAL_DATE)
+		VALUES('LECC' || SEQ_LEC_CAL.NEXTVAL, #{lec_cd}, #{admin_cd} , #{cal_fee} , SYSDATE)
+	</insert>
 	
 	
 </mapper>
+
+

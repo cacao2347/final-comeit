@@ -26,7 +26,14 @@
 					<th>첨부파일</th>	
 						
 						<td colspan="6">
+						<c:choose>
+						<c:when test="${file eq '없음' }">
+						없음
+						</c:when>
+						<c:otherwise>
 						<a href="">${file.file_url }</a>
+						</c:otherwise>
+						</c:choose>
 						</td> 
 						
 					</tr>	

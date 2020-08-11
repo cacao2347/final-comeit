@@ -48,97 +48,27 @@
 								<th>관리자</th>
 							</tr>
 						</thead>
-						<tfoot>
-							<tr>
-								<th>신고코드</th>
-								<th>거부날짜</th>
-								<th>거부사유</th>
-								<th>신고 아이디</th>
-								<th>신고유형</th>
-								<th>관리자</th>
-							</tr>
-						</tfoot>
 						<tbody>
-							<tr>
+						<c:forEach var="admstureqList" items="${admstureqList }">
+						<tr>
+						<c:if test="${admstureqList.check_type_cd == 'CHET1002'}">
+							<td>${admstureqList.stu_rep_cd }</td>
+							<td>${admstureqList.prcs_date }</td>
+							<td>${admstureqList.prcs_rsn }</td>
+							<td>${admstureqList.mem_id }</td>
+							<td>${admstureqList.type_name }</td>
+							<td>${admstureqList.name }</td>
+						</c:if>
+						</tr>
+						</c:forEach>
+							<!-- <tr>
 								<td>REP0001</td>
 								<td>2020-06-12</td>
 								<td>신고 사유가 적절하지 않습니다.</td>
 								<td>abc123</td>
 								<td>영리목적</td>
 								<td>[관리자]신재민</td>
-							</tr>
-							<tr>
-								<td>REP0001</td>
-								<td>2020-06-12</td>
-								<td>신고 사유가 적절하지 않습니다.</td>
-								<td>abc123</td>
-								<td>영리목적</td>
-								<td>[관리자]신재민</td>
-							</tr>
-							<tr>
-								<td>REP0001</td>
-								<td>2020-06-12</td>
-								<td>신고 사유가 적절하지 않습니다.</td>
-								<td>abc123</td>
-								<td>영리목적</td>
-								<td>[관리자]신재민</td>
-							</tr>
-							<tr>
-								<td>REP0001</td>
-								<td>2020-06-12</td>
-								<td>신고 사유가 적절하지 않습니다.</td>
-								<td>abc123</td>
-								<td>영리목적</td>
-								<td>[관리자]신재민</td>
-							</tr>
-							<tr>
-								<td>REP0001</td>
-								<td>2020-06-12</td>
-								<td>신고 사유가 적절하지 않습니다.</td>
-								<td>abc123</td>
-								<td>영리목적</td>
-								<td>[관리자]신재민</td>
-							</tr>
-							<tr>
-								<td>REP0001</td>
-								<td>2020-06-12</td>
-								<td>신고 사유가 적절하지 않습니다.</td>
-								<td>abc123</td>
-								<td>영리목적</td>
-								<td>[관리자]신재민</td>
-							</tr>
-							<tr>
-								<td>REP0001</td>
-								<td>2020-06-12</td>
-								<td>신고 사유가 적절하지 않습니다.</td>
-								<td>abc123</td>
-								<td>영리목적</td>
-								<td>[관리자]신재민</td>
-							</tr>
-							<tr>
-								<td>REP0001</td>
-								<td>2020-06-12</td>
-								<td>신고 사유가 적절하지 않습니다.</td>
-								<td>abc123</td>
-								<td>영리목적</td>
-								<td>[관리자]신재민</td>
-							</tr>
-							<tr>
-								<td>REP0001</td>
-								<td>2020-06-12</td>
-								<td>신고 사유가 적절하지 않습니다.</td>
-								<td>abc123</td>
-								<td>영리목적</td>
-								<td>[관리자]신재민</td>
-							</tr>
-							<tr>
-								<td>REP0001</td>
-								<td>2020-06-12</td>
-								<td>신고 사유가 적절하지 않습니다.</td>
-								<td>abc123</td>
-								<td>영리목적</td>
-								<td>[관리자]신재민</td>
-							</tr>
+							</tr> -->
 						</tbody>
 					</table>
 				</div>
