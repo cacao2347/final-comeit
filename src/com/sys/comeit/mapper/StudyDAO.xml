@@ -128,23 +128,21 @@
    <select id="studyCount" resultType="java.lang.Integer">
       SELECT COUNT(*) AS COUNT
       FROM VIEW_STU_LIST
-      WHERE END_DATE <![CDATA[>]]> SYSDATE
+      WHERE END_DATE <![CDATA[>]]> TO_CHAR(SYSDATE,'YYYY-MM-DD')
    </select>
    
    <!-- 모든 스터디방의 관심 키워드 -->
    <select id="studyTagList" resultType="com.sys.comeit.dto.StudyDTO">
-      <![CDATA[
-         SELECT STU_CD, INT_TAG AS INT_TAG_NAME
-      FROM 
-      (
-      SELECT STU_CD, INT_TAG, STR_DATE, END_DATE
-      FROM VIEW_STU_TAG
-      UNION ALL
-      SELECT STU_CD, ETC_TAG, STR_DATE, END_DATE
-      FROM VIEW_STU_ETC_TAG
-      )
-      WHERE END_DATE > SYSDATE
-      ]]>
+      	SELECT STU_CD, INT_TAG AS INT_TAG_NAME
+		FROM 
+		(
+		SELECT STU_CD, INT_TAG, STR_DATE, END_DATE
+		FROM VIEW_STU_TAG
+		UNION ALL
+		SELECT STU_CD, ETC_TAG, STR_DATE, END_DATE
+		FROM VIEW_STU_ETC_TAG
+		)
+		WHERE END_DATE <![CDATA[>]]> TO_CHAR(SYSDATE,'YYYY-MM-DD')
    </select>
    
    <!-- 스터디방의 비밀번호 확인 -->
@@ -218,23 +216,20 @@
    <select id="studySearchCount" resultType="java.lang.Integer">
       SELECT COUNT(*) AS COUNT
       FROM VIEW_STU_LIST
-      WHERE END_DATE <![CDATA[>]]> SYSDATE
+      WHERE END_DATE <![CDATA[>]]> TO_CHAR(SYSDATE,'YYYY-MM-DD')
       <choose>
       	<!-- 검색이랑 세부지역 다 null이 아닐 때(검색,필터했을때) -->
          <when test='searchValue != null and spc_area_cd != null'>
             AND ${searchKey} LIKE UPPER('%${searchValue}%')
-            AND END_DATE > SYSDATE
             AND SPC_AREA_CD = #{spc_area_cd}
          </when>
          <!-- 검색이 null 아니면서 세부지역이 null 일 때(검색만) -->
          <when test='searchValue != null and spc_area_cd == null'>
             AND ${searchKey} LIKE UPPER('%${searchValue}%')
-            AND END_DATE > SYSDATE
          </when>
          <!-- 검색이 null 이고 세부지역이 null이 아닐 때(필터만) -->
          <when test='searchValue == null and spc_area_cd != null'>
             AND SPC_AREA_CD LIKE #{spc_area_cd}
-            AND END_DATE > SYSDATE
          </when>
          
       </choose>
@@ -253,12 +248,12 @@
               SELECT STU_CD, CRT_DATE, TITLE, STR_DATE, MEM_NUM, CMT_DATE, AREA_NAME, SPC_AREA_NAME
                    , MEET_TERM, IDNTT_TYPE, LV, CAT_NAME, SCRT_NUM, END_DATE, IMG_URL
               FROM VIEW_STU_LIST
+              WHERE END_DATE <![CDATA[>]]> TO_CHAR(SYSDATE,'YYYY-MM-DD')
               <choose>
               	<!-- 검색이랑 세부지역 다 null이 아닐 때(검색,필터했을때) -->
                  <when test='searchValue != null and spc_area_cd != null'>
-                    WHERE ${searchKey} LIKE UPPER('%${searchValue}%')
+                    AND ${searchKey} LIKE UPPER('%${searchValue}%')
                     AND SPC_AREA_CD = #{spc_area_cd}
-                    AND END_DATE > SYSDATE
                     ORDER BY STU_CD DESC
                 ) DATA
             )
@@ -266,8 +261,7 @@
                  </when>
                  <!-- 검색이 null 아니면서 세부지역이 null 일 때(검색만) -->
                  <when test='searchValue != null and spc_area_cd == null'>
-                    WHERE ${searchKey} LIKE UPPER('%${searchValue}%')
-                      AND END_DATE > SYSDATE
+                    AND ${searchKey} LIKE UPPER('%${searchValue}%')
                     ORDER BY STU_CD DESC
                 ) DATA
             )
@@ -276,7 +270,6 @@
                  <!-- 검색이 null 이고 세부지역이 null이 아닐 때(필터만) -->
                  <when test='searchValue == null and spc_area_cd != null'>
                     AND SPC_AREA_CD = #{spc_area_cd}
-                    AND END_DATE > SYSDATE
                     ORDER BY STU_CD DESC
                 ) DATA
             )
@@ -284,7 +277,6 @@
                  </when>
                  <!-- 둘다 null 일 때 -->
                  <otherwise>
-                 	WHERE END_DATE > SYSDATE
                     ORDER BY STU_CD DESC
                 ) DATA
             )
