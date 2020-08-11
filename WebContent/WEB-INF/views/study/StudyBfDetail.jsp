@@ -153,13 +153,20 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 		});
       
      // 스터디방 폐쇄 버튼 클릭
-     $("#deleteBtn").click(function() 
-     {
-    	alert("스터디방을 폐쇄하시겠습니까?");
-    	
-		$(location).attr("href", "studydelete.action?stuCode=" + $(this).val());
-		
-	 });
+	 $("#deleteBtn").click(function() 
+	 {
+	   var delResult = confirm("스터디방을 폐쇄하시겠습니까?");
+	     
+	     if(delResult)
+	     {
+	        $(location).attr("href", "studydelete.action?stuCode=" + $(this).val());     
+	     }
+	     else if(delResult==null)
+	     {
+	        return;
+	     }
+	     
+	});
       
       // 스터디장 커밋 버튼 클릭
       $(".commitBtn").click(function() 
@@ -207,10 +214,6 @@ body{font-family: 'Noto Sans KR', sans-serif;}
             
       });
       
-      $(".delBtn").click(function() 
-      {
-         alert("스터디 방을 폐쇄하시겠습니까?");   
-      });
       
     });
   	

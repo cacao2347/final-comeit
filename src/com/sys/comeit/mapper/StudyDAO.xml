@@ -220,15 +220,21 @@
       FROM VIEW_STU_LIST
       WHERE END_DATE <![CDATA[>]]> SYSDATE
       <choose>
+      	<!-- 검색이랑 세부지역 다 null이 아닐 때(검색,필터했을때) -->
          <when test='searchValue != null and spc_area_cd != null'>
             AND ${searchKey} LIKE UPPER('%${searchValue}%')
-              AND SPC_AREA_CD = #{spc_area_cd}
+            AND END_DATE > SYSDATE
+            AND SPC_AREA_CD = #{spc_area_cd}
          </when>
+         <!-- 검색이 null 아니면서 세부지역이 null 일 때(검색만) -->
          <when test='searchValue != null and spc_area_cd == null'>
             AND ${searchKey} LIKE UPPER('%${searchValue}%')
+            AND END_DATE > SYSDATE
          </when>
+         <!-- 검색이 null 이고 세부지역이 null이 아닐 때(필터만) -->
          <when test='searchValue == null and spc_area_cd != null'>
             AND SPC_AREA_CD LIKE #{spc_area_cd}
+            AND END_DATE > SYSDATE
          </when>
          
       </choose>
@@ -248,29 +254,37 @@
                    , MEET_TERM, IDNTT_TYPE, LV, CAT_NAME, SCRT_NUM, END_DATE, IMG_URL
               FROM VIEW_STU_LIST
               <choose>
+              	<!-- 검색이랑 세부지역 다 null이 아닐 때(검색,필터했을때) -->
                  <when test='searchValue != null and spc_area_cd != null'>
                     WHERE ${searchKey} LIKE UPPER('%${searchValue}%')
                     AND SPC_AREA_CD = #{spc_area_cd}
+                    AND END_DATE > SYSDATE
                     ORDER BY STU_CD DESC
                 ) DATA
             )
             WHERE RNUM <![CDATA[>]]>= #{start} AND RNUM <![CDATA[<]]>= #{end}
                  </when>
+                 <!-- 검색이 null 아니면서 세부지역이 null 일 때(검색만) -->
                  <when test='searchValue != null and spc_area_cd == null'>
                     WHERE ${searchKey} LIKE UPPER('%${searchValue}%')
+                      AND END_DATE > SYSDATE
                     ORDER BY STU_CD DESC
                 ) DATA
             )
             WHERE RNUM <![CDATA[>]]>= #{start} AND RNUM <![CDATA[<]]>= #{end}
                  </when>
+                 <!-- 검색이 null 이고 세부지역이 null이 아닐 때(필터만) -->
                  <when test='searchValue == null and spc_area_cd != null'>
                     AND SPC_AREA_CD = #{spc_area_cd}
+                    AND END_DATE > SYSDATE
                     ORDER BY STU_CD DESC
                 ) DATA
             )
             WHERE RNUM <![CDATA[>]]>= #{start} AND RNUM <![CDATA[<]]>= #{end}
                  </when>
+                 <!-- 둘다 null 일 때 -->
                  <otherwise>
+                 	WHERE END_DATE > SYSDATE
                     ORDER BY STU_CD DESC
                 ) DATA
             )
