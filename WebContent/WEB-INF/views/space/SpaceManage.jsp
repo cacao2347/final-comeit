@@ -110,7 +110,7 @@
                        <li class="col-sm-4 col-md-6" >	
 						<div class="demo">
 					      <figure class="imghvr-scale-top-left">
-					       <img src="<%=cp %>/assets/images/199.jpg" alt="53" style="width: 300px; height: 250px;">
+					       <img src="${MyInfoList.img_url }" alt="53" style="width: 300px; height: 250px;">
 					        <figcaption>
 					        <button type="button" class="imageBtn" value="${MyInfoList.spa_req_cd }" style="background-color:transparent;  border:0px transparent solid; text-align: left;outline:none;" >
 					        <p><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>

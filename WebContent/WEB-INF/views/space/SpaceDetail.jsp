@@ -319,7 +319,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
       <!-- Post Content Column -->
       <div class="col-lg-8">
         <!-- Preview Image -->
-        <img src="<%=cp %>/assets/images/199.jpg" alt="53" style="width: 755px; height: 250px;">
+        <img src="${spaceInfo.img_url }" alt="53" style="width: 755px; height: 250px;">
 
         <hr>
 
