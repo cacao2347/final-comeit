@@ -82,7 +82,7 @@ WHERE ROWNUM<![CDATA[>]]>= #{start} AND ROWNUM <![CDATA[<]]>=#{end}
 </select>
 
 
-<!-- 스터디방 산출물 등록 -->
+<!-- 스터디방 첨부파일 있는 산출물 등록 -->
 <select id="fileAdd" parameterType="com.sys.comeit.dto.StudyFileDTO" statementType="CALLABLE">
 	   { CALL PRC_STU_FILE
 	      (
@@ -94,6 +94,13 @@ WHERE ROWNUM<![CDATA[>]]>= #{start} AND ROWNUM <![CDATA[<]]>=#{end}
 	      )
 	   }
 </select>
+
+<!-- 스터디방 첨부파일 없는 산출물 등록 -->
+<insert id="fileboardAdd">
+	INSERT INTO TBL_STU_OPUT(STU_OPUT_CD, STU_JOIN_CD, TITLE, CONTENT, CRT_DATE, HITS, DEL_DATE)
+	VALUES('SOPUT'||SEQ_STU_OPUT.NEXTVAL, #{file_stu_join_cd}, #{file_title}, #{file_content}, SYSDATE, 0, NULL)
+</insert>
+
 
 <!-- 참가중인 스터디방 참가코드 조회 -->
 <select id="fileStuJoinCd" resultType="java.lang.String">

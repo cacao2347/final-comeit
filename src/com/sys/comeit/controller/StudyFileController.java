@@ -230,15 +230,26 @@ public class StudyFileController
 		//System.out.println("파일 스터디 참가 코드 : "+ file_stu_join_cd);
 		
 		// 파일 등록하기
-		StudyFileDTO fileDto = new StudyFileDTO();
-		fileDto.setFile_stu_join_cd(file_stu_join_cd);
-		fileDto.setFile_title(file_title);
-		fileDto.setFile_content(file_content);
-		fileDto.setFile_name(file_name);
-		fileDto.setFile_url(file_url);
-		
-		// 등록 프로시저 실행
-		fileDao.fileAdd(fileDto); 
+		if (file_url != null) {
+			StudyFileDTO fileDto = new StudyFileDTO();
+			fileDto.setFile_stu_join_cd(file_stu_join_cd);
+			fileDto.setFile_title(file_title);
+			fileDto.setFile_content(file_content);
+			fileDto.setFile_name(file_name);
+			fileDto.setFile_url(file_url);
+			
+			// 등록 프로시저 실행
+			fileDao.fileAdd(fileDto); 
+		}
+		else
+		{
+			StudyFileDTO fileDto = new StudyFileDTO();
+			fileDto.setFile_stu_join_cd(file_stu_join_cd);
+			fileDto.setFile_title(file_title);
+			fileDto.setFile_content(file_content);
+			
+			fileDao.fileboardAdd(fileDto);
+		}
 		
 		model.addAttribute("stu_cd", stu_cd);
 		view = "redirect:studydetail.action";
@@ -251,6 +262,64 @@ public class StudyFileController
 	public String ajaxFileAdd()
 	{
 		String view = null;
+		 /*
+	      ServletContext file;
+	      
+	      String root = file.getServletContext().getRealPath("/");
+	      //System.out.println(root);
+	      String savePath = root + "pds\\saveData";
+	      //System.out.println(savePath);
+	      
+	      File dir = new File(savePath);
+	      //System.out.println(dir);
+	      
+	      if(!dir.exists())
+	         dir.mkdirs();
+	      
+	      String encType = "UTF-8";
+	      int maxSize = 5*1024*1024;
+	      
+	      MultipartRequest multi = null;
+	      Enumeration files = null;
+	      
+	      try
+	      {
+	         multi = new MultipartRequest(request, savePath, maxSize, encType, new DefaultFileRenamePolicy());
+	         
+	         // check~!!!
+	         // MultipartRequest 객체의 『getFileName()』
+	         // → 요청으로 넘어온 파일들의 이름을 Enumeration 타입으로 반환
+	         
+	         files = multi.getFileNames();
+	         while(files.hasMoreElements())
+	         {
+	            String name = (String)files.nextElement();
+	            System.out.println(name);
+	            if(multi.getFilesystemName(name) != null)
+	            {
+
+	               File file = multi.getFile(name);
+	               System.out.println(file);
+	               
+	               if(file != null)
+	                  System.out.println(file);
+	            }
+	         }
+	         
+	         //urlFile = "Download.jsp?saveFileName=" + multi.getFilesystemName("uploadFile");
+	         //urlFile += "&originalFileName=" + multi.getOriginalFileName("uploadFile");
+	      }
+	      catch(IOException e1)
+	      {
+	         System.out.println(e1.toString());
+	      }
+	      catch(Exception e2)
+	      {
+	         System.out.println(e2.toString());
+	      }
+
+	      return files;
+	       */
 
 		view = "WEB-INF/views/member/AjaxStuFile.jsp";
 
