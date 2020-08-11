@@ -175,10 +175,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 			                        <li class="col-sm-4 col-md-5" >	
 										<div class="demo">
 									      <figure class="imghvr-scale-top-left">
-									     <%--  <input type="image" class="imageBtn" value="${spaceList.area_name }" src="<%=cp %>/assets/images/199.jpg" alt="53" style="width: 300px; height: 250px;"> --%>
-									      <%-- <button type="button" class="imageBtn"  value="${spaceList.area_name }"><img src="<%=cp %>/assets/images/199.jpg" alt="53" style="width: 300px; height: 250px;"></button> --%>
-									       <%-- <input type="image" src="<%=cp %>/assets/images/199.jpg" alt="53" class="imageBtn" style="width: 300px; height: 250px;" value="${spaceList.spa_req_cd }"onclick="imageBtn(this)"> --%>
-									       <img src="<%=cp %>/assets/images/199.jpg" alt="53" style="width: 300px; height: 250px;">
+									       <img src="${spaceList.img_url }" alt="53" style="width: 300px; height: 250px;">
 									        <figcaption>
 									        <button type="button" class="imageBtn" value="${spaceList.spa_req_cd }" style="background-color:transparent;  border:0px transparent solid; text-align: left;outline:none;" >
 									        <p><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
