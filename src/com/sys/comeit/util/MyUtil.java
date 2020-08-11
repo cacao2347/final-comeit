@@ -65,7 +65,7 @@ public class MyUtil
 				sb.append("<li class=\"page-item\"><a class='page-link' style='text-decoration: underline; font-weight: bold;'>" + page + "</a></li>");
 			} else
 			{
-				sb.append("<li class=\"page-item\"><a class='page-link'>" + page + "</a></li>");
+				sb.append("<li class=\"page-item\"><a href='" + list_url + "pageNum=" + page + "' class='page-link'>" + page + "</a></li>");
 			}
 			page++;
 		}

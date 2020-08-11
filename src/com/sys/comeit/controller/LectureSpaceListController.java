@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.sys.comeit.dto.SpaReqDTO;
 import com.sys.comeit.idao.IAreaDAO;
 import com.sys.comeit.idao.ISpaceDAO;
-import com.sys.comeit.util.MyUtil;
+import com.sys.comeit.util.MyTabUtil;
 
 @Controller
 public class LectureSpaceListController
@@ -37,7 +37,7 @@ public class LectureSpaceListController
 		String check_type="CHET1001";
 		
 		// 페이징 처리
-		MyUtil util = new MyUtil();
+		MyTabUtil util = new MyTabUtil();
 		String pageNum = request.getParameter("pageNum");
 		
 		int currentPage = 1;
