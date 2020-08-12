@@ -269,29 +269,29 @@ public class StudyController
 		IMemberDAO memberDao = sqlSession.getMapper(IMemberDAO.class);
 
 		MemberDTO dto = new MemberDTO();
-		
+
 		// 스터디장 정보 조회하기
 		dto = memberDao.memModalList(request.getParameter("leaderMemCd"));
-		
+
 		// 스터디장의 관심 태그 조회하기
 		ArrayList<MemberDTO> intTagSearch = memberDao.memIntTagSearch(request.getParameter("leaderMemCd"));
-		
+
 		// 참가중인 스터디방 조회하기
 		ArrayList<MemberDTO> stuTitle = memberDao.modalStudyList(request.getParameter("leaderMemCd"));
 
-		String name = dto.getName();				// 이름
-		String idntt = dto.getIdntt();				// 신분
-		String memContent = dto.getMem_content();	// 한 줄 소개
-		String intTag = "/ ";						// 관심 키워드
-		String joinStudy = "";						// 참가중인 스터디
-		
+		String name = dto.getName(); // 이름
+		String idntt = dto.getIdntt(); // 신분
+		String memContent = dto.getMem_content(); // 한 줄 소개
+		String intTag = "/ "; // 관심 키워드
+		String joinStudy = ""; // 참가중인 스터디
+
 		// 관심 태그 담기
 		for (int i = 0; i < intTagSearch.size(); i++)
 		{
 			intTag += intTagSearch.get(i).getInt_tag();
 			intTag += " /";
 		}
-		
+
 		// 참가 스터디 담기
 		if (!stuTitle.isEmpty())
 		{
@@ -412,10 +412,6 @@ public class StudyController
 			currentPage = Integer.parseInt(pageNum);
 		}
 
-		// 검색 값들
-		String searchKey = null;
-		String searchValue = null;
-
 		StudyDTO dto = new StudyDTO();
 		ArrayList<String> cat_cd_list = new ArrayList<String>(); // 카테고리 리스트들
 
@@ -468,6 +464,10 @@ public class StudyController
 		// System.out.println("카테고리" + cat_cd);
 
 		// System.out.println("레벨" + level);
+
+		// 검색 값들
+		String searchKey = null;
+		String searchValue = null;
 
 		searchKey = request.getParameter("searchKey");
 		System.out.println("searchKey : " + searchKey);
@@ -760,63 +760,64 @@ public class StudyController
 		return String.valueOf(stu_count);
 
 	}
-	
+
 	// 스터디방 수정화면 노출하기
-	@RequestMapping(value = "/studydetailmod.action", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/studydetailmod.action", method =
+	{ RequestMethod.GET, RequestMethod.POST })
 	public String studyDetailMod(Model model, HttpServletRequest request) throws UnsupportedEncodingException
 	{
 		String view = null;
-		
+
 		IStudyDAO studyDao = sqlSession.getMapper(IStudyDAO.class); // 스터디 정보
-		
+
 		IDayDAO dayDao = sqlSession.getMapper(IDayDAO.class); // 요일
 		IIntTagDAO intTagDao = sqlSession.getMapper(IIntTagDAO.class); // 관심키워드
-		
+
 		String stu_cd = request.getParameter("stu_cd");
 		System.out.println("상세에서 받은 스터디 코드 : " + stu_cd);
-		
-		StudyDTO studydetailinfo = studyDao.studyDetailMod(stu_cd);				// 스터디방의 정보 가져오기
-		ArrayList<StudyDTO> studyDetailTags = studyDao.studyDetailTags(stu_cd);	// 스터디방의 키워드 정보 가져오기
-		ArrayList<StudyDTO> studyDetailDays = studyDao.studyDetailDays(stu_cd);	// 스터디방의 요일 정보 가져오기
-		
-		
+
+		StudyDTO studydetailinfo = studyDao.studyDetailMod(stu_cd); // 스터디방의 정보 가져오기
+		ArrayList<StudyDTO> studyDetailTags = studyDao.studyDetailTags(stu_cd); // 스터디방의 키워드 정보 가져오기
+		ArrayList<StudyDTO> studyDetailDays = studyDao.studyDetailDays(stu_cd); // 스터디방의 요일 정보 가져오기
+
 		model.addAttribute("studydetailinfo", studydetailinfo);
 		model.addAttribute("day", dayDao.dayList()); // 요일
 		model.addAttribute("intTag", intTagDao.intTagList()); // 관심키워드
-		model.addAttribute("studyDetailTags", studyDetailTags);	
+		model.addAttribute("studyDetailTags", studyDetailTags);
 		model.addAttribute("studyDetailDays", studyDetailDays);
-		
+
 		view = "/WEB-INF/views/study/StudyDetailMod.jsp";
-		
+
 		return view;
-		
+
 	}
-	
+
 	// 스터디방 수정하기
-	@RequestMapping(value = "/studymodify.action", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/studymodify.action", method =
+	{ RequestMethod.GET, RequestMethod.POST })
 	public String studyModify(Model model, HttpServletRequest request) throws UnsupportedEncodingException
 	{
 		String view = null;
-		
+
 		IStudyDAO studyDao = sqlSession.getMapper(IStudyDAO.class); // 스터디 정보
-		
+
 		String stu_cd = request.getParameter("stu_cd");
-		
+
 		String content = request.getParameter("content");
-		
+
 		StudyDTO dto = new StudyDTO();
-		
+
 		dto.setStu_cd(stu_cd);
 		dto.setContent(content);
-		
+
 		studyDao.studyModify(dto);
-		
+
 		model.addAttribute("stu_cd", stu_cd);
-	    
-	    view = "redirect:studydetail.action";
-		
+
+		view = "redirect:studydetail.action";
+
 		return view;
-		
+
 	}
 
 }

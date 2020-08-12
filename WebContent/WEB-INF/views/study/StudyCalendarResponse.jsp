@@ -26,6 +26,7 @@
 	out.println(jarr.toString());	// JSON배열에 넣은 정보를 String으로 현재 페이지에 뿌려주기
 
 
+
 	/*
 	String result="";
 	
@@ -61,6 +62,5 @@
 
 	*/
    
-   
-
 %>
+
