@@ -97,7 +97,6 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 	/* 피드백 */
 	 $(document).ready(function() {
         $("#slider").slider({
-            animate: true,
             value:0,
             min: 0,
             max: 10,
@@ -108,7 +107,6 @@ body{font-family: 'Noto Sans KR', sans-serif;}
         });
 
         $("#slider2").slider({
-            animate: true,
             value:0,
             min: 0,
             max: 10,
@@ -119,7 +117,6 @@ body{font-family: 'Noto Sans KR', sans-serif;}
         });
         
         $("#slider3").slider({
-            animate: true,
             value:0,
             min: 0,
             max: 10,
@@ -130,7 +127,6 @@ body{font-family: 'Noto Sans KR', sans-serif;}
         });
         
         $("#slider4").slider({
-            animate: true,
             value:0,
             min: 0,
             max: 10,
@@ -141,7 +137,6 @@ body{font-family: 'Noto Sans KR', sans-serif;}
         });
         
         $("#slider5").slider({
-            animate: true,
             value:0,
             min: 0,
             max: 10,

@@ -23,10 +23,6 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 <link rel="shortcut icon" href="<%=cp %>/assets/images/pen_1.ico" type="image/x-icon">
 <link rel="icon" href="<%=cp %>/assets/images/pen_1.ico" type="image/x-icon">
 <style type="text/css">
-	body 
-	{
-	    background-image: url('assets/images/199.jpg');
-	}
 	
 	#preview 
 	{
@@ -1021,7 +1017,6 @@ $(function(){
         </div>
     </form>
 </div>
-<script src="<%=cp %>/assets/js/spa.scripts.js"></script>
 
 </body>
 </html>
