@@ -67,19 +67,19 @@ public class LoginController
       
       String id = request.getParameter("formUsername");					// 로그인 아이디
       String pwd = request.getParameter("formPassword");				// 패스워드
-      String loginType = request.getParameter("loginType");				// 회원 유형
+      String login_type = request.getParameter("loginType");				// 회원 유형
      
       MemberDTO member = new MemberDTO();
       SpaDTO spa = new SpaDTO();
       
-      String stopDate = null;		// 정지일
+      String stop_date = null;		// 정지일
       String code = null;			 //코드
       String name = null;		    // 이름
       
       
       // 로그인 정보 확인 및 정지 여부 조회
       //! loginType = "0" 일반 회원 로그인, "1" 업체 회원 로그인 , "2" 관리자 로그인
-      if (loginType.equals("0")) 
+      if (login_type.equals("0")) 
       {
     	  MemberDTO dto = new MemberDTO();
 
@@ -101,11 +101,11 @@ public class LoginController
         	  code = member.getMem_cd();
         	  
               // 멤버 정지 내역 조회
-              stopDate = memDao.memStop(id);
+        	  stop_date = memDao.memStop(id);
           }
           
       }
-      else if(loginType.equals("1")) 
+      else if(login_type.equals("1")) 
       {
     	  SpaDTO dto = new SpaDTO();
     	  
@@ -130,11 +130,11 @@ public class LoginController
     		  code = spa.getSpa_cd();
 
         	  // 업체 정지 내역 조회
-        	  stopDate = spaDao.spaStop(id);
+    		  stop_date = spaDao.spaStop(id);
           }
     		  
       }
-      else if(loginType.equals("2"))		// 관리자 로그
+      else if(login_type.equals("2"))		// 관리자 로그
       {
     	  AdminDTO dto = new AdminDTO();
     	  
@@ -151,21 +151,18 @@ public class LoginController
     	  
       }
       
-      
-      if(stopDate != null) 							// 정지 내역이 있을시
+      if(stop_date != null) 							// 정지 내역이 있을시
       {
-    	  
-    	  session.setAttribute("stopDate", stopDate);
+    	  session.setAttribute("stopDate", stop_date);
           result = "/WEB-INF/views/member/MemStop.jsp";
       }
       else 													// 로그인 성공시
       {
-         
-    	  if (loginType.equals("2")) 		// 관리자
+    	  if (login_type.equals("2")) 		// 관리자
     	  {
     		  result = "/adminlist.action";
 		  }
-    	  else if (loginType.equals("1"))   // 업체
+    	  else if (login_type.equals("1"))   // 업체
     	  {
     		  session.setAttribute("spa_cd", code);
     		  result = "/WEB-INF/views/common/MainPage.jsp";
@@ -181,7 +178,7 @@ public class LoginController
       session.setAttribute("id", id);
       session.setAttribute("pwd", pwd);
       session.setAttribute("name", name);
-      session.setAttribute("loginType", loginType);
+      session.setAttribute("loginType", login_type);
       
       // 테스트
 	  //System.out.println(name+id+pwd+loginType+stopDate+code);
@@ -221,13 +218,13 @@ public class LoginController
       IMemberDAO memDao = sqlSession.getMapper(IMemberDAO.class);
       ISpaDAO spaDao = sqlSession.getMapper(ISpaDAO.class);
       
-      String searchId = request.getParameter("searchId");		// 업체/ 회원 여부
+      String search_type = request.getParameter("searchId");		// 업체/ 회원 여부
       String name = request.getParameter("formUserName");		// 이름
       String tel = request.getParameter("formTel");				// 전화번호
       String search_id = null;									// 찾은 아이디
 
       
-      if (searchId.equals("memIdSearch")) 			// 일반 회원 아이디 찾기일 때
+      if (search_type.equals("memIdSearch")) 			// 일반 회원 아이디 찾기일 때
       {
     	  MemberDTO dto = new MemberDTO();
     	  
@@ -236,7 +233,7 @@ public class LoginController
     	  
     	  search_id = memDao.memId(dto);
 	  }
-      else if (searchId.equals("spaIdSearch")) 		// 업체 회원 아이디 찾기일 때
+      else if (search_type.equals("spaIdSearch")) 		// 업체 회원 아이디 찾기일 때
       {
     	  SpaDTO dto = new SpaDTO();
     	  
@@ -361,21 +358,18 @@ public class LoginController
       String name = request.getParameter("formUserName");					// 사용자가 입력한 이름	
 	  String id = request.getParameter("formUserId");						// 사용자가 입력한 ID
       String tel = request.getParameter("formTel");							// 사용자가 입력한 전화번호
-      String searchPwd = (String)session.getAttribute("searchPwd");			// 일반 회원, 업체 회원 여부
+      String search_type = (String)session.getAttribute("searchPwd");		// 일반 회원, 업체 회원 여부
       
-      session.setAttribute("id", id);
-      session.setAttribute("name",name);
-      session.setAttribute("tel", tel);
       
       // 테스트
-      System.out.println(searchPwd);
+      System.out.println(search_type);
       System.out.println(name);
       System.out.println(id);
       System.out.println(tel);
     		  
       int result =0; 
       
-      if (searchPwd.equals("memPwdSearch")) 			// 일반 회원 패스워드 찾기일 때
+      if (search_type.equals("memPwdSearch")) 			// 일반 회원 패스워드 찾기일 때
       {
 		 MemberDTO dto = new MemberDTO();
 
@@ -387,7 +381,7 @@ public class LoginController
 		 
 		 mav.addObject("infoDto", dto);
 	  }
-      else if (searchPwd.equals("spaPwdSearch")) 		// 업체 회원 패스워드 찾기일때
+      else if (search_type.equals("spaPwdSearch")) 		// 업체 회원 패스워드 찾기일때
       {
     	  SpaDTO dto = new SpaDTO();
     	  
@@ -463,13 +457,6 @@ public class LoginController
 	    // 확인
 	    System.out.println("임시 비밀번호: "+authNum);
 	    
-	    /*
-	    String name = (String)session.getAttribute("name");
-	    String id = (String)session.getAttribute("id");
-	    String tel = (String)session.getAttribute("tel");
-	    
-	    System.out.println(authNum + name + id + tel+ searchPwd);
-	     */
 	    
 	    if (searchPwd.equals("memPwdSearch")) 					// 일반 회원
 	    {

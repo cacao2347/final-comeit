@@ -269,23 +269,30 @@ public class StudyController
 		IMemberDAO memberDao = sqlSession.getMapper(IMemberDAO.class);
 
 		MemberDTO dto = new MemberDTO();
-
+		
+		// 스터디장 정보 조회하기
 		dto = memberDao.memModalList(request.getParameter("leaderMemCd"));
+		
+		// 스터디장의 관심 태그 조회하기
 		ArrayList<MemberDTO> intTagSearch = memberDao.memIntTagSearch(request.getParameter("leaderMemCd"));
+		
+		// 참가중인 스터디방 조회하기
 		ArrayList<MemberDTO> stuTitle = memberDao.modalStudyList(request.getParameter("leaderMemCd"));
 
-		String name = dto.getName();
-		String idntt = dto.getIdntt();
-		String memContent = dto.getMem_content();
-		String intTag = "/ ";
-		String joinStudy = "";
-
+		String name = dto.getName();				// 이름
+		String idntt = dto.getIdntt();				// 신분
+		String memContent = dto.getMem_content();	// 한 줄 소개
+		String intTag = "/ ";						// 관심 키워드
+		String joinStudy = "";						// 참가중인 스터디
+		
+		// 관심 태그 담기
 		for (int i = 0; i < intTagSearch.size(); i++)
 		{
 			intTag += intTagSearch.get(i).getInt_tag();
 			intTag += " /";
 		}
-
+		
+		// 참가 스터디 담기
 		if (!stuTitle.isEmpty())
 		{
 			joinStudy = "/ ";
@@ -308,7 +315,7 @@ public class StudyController
 		model.addAttribute("intTag", intTag);
 		model.addAttribute("joinStudy", joinStudy);
 
-		view = "/WEB-INF/views/member/AjaxMemModal.jsp";
+		view = "/WEB-INF/views/study/AjaxMemModal.jsp";
 
 		return view;
 	}
@@ -362,7 +369,7 @@ public class StudyController
 		model.addAttribute("intTag", intTag);
 		model.addAttribute("joinStudy", joinStudy);
 
-		view = "/WEB-INF/views/member/AjaxMemModal.jsp";
+		view = "/WEB-INF/views/study/AjaxMemModal.jsp";
 
 		return view;
 
