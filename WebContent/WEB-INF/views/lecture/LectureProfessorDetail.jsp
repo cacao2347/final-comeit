@@ -39,21 +39,21 @@ body {
 
 		$("#member1").mouseover(function()
 		{
-			$("#stuMemInfo").css('display', 'block');
+			$("#lecMemInfo").css('display', 'block');
 		});
 		$("#member1").mouseleave(function()
 		{
-			$("#stuMemInfo").css('display', 'none');
+			$("#lecMemInfo").css('display', 'none');
 		});
 		/* 
 		
 		$("#member2").mouseover(function() 
 		{
-			$("#stuMemInfo2").css('display', 'block');	
+			$("#lecMemInfo2").css('display', 'block');	
 		});
 		$("#member2").mouseleave(function() 
 		{
-			$("#stuMemInfo2").css('display', 'none');
+			$("#lecMemInfo2").css('display', 'none');
 		});
 		 */
 		 
@@ -97,9 +97,9 @@ body {
 			<div class="col-md-8">
 				<div class="row">
 					<div class="col-md-12">
-						<img src="<%=cp%>/assets/images/study2.jpg" alt="" class="stuImg" />
+						<img src="<%=cp%>/assets/images/study2.jpg" alt="" class="lecImg" />
 						<!-- 스터디방 제목 -->
-						<div class="stuTitle">
+						<div class="lecTitle">
 
 							<div class="row">
 								<div class="col-md-10">
@@ -115,30 +115,30 @@ body {
 							<hr />
 
 						</div>
-						<!-- end.stuTitle -->
+						<!-- end.lecTitle -->
 
 
 						<!-- 스터디방 정보 -->
-						<div class="stuInfo">
+						<div class="lecInfo">
 							<!-- 활동 기간 -->
-							<div class="stuTerm">
+							<div class="lecTerm">
 								<span class="glyphicon glyphicon-pencil"></span>
 								<h3 class="lecIntro">강의 소개</h3>
 								<br>
 								<h3>${lecInfo.lec_intro }</h3>
 							</div>
-							<!-- end stuTerm -->
+							<!-- end lecTerm -->
 							<hr />
 							<!-- 활동 지역 -->
-							<div class="stuArea">
+							<div class="lecArea">
 								<span class="glyphicon glyphicon-map-marker icon"></span>
 								<h3>활동 지역</h3>
 								<br /> <span class="area">${lecInfo.spc_area_name }</span>
 							</div>
-							<!-- end .stuArea -->
+							<!-- end .lecArea -->
 							<hr />
 							<!-- 키워드 -->
-							<div class="stuKey">
+							<div class="lecKey">
 								<span class="glyphicon glyphicon-tags icon"></span>
 								<h3>키워드</h3>
 								<span class="keword"> <c:forEach var="lecTags"
@@ -149,10 +149,10 @@ body {
 									</c:forEach>
 								</span>
 							</div>
-							<!-- end .stuKey -->
+							<!-- end .lecKey -->
 							<hr />
 							<!-- 예상 레벨 -->
-							<div class="stuLevel">
+							<div class="lecLevel">
 								<span class="glyphicon glyphicon-calendar icon"></span>
 								<h3>강의 일자</h3>
 								<br> <span class="level">${lecInfo.str_date }~${lecInfo.end_date }</span>
@@ -160,7 +160,7 @@ body {
 							</div>
 							<hr />
 							<!-- 상세 설명 -->
-							<div class="stuCurr">
+							<div class="lecCurr">
 								<span class="glyphicon glyphicon-user icon"></span>
 								<h3>강의 인원</h3>
 								<br /> <span class="curr"> 강의 최소 개설 인원 :
@@ -189,7 +189,7 @@ body {
 							</div>
 
 						</div>
-						<!-- end .stuInfo -->
+						<!-- end .lecInfo -->
 					</div>
 					<!-- end .col-md-8 -->
 

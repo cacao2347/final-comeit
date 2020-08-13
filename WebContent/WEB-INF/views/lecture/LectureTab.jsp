@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>LectureTab</title>
 <link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/lecture/lectureTab.css">
 <script type="text/javascript">
         $(document).ready(function() {

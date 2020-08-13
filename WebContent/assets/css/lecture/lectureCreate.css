@@ -21,14 +21,14 @@ h1, h4 , .m
 }
 
 
-.stuKeyword >.check
+.lecKeyword >.check
 {
 	padding-top: 10px;
 	float: right;
 }
-.stuKeyword > h4 , .stuKeyword > .check,
+.lecKeyword > h4 , .lecKeyword > .check,
 .areaMemNum > h4 ,
-.stuKey >.stuKeySel , .stuKey > .stuKeyInput, .stuKey > .stuKeyBtn ,
+.lecKey >.lecKeySel , .lecKey > .lecKeyInput, .lecKey > .lecKeyBtn ,
 .areaMemNum > .area , .areaMemNum > .spcArea,
 .areaMemNum > .memNum , .period > h4, .period > .start , .period > .icon
 , .period > .termSel , .weekDay > .weekSel , .weekDay > .weekBtn, .weekDay > .weekBox
@@ -82,12 +82,12 @@ h1, h4 , .m
 	width: 600px;
 	height: 36px;
 }
-.stuKeyInput
+.lecKeyInput
 {
 	margin-bottom: 8px;
 }
 
-.stuKeyBox
+.lecKeyBox
 {
 	width: 990px;
 	height: 100px;
@@ -133,7 +133,7 @@ h1, h4 , .m
 	height: 36px;
 }
 
-.stuKeyBox , .areaMemNum , .period , .levelScret, .money
+.lecKeyBox , .areaMemNum , .period , .levelScret, .money
 {
 	margin-bottom: 10px;
 }

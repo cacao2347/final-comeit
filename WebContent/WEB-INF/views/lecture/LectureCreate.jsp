@@ -49,9 +49,9 @@
              	return;
             }
 			
-			if($(".stuKeyBox").children().length == 0)
+			if($(".lecKeyBox").children().length == 0)
             {
-			   alert($("#stuKeyBox").children().length);
+			   alert($("#lecKeyBox").children().length);
                $("#err").html("관심 키워드는 최소 한 개 이상 선택해야 합니다.");
                $("#err").css("display", "inline");
                return;
@@ -120,7 +120,7 @@
 							selectedValue = $("#keySelect option:checked")
 									.val();
 							keyInput = $("#keyInput").val();
-							elementCount = $(".stuKeyTag").length;
+							elementCount = $(".lecKeyTag").length;
 
 							if (selectedValue == 'INT1057') {
 								selectedText = keyInput;
@@ -148,17 +148,17 @@
 
 							if (selectedValue == 'INT1057') {
 
-								$(".stuKeyBox")
+								$(".lecKeyBox")
 										.append(
-												"<div class='tagStyle'><span class='stuKeyTag'>"
+												"<div class='tagStyle'><span class='lecKeyTag'>"
 														+ selectedText
 														+ "<input type='hidden' name='etcTagList' value='"+ selectedText + "'></span></div>");
 							}
 							// 관심키워드 일 때...
 							else {
-								$(".stuKeyBox")
+								$(".lecKeyBox")
 										.append(
-												"<div class='tagStyle'><span class='stuKeyTag'>"
+												"<div class='tagStyle'><span class='lecKeyTag'>"
 														+ selectedText
 														+ "<input type='hidden' name='intTagList' value='"+ selectedValue + "'></span></div>");
 							}
@@ -226,7 +226,7 @@
 
 		// 관심 키워드 삭제 버튼
 		$("#keyResetBtn").click(function() {
-			$(".stuKeyBox").empty();
+			$(".lecKeyBox").empty();
 			keyArray = [];
 		});
 		
@@ -320,36 +320,36 @@
 			<div class="col-md-2"></div>
 			<div class="col-md-8">
 				<!-- 스터디방 제목 -->
-				<div class="stuTitle">
+				<div class="lecTitle">
 					<h4>
 						제목<span class="ePoint">*</span>
 					</h4>
 				</div>
-				<div class="stuTitle">
+				<div class="lecTitle">
 					<input type="text" class="studyTitle form-control" id="lecName"
 						name = "lecName" placeholder="강의 제목을 입력해 주세요." /> <span class="titleErr">
 						제목은 필수 입력항목입니다. </span>
 				</div>
 				<!-- 스터디방 상세 내용 -->
-				<div class="stuContent form-inline">
+				<div class="lecContent form-inline">
 					<h4>
 						강의소개<span class="ePoint">*</span>
 					</h4>
 				</div>
-				<div class="stuContent">
+				<div class="lecContent">
 					<textarea id="lecIntro" name="lecIntro" class="form-control" rows="8"
 						placeholder="강의를 소개해주세요. "></textarea>
 					<span class="contentErr"> 상세 커리큘럼은 필수 입력항목입니다. </span>
 				</div>
 				<!-- 키워드 -->
-				<div class="stuKeyword">
+				<div class="lecKeyword">
 					<h4>
 						관심 키워드<span class="ePoint">*</span>
 					</h4>
 					<span class="check">최대 5개</span>
 				</div>
-				<div class="stuKey">
-					<div class="stuKeySel">
+				<div class="lecKey">
+					<div class="lecKeySel">
 						<select name="keySelect" id="keySelect"
 							class="form-control keySelect">
 							<option value="0">관심 키워드</option>
@@ -358,19 +358,19 @@
 							</c:forEach>
 						</select>
 					</div>
-					<div class="stuKeyInput">
+					<div class="lecKeyInput">
 						<input type="text" class="keyInput form-control" id="keyInput"
 							readonly = "readonly" placeholder="관심 키워드를 입력해 주세요." />
 					</div>
-					<div class="stuKeyBtn">
+					<div class="lecKeyBtn">
 						<input type="button" value="추가" id="keyAddBtn"
 							class="keyBtn btn btn-primary" /> <input type="button"
 							id="keyResetBtn" value="초기화" class="keyBtn btn btn-primary" />
 					</div>
-					<div class="stuKeyBox"></div>
-					<!-- end .stuKeyBox -->
+					<div class="lecKeyBox"></div>
+					<!-- end .lecKeyBox -->
 				</div>
-				<!-- end .stuKey -->
+				<!-- end .lecKey -->
 				<div class="areaMemNum" style="width: 990px;">
 					<h4>
 						활동지역<span class="ePoint">*</span>

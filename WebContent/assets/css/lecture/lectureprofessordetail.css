@@ -1,11 +1,11 @@
 @charset "UTF-8";
 
-.stuTitle > h1 , .stuTitle > .report
+.lecTitle > h1 , .lecTitle > .report
 {
 	display: inline-block;
 }
 
-.stuTitle > .row > .col-md-2 >.report
+.lecTitle > .row > .col-md-2 >.report
 {
 	margin-left: 10px;
 	width: 30px;
@@ -13,7 +13,7 @@
 }
 
  
-.stuImg
+.lecImg
 {
 	margin-top: 20px;
 	margin-bottom: 20px;
@@ -23,20 +23,20 @@
 	width: 100%;
 }
 
-.stuTitle
+.lecTitle
 {
 	margin-bottom: 40px;
 }
 
-.stuMem
+.lecMem
 {
 	margin-top: 120px;
 }
 
 
-.stuTitle > h2 , .stuArea > h3 , .stuMem > h3 , .memLeader > h4
-, .member > h4 , .stuTerm > .lecIntro , .stuKey > h3 , .stuLevel > h3
-, .stuCurr > h3, .lecMoney > h3
+.lecTitle > h2 , .lecArea > h3 , .lecMem > h3 , .memLeader > h4
+, .member > h4 , .lecTerm > .lecIntro , .lecKey > h3 , .lecLevel > h3
+, .lecCurr > h3, .lecMoney > h3
 {
 	font-weight: bold;
 }
@@ -46,7 +46,7 @@
 	margin-left: 200px;
 }
 
-.stuTitle > .join 
+.lecTitle > .join 
 {
 	margin-left: 650px; 
 	/* align: right */
@@ -55,9 +55,9 @@
 
 .term ,.day, .area, .keword , .level , .curr
 , .name , .manPencil , .position , .keyword ,.oneInt
-, .joinStu ,.joinPro , .stuTerm > .icon
-, .stuArea > .icon , .stuKey > .icon
-, .stuLevel > .icon , .stuCurr > .icon
+, .joinLec ,.joinPro , .lecTerm > .icon
+, .lecArea > .icon , .lecKey > .icon
+, .lecLevel > .icon , .lecCurr > .icon
 , .lecMoney > .icon
 {
 	font-size: 17pt;
@@ -89,11 +89,11 @@
 , .userPosi > h3 , .userPosi > .position , .userKey > h3 , .userKey > .keyword
 , .memLeader > img, .memLeader > h4
 , .member > img , .member > h4
-, .stuTerm > .icon , .stuTerm > h3
-, .stuArea > .icon , .stuArea > h3
-, .stuKey > .icon , .stuKey > h3
-, .stuLevel > .icon , .stuLevel > h3
-, .stuCurr > .icon , .stuCurr > h3
+, .lecTerm > .icon , .lecTerm > h3
+, .lecArea > .icon , .lecArea > h3
+, .lecKey > .icon , .lecKey > h3
+, .lecLevel > .icon , .lecLevel > h3
+, .lecCurr > .icon , .lecCurr > h3
 , .lecMoney > .icon, .lecMoney > h3
 {
 	display: inline-block;
@@ -127,7 +127,7 @@
 	display: none;
 }
 
-.stuMem > .memLeader
+.lecMem > .memLeader
 {
 	padding-top: 20px;
 	padding-left:10px;
@@ -140,7 +140,7 @@
 	/* font-family: Nanum Gothic; */
 }
 
-.stuMem > .member
+.lecMem > .member
 {
 	padding-top: 10px;
 	padding-left:10px;

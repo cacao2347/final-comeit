@@ -11,10 +11,7 @@
 <head>
 <meta charset="UTF-8">
 <title>COME-IT</title>
-<%-- <link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/lecture/lecturelist.css" > --%>
-<link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/study/studylist.css" >
-<%-- <link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/lecturelist.css" > --%>
-
+<link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/lecture/lecturelist.css" >
 <link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/bootstrap/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
@@ -79,8 +76,6 @@ body
 			}
 			
 		});
-		
-		
 		
 		// 강의 각각 리스트 클릭 시 (로그인 후)
 		$(".titleBtn").click(function()
@@ -189,7 +184,7 @@ body
 				<div class="col-md-2">
 				</div>
 				<div class="col-md-8">
-				<img class="img-fluid rounded study-img" style="border: 1px solid #ccc; " src="assets/images/강의배너.png" alt="studyImg">
+				<img class="img-fluid rounded lecture-img" style="border: 1px solid #ccc; " src="assets/images/강의배너.png" alt="lectureImg">
 				</div>
 				<div class="col-md-2">
 				</div>
@@ -280,25 +275,25 @@ body
 						${count }개의 강의에서 수강인원을 모집중입니다!
 						</div>
 						<div class="col-md-12">
-						<ul class="list-study">
+						<ul class="list-lecture">
 						
 							<c:forEach var="lecs" items="${lec }">
-								<li class="list-study-item">
+								<li class="list-lecture-item">
 								<div class="item-header">
 								
 								<c:choose>
 								<c:when test="${empty lecs.img_url }">
-								<img class="study-logo" alt="study-logo" src="assets/images/studylogo.PNG">
+								<img class="lecture-logo" alt="lecture-logo" src="assets/images/studylogo.PNG">
 								</c:when>
 								<c:when test="${not empty lecs.img_url }">
-								<img class="study-logo" alt="study-logo" src="${lecs.img_url }" style="width: 160px; height: 150px;">
+								<img class="lecture-logo" alt="lecture-logo" src="${lecs.img_url }" style="width: 160px; height: 150px;">
 								</c:when>
 								</c:choose>
 								</div>
 								<div class="item-body">
 								<div class="firstLine">
 									<div class="listTitle">
-										<h4 class="study-title" style="font-weight: bold;">
+										<h4 class="lecture-title" style="font-weight: bold;">
 										
 										<c:choose>
 										<c:when test="${empty id }">
@@ -316,18 +311,18 @@ body
 									
 								</div>
 								<div class="form-inline">
-									<h5 class="study-date">${lecs.str_date} ~ ${lecs.end_date}</h5>
-									<h5 class="study-term">${lecs.lec_term}</h5>
+									<h5 class="lecture-date">${lecs.str_date} ~ ${lecs.end_date}</h5>
+									<h5 class="lecture-term">${lecs.lec_term}</h5>
 								</div>
 								
-								<ul class="study-info">
+								<ul class="lecture-info">
 									<li class="pencil"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> ${lecs.name }</li>
 									<li class="location"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> ${lecs.area_name } ${lecs.spc_area_name }</li>
 									<li class="numb"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> ${lecs.min_mem }~${lecs.max_mem }명</li>
 									
 								</ul>
 								
-								<ul class="study-info">
+								<ul class="lecture-info">
 									<c:forEach var="lecHrDayss" items="${lecHrDays }">
 										<c:if test="${lecs.lec_cd eq lecHrDayss.lec_cd }">
 											<li class="day"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>${lecHrDayss.day_name}</li>
@@ -337,7 +332,7 @@ body
 								</ul>
 
 								
-								<ul class="list-study-tags">
+								<ul class="list-lecture-tags">
 								<c:forEach var="lecTagss" items="${lecTags }">
 								<c:if test="${lecs.lec_cd eq lecTagss.lec_cd }">
 									<li class="stack-item">${lecTagss.int_tag}</li>
