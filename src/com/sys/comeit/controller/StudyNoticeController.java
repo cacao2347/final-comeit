@@ -16,7 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.sys.comeit.util.MyUtil;
+import com.sys.comeit.util.MyTabUtil;
 import com.sys.comeit.dto.*;
 import com.sys.comeit.idao.*;
 
@@ -41,8 +41,7 @@ public class StudyNoticeController
 		
 		// 페이징 처리 ----------------
 		
-		MyUtil util = new MyUtil();
-		
+		MyTabUtil util = new MyTabUtil();
 		String pageNum = request.getParameter("pageNum");
 		
 		int currentPage = 1;
