@@ -153,7 +153,77 @@
 				$(".noticeList").html(data);
 				
 				
+				// 게시글 상세 정보 보기 클릭 시
+				$(".noticeListTitle").click(function()
+				{
+					//alert("상세");
+					
+					var send = params + "&stu_ntc_pnt_cd=" + $(this).val();
+					
+					$.ajax(
+					{
+						type : "POST"
+						, url : "studynoticedetail.action"
+						, data : send
+						, dataType : "text"
+						, async : false
+						, success : function(args) 
+						{
+							//alert("상세성공");
+							$(".noticeList").html(args);
+							
+							// 목록 버튼 클릭 시 리스트로 이동
+							$(".goListBtn").click(function() 
+							{
+								ajaxStudyNoticeList();
+							});
+							
+							// 수정 버튼 클릭 시
+							
+							// 게시글 삭제 버튼 클릭 시
+							
+							// 댓글 삭제 버튼 클릭 시
+							
+							// 댓글 등록 버튼 클릭 시
+							
+							
+							
+						}
+					});
 				
+				});
+				
+				// 등록 버튼 클릭 시
+				$(".notice-add").click(function() 
+				{
+					//alert("등록");
+					$.ajax(
+					{
+						type : "POST"
+						, url : "studynoticeaddjsp.action"
+						, data : params
+						, dataType : "text"
+						, async : false
+						, success : function(args) 
+						{
+							//alert("등록성공" + args);
+							
+							$(".noticeList").html(args);
+							
+							$("#noticeCreateBtn").click(function() 
+							{
+								alert("실제 등록");
+								
+								
+							});
+							
+							$(".notice-cancel").click(function() 
+							{
+								ajaxStudyNoticeList();	
+							});
+						}
+					});
+				});
 				
 				
 			}
