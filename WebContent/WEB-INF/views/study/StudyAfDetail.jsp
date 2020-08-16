@@ -46,19 +46,13 @@ $(document).ready(function ()
              , dataType : "text"
              , success : function(args)
                { 
-                var infoData = args.split('-');
-               
-                // 정보 담기
-              $("#modalName").text(infoData[0]);
-               $("#modalIdntt").text(infoData[1]);
-               $("#memContent").text(infoData[2]); 
-               $("#modalTag").text(infoData[3]);
-               $("#memJoinStu").text(infoData[4]);
+            	// 정보 담기
+   	    	    $(".search-modal-content").html(args);
+
+                // 모달창 보여주기
+                $("#modal").show();
               
-               // 모달창 보여주기
-               $("#modal").show();
-              
-              // 스크롤 제어
+                // 스크롤 제어
                 $("html, body").css({"overflow":"hidden", "height":"100%"});
                 $("#modal").bind("touchmove", function(e) {
                   e.preventDefault();
@@ -94,19 +88,13 @@ $(document).ready(function ()
              , dataType : "text"
              , success : function(args)
                { 
-                var infoData = args.split('-');
-               
-                // 정보 담기
-              $("#modalName").text(infoData[0]);
-               $("#modalIdntt").text(infoData[1]);
-               $("#memContent").text(infoData[2]); 
-               $("#modalTag").text(infoData[3]);
-               $("#memJoinStu").text(infoData[4]);
+            	// 정보 담기
+   	    	    $(".search-modal-content").html(args);
+
+                // 모달창 보여주기
+                $("#modal").show();
               
-               // 모달창 보여주기
-               $("#modal").show();
-              
-              // 스크롤 제어
+                // 스크롤 제어
                 $("html, body").css({"overflow":"hidden", "height":"100%"});
                 $("#modal").bind("touchmove", function(e) {
                   e.preventDefault();
@@ -377,41 +365,14 @@ $(document).ready(function ()
                      <div id="modal" class="searchModal">
                         <!-- 모달창 -->
                         <div class="search-modal-content">
-           
-                           <!-- 버튼 -->
-                           <div class="closeD" onClick="closeModal();">
-                              <span class="pop_bt modalCloseBtn pull-right" >X</span>
-                           </div><!-- end .closeD -->
-                           
-                           <div class="userName">
-                              <span class="glyphicon glyphicon-user user"></span><h4>이름 :</h4><span class="name" id="modalName"></span>              
-                              
-                           </div><!-- end .userName -->
-                           <div class="userManner">
-                              <span class="glyphicon glyphicon-pencil pencil"></span><h4>매너연필 :</h4><span class="manPencil">5cm</span>
-                           </div><!-- userManner -->
-                           <div class="userPosi">
-                              <h4>신분 :</h4><span class="position" id="modalIdntt"></span>
-                           </div><!-- end .userPosi -->
-                           <div class="userKey">
-                              <h4>관심키워드 :</h4><span class="keyword" id="modalTag"></span>
-                           </div><!-- end .userKey -->
-                           <div class="userInt">
-                              <h4>자기소개 :</h4><span class="oneInt" id="memContent"></span>
-                           </div><!-- end .userInt -->
-                           <div class="userStu">
-                              <h4>참여중인 스터디 :</h4>
-                              <span class="joinStu" id="memJoinStu"></span>
-                           </div><!-- end .userStu -->
-                          
-                          
+                          <%-- 
                           <c:if test="${sessionScope.mem_cd eq  leaderName.leader_mem_cd}">
                            <div class="out">
-                             <!--  <input type="button" value="방출" class="btn btn-sm outBtn" />
-                              <input type="button" class="btn btn-sm btn-primary manBtn" id="histBtn" value="위임" /> -->
+                              <input type="button" value="방출" class="btn btn-sm outBtn" />
+                              <input type="button" class="btn btn-sm btn-primary manBtn" id="histBtn" value="위임" />
                            </div><!-- end .out -->
                           </c:if>
-                           
+                          --%> 
                      </div><!-- end .search-modal-content -->                     
                      </div><!-- end .searchModal -->   
             

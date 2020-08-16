@@ -42,17 +42,9 @@ body{font-family: 'Noto Sans KR', sans-serif;}
     	      , dataType : "text"
     	      , success : function(args)
  	  	      { 
-    	    	  var infoData = args.split('-');
-    	    	 
     	    	  // 정보 담기
-    	    	  
-				  $("#modalName").text(infoData[0]);
-		    	  $("#modalIdntt").text(infoData[1]);
-		    	  $("#memContent").text(infoData[2]); 
-		    	  $("#modalTag").text(infoData[3]);
-		    	  $("#memJoinStu").text(infoData[4]);
-		    	  
-				  
+    	    	  $(".search-modal-content").html(args);
+
 		    	  // 모달창 보여주기
 		    	  $("#modal").show();
 				  
@@ -90,15 +82,9 @@ body{font-family: 'Noto Sans KR', sans-serif;}
     	      , dataType : "text"
     	      , success : function(args)
  	  	      { 
-    	    	  var infoData = args.split('-');
-    	    	 
     	    	  // 정보 담기
-				  $("#modalName").text(infoData[0]);
-		    	  $("#modalIdntt").text(infoData[1]);
-		    	  $("#memContent").text(infoData[2]); 
-		    	  $("#modalTag").text(infoData[3]);
-		    	  $("#memJoinStu").text(infoData[4]);
-				  
+    	    	  $(".search-modal-content").html(args);
+				   
 		    	  // 모달창 보여주기
 		    	  $("#modal").show();
 				  
@@ -125,13 +111,35 @@ body{font-family: 'Noto Sans KR', sans-serif;}
       // 스터디원 참가 요청 
       $(".joinStudyBtn").click(function() 
       {
-    	  
-    	  $(location).attr("href", "studyjoin.action?stuCode=" + $(this).val());	  
-    	  	  
-    	  if ($("#insertResult").val() == "참가")
-			 alert("참가가 완료 되었습니다.")
-		  else
-			  alert("참가가 불가합니다.")
+    	var params = "stuCode=" + $(this).val();  
+    	  $.ajax(
+		  {
+			 type : "POST"
+             , url : "studyjoin.action"
+             , data : params
+             , success : function(data)
+             { 
+            	 //alert(data);
+            	 
+            	 if (data == 1) 
+            	 {
+            		 alert("참가가 완료되었습니다."); 
+            		 $('.commitBtn').attr('disabled', true);
+            	 }
+            	 else
+            	 {
+            		 alert("참가가 불가합니다.");
+            	 }
+            		 
+            	 
+             }
+             , error : function(e) 
+             {
+              	alert(e.responseText);
+             }
+		  });
+ 
+			  reload();	  
     	
 	  });
       
@@ -178,7 +186,6 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 				 type : "POST"
 	             , url : "leadercommit.action"
 	             , data : params
-	             , dataType : "text"
 	             , success : function(data)
 	             { 
 	            	 alert(data);
@@ -365,37 +372,8 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                         <!-- 모달창 -->
                         <div class="search-modal-content">
            
-                           <!-- 버튼 -->
-                           <div class="closeD" onClick="closeModal();">
-                              <span class="pop_bt modalCloseBtn pull-right" >X</span>
-                           </div><!-- end .closeD -->
-                           
-                           <div class="userName">
-                              <span class="glyphicon glyphicon-user user"></span><h4>이름 :</h4><span class="name" id="modalName"></span>              
-	                           
-                           </div><!-- end .userName -->
-                           <div class="userManner">
-                              <span class="glyphicon glyphicon-pencil pencil"></span><h4>매너연필 :</h4><span class="manPencil">5cm</span>
-                           </div><!-- userManner -->
-                           <div class="userPosi">
-                              <h4>신분 :</h4><span class="position" id="modalIdntt"></span>
-                           </div><!-- end .userPosi -->
-                           <div class="userKey">
-                              <h4>관심키워드 :</h4><span class="keyword" id="modalTag"></span>
-                           </div><!-- end .userKey -->
-                           <div class="userInt">
-                              <h4>자기소개 :</h4><span class="oneInt" id="memContent"></span>
-                           </div><!-- end .userInt -->
-                           <div class="userStu">
-                              <h4>참여중인 스터디 :</h4>
-                              <span class="joinStu" id="memJoinStu"></span>
-                           </div><!-- end .userStu -->
                           
-                           <%-- <div class="out">
-                            <c:if test="${sessionScope.mem_cd eq leaderName.leader_mem_cd }">
-                              <input type="button" value="방출" class="btn btn-sm outBtn" />
-                            </c:if>
-                           </div><!-- end .out --> --%>
+                          
                      </div><!-- end .search-modal-content -->                     
                      </div><!-- end .searchModal -->   
             
