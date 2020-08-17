@@ -62,7 +62,7 @@
       WHERE CHECK_TYPE_CD LIKE #{check_type} -->
    <!-- 전체 공간 조회 & 피드백수 -->
    <select id="spaceList" resultType="com.sys.comeit.dto.SpaReqDTO">
-     SELECT *
+     <!-- SELECT *
 		FROM
 		(
     SELECT ROWNUM AS RNUM
@@ -85,7 +85,7 @@
     (
       SELECT SPA_REQ_CD
        FROM TBL_SPA_DEL
-    )
+    ) 
     <choose>
       <when test="searchValue != null">
       AND ${searchKey} LIKE '%${searchValue}%'
@@ -99,7 +99,25 @@
 				)
 				WHERE RNUM <![CDATA[>]]>= #{start} AND RNUM <![CDATA[<]]>=#{end}
 		        	</otherwise>
-		        </choose>
+		        </choose>-->
+		        
+	  SELECT *
+      FROM VIEW_SPA_LIST
+      <choose>
+      	<!-- 검색이랑 세부지역 다 null이 아닐 때(검색,필터했을때) -->
+         <when test='searchValue != null and spc_area_cd != null'>
+            WHERE ${searchKey} LIKE UPPER('%${searchValue}%')
+            AND SPC_AREA_CD LIKE #{spc_area_cd}
+         </when>
+         <!-- 검색이 null 아니면서 세부지역이 null 일 때(검색만) -->
+         <when test='searchValue != null and spc_area_cd == null'>
+            WHERE ${searchKey} LIKE UPPER('%${searchValue}%')
+         </when>
+         <!-- 검색이 null 이고 세부지역이 null이 아닐 때(필터만) -->
+         <when test='searchValue == null and spc_area_cd != null'>
+            WHERE SPC_AREA_CD LIKE #{spc_area_cd}
+         </when>
+      </choose>
    </select>
    
    

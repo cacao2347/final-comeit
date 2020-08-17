@@ -53,6 +53,23 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 			location.href = "<%=cp%>/spacedetail.action?"+params;
 		});
 		
+	 // 선택 초기화 버튼 클릭 시
+      $("#resetBtn").click(function()
+      {
+         
+         f = document.filterForm;
+         f.reset();
+      });
+	      
+   	// 필터 적용 버튼 클릭 시 
+     $("#filterBtn").click(function()
+     {
+        f = document.filterForm;
+        f.action = "<%=cp %>/spalist.action";
+        f.submit();
+        
+     }); 
+   	
 		 // 검색 버튼 클릭 시
 		$("#searchBtn").click(function()
 		{
@@ -72,7 +89,6 @@ body{font-family: 'Noto Sans KR', sans-serif;}
           area_cd : $("#area").children("option:selected").val()
        }, function(data)
        {
-          //alert(data);
           $("#spcAreadd").html(data);
           $("#spcArea").removeAttr("disabled");
        });
@@ -107,6 +123,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 				<div class="col-md-2">
 				</div>
 				<div class="col-md-2"><!-- 필터 시작 -->
+				<form name="filterForm" method="post">
 				<div class="side">
 					<dl class="region">
 						<dt>지역</dt>
@@ -126,6 +143,12 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 					</dl><!-- end region -->
 					
 				</div><!-- end side -->
+				
+				<div class="filterDiv">
+                  <button type="reset" style="width: 40%;" id="resetBtn" class="btn">초기화</button>
+                  <button type="button" style="width: 40%;" id="filterBtn" class="btn btn-success filterBtn">적용</button>
+               </div>
+               </form>
 				</div><!-- 필터 끝 -->
 				
 				<!-- 본문 영역 -->

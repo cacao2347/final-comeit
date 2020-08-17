@@ -23,7 +23,7 @@ public class SpaReqController
 	private SqlSession sqlSession;
 
 	// 공간 등록 키워드
-	  @RequestMapping(value = "/spacreate.action", method = RequestMethod.GET)
+	  @RequestMapping(value = "/spacreate.action", method = { RequestMethod.GET, RequestMethod.POST })
 	  public String spaCreate(Model model) 
 	  { 
 		  String view = null;
@@ -43,7 +43,7 @@ public class SpaReqController
 	  
 	  // 사업자 번호 중복 확인 ajax
 		@ResponseBody
-		@RequestMapping(value = "/checkspanum.action", method = RequestMethod.POST)
+		@RequestMapping(value = "/checkspanum.action", method = { RequestMethod.GET, RequestMethod.POST })
 		public String checkidAjax(HttpServletRequest request, Model model)
 		{
 			ISpaNumDAO iSpaNumDao = sqlSession.getMapper(ISpaNumDAO.class);
@@ -56,7 +56,7 @@ public class SpaReqController
 		}
 		
 		// 공간 등록
-		@RequestMapping(value = "/spareqinsert.action", method = RequestMethod.POST)
+		@RequestMapping(value = "/spareqinsert.action", method = { RequestMethod.GET, RequestMethod.POST })
 		public String spareqinsert(Model model, HttpServletRequest request)
 		{
 			String view = null;
@@ -129,7 +129,6 @@ public class SpaReqController
 			
 			// 공간 이미지 설정
 			String img_type_cd = "IMGT1001";
-			
 
 			if (spa_req_cd != null) // 카페 등록 성공했을경우
 			{
@@ -181,37 +180,29 @@ public class SpaReqController
 			} else
 			{
 				view = "redirect:spacreate.action"; // 회원가입 실패 시 회원가입 페이지 유지
-
 			}
-
 			view = "redirect:spalist.action";
-			
 			return view;
 		}
 		
-		
-		@RequestMapping(value = "/ajaxspafile.action", method = RequestMethod.POST)
+		@RequestMapping(value = "/ajaxspafile.action", method = { RequestMethod.GET, RequestMethod.POST })
 		public String ajaxSpaFile()
 		{
 			String view = null;
-
 			view = "WEB-INF/views/space/AjaxSpaFile.jsp";
-
 			return view;
 		}
 		
-		@RequestMapping(value = "/ajaxspaimg.action", method = RequestMethod.POST)
+		@RequestMapping(value = "/ajaxspaimg.action", method = { RequestMethod.GET, RequestMethod.POST })
 		public String ajaxSpaImg()
 		{
 			String view = null;
-
 			view = "WEB-INF/views/space/AjaxSpaImg.jsp";
-
 			return view;
 		}
 		
 		// 공간 수정 뷰
-		  @RequestMapping(value = "/spamodview.action", method = RequestMethod.GET)
+		  @RequestMapping(value = "/spamodview.action", method = { RequestMethod.GET, RequestMethod.POST })
 		  public String spaModView(Model model,HttpServletRequest request) 
 		  { 
 			  String view = null;
@@ -231,7 +222,7 @@ public class SpaReqController
 		  }
 		  
 		  // 공간 수정
-		  @RequestMapping(value = "/spamod.action", method = RequestMethod.GET)
+		  @RequestMapping(value = "/spamod.action", method = { RequestMethod.GET, RequestMethod.POST })
 		  public String spaMod(Model model,HttpServletRequest request) 
 		  { 
 			  String view = null;
@@ -246,22 +237,10 @@ public class SpaReqController
 			  String spapeo = request.getParameter("spapeo"); // 대표자명
 			  String spaname = request.getParameter("spaname"); // 공간명
 			  String spatel = request.getParameter("spatel"); // 업체 전화번호
-			  System.out.println(onein);
-			  System.out.println(dtlin);
-			  System.out.println(sparsv);
-			  System.out.println(spa);
-			  System.out.println(spapeo);
-			  System.out.println(spaname);
-			  System.out.println(spatel);
 			  int start = Integer.parseInt(request.getParameter("start"));  // 영업시작시간
 			  int end = Integer.parseInt(request.getParameter("end")); // 영업최대 이용시간
 			  int max = Integer.parseInt(request.getParameter("max")); // 영업최대 이용시간
 			  
-			  
-			  System.out.println(start);
-			  System.out.println(end);
-			  System.out.println(max);
-			  System.out.println(spa_req_cd);
 			  dto.setOne_intro(onein);
 			  dto.setUse_hrs(max);
 			  dto.setRsv_notes(sparsv);
@@ -322,7 +301,6 @@ public class SpaReqController
 					}
 				}
 				
-				
 				// 시설안내 등록
 				String[] contentList = request.getParameterValues("contentList"); // 모든 시설안내를 배열에 넣기
 				if (contentList.length > 0)
@@ -338,7 +316,6 @@ public class SpaReqController
 				}
 			} 
 			  view = "redirect:spacedetail.action?spa_req_cd="+spa_req_cd;
-			  
 			  return view; 
 		  }
 }
