@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>LectureMod.jsp</title>
+<title>COME-IT</title>
 <link rel="stylesheet" type="text/css" href="<%=cp%>/assets/css/bootstrap.min.css">
 <link rel="stylesheet" href="<%=cp%>/assets/css/blog-post.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">

@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
@@ -13,106 +13,148 @@
 <head>
 <meta charset="UTF-8">
 <title>LectureNoticeList.jsp</title>
-<link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/lecture/lectureNoticeList.css">
+<link rel="stylesheet" type="text/css"
+	href="<%=cp%>/assets/css/lecture/lectureNoticeList.css">
 
 <script type="text/javascript">
-
+	var pageNum = 0;
+	
 	$(function()
 	{
 		// ajax처리
-		ajaxLectureNoticeList();	
+		ajaxLectureNoticeList();
+		
+		// 페이징 번호가 클릭 됐을때
+		$(document).on('click', '.page-link', function()
+		{
+			pageNum = $(this).text();
+			ajaxLectureNoticeList();
+		});
+		// end 페이징 번호가 클릭 됐을때
+		
 	});
-	
-	// 이 스터디방에 대한 공지사항 리스트 뿌려주는 ajax
+
+	// 이 강의에 대한 공지사항 리스트 뿌려주는 메소드
 	function ajaxLectureNoticeList()
 	{
-		var params = "lec_cd=" + $("#lectureCode").val();
+		if(pageNum == 0)
+		{
+			var params = "lec_cd=" + $("#lectureCode").val();	
+		}
+		else
+		{
+			var params = "lec_cd=" + $("#lectureCode").val() + "&pageNum=" + pageNum; 
+		}
 		
+		// 공지사항 리스트 뿌려주는 Ajax
 		$.ajax(
 		{
-			type : "POST"
-			, url : "lecturenoticelist.action"
-			, data : params
-			, dataType : "text"
-			, async: false
-			, success : function(data)
+			type : "POST",
+			url : "lecturenoticelist.action",
+			data : params,
+			dataType : "text",
+			async : false,
+			success : function(data)
 			{
-				//alert("성공" + data);
-				// 여기부터 하기
+				
 				$(".noticeList").html(data);
-				
-				
+
+				// 공지사항 목록의 제목 버튼이 눌렸을 때
 				$(".listTitle").click(function()
 				{
-					alert("클릭");
-					$("#tableForm").submit();
-				
+					var send = params + "&lec_ntc_cd=" + $(this).val();
+					
+					// 공지사항 상세 ajax
+					$.ajax(
+					{
+						type : "POST",
+						url : "lecturenoticedetail.action",
+						data : send,
+						dataType : "text",
+						async : false,
+						success : function(args)
+						{
+							$(".noticeList").html(args);
+
+							// 목록 버튼 클릭 시 리스트로 이동
+							$(".goListBtn").click(function()
+							{
+								ajaxLectureNoticeList();
+							});
+
+						}
+					});
+					// end 공지사항 상세 Ajax
+					
 				});
+				// end 공지사항의 제목이 눌렸을때
 				
-			}
-			, error : function(e)
+				// 등록 버튼 클릭 시
+				$(".notice-add").click(function() 
+				{
+					
+					var params2 = "lec_cd=" + $("#lectureCode").val();
+					
+					$.ajax(
+					{
+						type : "POST"
+						, url : "lecturenoticeaddjsp.action"
+						, data : params2
+						, dataType : "text"
+						, async : false
+						, success : function(args) 
+						{
+							//alert("등록성공" + args);
+							
+							$(".noticeList").html(args);
+							
+							$("#noticeCreateBtn").click(function() 
+							{
+								alert("실제 등록");
+								
+							});
+							
+							$(".notice-cancel").click(function() 
+							{
+								ajaxLectureNoticeList();	
+							});
+						}
+					});
+				});
+				// end 등록 버튼 클릭 시 
+				
+			},
+			error : function(e)
 			{
 				alert(e.responseText + "에러");
 			}
+			
 		});
+		// 공지사항 리스트 뿌려주는 Ajax 끝
+		
 	}
 	
-
 </script>
 
 </head>
 <body>
 
-<div class="container-fluid" id="bodyDiv">	
-	
-	<div class="row searchRow">
-	<div class="col-md-12 form-inline">
-		<input type="text" style="width: 10%;" class="form-control" value="제목" readonly="readonly"/>
-		<input type="text" style="width: 80%;"class="searchBox form-control" placeholder="검색어를 입력하세요."/>
-		
-		<button type="button" class="search btn btn-primary">검색</button>
-	</div>
-		
-	</div><!-- end .row .searchRow -->
-	
-	<div class="row">
-		
-		<form id="tableForm" class="form-horizontal" role="form" method="post" action="lecturenoticedetail.action">
-		<input type="hidden" id="lectureCode" name="lec_cd" value="<%=lec_cd%>">
-			<!-- 실제 테이블 -->
-			<div class="col-md-12 noticeList">
-			</div>
-		</form>
-		
-	</div><!-- end .row -->
-	<div class="row">
-		
-		<div class="col-md-12">
-			<div class="paging"> 
-				<ul class="pagination">
-				<li class="page-item"><a href="#" class="page-link">Previous</a></li>
-				<li class="page-item"><a href="#" class="page-link">1</a></li>
-				<li class="page-item"><a href="#" class="page-link">2</a></li>
-				<li class="page-item"><a href="#" class="page-link">3</a></li>
-				<li class="page-item"><a href="#" class="page-link">4</a></li>
-				<li class="page-item"><a href="#" class="page-link">5</a></li>
-				<li class="page-item"><a href="#" class="page-link">6</a></li>
-				<li class="page-item"><a href="#" class="page-link">7</a></li>
-				<li class="page-item"><a href="#" class="page-link">8</a></li>
-				<li class="page-item"><a href="#" class="page-link">9</a></li>
-				<li class="page-item"><a href="#" class="page-link">10</a></li>
-				<li class="page-item"><a href="#" class="page-link">Next</a></li>
-				</ul>
-			</div>
-			
-			<c:if test="${sessionScope.mem_cd == studyNoticeLists.mem_cd }">
-				<button type="button" class="add btn btn-primary pull-right">등록</button>
-			</c:if>
-			
+	<div class="container-fluid" id="bodyDiv">
+
+		<div class="row">
+
+				<input type="hidden" id="lectureCode" name="lec_cd"
+					value="<%=lec_cd%>">
+
+				<!-- 실제 테이블 -->
+				<div class="col-md-12 noticeList">
+				</div>
+
 		</div>
-			
-</div><!-- end .row -->
-</div><!-- end .container-fluid -->
+		<!-- end div.row -->
+
+	</div>
+	<!-- end div.container-fluid #bodyDiv -->
 
 </body>
 </html>

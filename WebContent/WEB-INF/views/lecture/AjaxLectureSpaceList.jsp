@@ -9,14 +9,11 @@
 <head>
 <meta charset="UTF-8">
 <title>AjaxLectureSpaceList.jsp</title>
-<link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
 <body>
 
 	<hr>
-
 	<div align="center">
-
 		<table
 			style="width: 600px; margin: 1px; padding: 3px; background-color: #FFFFFF; align-self: center;">
 			<c:set var="n" value="0"></c:set>
@@ -69,9 +66,11 @@
 														${spaceList.busi_name}
 													</p>
 												</div>
+												<!-- end div.form-inline -->
 											</button>
 										</figcaption>
 									</figure>
+									<!-- end figure.imghvr-scale-top-left -->
 									<div class="caption">
 										<div class="nameAndCount">
 											<h4>${spaceList.spa_name}</h4>
@@ -80,6 +79,7 @@
 													aria-hidden="true"></span>피드백수: ${spaceList.feedCount }개
 											</p>
 										</div>
+										<!-- end div.nameAndCount -->
 										<p class="intro">&quot;${spaceList.one_intro}&quot;</p>
 										<p>
 										<ul class="list-study-tags">
@@ -90,13 +90,15 @@
 												</c:if>
 											</c:forEach>
 										</ul>
-										<p>
 									</div>
+									<!-- end div.caption -->
 								</div>
+								<!-- end div.demo -->
 							</li>
-
 						</ul>
+						<!-- end ul.thumbnails -->
 					</div>
+					<!-- end div.item -->
 
 				</td>
 
@@ -119,10 +121,9 @@
 				<tr style="height: 30px; background-color: #FFFFFF">
 					<td align="center" colspan="3">${pageIndexList }</td>
 				</tr>
-
 			</c:if>
 
-			<!-- IMAGEBOARD 테이블에 데이터가 존재하지 않을 경우 -->
+			<!-- DB에 데이터가 존재하지 않을 경우 -->
 			<c:if test="${dataCount == 0 }">
 				<tr style="height: 30px; background-color: #FFFFFF;">
 					<td align="center" colspan="3">등록된 자료가 존재하지 않습니다.</td>
@@ -130,14 +131,10 @@
 			</c:if>
 
 		</table>
-
-		<!-- 	<table style="width: 600px; margin: 0px; padding: 0px; align-self: center;">
-		<tr style="height: 3px;">
-			<td style="background-color: #DBDBDB;">
-			</td>		
-		</tr>
-	</table> -->
+		<!-- end table -->
+		
 	</div>
-
+	<!-- end div align=center -->
+	
 </body>
 </html>
