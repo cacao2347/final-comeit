@@ -86,7 +86,7 @@
 		AND TEL=#{tel} 
 	</select>
 	
-	<!-- 아이디와 같은 회원 수 조회 adminCount() -->
+	<!-- 입력받은 아이디와 일치하는 회원 수 조회 memcheckCount() -->
 	<select resultType="java.lang.Integer" id="memcheckCount">
 	   SELECT COUNT(*) AS COUNT
 	   FROM TBL_MEM_JOIN

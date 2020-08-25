@@ -37,7 +37,7 @@
 <link rel="shortcut icon" href="<%=cp %>/assets/images/pen_1.ico" type="image/x-icon">
 <link rel="icon" href="<%=cp %>/assets/images/pen_1.ico" type="image/x-icon">
 <script>
-    var array = new Array();
+	var array = new Array();
 
      $(function(){
         
@@ -111,14 +111,18 @@
              }
          });
          
-         $('#name').keyup(function(event){
+		$('#name').keyup(function(event)
+        {
              
              var divName = $('#divName');
              
-             if($.trim($('#name').val())==""){
+             if($.trim($('#name').val())=="")
+             {
                  divName.removeClass("has-success");
                  divName.addClass("has-error");
-             }else{
+             }
+             else
+             {
                  divName.removeClass("has-error");
                  divName.addClass("has-success");
              }
@@ -151,154 +155,145 @@
              }
          });
          
-         $("#proImgBtn").click(function()
-         {
-            var result = confirm('정말 등록하시겠습니까?'); 
+		// 프로필 이미지 등록 버튼 클릭 시
+		$("#proImgBtn").click(function()
+		{
+			var result = confirm("정말 등록하시겠습니까?"); 
+		   
+			// comfirm 확인 버튼 클릭 시
+			if(result) 
+			{
+				var myFormData = new FormData();
+				var fileok = document.getElementById("uploadFile");
+				var fileCheck = null;
+				
+				fileCheck = $("#uploadFile").val();
+				
+				myFormData.append("fileok", fileok.files[0]);
+				
+				// 파일을 선택하지 않고 등록버튼 클릭 시
+				if(fileCheck == false)
+				{
+				     alert("파일을 첨부해 주세요");
+				     return;
+				}
+				else
+				{
+				   $.ajax(
+				   {
+						url : '<%=cp%>/ajaximg.action'
+				        , type : "POST"
+				        , processData : false
+				        , contentType : false
+				        , dataType : "text"
+				        , data : myFormData
+				        , success : function(data)
+				        {
+				        	// 등록한 파일 명 구하기
+				        	var dataArray = data.split("\\");
+							var reverse = dataArray.reverse().join("\\");
+							var newpics = reverse.substring(0, reverse.indexOf("\\"));
+							
+							newpics = "/FinalComeit/pds/saveData/" + newpics;
+							
+							// hidden에 파일 경로 담아두기
+							$("#okFile").val(newpics); 
+				        }
+				   }); //end ajax
+				} //end else
+			}
+		});
+		
+		// 프로필 이미지 미리보기 마우스 오버 시 등록된 사진 노출
+		var xOffset = 5;
+		var yOffset = 15;
             
-            if(result) 
-            { 
-                    var myFormData = new FormData();
-                    
-                    var fileok = document.getElementById("uploadFile");
-                    
-                    var fileCheck = null;
-                    
-                    fileCheck = $("#uploadFile").val();
+		$(document).on("mouseover", "#thumbnail", function (e) 
+		{
+			var okFile = $("#okFile").val();
+		
+			if(okFile == false)	// 파일이 존재하지 않으면
+			{
+				return;
+			}
+			else				// 파일이 존재하면
+			{
+				var div = $("<div>", {id: "preview"});
+				
+				var img = "<img id='bye' src='" + okFile + "' style='width: 400px; height: 200px;'>";
+				
+				div.append(img);
+				
+				$("body").append(div);
+				
+				// 미리보기 영역에 이미지가 노출되는 좌표값 지정
+				$("#preview")
+				.css("top", (e.pageY - xOffset) + "px")
+				.css("left", (e.pageX + yOffset) + "px")
+				.fadeIn("fast"); 
+		     }
+		}); 
+        
+		// 마우스 이동 시 미리보기 노출 유지
+		$(document).on("mousemove", "#thumbnail", function (e) 
+		{
+			$("#preview")
+			.css("top", (e.pageY - xOffset) + "px")
+			.css("left", (e.pageX + yOffset) + "px");
+		});
 
-                    
-                    myFormData.append("fileok", fileok.files[0]);
-                    
-                    if(fileCheck == false)
-                    {
-                         alert("파일을 첨부해 주세요");
-                         return;
-                    }
-                    else
-                    {
-                       $.ajax(
-                       {
-                            url: '<%=cp%>/ajaximg.action',
-                            type: 'POST',
-                            processData: false, 
-                            contentType: false,
-                            dataType : 'text',
-                            data: myFormData,
-                            
-                            success : function(data)
-                            {
-                             var dataArray = data.split("\\");
-                                
-                             
-                             var reverse = dataArray.reverse().join("\\");
-                             
-                             var newpics = reverse.substring( 0, reverse.indexOf("\\"));
-                             
-                             newpics = "/FinalComeit/pds/saveData/" + newpics;
-                             
-                             $('#okFile').val(newpics);
-                               
-                            }
-                       })
-                    }
-             } 
-            else 
-             { 
-             }
-
-                    
-                 
-          })
-                 
-          
-                 
-          var xOffset = 5;
-          var yOffset = 15;
-            
-          $(document).on("mouseover", "#thumbnail", function (e) 
-          {
-              
-              var okFile = $("#okFile").val();
-          
-               if(okFile == false)
-              {
-                  return;
-              }
-               else
-               {
-                var div = $("<div>", {id: "preview"});
-                
-                var img = "<img id='bye' src='" + okFile + "' style='width: 400px; height: 200px;'>";
-                
-                div.append(img);
-                
-                $("body").append(div);
-                
-                $("#preview")
-                    .css("top", (e.pageY - xOffset) + "px")
-                    .css("left", (e.pageX + yOffset) + "px")
-                    .fadeIn("fast"); 
-               }
-              
-              
-          }); 
-          
-          $(document).on("mousemove", "#thumbnail", function (e) {
-              $("#preview")
-                  .css("top", (e.pageY - xOffset) + "px")
-                  .css("left", (e.pageX + yOffset) + "px");
-          });
-
-
-          $(document).on("mouseout", "#thumbnail", function () 
-          { 
-             $("#preview").remove()
-          });
-          
-          
+		$(document).on("mouseout", "#thumbnail", function () 
+		{
+			$("#preview").remove()
+		});
           
          
-         // 중복확인 버튼을 클릭했을때의 처리
-         $('#dupBtn').click(function()
-         {
-            
-            if(!$('#id').val())
-            {
-               alert("아이디를 입력해주세요");
-               $('#id').focus();
-               
-            }
-            else
-            {
-              $.ajax({ type: 'POST', url: 'checkidajax.action', data: { "id" : $('#id').val() }
-                , success: function(data)
-                
-                   { //alert(data); 
-                       if($.trim(data) == 0 && $('#id').val() != null)
-                       { 
-                          //$('#checkMsg').html('<p style="color:blue">사용가능</p>');
-                          alert("사용가능합니다.");
-                          $("#phoneAuth").removeAttr("disabled");
-                       }
-                       else 
-                       { 
-                          //$('#checkMsg').html('<p style="color:red">사용불가능</p>');
-                          alert("사용불가능합니다.");
-                       }
-                       
-                 } 
-               }); //end ajax
-            }
-              //alert('뭐');
-             
-        });
-         
-      
-        // 지역명이 바뀌면 상세지역 ajax 호출
-      $("#area").change(function()
-      {
-         ajaxSpcAreaRequest();
-         
-      })
+		// 아이디 중복 확인 버튼 클릭 시 처리
+		$("#dupBtn").click(function()
+		{
+		    if(!$("#id").val())	// 입력값이 없을 경우
+		    {
+				alert("아이디를 입력해주세요.");
+				$("#id").focus();
+		    }
+		    else				// 입력값이 있을 경우
+		    {
+		    	$.ajax(
+		    	{
+		    		type: "POST"
+		    		, url: "checkidajax.action"
+		    		, data: { "id" : $("#id").val() }
+		        	, success: function(data)
+		        	{
+		        		// 존재하지 않는 경우
+						if($.trim(data) == 0)
+						{
+							alert("사용가능한 아이디입니다.");
+							
+							// 아이디 사용 가능할 시에만 휴대폰 번호 인증 버튼 활성화
+							$("#phoneAuth").removeAttr("disabled");
+						}
+		        		// 존재하는 경우
+						else if($.trim(data) > 0)
+							alert("이미 존재하는 아이디입니다.");
+		        		else
+		        			alert("판별 불가");	
+					}
+		        	, error : function(error)
+					{
+						alert("error : " + error);
+					}
+				}); //end ajax
+			} //end else
+		});
+
+		
+        // 지역 select값 변경 시 상세지역 ajax 호출
+		$("#area").change(function()
+		{
+		   ajaxSpcAreaRequest();
+		   
+		})
 
       $('INPUT[type="file"]').change(function () 
       {
@@ -358,7 +353,7 @@
       });
       
       
-      // 동의하지 않습니다 누르면 비활성화 하고 값 리셋
+      // 동의하지 않습니다 선택 시 비활성화 하고 값 리셋
       $("#provisionN").click(function()
       {
          $("#id").attr("disabled", true);
@@ -398,109 +393,101 @@
       });
       
 
-      //alert($('input[name=provisionyn]').val());
-      // 가입하기 버튼 클릭 시 유효성 체크
-      $("#joinBtn").click(
-         function()
-         {
-            if ($("#id").val() == "" || $("#password").val() == ""
-                  || $("#passwordCheck").val() == ""
-                  || $("#name").val() == ""
-                  || $("#email").val() == "" || $("#week").val() == 0
-                  || $("#area").val() == 0
-                  || $("#spcArea").val() == 0
-                  || $("#phoneNumber").val() == ""
-                  || $("#phoneNumberCheck").val() == ""
-                  )
-            {
-               $("#err").html("필수 입력 항목이 누락되었습니다.");
-               $("#err").css("display", "inline");
-               return;
-            }
-            
-            if($("#stuKeyBox").children().length == 0)
-            {
-               $("#err").html("관심 키워드는 최소 한 개 이상 선택해야 합니다.");
-               $("#err").css("display", "inline");
-               return;
-            }
-            
-   
-            /*
-            if( $("input:radio[name='provisionyn']:radio[value='N']") == true)
-            {
-               //alert($('input[name=provisionyn]').val());
-               $("#err").html("회원가입약관에 동의해주세요.");
-               $("#err").css("display", "inline");
-               return;
-            }
-            */
-            
-            // 비밀번호 유효성 체크
-            //영문,숫자,특수문자 중 2가지 혼합 (영문,숫자 = 통과) (특문,숫자 = 통과) 비밀번호 10~20자리
-            var pw = $("#password").val();
-            var num = pw.search(/[0-9]/g);
-            var eng = pw.search(/[a-z]/ig);
-            var spe = pw.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
-
-            if(pw.length < 10 || pw.length > 20)
-            {
-               //alert("10자리 ~ 20자리 이내로 입력해주세요.");
-               $("#err").html("패스워드는 10자리 ~ 20자리 이내로 입력해주세요.");
-               $("#err").css("display", "inline");
-               return;
-            }
-            else if(pw.search(/\s/) != -1)
-            {
-               //alert("비밀번호는 공백 없이 입력해주세요.");
-               $("#err").html("패스워드는 공백 없이 입력해주세요.");
-               $("#err").css("display", "inline");
-               return;
-            }
-            else if( (num < 0 && eng < 0) || (eng < 0 && spe < 0) || (spe < 0 && num < 0) )
-            {
-               //alert("영문,숫자, 특수문자 중 2가지 이상을 혼합하여 입력해주세요.");
-               $("#err").html("패스워드는 영문,숫자, 특수문자 중 2가지 이상을 혼합하여 입력해주세요.");
-               $("#err").css("display", "inline");
-               return;
-            }
-            else 
-            {
-               console.log("통과");    
-            }
-            
-            
-            // 최종 submit
-            $("#joinForm").submit();
-   
-         });
+		// 가입하기 버튼 클릭 시 유효성 체크
+		$("#joinBtn").click(
+		function()
+		{
+			if ($("#id").val() == "" || $("#password").val() == ""
+		         || $("#passwordCheck").val() == ""
+		         || $("#name").val() == ""
+		         || $("#email").val() == "" || $("#week").val() == 0
+		         || $("#area").val() == 0
+		         || $("#spcArea").val() == 0
+		         || $("#phoneNumber").val() == ""
+		         || $("#phoneNumberCheck").val() == ""
+		         )
+			{
+				$("#err").html("필수 입력 항목이 누락되었습니다.");
+				$("#err").css("display", "inline");
+				return;
+			}
+		   
+			if($("#stuKeyBox").children().length == 0)
+			{
+				$("#err").html("관심 키워드는 최소 한 개 이상 선택해야 합니다.");
+				$("#err").css("display", "inline");
+				return;
+			}
+		   
+			// 비밀번호 유효성 체크
+			// 영문,숫자,특수문자 중 2가지 혼합 (영문,숫자 = 통과) (특문,숫자 = 통과) 비밀번호 10~20자리
+			var pw = $("#password").val();
+			var num = pw.search(/[0-9]/g);
+			var eng = pw.search(/[a-z]/ig);
+			var spe = pw.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
+		
+			if(pw.length < 10 || pw.length > 20)
+			{
+				//alert("10자리 ~ 20자리 이내로 입력해주세요.");
+				$("#err").html("패스워드는 10자리 ~ 20자리 이내로 입력해주세요.");
+				$("#err").css("display", "inline");
+				return;
+			}
+			else if(pw.search(/\s/) != -1)
+			{
+				//alert("비밀번호는 공백 없이 입력해주세요.");
+				$("#err").html("패스워드는 공백 없이 입력해주세요.");
+				$("#err").css("display", "inline");
+				return;
+			}
+			else if( (num < 0 && eng < 0) || (eng < 0 && spe < 0) || (spe < 0 && num < 0) )
+			{
+				//alert("영문,숫자, 특수문자 중 2가지 이상을 혼합하여 입력해주세요.");
+				$("#err").html("패스워드는 영문,숫자, 특수문자 중 2가지 이상을 혼합하여 입력해주세요.");
+				$("#err").css("display", "inline");
+				return;
+			}
+			else 
+				console.log("통과");    
+		   
+			// 최종 submit
+			$("#joinForm").submit();
+		
+		});
       
-         $("#authNumBtn").click(function() 
-         {          
-            if($("#authNum").val() == "" || $("#authNum").val() == null)
-             {
-                 alert("인증번호를 입력하세요.");
-                 return;
-             }
-   
-             if($("#authNum").val() == phoneCheck)
-              {
-                alert("인증에 성공하였습니다.");
-                $("#authNumRslt").attr("value", "인증 성공");
-                
-                $("#joinBtn").removeAttr("disabled");
-              }
-             else if($("#authNum").val() != phoneCheck)
-             {
-                alert("인증에 실패하였습니다.");
-                $("#authNumRslt").attr("value", "인증 실패"); 
-             }
-             else
-             {
-                alert("인증에 실패하였습니다.");
-                $("#authNumRslt").attr("value", "인증 실패");
-             }
-         });
+		// 인증번호 확인 버튼 클릭 시
+		$("#authNumBtn").click(function() 
+		{
+			// 입력값이 없을 경우
+			if($("#authNum").val() == "" || $("#authNum").val() == null)
+			{
+				alert("인증번호를 입력하세요.");
+				$("#authNum").focus();
+				return;
+			}
+			// 입력값이 있을 경우
+			else if($("#authNum").val() != "" || $("#authNum").val() != null)
+			{
+				if($("#authNum").val() == phoneCheck)
+				{
+					alert("인증에 성공하였습니다.");
+					$("#authNumRslt").attr("value", "인증 성공");
+					
+					// 인증 성공 시 가입하기 버튼 활성화
+					$("#joinBtn").removeAttr("disabled");
+				}
+				else if($("#authNum").val() != phoneCheck)
+				{
+					alert("인증에 실패하였습니다.");
+					$("#authNumRslt").attr("value", "인증 실패"); 
+				}
+				else
+				{
+					alert("인증에 실패하였습니다.(판별 불가)");
+					$("#authNumRslt").attr("value", "인증 실패");
+				}
+			}
+		});
          
          // 관심 키워드 추가 버튼
           $("#keyAddBtn").click(function() 
@@ -587,78 +574,88 @@
 
    });
 
-   // 문자 발송
-   function ajaxSendSms()
+	// 휴대폰 인증 버튼 클릭 시
+	function ajaxSendSms()
     {
-      var check = false;
+		var check = false;
+		
         // 문자 인증 발송 전 중복확인
-           if(!$('#phoneNumber').val())
-           {
-              alert("전화번호를 입력해주세요");
-              $('#phoneNumber').focus();
-              
-           }
-           else
-           {
-              $("#authNumBtn").removeAttr("disabled");
-             $.ajax({ type: 'POST', url: 'checkpwdajax.action', data: { "phoneNumber" : $('#phoneNumber').val() }
-               ,async:false,  success: function(data)
-                   { 
-                       if($.trim(data) == 0 && $('#phoneNumber').val() != null)
-                       { 
-                          check=true;
-                          alert("사용가능합니다.");
-                       }
-                       else 
-                       { 
-                          alert("번호가 이미 존재합니다.");
-                       }
-                 } 
-              }); //end ajax
-           }
+		if(!$("#phoneNumber").val())	// 입력값이 없을 경우
+		{
+			alert("휴대폰 번호를 입력해주세요.");
+			$("#phoneNumber").focus();
+		}
+		else							// 입력값이 있을 경우
+		{
+			$.ajax(
+			{
+				type: "POST"
+				, url : "checkphonenumberdajax.action"
+				, data : { "phoneNumber" : $("#phoneNumber").val() }
+			  	, async : false
+			  	, success: function(data)
+				{
+			  		// 존재하지 않는 경우
+				    if($.trim(data) == 0)
+				    {
+				    	check=true;
+						alert("사용가능한 번호입니다.");
+				    }
+				 	// 존재하는 경우
+					else if($.trim(data) > 0)
+						alert("이미 사용중인 번호입니다.");
+	        		else
+	        			alert("판별 불가");	
+				}
+			  	, error : function(error)
+				{
+					alert("error : " + error);
+				}
+			}); //end ajax
+		} //end else
       
-          if(check==true){
-            phoneCheck = "";
-            alert("phoneCheck_bf : " + phoneCheck);
-      
-            $.ajax(
-            {
-               url : "sendsms.action",
-               data: {
-                  receiver: $("#phoneNumber").val()
-               },
-               type: "post",
-               success: function(result){
-                  phoneCheck = result;
-                  alert("result : " + result);
-                  alert("phoneCheck_af : " + phroneCheck);
-               }
-            });   
-         }   
-    }
+		// 사용가능한 번호일 경우에만 문자 발송
+		if(check==true)
+		{
+			phoneCheck = "";	// 인증번호 담아둘 변수
+			
+			// 사용 가능한 번호일 경우 인증번호 확인 버튼 활성화
+			$("#authNumBtn").removeAttr("disabled");
+			
+			$.ajax(
+			{
+				url : "sendsms.action"
+				, data : { receiver: $("#phoneNumber").val() }
+				, type : "POST"
+				, success : function(result)
+				{
+					phoneCheck = result;	// 받아온 인증번호 담기
+      			}
+				, error : function(error)
+				{
+					alert("error : " + error);
+				}
+			}); //end ajax
+		} //end if
+	}
      
      
-     // 지역에 따른 세부지역 불러오는 ajax
-    function ajaxSpcAreaRequest()
-    {
-
-       $.post("areaajax.action",
-       {
-          area_cd : $("#area").children("option:selected").val()
-       }, function(data)
-       {
-          //alert(data);
-          $("#spcAreaDiv").html(data);
-          $("#spcArea").removeAttr("disabled");
-       });
-    }
-     
-
-    
-     
-     
-     
-     
+	// 지역에 따른 세부지역 불러오는 ajax
+	function ajaxSpcAreaRequest()
+	{
+		$.post("areaajax.action"
+		, { area_cd : $("#area").children("option:selected").val() }
+		, function(data)
+		{
+			// 받아온 세부지역 리스트(AjaxJoinSpcArea.jsp)를
+			// #spcAreaDiv 영역에 노출시키기
+			$("#spcAreaDiv").html(data);
+			$("#spcArea").removeAttr("disabled");
+		});
+	}
+	
+	
+	
 </script>
 </head>
 <body>

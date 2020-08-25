@@ -178,44 +178,25 @@ public class JoinController
 	}
 
 
-	// 회원 아이디가 맞는지 확인해주고 알려주는 AJAX 처리
+	// MemberJoin.jsp의 #dupBtn 클릭 시 아이디 중복 확인하는 AJAX 처리
 	@ResponseBody
 	@RequestMapping(value = "/checkidajax.action", method = RequestMethod.POST)
-	public String checkidAjax(HttpServletRequest request, Model model)
+	public String checkidAjax(HttpServletRequest request)
 	{
-
-		// String view = null;
 
 		IMemberDAO memberDao = sqlSession.getMapper(IMemberDAO.class);
 
-		String id = request.getParameter("id");
-		System.out.println(id);
-
 		int result = memberDao.memcheckCount(request.getParameter("id"));
-		System.out.println(result);
 
 		return String.valueOf(result);
-
-		// System.out.println(result);
-
-		/* (request.getParameter("area_cd"); */
-
-		// model.addAttribute("result", result);
-
-		// view = "/WEB-INF/views/member/AjaxJoinCheckId.jsp";
-
-		// return view;
 
 	}
 
 	// 회원 전화번호 중복 AJAX 처리
 	@ResponseBody
-	@RequestMapping(value = "/checkpwdajax.action", method = RequestMethod.POST)
-	public String checkTelAjax(HttpServletRequest request, Model model)
+	@RequestMapping(value = "/checkphonenumberdajax.action", method = RequestMethod.POST)
+	public String checkTelAjax(HttpServletRequest request)
 	{
-
-		// String view = null;
-
 		IMemberDAO memberDao = sqlSession.getMapper(IMemberDAO.class);
 
 		String tel = request.getParameter("phoneNumber");
