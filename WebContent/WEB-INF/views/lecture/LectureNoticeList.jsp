@@ -149,6 +149,7 @@
 				<!-- 실제 테이블 -->
 				<div class="col-md-12 noticeList">
 				</div>
+				<!-- end div.col-md-12 noticeList -->
 
 		</div>
 		<!-- end div.row -->

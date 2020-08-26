@@ -10,29 +10,23 @@
 <head>
 <meta charset="UTF-8">
 <title>LectureProfessorDetail.jsp</title>
-<link rel="stylesheet" type="text/css"
-	href="<%=cp%>/assets/css/lecture/lectureprofessordetail.css">
-<link rel="stylesheet" type="text/css"
-	href="<%=cp%>/assets/css/bootstrap/bootstrap.min.css">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<link
-	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap"
-	rel="stylesheet">
-<link rel="shortcut icon" href="<%=cp%>/assets/images/pen_1.ico"
-	type="image/x-icon">
-<link rel="icon" href="<%=cp%>/assets/images/pen_1.ico"
-	type="image/x-icon">
+<link rel="stylesheet" type="text/css" href="<%=cp%>/assets/css/lecture/lectureprofessordetail.css">
+<link rel="stylesheet" type="text/css" href="<%=cp%>/assets/css/bootstrap/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
+<link rel="shortcut icon" href="<%=cp%>/assets/images/pen_1.ico" type="image/x-icon">
+<link rel="icon" href="<%=cp%>/assets/images/pen_1.ico" type="image/x-icon">
 
 <style type="text/css">
-body {
-	font-family: 'Noto Sans KR', sans-serif !important;
-}
+	body 
+	{
+		font-family: 'Noto Sans KR', sans-serif !important;
+	}
 </style>
 
-<script type="text/javascript"
-	src="http://code.jquery.com/jquery.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="<%=cp%>/assets/js/bootstrap.min.js"></script>
+
 <script type="text/javascript">
 	$(document).ready(function()
 	{
@@ -45,17 +39,6 @@ body {
 		{
 			$("#lecMemInfo").css('display', 'none');
 		});
-		/* 
-		
-		$("#member2").mouseover(function() 
-		{
-			$("#lecMemInfo2").css('display', 'block');	
-		});
-		$("#member2").mouseleave(function() 
-		{
-			$("#lecMemInfo2").css('display', 'none');
-		});
-		 */
 		 
 		// 수정 버튼이 눌러졌을 때
 		$("#modify").click(function()
@@ -74,52 +57,68 @@ body {
 	});
 </script>
 
-
 </head>
 <body>
 
+	<!-- 헤더 영역 -->
 	<div class="row">
+	
 		<div class="col-md-12">
 			<c:import url="/WEB-INF/views/common/header.jsp"></c:import>
 		</div>
+		
 	</div>
+	<!-- end div.row -->
+	<!-- 헤더 영역 끝 -->
 
-	<!-- 바디 -->
+	<!-- 바디 영역 -->
 	<div class="container-fluid">
 
-		<!-- 방 정보 및 팀원 정보 -->
 		<div class="row">
+			
+			<!-- 강의 사이드탭 영역 -->		
 			<div class="col-md-2">
 				<c:import url="/WEB-INF/views/lecture/LectureSidebar.jsp">
 				</c:import>
 			</div>
-			<!-- 방 정보 -->
+			<!-- end div.col-md-2 -->
+			<!-- 강의 사이드탭 영역 끝 -->
+			
+			<!-- 강의 정보 영역 -->
 			<div class="col-md-8">
+			
 				<div class="row">
+				
 					<div class="col-md-12">
+					
 						<img src="<%=cp%>/assets/images/study2.jpg" alt="" class="lecImg" />
-						<!-- 스터디방 제목 -->
+						
+						<!-- 강의 제목 -->
 						<div class="lecTitle">
 
 							<div class="row">
+							
 								<div class="col-md-10">
 									<h2 class="title" style="font-weight: bold;">${lecInfo.lec_name }</h2>
 								</div>
+								<!-- end div.col-md-10 -->
 
 								<div class="col-md-2">
 									<img src="<%=cp%>/assets/images/report.png" alt=""
 										class="report" onclick="" />
 								</div>
+								<!-- end div.col-md-2 -->
+								
 							</div>
-
+							<!-- end div.row -->
 							<hr />
 
 						</div>
 						<!-- end.lecTitle -->
 
-
-						<!-- 스터디방 정보 -->
+						<!-- 강의 정보 -->
 						<div class="lecInfo">
+						
 							<!-- 활동 기간 -->
 							<div class="lecTerm">
 								<span class="glyphicon glyphicon-pencil"></span>
@@ -129,6 +128,7 @@ body {
 							</div>
 							<!-- end lecTerm -->
 							<hr />
+							
 							<!-- 활동 지역 -->
 							<div class="lecArea">
 								<span class="glyphicon glyphicon-map-marker icon"></span>
@@ -137,6 +137,7 @@ body {
 							</div>
 							<!-- end .lecArea -->
 							<hr />
+							
 							<!-- 키워드 -->
 							<div class="lecKey">
 								<span class="glyphicon glyphicon-tags icon"></span>
@@ -151,6 +152,7 @@ body {
 							</div>
 							<!-- end .lecKey -->
 							<hr />
+							
 							<!-- 예상 레벨 -->
 							<div class="lecLevel">
 								<span class="glyphicon glyphicon-calendar icon"></span>
@@ -158,7 +160,9 @@ body {
 								<br> <span class="level">${lecInfo.str_date }~${lecInfo.end_date }</span>
 								<br> <span class="level">화, 목</span>
 							</div>
+							<!-- end div.lecLevel -->
 							<hr />
+							
 							<!-- 상세 설명 -->
 							<div class="lecCurr">
 								<span class="glyphicon glyphicon-user icon"></span>
@@ -167,12 +171,15 @@ body {
 									${lecInfo.min_mem }명 <br> 강의 최대 인원 : ${lecInfo.max_mem }명
 								</span>
 							</div>
+							<!-- end div.lecCurr -->
 							<hr />
+							
 							<div class="lecMoney">
 								<span class="glyphicon glyphicon-shopping-cart icon"></span>
 								<h3>수강료</h3>
 								<br /> <span class="curr"> ${lecInfo.lec_fee } 원 </span>
 							</div>
+							<!-- end div.lecMoney -->
 
 							<br>
 							<br>
@@ -180,16 +187,22 @@ body {
 
 							<!-- 버튼 영역 -->
 							<div class="text-right">
+							
 								<input type="button" value="강의 수정" class="btn btn-lg btn-primary join" id="modify" />
 								<input type="button" value="강의 삭제" class="btn btn-lg btn-secondary join" id="delete"/>
+								
 								<!-- 수정/삭제시 강의코드를 넘겨주는 Form -->
 								<form id="buttonForm" action="">
 									<input type="hidden" name="lec_cd" value="${lec_cd }">
 								</form>
+								<!-- end form.buttonForm -->
+								
 							</div>
+							<!-- end div.text-right -->
 
 						</div>
 						<!-- end .lecInfo -->
+						
 					</div>
 					<!-- end .col-md-8 -->
 
@@ -199,7 +212,10 @@ body {
 			</div>
 			<!-- end .col-md-8 -->
 
-			<div class="col-md-2"></div>
+			<div class="col-md-2">
+			</div>
+			<!-- end div.col-md-2 -->
+			
 		</div>
 		<!-- end .row -->
 
@@ -207,24 +223,39 @@ body {
 	<!-- end .container-fluid -->
 
 	<div class="row">
+	
 		<div class="col-md-2">
 		</div>
+		
 		<div class="col-md-8">
+		
 			<div class="row">
+			
 				<div class="col-md-12">
 					<c:import url="/WEB-INF/views/lecture/LectureTab.jsp"></c:import>
 				</div>
+				<!-- end div.col-md-12 -->
+				
 			</div>
 			<!-- end .row -->
+			
 		</div>
 		<!-- end .col-md-8 -->
+		
 		<div class="col-md-2">
 		</div>
+		<!-- end div.col-md-2 -->
+		
 	</div>
 	<!-- end .row -->
+	<!-- 바디 영역 끝 -->
 
+	<!-- 푸터 영역 -->
 	<div class="col-md-12">
 		<c:import url="/WEB-INF/views/common/footer.jsp"></c:import>
 	</div>
+	<!-- end div.col-md-12 -->
+	<!-- 푸터 영역 끝 -->
+	
 </body>
 </html>

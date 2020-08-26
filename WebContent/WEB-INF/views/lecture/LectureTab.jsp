@@ -55,28 +55,36 @@
             <!--Content-->
             <c:import url="/WEB-INF/views/lecture/LectureNoticeList.jsp"></c:import>
         </div>
+        <!-- end div#tab1 -->
 
         <div id="tab2" class="tab_content">
            <!--Content-->
            <c:import url="/WEB-INF/views/lecture/LectureDateList.jsp"></c:import>
         </div>
+        <!-- end div#tab2 -->
 
         <div id="tab3" class="tab_content">
            <!--Content-->
            <c:import url="/WEB-INF/views/lecture/LectureSpaceList.jsp"></c:import>
         </div>
+        <!-- end div#tab3 -->
    
          <div id="tab4" class="tab_content">
            <!--Content-->
+           <c:import url="/WEB-INF/views/lecture/LectureLecStudent.jsp"></c:import>
         </div>
+        <!-- end div#tab4 -->
         
         <div id="tab5" class="tab_content">
            <!--Content-->
         </div>
+        <!-- end div#tab5 -->
 
     </div>
+    <!-- end div.tab_container -->
 
 </div>
+<!-- end div#wrapper -->
 
 </body>
 </html>

@@ -62,11 +62,14 @@
 					<td colspan="6">${noticeDetail.content }</td>
 				</tr>
 			</table>
+			<!-- end table.table detail -->
 			
 		</div>
 		<!-- end div.col-md-12 -->
 		
-	</div><!-- 상세내용 영역 끝 -->
+	</div>
+	<!-- end div.row -->
+	<!-- 상세내용 영역 끝 -->
 	
 	<!-- 버튼 영역 -->
 	<div class="row">

@@ -12,16 +12,6 @@ String cp = request.getContextPath();
 
 <link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/lecture/lectureSpaceList.css" >
 
-<%-- <script type="text/javascript">
-
-	function searchList() 
-	{
-		f = document.searchForm;
-		f.action = "<%=cp%>/image/list.action";
-		f.submit();
-	}
-</script> --%>
-
 <script type="text/javascript">
 
 	$(function()
@@ -90,13 +80,11 @@ String cp = request.getContextPath();
 		});
 		
 	}
-	
 
 </script>
 
 </head>
 <body>
-
 
 	<br>
 	<br>
@@ -104,20 +92,36 @@ String cp = request.getContextPath();
 	<div align="center">
 
 		<div class="container-fluid">
+		
 			<div class="row">
-				<div class="col-md-2"></div>
+			
+				<div class="col-md-2">
+				</div>
+				<!-- end div.col-md-2 -->
+				
 				<div class="col-md-8 text-center">
 					<h1>모임 장소 정하기</h1>
 				</div>
-				<div class="col-md-2"></div>
+				<!-- end div.col-md-8 text-center -->
+				
+				<div class="col-md-2">
+				</div>
+				<!-- end div.col-md-2 -->
+				
 			</div>
-	</div>
+			<!-- end div.row -->
+			
+		</div>
+		<!-- end div.container-fluid -->
 		
 		<div class="row spaceList">
 		</div>
+		<!-- end div.row spaceList -->
 		
 		<hr>
+		
 	</div>
+	<!-- end div -->
 
 </body>
 </html>
