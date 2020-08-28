@@ -37,10 +37,12 @@
 <link rel="shortcut icon" href="<%=cp %>/assets/images/pen_1.ico" type="image/x-icon">
 <link rel="icon" href="<%=cp %>/assets/images/pen_1.ico" type="image/x-icon">
 <script>
+	
+	// 선택된 관심 키워드가 담길 배열 선언. #keyAddBtn 클릭 시 push
 	var array = new Array();
 
-     $(function(){
-        
+	$(function()
+	{
         // AJAX 요청 및 응답 처리
         ajaxSpcAreaRequest();
         
@@ -161,7 +163,7 @@
 			var result = confirm("정말 등록하시겠습니까?"); 
 		   
 			// comfirm 확인 버튼 클릭 시
-			if(result) 
+			if(result)
 			{
 				var myFormData = new FormData();
 				var fileok = document.getElementById("uploadFile");
@@ -394,9 +396,9 @@
       
 
 		// 가입하기 버튼 클릭 시 유효성 체크
-		$("#joinBtn").click(
-		function()
+		$("#joinBtn").click(function()
 		{
+			// 필수 입력 항목 중 하나라도 누락되었을 경우
 			if ($("#id").val() == "" || $("#password").val() == ""
 		         || $("#passwordCheck").val() == ""
 		         || $("#name").val() == ""
@@ -412,6 +414,7 @@
 				return;
 			}
 		   
+			// 관심 키워드가 하나도 선택되지 않았을 경우
 			if($("#stuKeyBox").children().length == 0)
 			{
 				$("#err").html("관심 키워드는 최소 한 개 이상 선택해야 합니다.");
@@ -489,90 +492,81 @@
 			}
 		});
          
-         // 관심 키워드 추가 버튼
-          $("#keyAddBtn").click(function() 
-           {
-               var tmpHtml = "";
-               var selectedKey = "";
-               var keyInput = "";
+		// 관심 키워드 추가 버튼 클릭 시
+		$("#keyAddBtn").click(function() 
+		{
+			var tmpHtml = "";
+			var selectedKey = "";
+			var keyInput = "";
 
-               tmpHtml = tmpHtml + "";
-               
-               selectedText = $("#keySelect option:checked").text();
-               selectedValue = $("#keySelect option:checked").val();
-               keyInput = $("#keyInput").val();
-               elementCount = $(".tagStyle").length;
-               
-               if(selectedValue =='INT9999')
-               {
-                  selectedText = keyInput;
-               }
-               
-               for (var i = 0; i < array.length; i++) 
-               {
-                  if(selectedText == array[i])
-                  {
-                     alert(selectedText)
-                     alert("중복된 키워드는 입력 할 수 없습니다.");
-                     return;
-                  }
-              }
-              if(selectedText.trim()=="")
-             {
-               alert("공백은 입력할 수 없습니다.");
-               return;
-             }
-               
-                 // 키워드 개수 제한
-               if(elementCount == 5)
-               {
-                  alert("키워드는 최대 5개 까지 선택 할 수 있습니다.")
-                  return;
-               }
-               
-               array.push(selectedText);
-               document.getElementById("keyInput").value = null;
-               
-               if(selectedValue == 'INT9999')
-               {
-                  
-                  $(".stuKeyBox").append("<div class='tagStyle'><span class='keyTag'>"+ selectedText 
-                        + "<input type='hidden' name='etcTagList' value='"+ selectedText + "'></span></div>");
-               }
-               // 관심키워드 일 때...
-               else
-               {
-                  $(".stuKeyBox").append("<div class='tagStyle'><span class='keyTag'>"+ selectedText 
-                        + "<input type='hidden' name='intTagList' value='"+ selectedValue + "'></span></div>");                  
-               }
-               
-          });
-         
-          $("#keySelect").change(function() 
-          {
-                var selectedValue = "";
-                // alert("셀렉트값 변경");
-                
-                selectedValue = $("#keySelect option:checked").val();
-             
-               if(selectedValue == "INT9999")
-               {
-                  $("#keyInput").attr("readonly", false);
-               }
-               else
-               {
-                  $("#keyInput").attr("readonly", true);
-               }
-          });
+			tmpHtml = tmpHtml + "";
+     
+			selectedText = $("#keySelect option:checked").text();
+			selectedValue = $("#keySelect option:checked").val();
+			keyInput = $("#keyInput").val();
+			elementCount = $(".tagStyle").length;
+
+			// 기타 선택 시 #keyInput에 입력한 값으로 세팅하기
+			if(selectedValue =='INT9999')
+				selectedText = keyInput;
+			
+			// 선택한 키워드 중복 제어
+			for (var i = 0; i < array.length; i++) 
+			{
+			    if(selectedText == array[i])
+			    {
+			       alert("중복된 키워드는 입력 할 수 없습니다.");
+			       return;
+			    }
+			}
+			
+			if(selectedText.trim()=="")
+			{
+				alert("기타 관심 키워드를 입력해 주세요.");
+				return;
+			}
+     
+			// 키워드 개수 제한
+			if(elementCount == 5)
+			{
+				alert("키워드는 최대 5개 까지 선택 할 수 있습니다.")
+				return;
+			}
+
+			// 선택된 키워드를 배열에 담고 input box 초기화 하기
+			array.push(selectedText);
+			document.getElementById("keyInput").value = null;
+     
+			// 기타 관심키워드 일 때 etcTagList로 키워드 넘기기
+			if(selectedValue == 'INT9999')
+			   $(".stuKeyBox").append("<div class='tagStyle'><span class='keyTag'>"+ selectedText 
+			         + "<input type='hidden' name='etcTagList' value='"+ selectedText + "'></span></div>");
+			// 관심키워드 일 때 intTagList로 키워드 넘기기
+			else
+			   $(".stuKeyBox").append("<div class='tagStyle'><span class='keyTag'>"+ selectedText 
+			         + "<input type='hidden' name='intTagList' value='"+ selectedValue + "'></span></div>");                  
+		});
+
+		// 키워드 선택 변경 시
+		$("#keySelect").change(function() 
+		{
+			var selectedValue = "";
+			selectedValue = $("#keySelect option:checked").val();
+		   
+			if(selectedValue == "INT9999")
+			   $("#keyInput").attr("readonly", false);
+			else
+			   $("#keyInput").attr("readonly", true);
+		});
           
-          // 관심 키워드 삭제 버튼
-          $("#keyResetBtn").click(function() 
-           {
-               $(".stuKeyBox").empty();
-               array = [];
-          });
+		// 관심 키워드 초기화 버튼 클릭 시
+		$("#keyResetBtn").click(function() 
+		{
+			$(".stuKeyBox").empty();
+			array = [];
+		});
 
-   });
+	});
 
 	// 휴대폰 인증 버튼 클릭 시
 	function ajaxSendSms()
