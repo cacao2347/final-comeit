@@ -19,6 +19,46 @@
 	$(function()
 	{
 		ajaxLectureLecStudent();
+		
+		// 수강생 모달 정보 요청 joinMemBtn
+	       $(".stdntModalBtn").click(function() 
+	      {
+	    	  var params = "mem_cd=" +$(this).val();
+	    	  
+	    	  $.ajax(
+	    	  {
+	    	      type : "POST"
+	    	      , url : "stdntinfomodal.action"
+	    	      , data : params
+	    	      , dataType : "text"
+	    	      , success : function(args)
+	 	  	      { 
+	    	    	  // 정보 담기
+	    	    	  $(".search-modal-content").html(args);
+					   
+			    	  // 모달창 보여주기
+			    	  $("#modal").show();
+					  
+					  // 스크롤 제어
+			          $("html, body").css({"overflow":"hidden", "height":"100%"});
+			          $("#modal").bind("touchmove", function(e) {
+			            e.preventDefault();
+			          });
+			         
+			          $("#modal .searchModal").bind("touchmove", function(e) {
+			            e.stopPropagation();
+			          });
+		    	 
+				  }
+	    	  	  , error : function(e) 
+	    	  	  {
+						alert(e.responseText);
+				  }
+	    	  	
+	    	  
+	    	  });	
+	      });// end 스터디원 모달 정보요청
+		
 	});
 	
 	function ajaxLectureLecStudent()
@@ -44,6 +84,23 @@
 			
 		});
 		// 수강생 리스트 뿌려주는 Ajax 끝
+	}
+	
+	// 모달창 닫기 버튼 클릭 시 
+	function closeModal() 
+	{	
+		$('.searchModal').hide();
+		
+		// 스크롤 제어 해제
+		$("html, body").css({"overflow":"auto", "height":"auto"});
+		$('#modal').unbind('touchmove');
+		
+	};
+	
+	// 다시 로드
+	function reload() 
+	{
+		location.reload();	
 	}
 
 </script>
@@ -112,28 +169,12 @@
 			
 				<div class="student">
 				
-					<!-- <div class="memImg">
-						<img alt="Bootstrap Image Preview" src="assets/images/hjkim.PNG" class="rounded-circle profileImg" />
-					</div>
-					
-					<div class="memName">
-						<span class="name">김길동</span>
-					</div>
-					
-					<div class="memAtten">
-					
-						<div class="answer1">
-							<a href="" style="text-decoration: underline;">>회원 상세 프로필 보기</a>
-						</div>
-						
-					</div> -->
-					
-					
-					
-				</div><!-- end .mem -->
+				</div>
+				<!-- end .student -->
 				
 				<div class="blank">
 				</div>
+				<!-- end div.blank -->
 				
 			</div><!-- end .box3 -->
 			

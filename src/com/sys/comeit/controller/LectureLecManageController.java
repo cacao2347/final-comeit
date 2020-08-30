@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.sys.comeit.dto.MemberDTO;
 import com.sys.comeit.idao.ILectureLecStudentDAO;
+import com.sys.comeit.idao.IMemberDAO;
 
 @Controller
 public class LectureLecManageController
@@ -42,5 +43,30 @@ public class LectureLecManageController
 
 		return view;
 	}
+	
+	@RequestMapping(value = "/stdntinfomodal.action", method =
+		{ RequestMethod.GET, RequestMethod.POST })
+		public String memInfoModal(Model model, HttpServletRequest request)
+		{
+			String view = null;
+
+			IMemberDAO memberDao = sqlSession.getMapper(IMemberDAO.class);
+
+			MemberDTO dto = new MemberDTO();
+
+			// 수강생 정보 조회
+			dto = memberDao.memModalList(request.getParameter("mem_cd"));
+			System.out.println("안녕~");
+			// 수강생 관심 태그 조회
+			ArrayList<MemberDTO> intTagSearch = memberDao.memIntTagSearch(request.getParameter("mem_cd"));
+			System.out.println("잘가~");
+			model.addAttribute("modalDto", dto); // 회원 정보
+			model.addAttribute("intTagSearch", intTagSearch); // 관심 키워드
+
+			view = "/WEB-INF/views/lecture/AjaxStdntModal.jsp";
+
+			return view;
+
+		}
 	
 }

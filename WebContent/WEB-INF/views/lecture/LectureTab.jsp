@@ -77,6 +77,7 @@
         
         <div id="tab5" class="tab_content">
            <!--Content-->
+           <c:import url="/WEB-INF/views/lecture/LectureFeedback.jsp"></c:import>
         </div>
         <!-- end div#tab5 -->
 

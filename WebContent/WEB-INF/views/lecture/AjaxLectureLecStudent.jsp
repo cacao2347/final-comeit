@@ -6,25 +6,20 @@
 %>
 <c:forEach var="studentList" items="${studentList }">
 
-	<div class="mem">
+	<div class="mem" style="text-align:left;">
 
-		<div class="memImg">
+		<div class="memImg" style="margin-left:10%;">
 			<img alt="Bootstrap Image Preview" 
-				src="${studentList.img_url eq null ? '<%=cp %>/assets/images/basic.png' : '<%=cp %>/assets/images/basic.png' }"
-				class="rounded-circle profileImg" />
+				src="${studentList.img_url eq null ? 'assets/images/basic.png' : studentList.img_url}"
+				class="img-circle profileImg" />
 		</div>
 
 		<div class="memName">
 			<span class="name">${studentList.name }</span>
+			<button class="stdntModalBtn" type="button" class="btn btn-light" value="${studentList.mem_cd }">정보</button>
 		</div>
-
-		<div class="memAtten">
-
-			<div class="answer1">
-				<a href="" style="text-decoration: underline;">>회원 상세 프로필 보기</a>
-			</div>
-
-		</div>
+		
+		<hr size="10px">
 
 	</div>
 	<!-- end .mem -->
