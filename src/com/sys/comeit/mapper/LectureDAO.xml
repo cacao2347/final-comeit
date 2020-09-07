@@ -65,7 +65,7 @@
       SELECT LEC_CD, NAME, AREA_NAME, SPC_AREA_NAME, LEC_NAME, LEC_TERM, CRT_DATE
            , STR_DATE , LEC_FEE , LEC_INTRO , MIN_MEM , MAX_MEM , IMG_URL, END_DATE
       FROM VIEW_LEC_INFO
-      WHERE END_DATE <![CDATA[>]]> SYSDATE
+      WHERE END_DATE <![CDATA[>]]> TO_CHAR(SYSDATE,'YYYY-MM-DD')
       ORDER BY CRT_DATE DESC
    </select>
    
@@ -94,7 +94,7 @@
     <select id="lecCount" resultType="java.lang.Integer">
       SELECT COUNT(*) AS COUNT
       FROM VIEW_LEC_INFO
-      WHERE END_DATE <![CDATA[>]]> SYSDATE
+      WHERE END_DATE <![CDATA[>]]> TO_CHAR(SYSDATE,'YYYY-MM-DD')
     </select>
 	
 	<!-- 페이징 처리 -->
@@ -102,7 +102,7 @@
 	<select id="lecSearchCount" resultType="java.lang.Integer">
 		SELECT COUNT(*) AS COUNT
 		FROM VIEW_LEC_INFO
-		WHERE END_DATE <![CDATA[>]]> SYSDATE
+		WHERE END_DATE <![CDATA[>]]> TO_CHAR(SYSDATE,'YYYY-MM-DD')
 		<if test="searchValue != null and !searchValue.equals('')">
 			AND ${searchKey} LIKE '%${searchValue}%'
 		</if>
