@@ -47,7 +47,7 @@
 		AND DEL_DATE IS NULL
 		<choose>
 	      <when test="searchValue != null">
-	      		AND ${searchKey} LIKE '%${searchValue}%'
+	      		AND '${searchKey}' LIKE '%${searchValue}%'
 	      		ORDER BY LEC_NTC_CD DESC
 	      		)DATA
 	      	)

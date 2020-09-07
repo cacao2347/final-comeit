@@ -40,7 +40,7 @@ public class LectureNoticeController
 		
 		String lec_cd = request.getParameter("lec_cd");
 		
-		/* System.out.println("받은 강의코드" + lec_cd); */
+		System.out.println("받은 강의코드" + lec_cd);
 		
 		// 페이징 처리
 		MyTabUtil util = new MyTabUtil();
@@ -61,8 +61,8 @@ public class LectureNoticeController
 		
 		if (searchKey == null)
 		{
-			searchKey = "title";
-			searchValue = "";
+			searchKey = null;
+			searchValue = null;
 		}
 		
 		if (request.getMethod().equalsIgnoreCase("GET"))

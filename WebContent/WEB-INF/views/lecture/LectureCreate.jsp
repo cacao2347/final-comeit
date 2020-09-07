@@ -532,10 +532,10 @@
 						</h4>
 						<select name="lecTerm" id="lecTerm" class="termSel form-control">
 							<option value="0">강의기간</option>
-							<option value="LECTE1005">1개월</option>
-							<option value="LECTE1006">3개월</option>
-							<option value="LECTE1007">6개월</option>
-							<option value="LECTE1008">12개월</option>
+							<option value="LECTE1001">1개월</option>
+							<option value="LECTE1002">3개월</option>
+							<option value="LECTE1003">6개월</option>
+							<option value="LECTE1004">12개월</option>
 						</select>
 						
 					</div>

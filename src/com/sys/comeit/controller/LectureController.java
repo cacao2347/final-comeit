@@ -69,7 +69,7 @@ public class LectureController
 		System.out.println("lecName : " + lec_name);
 		String str_date = request.getParameter("start"); //
 		System.out.println("str_date : " + str_date);
-		int lec_fee = Integer.parseInt(request.getParameter("lecFee"));
+		String lec_fee = request.getParameter("lecFee");
 		System.out.println("lecFee : " + lec_fee);
 		String lec_intro = request.getParameter("lecIntro"); //
 		System.out.println("lecIntro : " + lec_intro);
@@ -88,7 +88,6 @@ public class LectureController
 		dto.setProf_cd(prof_cd);
 		dto.setSpc_area_cd(spc_area_cd);
 		dto.setLec_term_cd(lec_term_cd);
-		dto.setLec_name(lec_name);
 		dto.setStr_date(str_date);
 		dto.setLec_fee(lec_fee);
 		dto.setLec_intro(lec_intro);
@@ -96,6 +95,18 @@ public class LectureController
 		dto.setMax_mem(max_mem);
 		dto.setStr_hrs(startTime);
 		dto.setEnd_hrs(endTime);
+		
+		System.out.println(lec_name);
+		System.out.println(prof_cd);
+		System.out.println(spc_area_cd);
+		System.out.println(lec_term_cd);
+		System.out.println(str_date);
+		System.out.println(lec_fee);
+		System.out.println(lec_intro);
+		System.out.println(min_mem);
+		System.out.println(max_mem);
+		System.out.println(startTime);
+		System.out.println(endTime);
 
 		lectureDao.lectureInsert(dto);
 
@@ -214,7 +225,7 @@ public class LectureController
 		System.out.println("lecName : " + lec_name);
 		String str_date = request.getParameter("start"); //
 		System.out.println("str_date : " + str_date);
-		int lec_fee = Integer.parseInt(request.getParameter("lecFee"));
+		String lec_fee = request.getParameter("lecFee");
 		System.out.println("lecFee : " + lec_fee);
 		String lec_intro = request.getParameter("lecIntro"); //
 		System.out.println("lecIntro : " + lec_intro);

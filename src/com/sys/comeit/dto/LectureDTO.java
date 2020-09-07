@@ -5,7 +5,7 @@ public class LectureDTO
 	private String lec_cd, prof_cd, spc_area_cd, lec_term_cd, area_name, spc_area_name
 	, lec_name, name, crt_date, str_date, lec_intro , min_mem
 	, max_mem, int_tag_cd, etc_tag, str_hrs, end_hrs, day_cd
-	, lec_term, img_url, end_date;
+	, lec_term, img_url, end_date, lec_fee;
 	
 	private String int_tag_name, etc_tag_name, int_lec_cd;	// 관심 키워드 태그, 기타 관심 키워드 태그
 	private String int_tag, day_name;
@@ -13,6 +13,14 @@ public class LectureDTO
 	public String getDay_name()
 	{
 		return day_name;
+	}
+	public String getLec_fee()
+	{
+		return lec_fee;
+	}
+	public void setLec_fee(String lec_fee)
+	{
+		this.lec_fee = lec_fee;
 	}
 	public void setDay_name(String day_name)
 	{
@@ -195,7 +203,6 @@ public class LectureDTO
 	{
 		this.etc_tag = etc_tag;
 	}
-	private int lec_fee;
 	
 	public String getLec_cd()
 	{
@@ -276,14 +283,6 @@ public class LectureDTO
 	public void setMax_mem(String max_mem)
 	{
 		this.max_mem = max_mem;
-	}
-	public int getLec_fee()
-	{
-		return lec_fee;
-	}
-	public void setLec_fee(int lec_fee)
-	{
-		this.lec_fee = lec_fee;
 	}
 	
 }
