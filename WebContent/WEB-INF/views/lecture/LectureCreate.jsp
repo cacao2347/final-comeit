@@ -80,8 +80,7 @@
 		$("#start").datepicker(
 		{
 			showOn: "both",
-			buttonImage: "<%=cp%>
-	/assets/images/calendar.PNG",
+			buttonImage: "<%=cp%>/assets/images/calendar.PNG",
 			buttonImageOnly : true,
 			buttonText : "Select date",
 			dateFormat : 'yy-mm-dd'
@@ -331,7 +330,7 @@
 	<div class="row">
 	
 		<div class="col-md-12">
-			<c:import url="WEB-INF/views/common/header.jsp"></c:import>
+			<c:import url="/WEB-INF/views/common/header.jsp"></c:import>
 		</div>
 		
 	</div>
