@@ -100,7 +100,7 @@
    <update id="studyCommit">
    		UPDATE TBL_STU
 		SET CMT_DATE = SYSDATE
-		WHERE STU_CD = #{stu_cd}
+		WHERE STU_CD = #{stu_cd} 
    </update>
    
    
