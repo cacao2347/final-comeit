@@ -56,7 +56,7 @@
 			async : false,
 			success : function(data)
 			{
-				
+				alert(data);
 				$(".noticeList").html(data);
 
 				// 공지사항 목록의 제목 버튼이 눌렸을 때

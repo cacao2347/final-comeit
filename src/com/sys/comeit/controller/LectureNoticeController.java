@@ -126,6 +126,9 @@ public class LectureNoticeController
 		model.addAttribute("dataCount", dataCount);
 		model.addAttribute("mem_cd", mem_cd);
 		
+		System.out.println("start : " + start);
+		System.out.println("end : " + end);
+		
 		view = "WEB-INF/views/lecture/AjaxLectureNoticeList.jsp";
 
 		return view;

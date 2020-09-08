@@ -52,15 +52,15 @@ public class StudyNoticeController
 		String searchValue = null;
 		
 		searchKey = request.getParameter("searchKey");
-		searchValue = request.getParameter("searchValue");
+		searchValue = request.getParameter("title");
 		
 		if (searchKey == null)
 		{
-			searchKey = "title";
-			searchValue = "";
+			searchKey = null;
+			searchValue = null;
 		}
 		
-		if (request.getMethod().equals("GET"))
+		if (request.getMethod().equalsIgnoreCase("GET"))	// equals 말고 이거 맞나?
 		{
 			searchValue = URLDecoder.decode(searchValue, "UTF-8");
 		}
@@ -75,7 +75,7 @@ public class StudyNoticeController
 		int dataCount = studyNoticeDao.searchNoticeCount(pagingDto);
 		
 		// 전체 페이지 수 구하기
-		int numPerPage = 5;
+		int numPerPage = 10;
 		int totalPage = util.getPageCount(numPerPage, dataCount);
 		
 		// 전체 페이지 수 보다 현재 표시할 페이지가 큰 경우
@@ -83,11 +83,11 @@ public class StudyNoticeController
 			currentPage = totalPage;
 		
 		// 테이블에서 가져올 리스트들의 시작과 끝 위치
-		int start = (currentPage - 1) * numPerPage + 1;
-		int end = currentPage * numPerPage;
+		int ntcStart = (currentPage - 1) * numPerPage + 1;
+		int ntcEnd = currentPage * numPerPage;
 		
-		pagingDto.setStart(start);
-		pagingDto.setEnd(end);
+		pagingDto.setStart(ntcStart);
+		pagingDto.setEnd(ntcEnd);
 		
 		// 출력할 데이터
 		ArrayList<StudyNoticeDTO> studyNoticeList = studyNoticeDao.getNoticeListData(pagingDto);
@@ -102,7 +102,7 @@ public class StudyNoticeController
 		String cp = request.getContextPath();
 
 		// 페이징 처리
-		String listUrl = cp + "/studylist.action";
+		String listUrl = cp + "/studynoticelist.action";
 		if (params.length() != 0)
 			listUrl += "?" + params;
 		
@@ -121,8 +121,8 @@ public class StudyNoticeController
 		
 		// 테스트
 		//System.out.println(stu_cd);
-		System.out.println("start : " + start);
-		System.out.println("end : " + end);
+		System.out.println("공지사항start : " + ntcStart);
+		System.out.println("공지사항end : " + ntcEnd);
 		
 		view = "WEB-INF/views/study/AjaxStudyNoticeList.jsp";
 

@@ -119,8 +119,8 @@ public class StudyFileController
 		
 		// 테스트
 		//System.out.println(stu_cd);
-		System.out.println("start : " + start);
-		System.out.println("end : " + end);
+		System.out.println("산출물start : " + start);
+		System.out.println("산출물end : " + end);
 		
 		view = "WEB-INF/views/study/AjaxStudyFileList.jsp";
 		
