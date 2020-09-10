@@ -99,7 +99,7 @@
    <!-- 스터디 커밋 -->
    <update id="studyCommit">
    		UPDATE TBL_STU
-		SET CMT_DATE = TO_DATE(SYSDATE, 'yyyy-mm-dd')
+		SET CMT_DATE = SYSDATE
 		WHERE STU_CD = #{stu_cd}
    </update>
    

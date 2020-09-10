@@ -623,6 +623,7 @@
 				, type : "POST"
 				, success : function(result)
 				{
+					alert(result);
 					phoneCheck = result;	// 받아온 인증번호 담기
       			}
 				, error : function(error)
