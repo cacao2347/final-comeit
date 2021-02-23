@@ -34,7 +34,7 @@
 
 ## 2. 사이트 구성
 
-* 스터디
+* ### 스터디
 
 ![git_사진_1](https://user-images.githubusercontent.com/36719307/108813020-82639880-75f3-11eb-87d6-b3822088b9f4.PNG)
 
