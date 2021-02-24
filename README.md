@@ -96,14 +96,22 @@
 
 * ### 페이징 기능
 
-![git_사진_페이징1](https://user-images.githubusercontent.com/36719307/108955905-3deb0200-76b2-11eb-97a8-06b272ba264b.PNG)
-![git_사진_페이징2](https://user-images.githubusercontent.com/36719307/108955908-3fb4c580-76b2-11eb-9371-dd9f290c5401.PNG)
+![git_사진_페이징1](https://user-images.githubusercontent.com/36719307/108956589-4ee84300-76b3-11eb-82e1-2f624ede4806.PNG)
+![git_사진_페이징2](https://user-images.githubusercontent.com/36719307/108956593-50b20680-76b3-11eb-9984-a03a550971a4.PNG)
 
 > - 스터디/강의 게시판의 경우 한 페이지에 최대 10개의 게시글이 표시되도록 하였으며 10개 초과시 페이징 처리 되도록 구현하였습니다.
 
 
 * ### 탭 기능
 
+![git_사진_탭1](https://user-images.githubusercontent.com/36719307/108956785-a090cd80-76b3-11eb-87d2-f8d7970d9e01.PNG)
+![git_사진_탭2](https://user-images.githubusercontent.com/36719307/108956788-a1c1fa80-76b3-11eb-8672-272fd96fda62.PNG)
+![git_사진_탭3](https://user-images.githubusercontent.com/36719307/108956779-9ec70a00-76b3-11eb-9731-16a9225e0c2d.PNG)
+
+> - 강의 게시글 상세페이지에서는 탭 기능을 구현하여 페이지의 이동 없이 여러 페이지의 화면을 볼 수 있도록 하였습니다.
+
+
+## 4. 마치며
 
 
 
