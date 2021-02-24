@@ -30,7 +30,6 @@
 
 * #### COME-IT 사이트 접속 주소 : http://18.188.250.209:8090/FinalComeit/
 * #### (테스트 아이디 : member123 PWD : test123123!@ / 사이트 회원가입도 가능합니다.)
-* #### 프로젝트 Git 본 주소 : https://github.com/rhswl1023/final-comeit (해당 주소에서 Commit 내역 확인 가능합니다.)
 
 
 ## 2. 사이트 구성
