@@ -27,8 +27,8 @@
 
  COME-IT 사이트는 웹개발 국비지원과정의 파이널 과제로 제작한 사이트입니다. 2020년 7월 1일부터 2020년 7월 31일까지 1달에 걸쳐, 저를 포함한 5명의 팀원들이 제작하였습니다.
 
-* ### COME-IT 사이트 접속 주소 : http://18.188.250.209:8090/FinalComeit/
-* ### 프로젝트 Git 본 주소 : https://github.com/rhswl1023/final-comeit (해당 주소에서 Commit 내역 확인 가능합니다.)
+* #### COME-IT 사이트 접속 주소 : http://18.188.250.209:8090/FinalComeit/
+* #### 프로젝트 Git 본 주소 : https://github.com/rhswl1023/final-comeit (해당 주소에서 Commit 내역 확인 가능합니다.)
 
 
 ## 2. 사이트 구성
