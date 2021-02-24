@@ -80,18 +80,19 @@
 
 ![git_사진_로그인](https://user-images.githubusercontent.com/36719307/108949618-14c57400-76a8-11eb-9d1e-fab861d86e38.PNG)
 
-> 로그인 화면입니다.
-> 일반 로그인 / 업체 로그인 / 관리자 로그인 3가지가 존재하며 Sign in 버튼 클릭시 DB에 저장된 아이디와 비밀번호를 대조하여 일치 할시 로그인 됩니다.
+> - 로그인 화면입니다.
+> - 일반 로그인 / 업체 로그인 / 관리자 로그인 3가지가 존재하며 Sign in 버튼 클릭시 DB에 저장된 아이디와 비밀번호를 대조하여 일치 할시 로그인 됩니다.
 
 * ### 게시판 CRUD 기능 / 검색 기능
 
 ![git_사진_게시글목록](https://user-images.githubusercontent.com/36719307/108952149-63750d00-76ac-11eb-85d5-c9ee6c47711f.PNG)
 ![git_사진_게시글상세](https://user-images.githubusercontent.com/36719307/108952185-6ff96580-76ac-11eb-9528-14ed9e4de730.PNG)
-!
+![git_사진_게시글생성](https://user-images.githubusercontent.com/36719307/108953144-0c703780-76ae-11eb-906e-92990b0c5e68.PNG)
 ![git_사진_게시글수정](https://user-images.githubusercontent.com/36719307/108952135-6243e000-76ac-11eb-91e6-0eb518d34df6.PNG)
 ![git_사진_게시글삭제](https://user-images.githubusercontent.com/36719307/108952152-653ed080-76ac-11eb-880b-b781855fbfdf.PNG)
+![git_사진_게시글검색](https://user-images.githubusercontent.com/36719307/108953267-480b0180-76ae-11eb-969e-f572549e3205.PNG)
 
-> 게시글을  
+> - 게시판의 기본이 되는 CRUD 기능이 구현되어 있습니다. 또한 검색을 통하여 게시글을 찾을 수 있습니다.
 
 
 
